@@ -1,7 +1,5 @@
 #menufilms{
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+  background: #000000 !important;
 }
 .search {
     width: 50% !important;
