@@ -47,6 +47,9 @@ label{
 .top-header {
 	padding: 1.25em 3em 1.25em 2em;
 	background: rgba(255, 255, 255, 0.47);
+    position: absolute;
+    width: 95%;
+
 }
 .header {
 	background: url('./images/header-bg.jpg') no-repeat 0px 0px;
@@ -59,7 +62,7 @@ label{
 }
 .header-info {
 	float:right;
-	padding-top:4em;
+	padding-top:7em;
 	width:25%;
 	margin-right: 2.5%;
 }
@@ -343,8 +346,9 @@ i.contact1 {
 	background: none;
 	font-size: 16px;
 	border: none;
-	width: 84.33%;
+	width: 50%;
 }
+
 .search input[type="submit"] {
 	background: url('/Content/images/sprit-1.png') no-repeat 0px 0px;
 	border: none;
@@ -653,7 +657,7 @@ p.claim {
 }
 .reviews-section {
 	background: #fff;
-	padding:3em;
+	padding:7em 3em 3em 3em;
 	border-top:1px solid #000;
 }
 h3.head {
@@ -1220,6 +1224,7 @@ font-weight: 700;
 	}
 	.top-header {
 		padding: 1em 3em 1em 2em;
+       
 	}
 	.header-info h1 {
 		font-size: 3.3em;
@@ -1299,7 +1304,7 @@ font-weight: 700;
 		font-size: 1.05em;
 	}
 	.header-info {
-		padding-top: 2em;
+		padding-top: 7em;
 	}
 	p.special {
 		font-size: 0.95em;
@@ -1350,6 +1355,7 @@ font-weight: 700;
 	}
 	.top-header {
 		padding: 0.9em 3em 0.9em 2em;
+        
 	}
 	.search {
 		margin-top: 4px;
@@ -1408,6 +1414,7 @@ font-weight: 700;
 	}
 	.top-header {
 		padding: 0.6em 2em 0.6em 1em;
+       
 	}
 	.logo p {
 		font-size: 1.2em;
@@ -1462,7 +1469,7 @@ font-weight: 700;
 	}
 	.header-info {
 		float: right;
-		padding-top: 2em;
+		padding-top: 5em;
 		width: 31%;
 		margin-right: 2%;
 	}
@@ -1504,6 +1511,7 @@ font-weight: 700;
 	}
 	.top-header {
 		padding: 0.45em 2em 0.5em 1em;
+       
 	}
 	.search {
 		padding: 3px 8px;
@@ -1733,6 +1741,8 @@ font-weight: 700;
 	}
 	.top-header {
 		padding: 0.25em 2em 0.25em 1em;
+
+       
 	}
 }
 @media screen and (max-width: 768px) {
@@ -1820,7 +1830,7 @@ font-weight: 700;
 		font-size: 1.7em;
 	}
 	.header-info {
-		padding-top: 1.5em;
+		padding-top: 3em;
 		margin-right: 0%;
 	}
 	i.book1 {
@@ -2107,6 +2117,8 @@ font-weight: 700;
 	}
 	.top-header {
 		padding: 0.45em 1em 0em 1em;
+    
+        
 	}
 	.news-left-grid a {
 		padding: 9px 17px 11px 7px;
