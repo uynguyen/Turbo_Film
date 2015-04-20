@@ -11,6 +11,10 @@ namespace Turbo_Phim.Controllers
         // GET: Video
         public ActionResult Index()
         {
+            ViewBag.HomeStatus = "inactive";
+            ViewBag.VideoStatus = "active";
+            ViewBag.ReviewStatus = "inactive";
+            ViewBag.ContactStatus = "inactive";
             return View();
         }
     }

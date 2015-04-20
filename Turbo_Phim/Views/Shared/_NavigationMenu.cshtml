@@ -1,17 +1,25 @@
-﻿<div class="menu">
+﻿
+<div class="menu">
     <ul>
         <li>
-
-        @Html.ActionLink("Home", "Index", "Home")       
+            <a href='@Url.Action("Index", "Home")'  class='@ViewBag.HomeStatus'>
+                <i class="home"></i>
+            </a>      
         </li>
         <li>       
-            @Html.ActionLink("Watching", "Index", "Video")
+            <a href='@Url.Action("Index", "Video")' class=@ViewBag.VideoStatus>
+                <div class="video"><i class="videos"></i><i class="videos1"></i></div>
+            </a>
         </li>
         <li>      
-            @Html.ActionLink("Reviews", "Index", "Review")
+            <a href='@Url.Action("Index", "Review")' class='@ViewBag.ReviewStatus'>
+                <div class="cat"><i class="watching"></i><i class="watching1"></i></div>
+            </a>
         </li>
         <li>       
-            @Html.ActionLink("Contact", "Index", "Contact")
+            <a href='@Url.Action("Index", "Contact")' class=@ViewBag.ContactStatus>
+                <div class="cnt"><i class="contact"></i><i class="contact1"></i></div>
+            </a>
         </li>
     </ul>
 </div>
