@@ -1,0 +1,13 @@
+﻿<div class="top-header span_top">
+    <div class="logo">
+        @Html.ActionLink("Home", "Index", "Home", new { @class="header_image"})
+        <p>Turbo Phim</p>
+    </div>
+    <div class="search v-search">
+        <form>
+            <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Tìm kiếm..';}" />
+            <input type="submit" value="">
+        </form>
+    </div>
+    <div class="clearfix"></div>
+</div>
