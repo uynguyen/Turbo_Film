@@ -4,6 +4,118 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+/*--map--*/
+
+.map iframe {
+	width: 100%;
+	min-height: 321px;
+	border: none;
+}
+.map iframe {
+  min-height: 121px;
+}
+
+
+/*--contact--*/
+.contact-top h3{
+	font-size: 1.3em;
+	color: #00aedb;
+	text-transform: uppercase;
+	font-weight: 600;
+	padding:0 0 1em;
+}
+.contact-top div{
+	padding:0.5em 0;
+}
+.contact {
+	padding:1.5em 0 3em;
+    padding-top: 100px;
+}
+.contact-top div input[type="text"], .contact-top div textarea {
+	width: 100%;
+	padding: 0.7em;
+	margin:0.4em 0 0;
+	background: none;
+	outline: none;
+	border: 1px solid #838383;
+	border-radius: 8px;
+	-webkit-appearance: none;
+}
+.contact-top div textarea{
+	height:230px;
+	resize:none;
+}
+.contact-top div span{
+	color:#5261ac;
+	font-size: 1.2em;
+}
+.contact-top input[type="submit"]{
+	background:#f78f1d;
+	color:#fff;
+	font-size:1.1em;
+	border:none;
+	width:20%;
+	outline:none;
+	border-radius: 8px;
+	font-weight: 600;
+	padding:0.6em 1em;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+}
+.contact-top input[type="submit"]:hover{
+	background:#00aedb;
+}
+.contact-top p{
+	font-size: 1.1em;
+	color: #494949;
+	line-height: 1.3em;
+	padding: 0.5em 0;
+}
+ul.social li{
+	list-style:none;
+}
+ul.social li span,ul.social li a{
+	font-size:1em;
+	color:#494949;
+	margin: 0 0 0.5em;
+	display: block;
+}
+ul.social li a:hover{
+	text-decoration:none;
+	color:#00aedb;
+}
+ul.social li  i{
+	background: url(~/Content/images/img-sprite-social.png)no-repeat -171px -101px ;
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	vertical-align: middle;
+	margin:0 13px 0 0;
+}
+ul.social li  i.mes{
+	background-position:-193px -101px;
+}
+ul.social li  i.down{
+	background-position: -217px -101px;
+}
+ul.social {
+  padding: 0.4em 0 0;
+}
+.map iframe {
+	width: 100%;
+	min-height: 321px;
+	border: none;
+}
+
+
+/*-----end contact----*/
 body{
 	padding:0;
 	margin:0;
