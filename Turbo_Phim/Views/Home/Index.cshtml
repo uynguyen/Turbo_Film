@@ -2,3 +2,245 @@
     ViewBag.Title = "Turbo Phim";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+     
+        <div id="menufilms">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Thể loại</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Phim hành động</a></li>
+                    <li><a href="#">Phim viễn tưởng</a></li>
+                    <li><a href="#">Phim hoạt hình</a></li>
+
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Quốc gia</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Mỹ</a></li>
+                    <li><a href="#">Việt Nam</a></li>
+                    <li><a href="#">Hàn Quốc</a></li>
+
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Phim lẻ</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Phim lẻ 2015</a></li>
+                    <li><a href="#">Phim lẻ 2014</a></li>
+                    <li><a href="#">Phim lẻ 2013</a></li>
+
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Phim bộ</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Phim bộ 2015</a></li>
+                    <li><a href="#">Phim bộ 2014</a></li>
+                    <li><a href="#">Phim bộ 2013</a></li>
+
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Phim mới</button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Phim mới 2015</a></li>
+                        <li><a href="#">Phim mới 2014</a></li>
+                        <li><a href="#">Phim mới 2013</a></li>
+
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="review-slider">
+            <ul id="flexiselDemo1">
+                <li><img src="~/Content/images/r1.jpg" alt="" /></li>
+                <li><img src="~/Content/images/r2.jpg" alt="" /></li>
+                <li><img src="~/Content/images/r3.jpg" alt="" /></li>
+                <li><img src="~/Content/images/r4.jpg" alt="" /></li>
+                <li><img src="~/Content/images/r5.jpg" alt="" /></li>
+                <li><img src="~/Content/images/r6.jpg" alt="" /></li>
+            </ul>
+            <script type="text/javascript">
+                $(window).load(function () {
+
+                    $("#flexiselDemo1").flexisel({
+                        visibleItems: 6,
+                        animationSpeed: 1000,
+                        autoPlay: true,
+                        autoPlaySpeed: 3000,
+                        pauseOnHover: false,
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 2
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 3
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 4
+                            }
+                        }
+                    });
+                });
+            </script>
+            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        </div>
+        <div class="news">
+            <div class="col-md-6 news-right-grid">
+                <h3>Phim mới</h3>
+
+                <div class="news-grid">
+                    <h5>Kẻ cướp mặt trăng III</h5>
+                    <label>Dự kiến khởi chiếu: 11 tháng 04 năm 2014</label>
+
+                    <p>
+                        Chuyện kể về hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý
+                        nghĩa và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
+                    </p>
+                    <a class="more" href="#">MORE</a>
+                </div>
+                <div class="news-grid">
+                    <h5>Biệt đội siêu anh hùng III</h5>
+                    <label>Dự kiến khởi chiếu: 30 tháng 04 năm 2014</label>
+
+                    <p>
+                        Chuyện kể về hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý
+                        nghĩa và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
+                    </p>
+                    <a class="more" href="#">MORE</a>
+                </div>
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+            </div>
+
+            <div class="col-md-6 news-right-grid">
+                <h3>Đánh giá phim</h3>
+
+                <div class="news-grid">
+                    <h5>HOME - Hành trình trở về</h5>
+                    <label>11 tháng 04 năm 2014</label>
+
+                    <p>
+                        Home – Hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý nghĩa
+                        và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
+                    </p>
+                    <a class="more" href="#">MORE</a>
+                </div>
+                <div class="news-grid">
+                    <h5>The land of the God - Vùng đất thần thánh</h5>
+                    <label>11 tháng 05 năm 2014</label>
+
+                    <p>
+                        The land of the God – Là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý nghĩa và
+                        thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng.
+                    </p>
+                    <a class="more" href="#">MORE</a>
+                </div>
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="more-reviews">
+            <ul id="flexiselDemo2">
+                <li><img src="~/Content/images/m1.jpg" alt="" /></li>
+                <li><img src="~/Content/images/m2.jpg" alt="" /></li>
+                <li><img src="~/Content/images/m3.jpg" alt="" /></li>
+                <li><img src="~/Content/images/m4.jpg" alt="" /></li>
+            </ul>
+            <script type="text/javascript">
+                $(window).load(function () {
+
+                    $("#flexiselDemo2").flexisel({
+                        visibleItems: 4,
+                        animationSpeed: 1000,
+                        autoPlay: true,
+                        autoPlaySpeed: 3000,
+                        pauseOnHover: false,
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 2
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 3
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 3
+                            }
+                        }
+                    });
+                });
+            </script>
+            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        </div>
+        
+   
+

@@ -9,13 +9,17 @@
 
 </head>
 <body>
-    @RenderPage("~/Views/Shared/_NavigationMenu.cshtml")
-    <div class="container body-content">
-        @RenderPage("~/Views/Shared/_HeaderPage.cshtml")
-        @RenderBody()
-        <hr />
-       @RenderPage("~/Views/Shared/_FooterPage.cshtml")
+  
+    <div class="full">
+        @RenderPage("~/Views/Shared/_NavigationMenu.cshtml")
+        <div class="main">
+            @RenderPage("~/Views/Shared/_HeaderPage.cshtml")
+            @RenderBody()
+            <hr />
+            @RenderPage("~/Views/Shared/_FooterPage.cshtml")
+        </div>
+
+        @RenderSection("scripts", required: false)
     </div>
-    @RenderSection("scripts", required: false)
 </body>
 </html>

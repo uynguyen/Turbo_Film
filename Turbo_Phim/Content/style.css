@@ -181,7 +181,7 @@ i.video1 {
 i.home {
 	width:60px;
 	height:60px;
-	background: url('./images/img-sprite.png') no-repeat 0px 0px;
+	background: url('~/Content/images/img-sprite.png') no-repeat 0px 0px;
 	display:block;
 }
 i.home1 {
