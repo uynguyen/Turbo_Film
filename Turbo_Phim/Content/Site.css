@@ -40,9 +40,3 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
-
-.header_image {
-    background: url('./images/logo.png') no-repeat top left;
-    display: block;
-    text-indent: -9999px; /* hides the link text */
-}

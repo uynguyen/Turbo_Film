@@ -11,11 +11,16 @@ namespace Turbo_Phim.Controllers
         // GET: Review
         public ActionResult Index()
         {
+            ViewBag.HomeStatus = "inactive";
+            ViewBag.VideoStatus = "inactive";
+            ViewBag.ReviewStatus = "active";
+            ViewBag.ContactStatus = "inactive";
             return View();
         }
 
         public ActionResult ReviewDetail()
         {
+            ViewBag.ReviewStatus = "active";
             return View();
         }
     }
