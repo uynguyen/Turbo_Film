@@ -3,25 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Turbo Phim</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
 
 </head>
 <body>
-
+   
     <div class="full">
         @RenderPage("~/Views/Shared/_NavigationMenu.cshtml")
         <div class="main">
             @RenderPage("~/Views/Shared/_HeaderPage.cshtml")
-            @RenderBody()
+            @RenderBody()  
             <hr />
-            @RenderPage("~/Views/Shared/_FooterPage.cshtml")
-        </div>
-
-        @RenderSection("scripts", required: false)
+            @RenderPage("~/Views/Shared/_FooterPage.cshtml")          
+        </div>     
     </div>
 
-
+    @*@RenderSection("scripts", required: false)*@
 </body>
 </html>
