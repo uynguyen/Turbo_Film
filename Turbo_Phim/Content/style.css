@@ -98,12 +98,18 @@ ul.social {
 }
 .map iframe {
 	width: 100%;
-	min-height: 321px;
+    height: 100%;
+	min-height: 300px !important;
 	border: none;
 }
-
-
-
+.map {
+    float: right;
+    height: 650px;
+    width: 700px;
+    min-width: 300px;
+    min-height: 300px;
+    border:groove;
+}
 
 body{
 	padding:0;
