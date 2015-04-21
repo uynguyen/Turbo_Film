@@ -1397,7 +1397,10 @@ font-weight: 700;
 		font-size: 1.05em;
 	}
 	.header-info {
-		padding-top: 2em;
+		float: right;
+          padding-top: 2em;
+          width: 31%;
+          margin-right: 2%;
 	}
 	p.special {
 		font-size: 0.95em;
@@ -1751,6 +1754,7 @@ font-weight: 700;
 	}
 	.header-info {
 		width: 32%;
+        margin-right: 2.5%;
 	}
 	a.video {
 		display:none;
@@ -1918,8 +1922,7 @@ font-weight: 700;
 		font-size: 1.7em;
 	}
 	.header-info {
-		padding-top: 1.5em;
-		margin-right: 0%;
+        display: none;
 	}
 	i.book1 {
 		width: 30px;
