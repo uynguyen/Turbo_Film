@@ -158,6 +158,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminMainController.cs" />
+    <Compile Include="Controllers\AdminMoviesController.cs" />
+    <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
@@ -176,12 +179,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\elements.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\isotope.css" />
     <Content Include="Content\popuo-box.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\customtheme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site1.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -226,6 +234,13 @@
     <Content Include="Views\Video\Index.cshtml" />
     <Content Include="Views\Review\ReviewDetail.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Shared\_Admin_layout.cshtml" />
+    <Content Include="Views\AdminMovies\Index.cshtml" />
+    <Content Include="Views\AdminMain\Index.cshtml" />
+    <Content Include="Views\Shared\_Admin_Footer.cshtml" />
+    <Content Include="Views\Shared\_Admin_Header.cshtml" />
+    <Content Include="Views\Shared\_Admin_NavigationMenu.cshtml" />
+    <Content Include="Views\AdminUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
