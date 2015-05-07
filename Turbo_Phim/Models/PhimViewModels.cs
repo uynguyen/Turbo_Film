@@ -21,30 +21,7 @@ namespace Turbo_Phim.Models
         public string HinhAnh { get; set; }
         public DateTime? NgayPhatHanh { get; set; }
 
-        private Bus bus = new Bus();
-        public List<PhimViewModels> getAllFilms()
-        {
-            List<PhimViewModels> result = new List<PhimViewModels>();
-            List<Phim> lstFilms = bus.getAllFilms();
-            foreach (Phim p in lstFilms)
-            {
-                PhimViewModels pvm = new PhimViewModels();
-                pvm.TenPhim = p.TenPhim;
-                pvm.NoiDung = p.NoiDung;
-                pvm.URL_Trailer = p.URL_Trailer;
-                pvm.DiemDanhGia = p.DiemDanhGia;
-                pvm.ThoiLuong = p.ThoiLuong;
-                pvm.DienVien = p.DienVien;
-                pvm.DaoDien = p.DaoDien;
-                pvm.HinhAnh = p.HinhAnh;
-                pvm.NgayPhatHanh = p.NgayPhatHanh;
-                pvm.TheLoai = bus.getTypeOfFilm(p.MS_TheLoai);
-                pvm.NuocSX = bus.getCountry(p.MS_NuocSX);
-                result.Add(pvm);
-            }
-
-            return result;
-        }
+       
       
     }
 }

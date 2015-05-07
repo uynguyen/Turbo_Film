@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
     ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,40 +7,29 @@
 <div class="reviews-section">
     <h3 class="head">Phim Review</h3>
     <div class="col-md-9 reviews-grids">
-        <div class="review">
+        @foreach(Turbo_Phim.Models.PhimViewModels p in Model)
+        {
+            <div class="review">
             <div class="movie-pic">
-                <a href="single.html"><img src="~/Content/images/r4.jpg" alt="" /></a>
+                <a href="single.html"><img src="@p.HinhAnh" alt="" /></a>
             </div>
             <div class="review-info">
                 
-                @Html.ActionLink("Review Interstellar", "ReviewDetail", "Review", new { @class="span"})
+                @Html.ActionLink("Review " + p.TenPhim, "ReviewDetail", "Review", new { @class="span"})
                 <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
                 <p class="ratingview">Đánh giá của trang:</p>
-                <div class="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
                 <p class="ratingview">
-                    &nbsp;3.5/5
+                    &nbsp;@p.DiemDanhGia / 10
                 </p>
                 <div class="clearfix"></div>
                 <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
-                <div class="rating c-rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
+               
                 <p class="ratingview c-rating">
                     &nbsp; 3.3/5
                 </p>
                 <div class="clearfix"></div>
                 <div class="yrw">
-                    <div class="dropdown-button">
+                    @*<div class="dropdown-button">
                         <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
                             <option value="0">Đánh giá của bạn</option>
                             <option value="1">1. Tệ</option>
@@ -51,7 +41,7 @@
                             <option value="7">4.5. Rất tốt</option>
                             <option value="8">5. Tuyệt vời</option>
                         </select>
-                    </div>
+                    </div>*@
                     <div class="rtm text-center">
                         <a href="#">Review phim</a>
                     </div>
@@ -60,253 +50,16 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <p class="info">Diễn viên:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Will Smith, Margot Robbie, Adrian Martinez, Rodrigo Santoro, BD Wong, Robert Taylor</p>
-                <p class="info">Đạo diễn: &nbsp;&nbsp;&nbsp;&nbsp;Glenn Ficarra, John Requa</p>
-                <p class="info">Thể loại:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Viễn tưởng</p>
-                <p class="info">Thời lượng:&nbsp;&nbsp;&nbsp; &nbsp; 1 giờ 45 phút</p>
+                <p class="info">Diễn viên:&nbsp; @p.DienVien</p>
+                <p class="info">Đạo diễn: &nbsp; @p.DaoDien</p>
+                <p class="info">Thể loại:&nbsp; @p.TheLoai</p>
+                <p class="info">Thời lượng:&nbsp; @p.ThoiLuong</p>
             </div>
             <div class="clearfix"></div>
-        </div>
-        <div class="review">
-            <div class="movie-pic">
-                <a href="single.html"><img src="~/Content/images/r6.jpg" alt="" /></a>
             </div>
-            <div class="review-info">
-                <a class="span" href="single.html">Review  <i>Big Hero 6</i></a>
-                <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
-                <p class="ratingview">Đánh giá của trang:</p>
-                <div class="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview">
-                    &nbsp;3.5/5
-                </p>
-                <div class="clearfix"></div>
-                <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
-                <div class="rating c-rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview c-rating">
-                    &nbsp; 3.3/5
-                </p>
-                <div class="clearfix"></div>
-                <div class="yrw">
-                    <div class="dropdown-button">
-                        <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
-                            <option value="0">Đánh giá của bạn</option>
-                            <option value="1">1. Tệ</option>
-                            <option value="2">1.5. Dưới trung bình</option>
-                            <option value="3">2. Trung bình</option>
-                            <option value="4">2.5. Trên trung bình</option>
-                            <option value="5">3. Xem được</option>
-                            <option value="6">3.5. Tốt</option>
-                            <option value="7">4.5. Rất tốt</option>
-                            <option value="8">5. Tuyệt vời</option>
-                        </select>
-                    </div>
-                    <div class="rtm text-center">
-                        <a href="#">Review phim</a>
-                    </div>
-                    <div class="wt text-center">
-                        <a href="#">Xem trailer</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <p class="info">Diễn viên:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Will Smith, Margot Robbie, Adrian Martinez, Rodrigo Santoro, BD Wong, Robert Taylor</p>
-                <p class="info">Đạo diễn: &nbsp;&nbsp;&nbsp;&nbsp;Glenn Ficarra, John Requa</p>
-                <p class="info">Thể loại:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Viễn tưởng</p>
-                <p class="info">Thời lượng:&nbsp;&nbsp;&nbsp; &nbsp; 1 giờ 45 phút</p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="review">
-            <div class="movie-pic">
-                <a href="single.html"><img src="~/Content/images/r5.jpg" alt="" /></a>
-            </div>
-            <div class="review-info">
-                <a class="span" href="single.html">Review  <i>Dawn Planet Ages</i></a>
-                <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
-                <p class="ratingview">Đánh giá của trang:</p>
-                <div class="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview">
-                    &nbsp;3.5/5
-                </p>
-                <div class="clearfix"></div>
-                <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
-                <div class="rating c-rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview c-rating">
-                    &nbsp; 3.3/5
-                </p>
-                <div class="clearfix"></div>
-                <div class="yrw">
-                    <div class="dropdown-button">
-                        <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
-                            <option value="0">Đánh giá của bạn</option>
-                            <option value="1">1. Tệ</option>
-                            <option value="2">1.5. Dưới trung bình</option>
-                            <option value="3">2. Trung bình</option>
-                            <option value="4">2.5. Trên trung bình</option>
-                            <option value="5">3. Xem được</option>
-                            <option value="6">3.5. Tốt</option>
-                            <option value="7">4.5. Rất tốt</option>
-                            <option value="8">5. Tuyệt vời</option>
-                        </select>
-                    </div>
-                    <div class="rtm text-center">
-                        <a href="#">Review phim</a>
-                    </div>
-                    <div class="wt text-center">
-                        <a href="#">Xem trailer</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <p class="info">Diễn viên:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Will Smith, Margot Robbie, Adrian Martinez, Rodrigo Santoro, BD Wong, Robert Taylor</p>
-                <p class="info">Đạo diễn: &nbsp;&nbsp;&nbsp;&nbsp;Glenn Ficarra, John Requa</p>
-                <p class="info">Thể loại:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Viễn tưởng</p>
-                <p class="info">Thời lượng:&nbsp;&nbsp;&nbsp; &nbsp; 1 giờ 45 phút</p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="review">
-            <div class="movie-pic">
-                <a href="single.html"><img src="~/Content/images/r1.jpg" alt="" /></a>
-            </div>
-            <div class="review-info">
-                <a class="span" href="single.html">Review  <i>The Lego Movie</i></a>
-                <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
-                <p class="ratingview">Đánh giá của trang:</p>
-                <div class="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview">
-                    &nbsp;3.5/5
-                </p>
-                <div class="clearfix"></div>
-                <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
-                <div class="rating c-rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview c-rating">
-                    &nbsp; 3.3/5
-                </p>
-                <div class="clearfix"></div>
-                <div class="yrw">
-                    <div class="dropdown-button">
-                        <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
-                            <option value="0">Đánh giá của bạn</option>
-                            <option value="1">1. Tệ</option>
-                            <option value="2">1.5. Dưới trung bình</option>
-                            <option value="3">2. Trung bình</option>
-                            <option value="4">2.5. Trên trung bình</option>
-                            <option value="5">3. Xem được</option>
-                            <option value="6">3.5. Tốt</option>
-                            <option value="7">4.5. Rất tốt</option>
-                            <option value="8">5. Tuyệt vời</option>
-                        </select>
-                    </div>
-                    <div class="rtm text-center">
-                        <a href="#">Review phim</a>
-                    </div>
-                    <div class="wt text-center">
-                        <a href="#">Xem trailer</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <p class="info">Diễn viên:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Will Smith, Margot Robbie, Adrian Martinez, Rodrigo Santoro, BD Wong, Robert Taylor</p>
-                <p class="info">Đạo diễn: &nbsp;&nbsp;&nbsp;&nbsp;Glenn Ficarra, John Requa</p>
-                <p class="info">Thể loại:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Viễn tưởng</p>
-                <p class="info">Thời lượng:&nbsp;&nbsp;&nbsp; &nbsp; 1 giờ 45 phút</p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="review">
-            <div class="movie-pic">
-                <a href="single.html"><img src="~/Content/images/r3.jpg" alt="" /></a>
-            </div>
-            <div class="review-info">
-                <a class="span" href="single.html">Review  <i>The Avengers</i></a>
-                <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
-                <p class="ratingview">Đánh giá của trang:</p>
-                <div class="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview">
-                    &nbsp;3.5/5
-                </p>
-                <div class="clearfix"></div>
-                <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
-                <div class="rating">
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                    <span>☆</span>
-                </div>
-                <p class="ratingview">
-                    &nbsp; 3.3/5
-                </p>
-                <div class="clearfix"></div>
-                <div class="yrw">
-                    <div class="dropdown-button">
-                        <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
-                            <option value="0">Đánh giá của bạn</option>
-                            <option value="1">1. Tệ</option>
-                            <option value="2">1.5. Dưới trung bình</option>
-                            <option value="3">2. Trung bình</option>
-                            <option value="4">2.5. Trên trung bình</option>
-                            <option value="5">3. Xem được</option>
-                            <option value="6">3.5. Tốt</option>
-                            <option value="7">4.5. Rất tốt</option>
-                            <option value="8">5. Tuyệt vời</option>
-                        </select>
-                    </div>
-                    <div class="rtm text-center">
-                        <a href="#">Review phim</a>
-                    </div>
-                    <div class="wt text-center">
-                        <a href="#">Xem trailer</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <p class="info">Diễn viên:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Will Smith, Margot Robbie, Adrian Martinez, Rodrigo Santoro, BD Wong, Robert Taylor</p>
-                <p class="info">Đạo diễn: &nbsp;&nbsp;&nbsp;&nbsp;Glenn Ficarra, John Requa</p>
-                <p class="info">Thể loại:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Viễn tưởng</p>
-                <p class="info">Thời lượng:&nbsp;&nbsp;&nbsp; &nbsp; 1 giờ 45 phút</p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+        }
+
+       
     </div>
     <div class="col-md-3 side-bar">
         <div class="featured">

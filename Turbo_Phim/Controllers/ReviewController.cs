@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Turbo_Phim.Models;
 
 namespace Turbo_Phim.Controllers
 {
@@ -11,11 +12,17 @@ namespace Turbo_Phim.Controllers
         // GET: Review
         public ActionResult Index()
         {
+
             ViewBag.HomeStatus = "inactive";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "active";
             ViewBag.ContactStatus = "inactive";
-            return View();
+
+
+            FilmService phimService = new FilmService();
+
+            return View(phimService.getAllFilms());
+         
         }
 
         public ActionResult ReviewDetail()

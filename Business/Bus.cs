@@ -25,5 +25,24 @@ namespace Business
         {
             return db.DanhMucNuocSanXuat.Find(id).TenNuoc;
         }
+
+        public bool createNewFilm(Phim p)
+        {
+            db.Phim.Add(p);
+         
+            db.SaveChanges();
+            return true;
+        }
+
+        public bool deleteFilm(int ID)
+        {
+            Phim temp = db.Phim.Find(ID);
+            db.Phim.Remove(temp);
+            db.SaveChanges();
+
+            return true;  
+        }
+
+
     }
 }
