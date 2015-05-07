@@ -40,3 +40,26 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+
+#line-chart {
+            height: 300px;
+            width: 800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+
+        .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+            color: #fff;
+        }
+.user {
+    
+    display: block;
+    float: right;
+    width: 10%;
+    height: 100%;
+    position: relative;
+    margin-left: 10px;
+    padding: 10px;
+
+}

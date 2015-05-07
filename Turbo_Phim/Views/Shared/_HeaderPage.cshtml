@@ -4,6 +4,12 @@
             <a href="index.html"><img src="~/Content/images/logo.png" alt="" /></a>
             <p>TURBO PHIM</p>
         </div>
+        <div class="user">
+            <a href='@Url.Action("Index", "AdminMain")'>
+                <span class="glyphicon glyphicon-log-in padding-right-small" style="position:relative;top: 3px;"></span>
+                Log in
+            </a>
+        </div>
         <div class="search">
             <form>
                 <input type="text" value="Search.." onfocus="this.value = '';"
@@ -11,5 +17,6 @@
                 <input type="submit" value="">
             </form>
         </div>
+       
         <div class="clearfix"></div>
     </div>
