@@ -1,7 +1,57 @@
-﻿@{
+﻿@*@using Business;
+@model IEnumerable<Business.Phim>*@
+@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+
+
+@{
     ViewBag.Title = "Turbo Phim";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenPhim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL_Trailer)
+        </th>
+        <th></th>
+    </tr>
+ 
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NuocSX)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "User") |
+                @Html.ActionLink("Details", "Details", "User") |
+                @Html.ActionLink("Delete", "Delete", "User")
+            </td>
+        </tr>
+    }
+
+
+
+</table>*@
+
+
+
+
+
+
 <div class="header">
 
     <div class="header-info">

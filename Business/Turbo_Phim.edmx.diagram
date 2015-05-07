@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="49b215a22bab4448940818e3540898b1" Name="Diagram1">
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BaiNhanXet" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BangThamSo" Width="1.5" PointX="5.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhChon" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhLuan" Width="1.5" PointX="9.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhGia" Width="1.5" PointX="10.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucNuocSanXuat" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucTheLoai" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.PhanQuyen" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.Phim" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.TaiKhoan" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.ThanhVien" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_BaiNhanXet_Phim" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_BaiNhanXet_ThanhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhChon_BaiNhanXet" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhLuan_BaiNhanXet" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhChon_ThanhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhLuan_ThanhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_DanhGia_Phim" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_DanhGia_ThanhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_Phim_NuocSX" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_Phim_TheLoai" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_TaiKhoan_PhanQuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_ThanhVien_TaiKhoan" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
