@@ -12,7 +12,7 @@ namespace Business
         
         public List<Phim> getAllFilms()
         {
-            return db.Phim.ToList();
+            return db.Phim.Where(x => x.TinhTrang == true ).OrderBy(x => x.MaSo).Skip(3).Take(3).ToList();
         }
 
 
@@ -34,11 +34,21 @@ namespace Business
             return true;
         }
 
-        public bool deleteFilm(int ID)
+        /// <summary>
+        /// Chỉ đánh dấu trạng thái thành false chứ không xóa thật sự
+        /// </summary>
+        /// <param name="codeFilm"></param>
+        /// <returns></returns>
+        public bool deleteFilm(string codeFilm)
         {
-            Phim temp = db.Phim.Find(ID);
-            db.Phim.Remove(temp);
+            int id = Int32.Parse(codeFilm);
+            Phim temp = db.Phim.Find(id);
+
+            temp.TinhTrang = false;
+
             db.SaveChanges();
+            
+          
 
             return true;  
         }

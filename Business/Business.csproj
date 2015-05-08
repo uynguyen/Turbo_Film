@@ -104,14 +104,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
     <EntityDeploy Include="Turbo_Phim.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Turbo_Phim.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
     <None Include="Turbo_Phim.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Turbo_Phim.edmx</DependentUpon>
