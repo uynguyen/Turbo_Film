@@ -16,6 +16,7 @@ namespace Turbo_Phim.Models
             foreach (Phim p in lstFilms)
             {
                 PhimViewModels pvm = new PhimViewModels();
+                pvm.MaSo = p.MaSo;
                 pvm.TenPhim = p.TenPhim;
                 pvm.NoiDung = p.NoiDung;
                 pvm.URL_Trailer = p.URL_Trailer;
@@ -50,6 +51,12 @@ namespace Turbo_Phim.Models
             phim.DiemDanhGia = 9;
 
             bus.createNewFilm(phim);
+        }
+
+        internal void deletePhim(string codeFilm)
+        {
+            string temp = codeFilm;
+            bus.deleteFilm(codeFilm);
         }
     }
 }

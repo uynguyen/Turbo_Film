@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
     ViewBag.Title = "Movies";
     Layout = "~/Views/Shared/_Admin_layout.cshtml";
 }
@@ -13,6 +14,114 @@
     </div>
     <div class="main-content">
 
-       <h2> Đây là mục quản lý phim </h2>
+        <div class="main-content">
+
+            <div class="btn-toolbar list-toolbar">
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> New User</button>
+                <button class="btn btn-default">Import</button>
+                <button class="btn btn-default">Export</button>
+                <div class="btn-group">
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.MaSo)</th>
+                        <th>@Html.DisplayNameFor(model => model.TenPhim)</th>
+                       @* <th>@Html.DisplayNameFor(model => model.NoiDung)</th>*@
+                        @*<th>@Html.DisplayNameFor(model => model.URL_Trailer)</th>*@
+                        <th>@Html.DisplayNameFor(model => model.DiemDanhGia)</th>
+                        <th>@Html.DisplayNameFor(model => model.TheLoai)</th>
+                        <th>@Html.DisplayNameFor(model => model.ThoiLuong)</th>
+                        <th>@Html.DisplayNameFor(model => model.DienVien)</th>
+                        <th>@Html.DisplayNameFor(model => model.DaoDien)</th>
+                        <th>@Html.DisplayNameFor(model => model.NuocSX)</th>
+                        <th>@Html.DisplayNameFor(model => model.HinhAnh)</th>
+                        <th>@Html.DisplayNameFor(model => model.NgayPhatHanh)</th>
+                        <th style="width: 3.5em;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(Turbo_Phim.Models.PhimViewModels p in Model)
+                    {
+                    <tr>
+                        <td>@p.MaSo</td>
+                        <td>@p.TenPhim</td>
+                      @*  <td>@p.NoiDung.Substring(0, 20) ...</td>*@
+                      @*  <td>@p.URL_Trailer</td>*@
+                        <td>@p.DiemDanhGia</td>
+                        <td>@p.TheLoai</td>
+                        <td>@p.ThoiLuong</td>
+                        <td>@p.DienVien</td>
+                        <td>@p.DaoDien</td>
+                        <td>@p.NuocSX</td>
+                        <td><img class="ImageFilmAdmin" src="@p.HinhAnh" alt="" /></td>
+                        <td>@p.NgayPhatHanh</td>
+                        
+                        <td>
+                            @*<a href="user.html"><i class="fa fa-pencil"></i></a>
+                            <a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-trash-o"></i></a>*@
+                            @using (Html.BeginForm("Delete", "AdminMovies", FormMethod.Get))
+                            {
+                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" name="codeFilm" value="@p.MaSo"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" name="codeFilm" value="@p.MaSo"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-trash-o"></i></button>
+
+                            }
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+            <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="myModalLabel">Delete Confirmation</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>Are you sure you want to delete the user?<br>This cannot be undone.</p>
+                        </div>
+                        <div class="modal-footer">
+                          
+                           
+                            @using (Html.BeginForm("Index", "AdminMovies", FormMethod.Get))
+                            {
+                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                <input class="btn btn-danger" type="submit" value="Xóa" />
+
+                            }
+
+                            @*<button type="submit" class="btn btn-danger" data-dismiss="modal">Delete</button>*@
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 </div>

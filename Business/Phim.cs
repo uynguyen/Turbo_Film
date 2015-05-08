@@ -32,6 +32,7 @@ namespace Business
         public Nullable<int> MS_NuocSX { get; set; }
         public string HinhAnh { get; set; }
         public Nullable<System.DateTime> NgayPhatHanh { get; set; }
+        public Nullable<bool> TinhTrang { get; set; }
     
         public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }
         public virtual ICollection<DanhGia> DanhGia { get; set; }

@@ -35,9 +35,9 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ThanhVien" Type="int" />
-          <Property Name="BaiNhanXet" Type="int" />
-          <Property Name="NoiDung" Type="text" />
+          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_BaiNhanXet" Type="int" />
+          <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="date" />
         </EntityType>
         <EntityType Name="DanhGia">
@@ -86,6 +86,7 @@
           <Property Name="MS_NuocSX" Type="int" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="100" />
           <Property Name="NgayPhatHanh" Type="date" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -173,7 +174,7 @@
               <PropertyRef Name="MaSo" />
             </Principal>
             <Dependent Role="BinhLuan">
-              <PropertyRef Name="BaiNhanXet" />
+              <PropertyRef Name="MS_BaiNhanXet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -185,7 +186,7 @@
               <PropertyRef Name="MaSo" />
             </Principal>
             <Dependent Role="BinhLuan">
-              <PropertyRef Name="ThanhVien" />
+              <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -364,12 +365,12 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ThanhVien" Type="Int32" />
-          <Property Name="BaiNhanXet" Type="Int32" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_BaiNhanXet" Type="Int32" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="BaiNhanXet1" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BinhLuan" ToRole="BaiNhanXet" />
-          <NavigationProperty Name="ThanhVien1" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="BinhLuan" ToRole="ThanhVien" />
+          <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BinhLuan" ToRole="BaiNhanXet" />
+          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="BinhLuan" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
@@ -422,6 +423,7 @@
           <Property Name="MS_NuocSX" Type="Int32" />
           <Property Name="HinhAnh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NgayPhatHanh" Type="DateTime" Precision="0" />
+          <Property Name="TinhTrang" Type="Boolean" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BaiNhanXet_Phim" FromRole="Phim" ToRole="BaiNhanXet" />
           <NavigationProperty Name="DanhGia" Relationship="Self.FK_DanhGia_Phim" FromRole="Phim" ToRole="DanhGia" />
           <NavigationProperty Name="DanhMucNuocSanXuat" Relationship="Self.FK_Phim_NuocSX" FromRole="Phim" ToRole="DanhMucNuocSanXuat" />
@@ -508,7 +510,7 @@
               <PropertyRef Name="MaSo" />
             </Principal>
             <Dependent Role="BinhLuan">
-              <PropertyRef Name="BaiNhanXet" />
+              <PropertyRef Name="MS_BaiNhanXet" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -532,7 +534,7 @@
               <PropertyRef Name="MaSo" />
             </Principal>
             <Dependent Role="BinhLuan">
-              <PropertyRef Name="ThanhVien" />
+              <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -708,8 +710,8 @@
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BinhLuan">
               <MappingFragment StoreEntitySet="BinhLuan">
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="ThanhVien" ColumnName="ThanhVien" />
-                <ScalarProperty Name="BaiNhanXet" ColumnName="BaiNhanXet" />
+                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
+                <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
               </MappingFragment>
@@ -764,6 +766,7 @@
                 <ScalarProperty Name="MS_NuocSX" ColumnName="MS_NuocSX" />
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="NgayPhatHanh" ColumnName="NgayPhatHanh" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
