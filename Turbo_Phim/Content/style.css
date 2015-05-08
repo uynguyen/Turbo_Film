@@ -269,7 +269,7 @@ i.video1 {
 .menu {
 	position: fixed;
 	top: 82px;
-	left: 5px;
+	left: 3px;
 	 z-index: 2;
 }
 .menu ul li {
@@ -1384,10 +1384,10 @@ font-weight: 700;
 		margin: 0px 0 1.8em 0;
 	}
 	.main {
-		border-left: 90px solid #383838;
+		border-left: 68px solid #383838;
 	}
 	.menu ul li a {
-		padding: 10px 15px;
+		padding: 5px 5px;
 	}
 	.video iframe {
 		min-height: 470px;
@@ -1532,16 +1532,16 @@ font-weight: 700;
 }
 @media screen and (max-width: 1024px) {
 	.main {
-		border-left: 80px solid #383838;
+		border-left: 63px solid #383838;
 	}	
 	.full {
 		border-left: 3px solid #2b2b2b;
 	}
 	.menu {
-		left: 3px;
+		left: 2px;
 	}
 	.menu ul li a {
-		padding: 8px 10px;
+		padding: 2px 2px;
 	}
 	.video iframe {
 		min-height: 360px;
@@ -1717,10 +1717,10 @@ font-weight: 700;
 		margin-top: 1.5em;
 	}
 	.main {
-		border-left: 70px solid #383838;
+		border-left: 60px solid #383838;
 	}
 	.menu ul li a {
-		padding: 5px 5px;
+		padding: 1px 1px;
 	}
 	.news-right-grid {
 		margin-top: 2em;
@@ -1899,10 +1899,10 @@ font-weight: 700;
 		border-left: 1px solid #2b2b2b;
 	}
 	.main {
-		border-left: 61px solid #383838;
+		border-left: 59px solid #383838;
 	}
 	.menu {
-		left: 2px;
+		left: 1px;
 	}
 	.video iframe {
 		min-height: 270px;
@@ -2193,7 +2193,7 @@ font-weight: 700;
 		background-size: 266px;
 	}
 	.main {
-		border-left: 46px solid #383838;
+		border-left: 30px solid #383838;
 	}
 	.header {
 		min-height: 220px;
