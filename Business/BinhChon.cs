@@ -18,6 +18,7 @@ namespace Business
         public int MS_ThanhVien { get; set; }
         public int MS_BaiNhanXet { get; set; }
         public bool BinhChon1 { get; set; }
+        public Nullable<bool> TinhTrang { get; set; }
     
         public virtual BaiNhanXet BaiNhanXet { get; set; }
         public virtual ThanhVien ThanhVien { get; set; }

@@ -21,7 +21,7 @@ namespace Turbo_Phim.Controllers
 
             FilmService phimService = new FilmService();
 
-            return View(phimService.getAllFilms());
+            return View(phimService.getAllFilms(1));
          
         }
 

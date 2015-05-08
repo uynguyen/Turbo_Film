@@ -1,0 +1,57 @@
+﻿
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+}
+
+<div class="content">
+    <div class="header-admin">
+        <h1 class="page-title">Bảng danh mục</h1>
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> </li>
+            <li><a href="users.html">Bảng danh mục</a> </li>
+        </ul>
+    </div>
+    <div class="main-content">
+
+        <div class="main-content">
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        @Html.Action("Genre", "AdminCategory")
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Action("Country", "AdminCategory")
+                    </div>
+
+                </div>
+            </div>
+           
+           
+
+
+
+
+
+         
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>

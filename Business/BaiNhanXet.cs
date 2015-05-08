@@ -25,6 +25,7 @@ namespace Business
         public Nullable<int> MS_ThanhVien { get; set; }
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayDang { get; set; }
+        public Nullable<bool> TinhTrang { get; set; }
     
         public virtual Phim Phim { get; set; }
         public virtual ThanhVien ThanhVien { get; set; }

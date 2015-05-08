@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
+    ViewBag.Title = "createNewFilm";
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+}
+
+
+
+<div class="content">
+    <div class="header-admin">
+        <h1 class="page-title">Bảng danh mục</h1>
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a> </li>
+            <li><a href="users.html">Bảng danh mục</a> </li>
+        </ul>
+    </div>
+    <div class="main-content">
+
+        <div class="main-content">
+@using (Html.BeginForm("AddNewFilm", "AdminMovies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <img id="blah" class="createImage" src="/Images/01.jpg" alt="" />
+
+
+                        <input type='file' name="file" id="imgInp" />
+
+
+
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                    @*<div class="col-md-2">
+
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.TenPhim):&nbsp; </p>
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.DiemDanhGia):</p>
+
+
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.DienVien):&nbsp; </p>
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.DaoDien): &nbsp; </p>
+
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.ThoiLuong):&nbsp; </p>
+
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.NgayPhatHanh):&nbsp; </p>
+
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.URL_Trailer):&nbsp; </p>
+
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.TheLoai):&nbsp; </p>
+                        <div class="clearfix"></div>
+                        <p class="ratingview">@Html.DisplayNameFor(model => model.NuocSX):&nbsp; </p>
+
+                        <div class="clearfix"></div>
+
+                    </div>*@
+             
+               
+                    <div class="col-md-5">
+
+                        <div class="clearfix"></div>
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.TenPhim)" name="name">
+                        <div class="clearfix"></div>
+
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.DiemDanhGia)" name="rank">
+
+                        <div class="clearfix"></div>
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.DienVien)" name="actor">
+                        <div class="clearfix"></div>
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.DaoDien)" name="director">
+
+
+                        <div class="clearfix"></div>
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.ThoiLuong)" name="duration">
+
+                        <div class="clearfix"></div>
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.NgayPhatHanh)" name="reissue">
+                        <div class="clearfix"></div>
+                        <input type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.URL_Trailer)" name="trailer">
+
+
+                        <div class="clearfix"></div>
+                        @Html.Action("Genre", "AdminMovies")
+                        <div class="clearfix"></div>
+                        @Html.Action("Country", "AdminMovies")
+
+
+                        <div class="clearfix"></div>
+
+
+                    </div>
+
+                       </div>
+                    <div></div>
+               
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="clearfix"></div>
+                            <textarea class="form-control" rows="10" placeholder="Nội dung phim" name="content"></textarea>
+                        </div>
+
+
+                    </div>
+
+
+                    <button class="btn-primary" type="submit" value="">Thêm phim</button>
+
+              
+
+            </div>
+                }
+        </div>
+
+    </div>
+</div>
+
+

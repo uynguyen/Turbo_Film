@@ -21,6 +21,7 @@ namespace Business
     
         public int MaSo { get; set; }
         public string TenTheLoai { get; set; }
+        public Nullable<bool> TinhTrang { get; set; }
     
         public virtual ICollection<Phim> Phim { get; set; }
     }

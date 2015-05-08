@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TURBO_PHIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TURBO_PHIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BaiNhanXet">
           <Key>
             <PropertyRef Name="MaSo" />
@@ -14,6 +14,7 @@
           <Property Name="MS_ThanhVien" Type="int" />
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="datetime" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="BangThamSo">
           <Key>
@@ -29,6 +30,7 @@
           <Property Name="MS_ThanhVien" Type="int" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="int" Nullable="false" />
           <Property Name="BinhChon" Type="bit" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -55,6 +57,7 @@
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenNuoc" Type="nvarchar" MaxLength="20" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="DanhMucTheLoai">
           <Key>
@@ -62,6 +65,7 @@
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenTheLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -107,6 +111,7 @@
           <Property Name="MatKhau" Type="nchar" MaxLength="20" />
           <Property Name="Email" Type="nchar" MaxLength="30" />
           <Property Name="MS_PhanQuyen" Type="int" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -117,6 +122,8 @@
           <Property Name="MS_TaiKhoan" Type="int" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySinh" Type="date" />
+          <Property Name="TinhTrang" Type="bit" />
+          <Property Name="GioiTinh" Type="bit" />
         </EntityType>
         <Association Name="FK_BaiNhanXet_Phim">
           <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
@@ -324,8 +331,7 @@
             <End Role="ThanhVien" EntitySet="ThanhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TURBO_PHIMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -342,6 +348,7 @@
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BaiNhanXet_ThanhVien" FromRole="BaiNhanXet" ToRole="ThanhVien" />
           <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhChon" />
           <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhLuan" />
+          <Property Name="TinhTrang" Type="Boolean" />
         </EntityType>
         <EntityType Name="BangThamSo">
           <Key>
@@ -359,6 +366,7 @@
           <Property Name="BinhChon1" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BinhChon" ToRole="BaiNhanXet" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BinhChon_ThanhVien" FromRole="BinhChon" ToRole="ThanhVien" />
+          <Property Name="TinhTrang" Type="Boolean" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -390,6 +398,7 @@
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenNuoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_Phim_NuocSX" FromRole="DanhMucNuocSanXuat" ToRole="Phim" />
+          <Property Name="TinhTrang" Type="Boolean" />
         </EntityType>
         <EntityType Name="DanhMucTheLoai">
           <Key>
@@ -398,6 +407,7 @@
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenTheLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_Phim_TheLoai" FromRole="DanhMucTheLoai" ToRole="Phim" />
+          <Property Name="TinhTrang" Type="Boolean" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -450,6 +460,7 @@
           <Property Name="MS_PhanQuyen" Type="Int32" />
           <NavigationProperty Name="PhanQuyen" Relationship="Self.FK_TaiKhoan_PhanQuyen" FromRole="TaiKhoan" ToRole="PhanQuyen" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_ThanhVien_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhVien" />
+          <Property Name="TinhTrang" Type="Boolean" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -465,6 +476,8 @@
           <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="ThanhVien" ToRole="BinhLuan" />
           <NavigationProperty Name="DanhGia" Relationship="Self.FK_DanhGia_ThanhVien" FromRole="ThanhVien" ToRole="DanhGia" />
           <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_ThanhVien_TaiKhoan" FromRole="ThanhVien" ToRole="TaiKhoan" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <Property Name="GioiTinh" Type="Boolean" />
         </EntityType>
         <Association Name="FK_BaiNhanXet_Phim">
           <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
@@ -681,6 +694,7 @@
           <EntitySetMapping Name="BaiNhanXet">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BaiNhanXet">
               <MappingFragment StoreEntitySet="BaiNhanXet">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MS_Phim" ColumnName="MS_Phim" />
                 <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
@@ -699,6 +713,7 @@
           <EntitySetMapping Name="BinhChon">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BinhChon">
               <MappingFragment StoreEntitySet="BinhChon">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
                 <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
@@ -730,6 +745,7 @@
           <EntitySetMapping Name="DanhMucNuocSanXuat">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.DanhMucNuocSanXuat">
               <MappingFragment StoreEntitySet="DanhMucNuocSanXuat">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="TenNuoc" ColumnName="TenNuoc" />
               </MappingFragment>
@@ -738,6 +754,7 @@
           <EntitySetMapping Name="DanhMucTheLoai">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.DanhMucTheLoai">
               <MappingFragment StoreEntitySet="DanhMucTheLoai">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="TenTheLoai" ColumnName="TenTheLoai" />
               </MappingFragment>
@@ -784,6 +801,7 @@
           <EntitySetMapping Name="TaiKhoan">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.TaiKhoan">
               <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
@@ -795,6 +813,8 @@
           <EntitySetMapping Name="ThanhVien">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.ThanhVien">
               <MappingFragment StoreEntitySet="ThanhVien">
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="MS_TaiKhoan" ColumnName="MS_TaiKhoan" />

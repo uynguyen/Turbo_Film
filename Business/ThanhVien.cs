@@ -27,6 +27,8 @@ namespace Business
         public Nullable<int> MS_TaiKhoan { get; set; }
         public string DiaChi { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
+        public Nullable<bool> TinhTrang { get; set; }
+        public Nullable<bool> GioiTinh { get; set; }
     
         public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }
         public virtual ICollection<BinhChon> BinhChon { get; set; }

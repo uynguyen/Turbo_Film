@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Business.DanhMucNuocSanXuat>
+@{
+    ViewBag.Title = "Country";
+    Layout = null;
+}
+<div class="btn-toolbar list-toolbar">
+    <button class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới nước sản xuất</button>
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên nước sản xuất</th>
+            @*<th>Username</th>
+                <th>Permission</th>*@
+            <th style="width: 3.5em;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach (Business.DanhMucNuocSanXuat country in Model)
+            {
+            <tr>
+@if (!country.TenNuoc.Equals("Khác"))
+{
+                <td>@country.MaSo</td>
+                <td>@country.TenNuoc</td>
+               
+                    <td>
+                        <a href="user.html"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                }
+
+            </tr>
+
+            }
+            </tr>
+
+        </tbody>
+    </table>
+
+
+

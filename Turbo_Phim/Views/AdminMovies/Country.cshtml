@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Business.DanhMucNuocSanXuat>
+@{
+    ViewBag.Title = "Country";
+    Layout = null;
+}
+
+@Html.DropDownList(
+      "country",
+    new SelectList(
+        Model.Select(x => new { Value = x.MaSo, Text = x.TenNuoc }),
+        "Value",
+        "Text"
+        ), "-Nước sản xuất-",new { @class="form-control" }
+       
+)
+

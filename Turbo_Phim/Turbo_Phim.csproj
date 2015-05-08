@@ -158,6 +158,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminCategoryController.cs" />
     <Compile Include="Controllers\AdminMainController.cs" />
     <Compile Include="Controllers\AdminMoviesController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
@@ -169,7 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CountryService.cs" />
     <Compile Include="Models\FilmService.cs" />
+    <Compile Include="Models\GenreService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,6 +255,12 @@
     <Content Include="Views\Shared\_Admin_Header.cshtml" />
     <Content Include="Views\Shared\_Admin_NavigationMenu.cshtml" />
     <Content Include="Views\AdminUsers\Index.cshtml" />
+    <Content Include="Views\AdminCategory\Index.cshtml" />
+    <Content Include="Views\AdminCategory\Genre.cshtml" />
+    <Content Include="Views\AdminCategory\Country.cshtml" />
+    <Content Include="Views\AdminMovies\createNewFilm.cshtml" />
+    <Content Include="Views\AdminMovies\Genre.cshtml" />
+    <Content Include="Views\AdminMovies\Country.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
