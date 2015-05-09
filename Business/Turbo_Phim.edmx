@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TURBO_PHIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TURBO_PHIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BaiNhanXet">
           <Key>
             <PropertyRef Name="MaSo" />
@@ -14,6 +14,7 @@
           <Property Name="MS_ThanhVien" Type="int" />
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="datetime" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="BangThamSo">
           <Key>
@@ -29,6 +30,7 @@
           <Property Name="MS_ThanhVien" Type="int" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="int" Nullable="false" />
           <Property Name="BinhChon" Type="bit" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -55,6 +57,7 @@
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenNuoc" Type="nvarchar" MaxLength="20" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="DanhMucTheLoai">
           <Key>
@@ -62,6 +65,7 @@
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenTheLoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="bit" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -107,6 +111,8 @@
           <Property Name="MatKhau" Type="nchar" MaxLength="20" />
           <Property Name="Email" Type="nchar" MaxLength="30" />
           <Property Name="MS_PhanQuyen" Type="int" />
+          <Property Name="TinhTrang" Type="bit" />
+          <Property Name="NgayDangKy" Type="date" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -117,6 +123,8 @@
           <Property Name="MS_TaiKhoan" Type="int" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySinh" Type="date" />
+          <Property Name="TinhTrang" Type="bit" />
+          <Property Name="GioiTinh" Type="bit" />
         </EntityType>
         <Association Name="FK_BaiNhanXet_Phim">
           <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
@@ -324,11 +332,72 @@
             <End Role="ThanhVien" EntitySet="ThanhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TURBO_PHIMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TURBO_PHIMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BaiNhanXet" EntityType="TURBO_PHIMModel.BaiNhanXet" />
+          <EntitySet Name="BangThamSo" EntityType="TURBO_PHIMModel.BangThamSo" />
+          <EntitySet Name="BinhChon" EntityType="TURBO_PHIMModel.BinhChon" />
+          <EntitySet Name="BinhLuan" EntityType="TURBO_PHIMModel.BinhLuan" />
+          <EntitySet Name="DanhGia" EntityType="TURBO_PHIMModel.DanhGia" />
+          <EntitySet Name="DanhMucNuocSanXuat" EntityType="TURBO_PHIMModel.DanhMucNuocSanXuat" />
+          <EntitySet Name="DanhMucTheLoai" EntityType="TURBO_PHIMModel.DanhMucTheLoai" />
+          <EntitySet Name="PhanQuyen" EntityType="TURBO_PHIMModel.PhanQuyen" />
+          <EntitySet Name="Phim" EntityType="TURBO_PHIMModel.Phim" />
+          <EntitySet Name="sysdiagrams" EntityType="TURBO_PHIMModel.sysdiagrams" />
+          <EntitySet Name="TaiKhoan" EntityType="TURBO_PHIMModel.TaiKhoan" />
+          <EntitySet Name="ThanhVien" EntityType="TURBO_PHIMModel.ThanhVien" />
+          <AssociationSet Name="FK_BaiNhanXet_Phim" Association="TURBO_PHIMModel.FK_BaiNhanXet_Phim">
+            <End Role="Phim" EntitySet="Phim" />
+            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaiNhanXet_ThanhVien" Association="TURBO_PHIMModel.FK_BaiNhanXet_ThanhVien">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinhChon_BaiNhanXet" Association="TURBO_PHIMModel.FK_BinhChon_BaiNhanXet">
+            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
+            <End Role="BinhChon" EntitySet="BinhChon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinhLuan_BaiNhanXet" Association="TURBO_PHIMModel.FK_BinhLuan_BaiNhanXet">
+            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
+            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinhChon_ThanhVien" Association="TURBO_PHIMModel.FK_BinhChon_ThanhVien">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="BinhChon" EntitySet="BinhChon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="TURBO_PHIMModel.FK_BinhLuan_ThanhVien">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGia_Phim" Association="TURBO_PHIMModel.FK_DanhGia_Phim">
+            <End Role="Phim" EntitySet="Phim" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGia_ThanhVien" Association="TURBO_PHIMModel.FK_DanhGia_ThanhVien">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phim_NuocSX" Association="TURBO_PHIMModel.FK_Phim_NuocSX">
+            <End Role="DanhMucNuocSanXuat" EntitySet="DanhMucNuocSanXuat" />
+            <End Role="Phim" EntitySet="Phim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phim_TheLoai" Association="TURBO_PHIMModel.FK_Phim_TheLoai">
+            <End Role="DanhMucTheLoai" EntitySet="DanhMucTheLoai" />
+            <End Role="Phim" EntitySet="Phim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoan_PhanQuyen" Association="TURBO_PHIMModel.FK_TaiKhoan_PhanQuyen">
+            <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThanhVien_TaiKhoan" Association="TURBO_PHIMModel.FK_ThanhVien_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BaiNhanXet">
           <Key>
             <PropertyRef Name="MaSo" />
@@ -338,10 +407,11 @@
           <Property Name="MS_ThanhVien" Type="Int32" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Phim" Relationship="Self.FK_BaiNhanXet_Phim" FromRole="BaiNhanXet" ToRole="Phim" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BaiNhanXet_ThanhVien" FromRole="BaiNhanXet" ToRole="ThanhVien" />
-          <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhChon" />
-          <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhLuan" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <NavigationProperty Name="Phim" Relationship="TURBO_PHIMModel.FK_BaiNhanXet_Phim" FromRole="BaiNhanXet" ToRole="Phim" />
+          <NavigationProperty Name="ThanhVien" Relationship="TURBO_PHIMModel.FK_BaiNhanXet_ThanhVien" FromRole="BaiNhanXet" ToRole="ThanhVien" />
+          <NavigationProperty Name="BinhChon" Relationship="TURBO_PHIMModel.FK_BinhChon_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhChon" />
+          <NavigationProperty Name="BinhLuan" Relationship="TURBO_PHIMModel.FK_BinhLuan_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhLuan" />
         </EntityType>
         <EntityType Name="BangThamSo">
           <Key>
@@ -357,8 +427,9 @@
           <Property Name="MS_ThanhVien" Type="Int32" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="Int32" Nullable="false" />
           <Property Name="BinhChon1" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BinhChon" ToRole="BaiNhanXet" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BinhChon_ThanhVien" FromRole="BinhChon" ToRole="ThanhVien" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <NavigationProperty Name="BaiNhanXet" Relationship="TURBO_PHIMModel.FK_BinhChon_BaiNhanXet" FromRole="BinhChon" ToRole="BaiNhanXet" />
+          <NavigationProperty Name="ThanhVien" Relationship="TURBO_PHIMModel.FK_BinhChon_ThanhVien" FromRole="BinhChon" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -369,8 +440,8 @@
           <Property Name="MS_BaiNhanXet" Type="Int32" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BinhLuan" ToRole="BaiNhanXet" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="BinhLuan" ToRole="ThanhVien" />
+          <NavigationProperty Name="BaiNhanXet" Relationship="TURBO_PHIMModel.FK_BinhLuan_BaiNhanXet" FromRole="BinhLuan" ToRole="BaiNhanXet" />
+          <NavigationProperty Name="ThanhVien" Relationship="TURBO_PHIMModel.FK_BinhLuan_ThanhVien" FromRole="BinhLuan" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
@@ -380,8 +451,8 @@
           <Property Name="MS_ThanhVien" Type="Int32" />
           <Property Name="MS_Phim" Type="Int32" />
           <Property Name="DiemDanhGia" Type="Double" />
-          <NavigationProperty Name="Phim" Relationship="Self.FK_DanhGia_Phim" FromRole="DanhGia" ToRole="Phim" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_DanhGia_ThanhVien" FromRole="DanhGia" ToRole="ThanhVien" />
+          <NavigationProperty Name="Phim" Relationship="TURBO_PHIMModel.FK_DanhGia_Phim" FromRole="DanhGia" ToRole="Phim" />
+          <NavigationProperty Name="ThanhVien" Relationship="TURBO_PHIMModel.FK_DanhGia_ThanhVien" FromRole="DanhGia" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="DanhMucNuocSanXuat">
           <Key>
@@ -389,7 +460,8 @@
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenNuoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Phim" Relationship="Self.FK_Phim_NuocSX" FromRole="DanhMucNuocSanXuat" ToRole="Phim" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <NavigationProperty Name="Phim" Relationship="TURBO_PHIMModel.FK_Phim_NuocSX" FromRole="DanhMucNuocSanXuat" ToRole="Phim" />
         </EntityType>
         <EntityType Name="DanhMucTheLoai">
           <Key>
@@ -397,7 +469,8 @@
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenTheLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Phim" Relationship="Self.FK_Phim_TheLoai" FromRole="DanhMucTheLoai" ToRole="Phim" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <NavigationProperty Name="Phim" Relationship="TURBO_PHIMModel.FK_Phim_TheLoai" FromRole="DanhMucTheLoai" ToRole="Phim" />
         </EntityType>
         <EntityType Name="PhanQuyen">
           <Key>
@@ -405,7 +478,7 @@
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenQuyen" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_TaiKhoan_PhanQuyen" FromRole="PhanQuyen" ToRole="TaiKhoan" />
+          <NavigationProperty Name="TaiKhoan" Relationship="TURBO_PHIMModel.FK_TaiKhoan_PhanQuyen" FromRole="PhanQuyen" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -424,16 +497,16 @@
           <Property Name="HinhAnh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NgayPhatHanh" Type="DateTime" Precision="0" />
           <Property Name="TinhTrang" Type="Boolean" />
-          <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BaiNhanXet_Phim" FromRole="Phim" ToRole="BaiNhanXet" />
-          <NavigationProperty Name="DanhGia" Relationship="Self.FK_DanhGia_Phim" FromRole="Phim" ToRole="DanhGia" />
-          <NavigationProperty Name="DanhMucNuocSanXuat" Relationship="Self.FK_Phim_NuocSX" FromRole="Phim" ToRole="DanhMucNuocSanXuat" />
-          <NavigationProperty Name="DanhMucTheLoai" Relationship="Self.FK_Phim_TheLoai" FromRole="Phim" ToRole="DanhMucTheLoai" />
+          <NavigationProperty Name="BaiNhanXet" Relationship="TURBO_PHIMModel.FK_BaiNhanXet_Phim" FromRole="Phim" ToRole="BaiNhanXet" />
+          <NavigationProperty Name="DanhGia" Relationship="TURBO_PHIMModel.FK_DanhGia_Phim" FromRole="Phim" ToRole="DanhGia" />
+          <NavigationProperty Name="DanhMucNuocSanXuat" Relationship="TURBO_PHIMModel.FK_Phim_NuocSX" FromRole="Phim" ToRole="DanhMucNuocSanXuat" />
+          <NavigationProperty Name="DanhMucTheLoai" Relationship="TURBO_PHIMModel.FK_Phim_TheLoai" FromRole="Phim" ToRole="DanhMucTheLoai" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -448,8 +521,10 @@
           <Property Name="MatKhau" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="MS_PhanQuyen" Type="Int32" />
-          <NavigationProperty Name="PhanQuyen" Relationship="Self.FK_TaiKhoan_PhanQuyen" FromRole="TaiKhoan" ToRole="PhanQuyen" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_ThanhVien_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhVien" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <NavigationProperty Name="PhanQuyen" Relationship="TURBO_PHIMModel.FK_TaiKhoan_PhanQuyen" FromRole="TaiKhoan" ToRole="PhanQuyen" />
+          <NavigationProperty Name="ThanhVien" Relationship="TURBO_PHIMModel.FK_ThanhVien_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhVien" />
+          <Property Name="NgayDangKy" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -460,15 +535,17 @@
           <Property Name="MS_TaiKhoan" Type="Int32" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BaiNhanXet_ThanhVien" FromRole="ThanhVien" ToRole="BaiNhanXet" />
-          <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_ThanhVien" FromRole="ThanhVien" ToRole="BinhChon" />
-          <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="ThanhVien" ToRole="BinhLuan" />
-          <NavigationProperty Name="DanhGia" Relationship="Self.FK_DanhGia_ThanhVien" FromRole="ThanhVien" ToRole="DanhGia" />
-          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_ThanhVien_TaiKhoan" FromRole="ThanhVien" ToRole="TaiKhoan" />
+          <Property Name="TinhTrang" Type="Boolean" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <NavigationProperty Name="BaiNhanXet" Relationship="TURBO_PHIMModel.FK_BaiNhanXet_ThanhVien" FromRole="ThanhVien" ToRole="BaiNhanXet" />
+          <NavigationProperty Name="BinhChon" Relationship="TURBO_PHIMModel.FK_BinhChon_ThanhVien" FromRole="ThanhVien" ToRole="BinhChon" />
+          <NavigationProperty Name="BinhLuan" Relationship="TURBO_PHIMModel.FK_BinhLuan_ThanhVien" FromRole="ThanhVien" ToRole="BinhLuan" />
+          <NavigationProperty Name="DanhGia" Relationship="TURBO_PHIMModel.FK_DanhGia_ThanhVien" FromRole="ThanhVien" ToRole="DanhGia" />
+          <NavigationProperty Name="TaiKhoan" Relationship="TURBO_PHIMModel.FK_ThanhVien_TaiKhoan" FromRole="ThanhVien" ToRole="TaiKhoan" />
         </EntityType>
         <Association Name="FK_BaiNhanXet_Phim">
-          <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
-          <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.Phim" Role="Phim" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.BaiNhanXet" Role="BaiNhanXet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Phim">
               <PropertyRef Name="MaSo" />
@@ -479,8 +556,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BaiNhanXet_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.ThanhVien" Role="ThanhVien" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.BaiNhanXet" Role="BaiNhanXet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ThanhVien">
               <PropertyRef Name="MaSo" />
@@ -491,8 +568,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BinhChon_BaiNhanXet">
-          <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="1" />
-          <End Role="BinhChon" Type="Self.BinhChon" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.BaiNhanXet" Role="BaiNhanXet" Multiplicity="1" />
+          <End Type="TURBO_PHIMModel.BinhChon" Role="BinhChon" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BaiNhanXet">
               <PropertyRef Name="MaSo" />
@@ -503,8 +580,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BinhLuan_BaiNhanXet">
-          <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="0..1" />
-          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.BaiNhanXet" Role="BaiNhanXet" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.BinhLuan" Role="BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BaiNhanXet">
               <PropertyRef Name="MaSo" />
@@ -515,8 +592,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BinhChon_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="1" />
-          <End Role="BinhChon" Type="Self.BinhChon" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.ThanhVien" Role="ThanhVien" Multiplicity="1" />
+          <End Type="TURBO_PHIMModel.BinhChon" Role="BinhChon" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ThanhVien">
               <PropertyRef Name="MaSo" />
@@ -527,8 +604,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BinhLuan_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.ThanhVien" Role="ThanhVien" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.BinhLuan" Role="BinhLuan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ThanhVien">
               <PropertyRef Name="MaSo" />
@@ -539,8 +616,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DanhGia_Phim">
-          <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
-          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.Phim" Role="Phim" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.DanhGia" Role="DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Phim">
               <PropertyRef Name="MaSo" />
@@ -551,8 +628,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DanhGia_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.ThanhVien" Role="ThanhVien" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.DanhGia" Role="DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ThanhVien">
               <PropertyRef Name="MaSo" />
@@ -563,8 +640,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phim_NuocSX">
-          <End Role="DanhMucNuocSanXuat" Type="Self.DanhMucNuocSanXuat" Multiplicity="0..1" />
-          <End Role="Phim" Type="Self.Phim" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.DanhMucNuocSanXuat" Role="DanhMucNuocSanXuat" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.Phim" Role="Phim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DanhMucNuocSanXuat">
               <PropertyRef Name="MaSo" />
@@ -575,8 +652,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Phim_TheLoai">
-          <End Role="DanhMucTheLoai" Type="Self.DanhMucTheLoai" Multiplicity="0..1" />
-          <End Role="Phim" Type="Self.Phim" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.DanhMucTheLoai" Role="DanhMucTheLoai" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.Phim" Role="Phim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DanhMucTheLoai">
               <PropertyRef Name="MaSo" />
@@ -587,8 +664,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TaiKhoan_PhanQuyen">
-          <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="0..1" />
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.PhanQuyen" Role="PhanQuyen" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PhanQuyen">
               <PropertyRef Name="MaSo" />
@@ -599,8 +676,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ThanhVien_TaiKhoan">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
+          <End Type="TURBO_PHIMModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.ThanhVien" Role="ThanhVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="MaSo" />
@@ -610,68 +687,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TURBO_PHIMEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BaiNhanXet" EntityType="Self.BaiNhanXet" />
-          <EntitySet Name="BangThamSo" EntityType="Self.BangThamSo" />
-          <EntitySet Name="BinhChon" EntityType="Self.BinhChon" />
-          <EntitySet Name="BinhLuan" EntityType="Self.BinhLuan" />
-          <EntitySet Name="DanhGia" EntityType="Self.DanhGia" />
-          <EntitySet Name="DanhMucNuocSanXuat" EntityType="Self.DanhMucNuocSanXuat" />
-          <EntitySet Name="DanhMucTheLoai" EntityType="Self.DanhMucTheLoai" />
-          <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" />
-          <EntitySet Name="Phim" EntityType="Self.Phim" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" />
-          <EntitySet Name="ThanhVien" EntityType="Self.ThanhVien" />
-          <AssociationSet Name="FK_BaiNhanXet_Phim" Association="Self.FK_BaiNhanXet_Phim">
-            <End Role="Phim" EntitySet="Phim" />
-            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BaiNhanXet_ThanhVien" Association="Self.FK_BaiNhanXet_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BinhChon_BaiNhanXet" Association="Self.FK_BinhChon_BaiNhanXet">
-            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
-            <End Role="BinhChon" EntitySet="BinhChon" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BinhLuan_BaiNhanXet" Association="Self.FK_BinhLuan_BaiNhanXet">
-            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
-            <End Role="BinhLuan" EntitySet="BinhLuan" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BinhChon_ThanhVien" Association="Self.FK_BinhChon_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="BinhChon" EntitySet="BinhChon" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="BinhLuan" EntitySet="BinhLuan" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhGia_Phim" Association="Self.FK_DanhGia_Phim">
-            <End Role="Phim" EntitySet="Phim" />
-            <End Role="DanhGia" EntitySet="DanhGia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhGia_ThanhVien" Association="Self.FK_DanhGia_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="DanhGia" EntitySet="DanhGia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Phim_NuocSX" Association="Self.FK_Phim_NuocSX">
-            <End Role="DanhMucNuocSanXuat" EntitySet="DanhMucNuocSanXuat" />
-            <End Role="Phim" EntitySet="Phim" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Phim_TheLoai" Association="Self.FK_Phim_TheLoai">
-            <End Role="DanhMucTheLoai" EntitySet="DanhMucTheLoai" />
-            <End Role="Phim" EntitySet="Phim" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TaiKhoan_PhanQuyen" Association="Self.FK_TaiKhoan_PhanQuyen">
-            <End Role="PhanQuyen" EntitySet="PhanQuyen" />
-            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThanhVien_TaiKhoan" Association="Self.FK_ThanhVien_TaiKhoan">
-            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -681,11 +696,12 @@
           <EntitySetMapping Name="BaiNhanXet">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BaiNhanXet">
               <MappingFragment StoreEntitySet="BaiNhanXet">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="MS_Phim" ColumnName="MS_Phim" />
-                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
+                <ScalarProperty Name="MS_Phim" ColumnName="MS_Phim" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -699,107 +715,114 @@
           <EntitySetMapping Name="BinhChon">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BinhChon">
               <MappingFragment StoreEntitySet="BinhChon">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
-                <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="BinhChon1" ColumnName="BinhChon" />
+                <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
+                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BinhLuan">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BinhLuan">
               <MappingFragment StoreEntitySet="BinhLuan">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
-                <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
+                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DanhGia">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.DanhGia">
               <MappingFragment StoreEntitySet="DanhGia">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
-                <ScalarProperty Name="MS_Phim" ColumnName="MS_Phim" />
                 <ScalarProperty Name="DiemDanhGia" ColumnName="DiemDanhGia" />
+                <ScalarProperty Name="MS_Phim" ColumnName="MS_Phim" />
+                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DanhMucNuocSanXuat">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.DanhMucNuocSanXuat">
               <MappingFragment StoreEntitySet="DanhMucNuocSanXuat">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="TenNuoc" ColumnName="TenNuoc" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DanhMucTheLoai">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.DanhMucTheLoai">
               <MappingFragment StoreEntitySet="DanhMucTheLoai">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="TenTheLoai" ColumnName="TenTheLoai" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PhanQuyen">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.PhanQuyen">
               <MappingFragment StoreEntitySet="PhanQuyen">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Phim">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.Phim">
               <MappingFragment StoreEntitySet="Phim">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="TenPhim" ColumnName="TenPhim" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="URL_Trailer" ColumnName="URL_Trailer" />
-                <ScalarProperty Name="DiemDanhGia" ColumnName="DiemDanhGia" />
-                <ScalarProperty Name="MS_TheLoai" ColumnName="MS_TheLoai" />
-                <ScalarProperty Name="ThoiLuong" ColumnName="ThoiLuong" />
-                <ScalarProperty Name="DienVien" ColumnName="DienVien" />
-                <ScalarProperty Name="DaoDien" ColumnName="DaoDien" />
-                <ScalarProperty Name="MS_NuocSX" ColumnName="MS_NuocSX" />
-                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-                <ScalarProperty Name="NgayPhatHanh" ColumnName="NgayPhatHanh" />
                 <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="NgayPhatHanh" ColumnName="NgayPhatHanh" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="MS_NuocSX" ColumnName="MS_NuocSX" />
+                <ScalarProperty Name="DaoDien" ColumnName="DaoDien" />
+                <ScalarProperty Name="DienVien" ColumnName="DienVien" />
+                <ScalarProperty Name="ThoiLuong" ColumnName="ThoiLuong" />
+                <ScalarProperty Name="MS_TheLoai" ColumnName="MS_TheLoai" />
+                <ScalarProperty Name="DiemDanhGia" ColumnName="DiemDanhGia" />
+                <ScalarProperty Name="URL_Trailer" ColumnName="URL_Trailer" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="TenPhim" ColumnName="TenPhim" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaiKhoan">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.TaiKhoan">
               <MappingFragment StoreEntitySet="TaiKhoan">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NgayDangKy" ColumnName="NgayDangKy" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MS_PhanQuyen" ColumnName="MS_PhanQuyen" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThanhVien">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.ThanhVien">
               <MappingFragment StoreEntitySet="ThanhVien">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
-                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
-                <ScalarProperty Name="MS_TaiKhoan" ColumnName="MS_TaiKhoan" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MS_TaiKhoan" ColumnName="MS_TaiKhoan" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

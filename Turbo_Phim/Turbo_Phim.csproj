@@ -158,6 +158,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminMainController.cs" />
     <Compile Include="Controllers\AdminMoviesController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
@@ -168,10 +169,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilmService.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
+    <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\UserAccountService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -252,6 +253,8 @@
     <Content Include="Views\Shared\_Admin_Header.cshtml" />
     <Content Include="Views\Shared\_Admin_NavigationMenu.cshtml" />
     <Content Include="Views\AdminUsers\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

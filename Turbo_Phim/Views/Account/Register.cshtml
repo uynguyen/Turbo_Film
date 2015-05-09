@@ -1,0 +1,110 @@
+﻿@model Turbo_Phim.Models.AccountViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="container" id="register" style="width:100%">
+       
+        @Html.ValidationSummary(true, "Đăng kí lỗi! Vui lòng kiểm tra lại thông tin bạn đã nhập!")
+        <fieldset>
+            <legend> Thông tin đăng ký </legend>
+            @*UserName*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.UserName)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            </div>
+
+            @*Password*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.Password)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                    @Html.PasswordFor(m => m.Password, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+
+
+            @*ConfirmPassword*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+            </div>
+
+            @*Email*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.Email)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend> Thông tin cá nhân </legend>
+            @*Name*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.Name)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            @*Sex*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.Sex)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                    @Html.DropDownListFor(m => m.Sex, Model.getSex(), "Nam/Nữ")
+                    @Html.ValidationMessageFor(m => m.Sex)
+                </div>
+            </div>
+            @*Birthday*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">
+                    @Html.LabelFor(m => m.Birthday)
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    @Html.TextBoxFor(m => m.Birthday, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.Birthday)
+                </div>
+            </div>
+            @*Address*@
+            <div class="row">
+                <div class="editor-label col-md-6 col-xs-12">                    
+                    @Html.LabelFor(m => m.Address)
+                </div>
+                <div class="editor-field col-md-6 col-xs-12">
+                   @Html.TextBoxFor(m => m.Address, new { @class = "textbox" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+            </div>
+           
+            <div class="row">
+                <input class="btn btn-success col-md-4 col-xs-12" type="submit" value="Đăng ký" />
+            </div>
+        </fieldset>
+    </div>
+}

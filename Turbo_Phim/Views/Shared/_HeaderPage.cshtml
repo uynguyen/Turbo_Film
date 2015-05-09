@@ -5,7 +5,7 @@
             <p>TURBO PHIM</p>
         </div>
         <div class="user">
-            <a href='@Url.Action("Index", "AdminMain")'>
+            <a href="#" data-toggle="modal" data-target="#registerModal">
                 <span class="glyphicon glyphicon-log-in padding-right-small" style="position:relative;top: 3px;"></span>
                 Log in
             </a>
@@ -20,3 +20,19 @@
        
         <div class="clearfix"></div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Đăng ký tài khoản</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("Register","Account")
+            </div>
+            
+        </div>
+    </div>
+</div>
