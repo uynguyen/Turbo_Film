@@ -14,4 +14,7 @@
     width: 100% !important;
     height: 400px !important;
 }
-
+.my-form-control{
+    margin-top: 10px !important;
+    height: 30px !important;
+}

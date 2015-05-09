@@ -115,7 +115,20 @@ namespace Business
 
         public bool addNewFilmd(Phim p)
         {
+            if(p.MS_NuocSX == null)
+            {
+                  DanhMucNuocSanXuat diffCountry = db.DanhMucNuocSanXuat.Where(x => x.TenNuoc.Equals("Khác") ).FirstOrDefault();
+                  p.MS_NuocSX = diffCountry.MaSo;
+            }
+            if (p.MS_TheLoai == null)
+            {
+                DanhMucTheLoai diffGenre = db.DanhMucTheLoai.Where(x => x.TenTheLoai.Equals("Khác")).FirstOrDefault();
+                p.MS_TheLoai = diffGenre.MaSo;
+            }
+
             db.Phim.Add(p);
+
+
 
             db.SaveChanges();
             return true;

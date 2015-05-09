@@ -7,6 +7,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     
+    @Scripts.Render("~/bundles/modernizr")
+
+    
 </head>
 <body class="theme-blue">
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
@@ -21,6 +24,9 @@
     @RenderBody()
 
     @RenderPage("~/Views/Shared/_Admin_Footer.cshtml")
+
+    @RenderSection("scripts", required: false)
     
 </body>
 </html>
+

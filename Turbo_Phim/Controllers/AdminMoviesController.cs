@@ -55,8 +55,8 @@ namespace Turbo_Phim.Controllers
         }
 
 
-        public ActionResult AddNewFilm(HttpPostedFileBase file, String name, String rank, String actor,
-            String director, String duration, String reissue, String genre, String country, String content, String trailer)
+        public ActionResult AddNewFilm(HttpPostedFileBase file,  String genre, String country, PhimViewModels fvm)//String name, String rank, String actor,
+        //    String director, String duration, String reissue, String genre, String country, String content, String trailer)
         {
             String fileName = "";
             if (file != null && file.ContentLength > 0)
@@ -65,21 +65,27 @@ namespace Turbo_Phim.Controllers
                 var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                 file.SaveAs(path);
             }
+            else
+            {
+                fileName = "defaultAvatar.jpg";
+            }
 
 
             Phim p = new Phim();
 
-            p.NoiDung = content;
-            p.NgayPhatHanh = System.DateTime.Now;
-            p.TenPhim = name;
+            p.NoiDung = fvm.NoiDung;
+            p.NgayPhatHanh = fvm.NgayPhatHanh;
+            p.TenPhim = fvm.TenPhim;
             p.TinhTrang = true;
-            p.ThoiLuong = double.Parse(duration);
-            p.DaoDien = director;
-            p.DienVien = actor;
-            p.MS_TheLoai = Int32.Parse( genre);
+            p.ThoiLuong = fvm.ThoiLuong;
+            p.DaoDien = fvm.DaoDien;
+            p.DienVien = fvm.DienVien;
+            if(genre != "")
+            p.MS_TheLoai = Int32.Parse(genre);
+            if(country != "")
             p.MS_NuocSX = Int32.Parse(country);
-            p.URL_Trailer = trailer;
-            p.HinhAnh =  "/Images/" + fileName;
+            p.URL_Trailer = fvm.URL_Trailer;
+            p.HinhAnh = "/Images/" + fileName;
 
             FilmService filmsv = new FilmService();
             filmsv.addNewFilmd(p);
