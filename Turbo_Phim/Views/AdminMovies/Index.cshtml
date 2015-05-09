@@ -77,21 +77,28 @@
                     }
                 </tbody>
             </table>
-
+            <h3>Trang @TempData["currentPage"] / @ViewBag.maxPage</h3>
             <ul class="pagination">
-                <li>@Html.ActionLink("«", "Index", "AdminMovies", new { page = @Int32.Parse(TempData["currentPage"].ToString()) > 1 ? @Int32.Parse(TempData["currentPage"].ToString()) - 1 : 1 }, null)</li>
-                  @*<li><a href="#">&laquo;</a></li>*@
-                @for (int i = 1; i <= 5; i++)
-                {
+
+                <li>@Html.ActionLink("«", "Index", "AdminMovies", new { page = ((int)TempData["currentPage"] > 1)  ? (int)(TempData["currentPage"]) - 1 : 1 }, null)</li>
+
+                @{
+                    int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
+                    int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
+                    for (int i = startIndexPage; i < endIndexPage; i++)
+                    {
+                        if (i > (int)ViewBag.maxPage)
+                    {
+                        break;
+                    }
                     <li>@Html.ActionLink(i.ToString(), "Index", "AdminMovies", new { page = @i }, null)</li>
+                    }
+                    
                 }
 
-                @*<li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>*@
-                <li>@Html.ActionLink("»", "Index", "AdminMovies", new { page = @Int32.Parse(TempData["currentPage"].ToString()) + 1 }, null)</li>
-                @*<li><a href="#">&raquo;</a></li>*@
+ 
+                <li>@Html.ActionLink("»", "Index", "AdminMovies", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1 }, null)</li>
+
             </ul>
             <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

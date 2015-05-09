@@ -41,6 +41,9 @@ namespace Turbo_Phim.Controllers
             FilmService phimService = new FilmService();
 
 
+            ViewBag.maxPage = phimService.countPage();
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+
 
             return View(phimService.getAllFilms(page,(String)TempData["strSort"], (bool)TempData["isASC"]));
         }
@@ -188,6 +191,8 @@ namespace Turbo_Phim.Controllers
                 p.MS_NuocSX = Int32.Parse(country);
             p.URL_Trailer = fvm.URL_Trailer;
 
+
+            //Nếu người dùng không upload ảnh mới thì sẽ lấy lại ảnh cũ
             if (fileName != "")
                 p.HinhAnh = "/Images/" + fileName;
             else

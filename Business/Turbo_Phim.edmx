@@ -21,6 +21,9 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenThamSo" Type="nvarchar" MaxLength="30" />
+          <Property Name="KieuDuLieu" Type="nchar" MaxLength="10" />
+          <Property Name="GiaTri" Type="nchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="BinhChon">
           <Key>
@@ -79,7 +82,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenPhim" Type="nvarchar" MaxLength="30" />
+          <Property Name="TenPhim" Type="nvarchar" MaxLength="100" />
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="URL_Trailer" Type="nvarchar" MaxLength="50" />
           <Property Name="DiemDanhGia" Type="float" />
@@ -112,6 +115,8 @@
           <Property Name="Email" Type="nchar" MaxLength="30" />
           <Property Name="MS_PhanQuyen" Type="int" />
           <Property Name="TinhTrang" Type="bit" />
+          <Property Name="NgayDangKy" Type="date" />
+          <Property Name="HinhDaiDien" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -355,6 +360,9 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenThamSo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="KieuDuLieu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GiaTri" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="BinhChon">
           <Key>
@@ -422,7 +430,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenPhim" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TenPhim" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="URL_Trailer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiemDanhGia" Type="Double" />
@@ -461,6 +469,8 @@
           <NavigationProperty Name="PhanQuyen" Relationship="Self.FK_TaiKhoan_PhanQuyen" FromRole="TaiKhoan" ToRole="PhanQuyen" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_ThanhVien_TaiKhoan" FromRole="TaiKhoan" ToRole="ThanhVien" />
           <Property Name="TinhTrang" Type="Boolean" />
+          <Property Name="NgayDangKy" Type="DateTime" Precision="0" />
+          <Property Name="HinhDaiDien" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -706,6 +716,9 @@
           <EntitySetMapping Name="BangThamSo">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BangThamSo">
               <MappingFragment StoreEntitySet="BangThamSo">
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+                <ScalarProperty Name="KieuDuLieu" ColumnName="KieuDuLieu" />
+                <ScalarProperty Name="TenThamSo" ColumnName="TenThamSo" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -801,6 +814,8 @@
           <EntitySetMapping Name="TaiKhoan">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.TaiKhoan">
               <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="HinhDaiDien" ColumnName="HinhDaiDien" />
+                <ScalarProperty Name="NgayDangKy" ColumnName="NgayDangKy" />
                 <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />

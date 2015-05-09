@@ -8,7 +8,7 @@ namespace Turbo_Phim.Models
 {
     public class FilmService
     {
-        private Bus bus = new Bus();
+        private FilmBus bus = new FilmBus();
         public List<PhimViewModels> getAllFilms(int? page, String strSort, bool isASC)
         {
             if (page == null)
@@ -88,6 +88,16 @@ namespace Turbo_Phim.Models
         {
            
             return bus.editFilm(p);
+        }
+
+        internal int countPage()
+        {
+            return bus.countPage();
+        }
+
+        internal int getMaxIndexPage()
+        {
+            return Business.FilmBus.MAX_INDEX_PAGE;
         }
     }
 }

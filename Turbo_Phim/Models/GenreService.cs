@@ -9,7 +9,7 @@ namespace Turbo_Phim.Models
    
     public class GenreService
     {
-        private Bus bus = new Bus();
+        private FilmBus bus = new FilmBus();
         public List<DanhMucTheLoai> getAllGener()
         {
             return bus.getAllGeners() ;

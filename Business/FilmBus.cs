@@ -7,10 +7,20 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class Bus
+    public class FilmBus
     {
         private TURBO_PHIMEntities db = new TURBO_PHIMEntities();
-        private const int MAX_PRODUCT_EACHPAGE = 10;
+        public static int MAX_PRODUCT_EACHPAGE = 0;
+        public static int MAX_INDEX_PAGE = 0;
+        public FilmBus(){
+             BangThamSo temp = db.BangThamSo.Where(x => x.TenThamSo == "SoPhimTrenMotTrang").FirstOrDefault();
+             MAX_PRODUCT_EACHPAGE = Int32.Parse(temp.GiaTri);
+
+             temp = db.BangThamSo.Where(x => x.TenThamSo == "GiaTriTrangLonNhatMoiLanPhanTrang").FirstOrDefault();
+             MAX_INDEX_PAGE = Int32.Parse(temp.GiaTri);
+                
+        }
+        
         public List<Phim> getAllFilms(int page, String strSort, bool isASC)
         {
             //if(isASC)
@@ -188,6 +198,18 @@ namespace Business
 
             return true;
 
+        }
+
+        public int countPage()
+        {
+            int size = db.Phim.Where(x => x.TinhTrang == true).ToList().Count();
+
+            int page = size / MAX_PRODUCT_EACHPAGE;
+            if (size % MAX_PRODUCT_EACHPAGE != 0)
+            {
+                page++;
+            }
+            return page;
         }
     }
 }
