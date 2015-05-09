@@ -18,7 +18,7 @@
 
             <div class="btn-toolbar list-toolbar">
 
-                <div class="btn btn-primary"> <i class="fa fa-plus"></i>@Html.ActionLink("Thêm phim mới", "createNewFilm", "AdminMovies") </div> 
+                <div class="btn btn-primary"> <i class="fa fa-plus"></i> @Html.ActionLink("Thêm phim mới", "createNewFilm", "AdminMovies") </div> 
 
             </div>
 
@@ -26,28 +26,28 @@
                 <thead>
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.MaSo)</th>
-                        <th>@Html.DisplayNameFor(model => model.TenPhim)</th>
-                        @* <th>@Html.DisplayNameFor(model => model.NoiDung)</th>*@
-                        @*<th>@Html.DisplayNameFor(model => model.URL_Trailer)</th>*@
-                        <th>@Html.DisplayNameFor(model => model.DiemDanhGia)</th>
-                        <th>@Html.DisplayNameFor(model => model.TheLoai)</th>
-                        <th>@Html.DisplayNameFor(model => model.ThoiLuong)</th>
+                        <th>@Html.ActionLink("Tên phim", "SortByName", "AdminMovies")</th>
+                        <th>@Html.ActionLink("Điểm", "SortByRank", "AdminMovies")</th>
+                        <th>@Html.ActionLink("Thể loại", "SortByGenre", "AdminMovies")</th>
+                        <th>@Html.ActionLink("Thời lượng", "SortByDuration", "AdminMovies")</th>
                         <th>@Html.DisplayNameFor(model => model.DienVien)</th>
                         <th>@Html.DisplayNameFor(model => model.DaoDien)</th>
                         <th>@Html.DisplayNameFor(model => model.NuocSX)</th>
                         <th>@Html.DisplayNameFor(model => model.HinhAnh)</th>
-                        <th>@Html.DisplayNameFor(model => model.NgayPhatHanh)</th>
+                        <th>@Html.ActionLink("Ngày phát hành", "SortByDate", "AdminMovies")</th>
                         <th style="width: 3.5em;"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
                     {
+                        TempData["strSort"] = p.strSort;
+                        TempData["indexPage"] = p.currentPage;
+                        TempData["isASC"] = p.isASC;
                         <tr>
                             <td>@p.MaSo</td>
                             <td>@p.TenPhim</td>
-                            @*  <td>@p.NoiDung.Substring(0, 20) ...</td>*@
-                            @*  <td>@p.URL_Trailer</td>*@
+           
                             <td>@p.DiemDanhGia</td>
                             <td>@p.TheLoai</td>
                             <td>@p.ThoiLuong</td>
@@ -55,14 +55,20 @@
                             <td>@p.DaoDien</td>
                             <td>@p.NuocSX</td>
                             <td><img class="ImageFilmAdmin" src="@p.HinhAnh" alt="" /></td>
-                            <td>@p.NgayPhatHanh</td>
+                            <td>@p.NgayPhatHanh.Value.ToShortDateString()</td>
 
                             <td>
                                 @*<a href="user.html"><i class="fa fa-pencil"></i></a>
                                     <a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-trash-o"></i></a>*@
-                                @using (Html.BeginForm("Delete", "AdminMovies", FormMethod.Get))
+                                @using (Html.BeginForm("Edit", "AdminMovies", FormMethod.Get))
                                 {
                                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" name="codeFilm" value="@p.MaSo"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-pencil"></i></button>
+                                  
+
+                                }
+                                @using (Html.BeginForm("Delete", "AdminMovies", FormMethod.Get))
+                                {
+                                    
                                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" name="codeFilm" value="@p.MaSo"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-trash-o"></i></button>
 
                                 }
@@ -73,8 +79,8 @@
             </table>
 
             <ul class="pagination">
-                <li>@Html.ActionLink("»", "Index", "AdminMovies", new { page = @Int32.Parse(TempData["currentPage"].ToString()) > 1 ? @Int32.Parse(TempData["currentPage"].ToString()) - 1 : 1 }, null)</li>
-                @*  <li><a href="#">&laquo;</a></li>*@
+                <li>@Html.ActionLink("«", "Index", "AdminMovies", new { page = @Int32.Parse(TempData["currentPage"].ToString()) > 1 ? @Int32.Parse(TempData["currentPage"].ToString()) - 1 : 1 }, null)</li>
+                  @*<li><a href="#">&laquo;</a></li>*@
                 @for (int i = 1; i <= 5; i++)
                 {
                     <li>@Html.ActionLink(i.ToString(), "Index", "AdminMovies", new { page = @i }, null)</li>

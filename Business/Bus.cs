@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,47 @@ namespace Business
     public class Bus
     {
         private TURBO_PHIMEntities db = new TURBO_PHIMEntities();
-
-        public List<Phim> getAllFilms(int page)
+        private const int MAX_PRODUCT_EACHPAGE = 10;
+        public List<Phim> getAllFilms(int page, String strSort, bool isASC)
         {
-            return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MaSo).Skip(page * 3 - 3).Take(3).ToList();
+            //if(isASC)
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            //else
+            //{
+            //    switch (strSort)
+            //    {
+            //        case "ID":
+            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //        case "Name":
+            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //        case "Date":
+            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //        case "Duration":
+            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //        case "Genre":
+            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //        case "Rank":
+            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //    }
+            //}
+            return  db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+           
         }
 
 
@@ -132,6 +170,24 @@ namespace Business
 
             db.SaveChanges();
             return true;
+        }
+
+        public Phim getFilmByID(string codeFilm)
+        {
+            return db.Phim.Find(Int32.Parse(codeFilm));
+        }
+
+        public bool editFilm(Phim p)
+        {
+            
+            db.Entry(p).State = EntityState.Modified;
+            db.SaveChanges();
+
+            
+         
+
+            return true;
+
         }
     }
 }

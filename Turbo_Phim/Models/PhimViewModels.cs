@@ -57,9 +57,21 @@ namespace Turbo_Phim.Models
 
          [Required(ErrorMessage = "Bạn chưa nhập {0}")]
          [Display(Name = "Ngày phát hành")]
-        public DateTime? NgayPhatHanh { get; set; }
+         public DateTime? NgayPhatHanh { get; set; }
 
-       
-      
+
+
+         public int MS_NuocSX { get; set; }
+
+         public int MS_TheLoai { get; set; }
+
+
+         public String strSort { get; set; }
+
+
+         public int currentPage { get; set; }
+
+         public bool isASC { get; set; }
+
     }
 }
