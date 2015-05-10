@@ -5,14 +5,17 @@
 }
 
 @Html.DropDownList(
-      "genre",
-    new SelectList(
+      "genre", 
+     new SelectList(
         Model.Select(x => new { Value = x.MaSo, Text = x.TenTheLoai }),
         "Value",
-        "Text"
-        ), "-Thể loại-", new { @class = "form-control" }
+            "Text", ViewBag.DefaultGenreValue
+                ), new { @class = "form-control my-form-control" }
+
 
 )
+
+
 
 
 

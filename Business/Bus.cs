@@ -118,6 +118,22 @@ namespace Business
         }
 
 
+        // Cac ham chuc nang search cua Xanh
+        public List<Phim> searchFilm(string nameFilm)
+        {
+            List<Phim> lst = db.Phim.ToList();
+
+            List<Phim> result = new List<Phim>();
+            foreach (Phim item in lst)
+            {
+                int temp = LevenshteinDistance(nameFilm, item.TenPhim);
+                if (temp <= 5)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
      
 
     }

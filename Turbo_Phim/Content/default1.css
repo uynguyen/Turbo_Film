@@ -8,10 +8,23 @@
 }
 .ImageFilmAdmin{
     width: 50px;
-
+    height: 90px;
 }
 .createImage{
     width: 100% !important;
     height: 400px !important;
 }
-
+.my-form-control{
+    margin-top: 10px !important;
+    height: 30px !important;
+}
+.btnAddNewFilm{
+   margin-left: 5px;
+}
+#indexPaging{
+    text-align: center !important;
+}
+#sortDirection{
+    float:right;
+    margin-right: 5px;
+}

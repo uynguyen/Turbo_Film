@@ -1,13 +1,9 @@
 ﻿@model Turbo_Phim.Models.PhimViewModels
 @using Microsoft.AspNet.Identity
-
-
 @{
-    ViewBag.Title = "CreateNewFilm";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Admin_layout.cshtml";
 }
-
-
 
 <script>
     $(function () {
@@ -28,16 +24,19 @@
     <div class="main-content">
 
         <div class="main-content">
-            @using (Html.BeginForm("AddNewFilm", "AdminMovies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("EditFilm", "AdminMovies", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3">
 
-                            <img id="blah" class="createImage" src="/Images/defaultAvatar.jpg" alt="" />
+                          
+                            <img id="blah" class="createImage" src="@Model.HinhAnh" alt="" />
+                           @{
+                                 TempData["currentAvatar"] = Model.HinhAnh;
+                               }
 
-
-                            <input type='file' name="file" id="imgInp" />
+                            <input type='file' name="file" id="imgInp" src="@Model.HinhAnh" />
 
 
 
@@ -46,22 +45,22 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-md-2">
-                       
+
                             <div class="ratingview">@Html.DisplayNameFor(model => model.TenPhim):&nbsp; </div>
-                           
+
                             <br />
-                         
+
                             <div class="ratingview">@Html.DisplayNameFor(model => model.DiemDanhGia):</div>
                             <br />
-                    
+
                             <div class="ratingview">@Html.DisplayNameFor(model => model.DienVien):&nbsp; </div>
                             <br />
-                       
+
                             <div class="ratingview">@Html.DisplayNameFor(model => model.DaoDien): &nbsp; </div>
                             <br />
                             <div class="ratingview">@Html.DisplayNameFor(model => model.ThoiLuong):&nbsp; </div>
                             <br />
-                        
+
                             <div class="ratingview">@Html.DisplayNameFor(model => model.NgayPhatHanh):&nbsp; </div>
                             <br />
                             <div class="ratingview">@Html.DisplayNameFor(model => model.URL_Trailer):&nbsp; </div>
@@ -69,8 +68,8 @@
                             <div class="ratingview">@Html.DisplayNameFor(model => model.TheLoai):&nbsp; </div>
                             <br />
                             <div class="ratingview">@Html.DisplayNameFor(model => model.NuocSX):&nbsp; </div>
-                        
-                       
+
+
 
                         </div>
 
@@ -80,16 +79,16 @@
                                 @Html.TextBoxFor(m => m.TenPhim, new { @class = "form-control" })
                                 @*@Html.ValidationMessageFor(m => m.TenPhim)*@
                             </div>
-                          
-                            @*<input id="TenPhim" name="TenPhim" type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.TenPhim)">*@
-                           
 
-                        
+                            @*<input id="TenPhim" name="TenPhim" type="text" class="form-control" placeholder="@Html.DisplayNameFor(model => model.TenPhim)">*@
+
+
+
                             <div class="clearfix"></div>
 
                             @{
                 List<SelectListItem> listRank = new List<SelectListItem>();
-                for (float i = 0; i <= 10; i ++)
+                for (float i = 0; i <= 10; i++)
                 {
 
                     SelectListItem temp = new SelectListItem();
@@ -98,25 +97,25 @@
                     listRank.Add(temp);
                 }
                 @Html.DropDownListFor(m => m.DiemDanhGia, listRank, "-Điểm đánh giá-", new { @class = "form-control my-form-control" })
-                      @*@Html.ValidationMessageFor(m => m.DiemDanhGia)*@
-                                         }
+                                @*@Html.ValidationMessageFor(m => m.DiemDanhGia)*@
+                            }
 
 
 
 
-                           
-                         
+
+
                             @Html.TextBoxFor(m => m.DienVien, new { @class = "form-control my-form-control" })
-                           @* @Html.ValidationMessageFor(m => m.DienVien)*@
-                           @* <input type="text" class="field my-form-control" placeholder="@Html.DisplayNameFor(model => model.DienVien)" name="actor">*@
-                           
-                     
-                            @Html.TextBoxFor(m => m.DaoDien, new { @class = "form-control my-form-control" })
-                           @* @Html.ValidationMessageFor(m => m.DaoDien)*@
-                           @* <input type="text" class="form-control my-form-control" placeholder="@Html.DisplayNameFor(model => model.DaoDien)" name="director">*@
+                            @* @Html.ValidationMessageFor(m => m.DienVien)*@
+                            @* <input type="text" class="field my-form-control" placeholder="@Html.DisplayNameFor(model => model.DienVien)" name="actor">*@
 
-                          
-                  
+
+                            @Html.TextBoxFor(m => m.DaoDien, new { @class = "form-control my-form-control" })
+                            @* @Html.ValidationMessageFor(m => m.DaoDien)*@
+                            @* <input type="text" class="form-control my-form-control" placeholder="@Html.DisplayNameFor(model => model.DaoDien)" name="director">*@
+
+
+
 
                             @Html.DropDownListFor(m => m.ThoiLuong, new List<SelectListItem> {
         new SelectListItem {Text = "45 phút", Value ="45",},
@@ -127,25 +126,25 @@
 
        }, "-Thời lượng-", new { @class = "form-control my-form-control" })
 
-                            
-                          @*  @Html.TextBoxFor(m => m.NgayPhatHanh, new { id = "datepicker", @class = "form-control my-form-control", @Value = @System.DateTime.Now.ToShortDateString() })*@
-                           @* @Html.ValidationMessageFor(m => m.NgayPhatHanh)*@
+
+                            @*@Html.TextBoxFor(m => m.NgayPhatHanh, new { id = "datepicker", @class = "form-control my-form-control", @Value = @System.DateTime.Now.ToShortDateString() })*@
+                            @* @Html.ValidationMessageFor(m => m.NgayPhatHanh)*@
                             <input type="text" class="form-control my-form-control" placeholder="@Html.DisplayNameFor(model => model.NgayPhatHanh)" name="reissue" id="datepicker" value="@System.DateTime.Now.ToString("MM/dd/yyyy")">
-                          
-                    
+
+
                             @Html.TextBoxFor(m => m.URL_Trailer, new { @class = "form-control my-form-control" })
-                          @*  @Html.ValidationMessageFor(m => m.URL_Trailer)*@
+                            @*  @Html.ValidationMessageFor(m => m.URL_Trailer)*@
 
                             @*<input type="text" class="form-control my-form-control" placeholder="@Html.DisplayNameFor(model => model.URL_Trailer)" name="trailer">*@
 
-                    
-                            @Html.Action("Genre", "AdminMovies", new { value = 0 })
-                       
-                    
-                            @Html.Action("Country", "AdminMovies",  new { value = 0 })
 
-                          @Html.ValidationSummary(false)
-                  
+                            @Html.Action("Genre", "AdminMovies", new { value = @Model.MS_TheLoai })
+
+
+                            @Html.Action("Country", "AdminMovies", new { value = @Model.MS_NuocSX})
+
+                            @Html.ValidationSummary(false)
+
 
 
                         </div>
@@ -156,14 +155,14 @@
                     <div class="row">
                         <div class="col-md-10">
                             <div class="clearfix"></div>
-                            <textarea class="form-control" rows="10" placeholder="Nội dung phim" name="content"></textarea>
+                            <textarea class="form-control" rows="10" placeholder="Nội dung phim" name="content">@Model.NoiDung</textarea>
                         </div>
 
 
                     </div>
 
 
-                    <button class="btn-primary" type="submit" value="">Thêm phim</button>
+                    <button class="btn-primary" type="submit" value="@Model.MaSo" name="codeFilm">Cập nhật</button>
 
 
 
@@ -176,40 +175,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
