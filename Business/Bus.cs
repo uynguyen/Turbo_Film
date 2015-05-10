@@ -84,10 +84,6 @@ namespace Business
             db.SaveChanges();
             return true;
         }
-
-
-
-
         public bool deleteGenre(int id)
         {
             DanhMucTheLoai genre = db.DanhMucTheLoai.Find(id);
@@ -120,5 +116,9 @@ namespace Business
             db.SaveChanges();
             return true;
         }
+
+
+     
+
     }
 }

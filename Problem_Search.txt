@@ -1,0 +1,3 @@
+﻿- Dạng search k dấu, chương trình đào tạo -> chuong trinh dao tao
+- Dạng search từ khóa ít, chương trình đào tạo -> chương trình
+- Dạng search sai chính tả, chương trình đào tạo -> chương trnh

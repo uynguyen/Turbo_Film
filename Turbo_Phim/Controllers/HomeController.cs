@@ -14,7 +14,8 @@ namespace Turbo_Phim.Controllers
         public ActionResult Index()
         {
 
-
+            Bus bus = new Bus();
+            bus.searchFilm4("Gary Oldman", "Ly An", "Trung Quoc", "Tam Ly");
             ViewBag.HomeStatus = "active";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "inactive";

@@ -65,5 +65,7 @@ namespace Turbo_Phim.Models
         {
             return bus.addNewFilmd(p);
         }
+
+
     }
 }
