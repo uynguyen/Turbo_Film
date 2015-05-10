@@ -10,7 +10,7 @@ namespace Turbo_Phim.Controllers
     public class ReviewController : Controller
     {
         // GET: Review
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
 
             ViewBag.HomeStatus = "inactive";
@@ -18,11 +18,87 @@ namespace Turbo_Phim.Controllers
             ViewBag.ReviewStatus = "active";
             ViewBag.ContactStatus = "inactive";
 
+            if (page == null)
+            {
+                if (TempData["currentPage"] != null)
+                {
+                    page = Int32.Parse(TempData["currentPage"].ToString()); //Chuyển hướng từ action delete
+                }
+                else
+                {
+                    page = 1;
+                    TempData["currentPage"] = page;
+                }
+            }
+            else
+                TempData["currentPage"] = page;
+
+
+
+            if (TempData["strSort"] == null)
+                TempData["strSort"] = "ID";
+            if (TempData["sortDirection"] == null)
+                TempData["sortDirection"] = "true";
+
+
 
             FilmService phimService = new FilmService();
 
-            return View(phimService.getAllFilms(1, "ID", true));
+
+            ViewBag.maxPage = phimService.countPage();
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+
+
+            return View(phimService.getAllFilms(page, (String)TempData["strSort"], Boolean.Parse(TempData["sortDirection"].ToString())));
          
+        }
+
+        public ActionResult SortByName()
+        {
+            TempData["strSort"] = "Name";
+            getInfo();
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult SortByDate()
+        {
+            TempData["strSort"] = "Date";
+            getInfo();
+            return RedirectToAction("Index");
+
+        }
+
+        //Hàm lấy các thông tin lưu trữ hiện tại trạng thái của page
+        private void getInfo()
+        {
+
+            TempData["currentPage"] = TempData["indexPage"];
+
+        }
+
+        public ActionResult SortByRank()
+        {
+            TempData["strSort"] = "Rank";
+            getInfo();
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult SortByGenre()
+        {
+            TempData["strSort"] = "Genre";
+            getInfo();
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult SortByDuration()
+        {
+            TempData["strSort"] = "Duration";
+            getInfo();
+            return RedirectToAction("Index");
+
         }
 
         public ActionResult ReviewDetail()

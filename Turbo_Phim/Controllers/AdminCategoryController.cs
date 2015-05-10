@@ -27,10 +27,43 @@ namespace Turbo_Phim.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult deleteGenre(String id)
+
+        public ActionResult EditGenre(String genreID, String newName)
         {
-            //GenreService generService = new GenreService();
-           // generService.deleteGenre(Int32.Parse(id));
+            GenreService generService = new GenreService();
+            generService.editGenre(Int32.Parse(genreID), newName);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteGenre(String genreID)
+        {
+            GenreService generService = new GenreService();
+            generService.deleteGenre(Int32.Parse(genreID));
+            return RedirectToAction("Index");
+        }
+
+
+
+        public ActionResult CreateNewCountry(String name)
+        {
+            CountryService countryService = new CountryService();
+            countryService.createNew(name);
+
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult EditCountry(String countryID, String newName)
+        {
+            CountryService countryService = new CountryService();
+            countryService.editCountry(Int32.Parse(countryID), newName);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteCountry(String countryID)
+        {
+            CountryService countryService = new CountryService();
+            countryService.deleteCountry(Int32.Parse(countryID));
             return RedirectToAction("Index");
         }
 

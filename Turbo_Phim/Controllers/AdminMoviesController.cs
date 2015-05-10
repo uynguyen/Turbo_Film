@@ -169,12 +169,22 @@ namespace Turbo_Phim.Controllers
             p.HinhAnh = "/Images/" + fileName;
 
             FilmService filmsv = new FilmService();
-            filmsv.addNewFilmd(p);
+
+            TempData["CreateFilmResult"] = filmsv.addNewFilmd(p);
+            return RedirectToAction("CreateFilmResult");
     
 
 
 
-            return RedirectToAction("CreateNewFilm");
+           
+        }
+
+
+        public ActionResult CreateFilmResult()
+        {
+       
+            return View();
+
         }
 
         public ActionResult EditFilm(HttpPostedFileBase file, String reissue, String genre, String country, String content, String codeFilm, PhimViewModels fvm) {

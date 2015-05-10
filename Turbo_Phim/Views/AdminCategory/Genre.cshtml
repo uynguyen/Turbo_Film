@@ -4,94 +4,85 @@
     Layout = null;
 }
 
-@*<script type="text/javascript">
-    $('#confirmDeleteModal').on('show.bs.modal', function (e) {
-        var myGenreID = $(e.relatedTarget).data('data-genre-id');
-        $(e.currentTarget).find('input[name="bookId"]').val(myGenreID);
+
+@*//TODO bỏ qua file scripts *@
+<script type="text/javascript">
+    $(document).on("click", "#open-Dialog", function () {
+        var myGenreId = $(this).data('id');
+        $("#genreID").val(myGenreId);
         // As pointed out in comments,
         // it is superfluous to have to manually call the modal.
         // $('#addBookDialog').modal('show');
     });
-</script>*@
+</script>
 
 
-
-
-
-<div class="btn-toolbar list-toolbar">
+<div>
     <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Thêm mới thể loại</button>
+    @*@using (Html.BeginForm("CreateNewGenre", "AdminCategory", FormMethod.Get))
+        {
 
+
+                    <input type="text" class="form-control" name="name" placeholder="Thêm mới thể loại">
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+
+
+
+        }*@
 </div>
+
+
 
 <table class="table">
     <thead>
         <tr>
             <th>#</th>
             <th>Tên thể loại</th>
-            @*<th>Username</th>
-                <th>Permission</th>*@
-            <th style="width: 3.5em;"></th>
+            <th>Cập nhật tên thể loại</th>
+            <th style="width: 3.5em;">Xóa</th>
         </tr>
     </thead>
     <tbody>
-     
-            @foreach (Business.DanhMucTheLoai genre in Model)
-            {
+
+        @foreach (Business.DanhMucTheLoai genre in Model)
+        {
             <tr>
                 @if (!genre.TenTheLoai.Equals("Khác"))
                 {
                     <td>@genre.MaSo</td>
                     <td>@genre.TenTheLoai</td>
-
                     <td>
-                        <a href="user.html"><i class="fa fa-pencil"></i></a>
-                        <a href="#confirmDeleteModal"  data-toggle="modal" data-genre-id="@genre.MaSo"><i class="fa fa-trash-o"></i></a>
+                        @using (Html.BeginForm("EditGenre", "AdminCategory", FormMethod.Get))
+                        {
+
+
+                            <input style="width: 150px; float: left" type="text" class="form-control" name="newName" placeholder="Tên thể loại">
+
+    <button class="btn btn-primary btn-sm" type="submit" style="margin-left: 10px" name="genreID" value="@genre.MaSo"><i class="fa fa-pencil"></i></button>
+
+
+                        }
+                    </td>
+                    <td>
+
+
+
+                        @*<a href="#confirmDeleteModal" class="btn btn-default" id="open-Dialog" role="button" data-toggle="modal" data-id="@genre.MaSo"><i class="fa fa-trash-o"></i></a>*@
+
+                        <a class="btn btn-primary btn-sm" href="#confirmDeleteModal" id="open-Dialog" data-toggle="modal" data-id="@genre.MaSo"><i class="fa fa-trash-o"></i></a>
                     </td>
                 }
 
             </tr>
 
-            }
+        }
 
 
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">THÊM MỚI THỂ LOẠI</h4>
-                </div>
-
-                @using (Html.BeginForm("CreateNewGenre", "AdminCategory", FormMethod.Get))
-                {
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">Thể loại:</label>
-                            <input type="text" class="form-control" name="name">
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        @*<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>*@
-
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm">Thêm mới</button>
-
-
-                        @*<button type="button" class="btn btn-primary">@Html.ActionLink("Thêm mới", "CreateNewGenre", "AdminCategory")</button>*@
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-
-
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -99,25 +90,61 @@
                 <h4 class="modal-title" id="exampleModalLabel">THÊM MỚI THỂ LOẠI</h4>
             </div>
 
-           @* @using (Html.BeginForm("deleteGenre", "AdminCategory", FormMethod.Get))*@
-            
+            @using (Html.BeginForm("CreateNewGenre", "AdminCategory", FormMethod.Get))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Thể loại:</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
 
+
+                </div>
                 <div class="modal-footer">
-                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>*@
+
 
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    
-                    <input type="text" name="bookId"  value="" />
-                   @* <button type="submit" class="btn btn-primary" id="btn_Delete" value="">Thêm mới</button>*@
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
 
 
-                    @*<button type="button" class="btn btn-primary">@Html.ActionLink("Thêm mới", "CreateNewGenre", "AdminCategory")</button>*@
+
                 </div>
-            
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 id="myModalLabel">Xác nhận xóa</h2>
+            </div>
+            <div class="modal-body">
+                <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn có chắc muốn xóa loại phim này?<br>Những bộ phim liên quan sẽ được chuyển thành thể loại "Khác".</p>
+            </div>
+            <div class="modal-footer">
+
+
+                @using (Html.BeginForm("DeleteGenre", "AdminCategory", FormMethod.Get))
+                {
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
+                    <button class="btn btn-danger" type="submit" value="" id="genreID" name="genreID">Xóa</button>
+                }
+
+
+
+
+            </div>
         </div>
     </div>
 </div>
 
 
 
-  
+
+
+
+
