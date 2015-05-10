@@ -23,7 +23,7 @@ namespace Business
         
         public List<Phim> getAllFilms(int page, String strSort, bool isASC)
         {
-            //if(isASC)
+            if(isASC)
             {
                 switch (strSort)
                 {
@@ -41,24 +41,24 @@ namespace Business
                         return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
                 }
             }
-            //else
-            //{
-            //    switch (strSort)
-            //    {
-            //        case "ID":
-            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //        case "Name":
-            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //        case "Date":
-            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //        case "Duration":
-            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //        case "Genre":
-            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //        case "Rank":
-            //            return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //    }
-            //}
+            else
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
             return  db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
            
         }

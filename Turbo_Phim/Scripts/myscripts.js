@@ -42,13 +42,13 @@ $(function () {
 });
 
 
-//$('#confirmDeleteModal').on('show.bs.modal', function (e) {
-//    var myGenreID = $(e.relatedTarget).data('data-genre-id');
-//    $(e.currentTarget).find('input[name="bookId"]').val(myGenreID);
-//    // As pointed out in comments,
-//    // it is superfluous to have to manually call the modal.
-//    // $('#addBookDialog').modal('show');
-//});
+$(document).on("click", ".open-AddBookDialog", function () {
+    var myBookId = $(this).data('id');
+    $("#bookId").val(myBookId);
+    // As pointed out in comments, 
+    // it is superfluous to have to manually call the modal.
+    // $('#addBookDialog').modal('show');
+});
 
 $(function readURL(input) {
     if (input.files && input.files[0]) {
@@ -64,6 +64,7 @@ $(function readURL(input) {
         readURL(this);
     });
 });
+
 
 
 

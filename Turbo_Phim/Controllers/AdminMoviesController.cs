@@ -34,8 +34,9 @@ namespace Turbo_Phim.Controllers
 
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
-            if (TempData["isASC"] == null)
-                TempData["isASC"] = true;
+            if (TempData["sortDirection"] == null)
+                TempData["sortDirection"] = "true";
+          
 
 
             FilmService phimService = new FilmService();
@@ -45,7 +46,7 @@ namespace Turbo_Phim.Controllers
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
 
-            return View(phimService.getAllFilms(page,(String)TempData["strSort"], (bool)TempData["isASC"]));
+            return View(phimService.getAllFilms(page, (String)TempData["strSort"], Boolean.Parse(TempData["sortDirection"].ToString())));
         }
 
 
@@ -65,11 +66,12 @@ namespace Turbo_Phim.Controllers
 
         }
 
+        //Hàm lấy các thông tin lưu trữ hiện tại trạng thái của page
         private void getInfo()
         {
             
             TempData["currentPage"] = TempData["indexPage"];
-            TempData["isASC"] = !(Boolean)TempData["isASC"];
+           
         }
 
         public ActionResult SortByRank()
@@ -120,6 +122,17 @@ namespace Turbo_Phim.Controllers
         public ActionResult CreateNewFilm()
         {
             return View();
+        }
+
+
+        public ActionResult SortDirection(String sortDirection)
+        {
+            TempData["sortDirection"] = sortDirection;
+
+            getInfo();
+
+            return RedirectToAction("Index");
+
         }
 
 

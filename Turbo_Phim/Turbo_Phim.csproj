@@ -260,7 +260,7 @@
     <Content Include="Views\AdminCategory\Index.cshtml" />
     <Content Include="Views\AdminCategory\Genre.cshtml" />
     <Content Include="Views\AdminCategory\Country.cshtml" />
-    <Content Include="Views\AdminMovies\createNewFilm.cshtml" />
+    <Content Include="Views\AdminMovies\CreateNewFilm.cshtml" />
     <Content Include="Views\AdminMovies\Genre.cshtml" />
     <Content Include="Views\AdminMovies\Country.cshtml" />
     <Content Include="Views\AdminMovies\Edit.cshtml" />
