@@ -26,7 +26,7 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Tên nước sản xuất</th>
+            <th>Tên nước </th>
             <th>Cập nhật tên nước</th>
             <th style="width: 3.5em;">Xóa</th>
         </tr>
@@ -38,14 +38,14 @@
             <tr>
                 @if (!country.TenNuoc.Equals("Khác"))
                 {
-                    <td>@country.MaSo</td>
-                    <td>@country.TenNuoc</td>
-                    <td>
+                    <td width="5%">@country.MaSo</td>
+                    <td width="30%">@country.TenNuoc</td>
+                    <td width="60%">
                         @using (Html.BeginForm("EditCountry", "AdminCategory", FormMethod.Get))
                         {
 
 
-                            <input style="width: 150px; float: left" type="text" class="form-control" name="newName" placeholder="Tên nước sản xuất">
+                            <input style="width: 80%; float: left" type="text" class="form-control" name="newName" placeholder="Tên nước sản xuất">
 
     <button class="btn btn-primary btn-sm" type="submit" style="margin-left: 10px" name="countryID" value="@country.MaSo"><i class="fa fa-pencil"></i></button>
 

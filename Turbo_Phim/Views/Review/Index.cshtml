@@ -83,7 +83,16 @@
                         {
                             break;
                         }
-                        <li>@Html.ActionLink(i.ToString(), "Index", "Review", new { page = @i }, null)</li>
+                        
+                          if (i == (int)TempData["currentPage"])
+                            {
+                                <li class="active">@Html.ActionLink(i.ToString(), "Index", "Review", new { page = @i }, null)</li>
+                            }
+                            else
+                            {
+                                <li >@Html.ActionLink(i.ToString(), "Index", "Review", new { page = @i }, null)</li>
+                            }
+                      
                     }
 
                 }

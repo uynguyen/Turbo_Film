@@ -107,7 +107,7 @@ namespace Business
         }
         public List<DanhMucNuocSanXuat> getAllCountry()
         {
-            return db.DanhMucNuocSanXuat.ToList();
+            return db.DanhMucNuocSanXuat.Where(x => x.TinhTrang == true).ToList();
         }
 
         public bool createNewGenre(string name)
@@ -310,5 +310,28 @@ namespace Business
                 return false;
             }
         }
+
+        // Cac ham chuc nang search cua Xanh
+        public List<Phim> searchFilm(string nameFilm)
+        {
+            List<Phim> lst = db.Phim.ToList();
+
+            List<Phim> result = new List<Phim>();
+            foreach (Phim item in lst)
+            {
+                int temp = LevenshteinDistance(nameFilm, item.TenPhim);
+                if (temp <= 5)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+
+        private int LevenshteinDistance(string nameFilm, string p)
+        {
+            throw new NotImplementedException();
+        }
+     
     }
 }
