@@ -15,5 +15,20 @@ namespace Turbo_Phim.Models
             return bus.getAllCountry();
         }
 
+
+        internal bool createNew(string name)
+        {
+            return bus.createNewCountry(name);
+        }
+
+        internal bool editCountry(int p, string newName)
+        {
+            return bus.editCountry(p, newName);
+        }
+
+        internal bool deleteCountry(int p)
+        {
+            return bus.deleteCountry(p);
+        }
     }
 }

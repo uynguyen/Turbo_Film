@@ -43,21 +43,59 @@
                         </select>
                     </div>*@
                     <div class="rtm text-center">
-                        <a href="#">Review phim</a>
+                        <a class="button play-icon" href="#">Review phim</a>
                     </div>
                     <div class="wt text-center">
-                        <a href="#">Xem trailer</a>
+                        <a class ="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
+         
+
+                        <div id="small-dialog" class="mfp-hide">
+                            <iframe src="@p.URL_Trailer" frameborder="0" allowfullscreen></iframe>
+                        </div>
+
+              
+
+
+
+                        <div class="clearfix"></div>
+                    </div>
                 <p class="info">Diễn viên:&nbsp; @p.DienVien</p>
                 <p class="info">Đạo diễn: &nbsp; @p.DaoDien</p>
                 <p class="info">Thể loại:&nbsp; @p.TheLoai</p>
-                <p class="info">Thời lượng:&nbsp; @p.ThoiLuong</p>
+                <p class="info">Thời lượng:&nbsp; @p.ThoiLuong Phút</p>
             </div>
             <div class="clearfix"></div>
             </div>
         }
+        <div >
+
+            <ul class="pagination">
+                <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
+                <li>@Html.ActionLink("«", "Index", "Review", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1 }, null)</li>
+
+                @{
+                    int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
+                    int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
+                    for (int i = startIndexPage; i < endIndexPage; i++)
+                    {
+                        if (i > (int)ViewBag.maxPage)
+                        {
+                            break;
+                        }
+                        <li>@Html.ActionLink(i.ToString(), "Index", "Review", new { page = @i }, null)</li>
+                    }
+
+                }
+
+
+                <li>@Html.ActionLink("»", "Index", "Review", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1 }, null)</li>
+
+            </ul>
+        </div>
+
+
+
 
        
     </div>
@@ -149,7 +187,7 @@
             </ul>
         </div>
         <div class="might">
-            <!--<h4>Có thể bạn sẽ thích</h4>
+            <h4>Có thể bạn sẽ thích</h4>
             <div class="might-grid">
                 <div class="grid-might">
                     <a href="single.html"><img src="~/Content/images/mi.jpg" class="img-responsive" alt=""> </a>
@@ -189,7 +227,7 @@
                     <a href="single.html">Lorem Ipsum <i> </i></a>
                 </div>
             <div class="clearfix"></div>
-            </div>-->
+            </div>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -197,18 +235,18 @@
 
 <div class="review-slider">
     <ul id="flexiselDemo1">
-        <li><img src="~/Content/images/r1.jpg" alt="" /></li>
-        <li><img src="~/Content/images/r2.jpg" alt="" /></li>
-        <li><img src="~/Content/images/r3.jpg" alt="" /></li>
-        <li><img src="~/Content/images/r4.jpg" alt="" /></li>
-        <li><img src="~/Content/images/r5.jpg" alt="" /></li>
-        <li><img src="~/Content/images/r6.jpg" alt="" /></li>
+@foreach(Turbo_Phim.Models.PhimViewModels p in Model)
+        {
+     <li><img src="@p.HinhAnh" alt="" /></li>
+}
+       
+        
     </ul>
     <script type="text/javascript">
 		$(window).load(function() {
 
 		  $("#flexiselDemo1").flexisel({
-				visibleItems: 6,
+				visibleItems: 8,
 				animationSpeed: 1000,
 				autoPlay: true,
 				autoPlaySpeed: 3000,

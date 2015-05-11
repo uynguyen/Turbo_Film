@@ -28,5 +28,10 @@ namespace Turbo_Phim.Models
         }
 
 
+
+        internal bool editGenre(int p, string newName)
+        {
+            return bus.editGenre(p,newName);
+        }
     }
 }

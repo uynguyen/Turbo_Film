@@ -3,43 +3,147 @@
     ViewBag.Title = "Country";
     Layout = null;
 }
-<div class="btn-toolbar list-toolbar">
-    <button class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới nước sản xuất</button>
 
+@*//TODO bỏ qua file scripts *@
+<script type="text/javascript">
+    $(document).on("click", "#open-Dialog", function () {
+        var myCountryId = $(this).data('id');
+        $("#countryID").val(myCountryId);
+        // As pointed out in comments,
+        // it is superfluous to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+</script>
+
+
+<div>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-plus"></i> Thêm mới nước sản xuất</button>
 </div>
+
+
+
 <table class="table">
     <thead>
         <tr>
             <th>#</th>
             <th>Tên nước sản xuất</th>
-            @*<th>Username</th>
-                <th>Permission</th>*@
-            <th style="width: 3.5em;"></th>
+            <th>Cập nhật tên nước</th>
+            <th style="width: 3.5em;">Xóa</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach (Business.DanhMucNuocSanXuat country in Model)
-            {
+
+        @foreach (Business.DanhMucNuocSanXuat country in Model)
+        {
             <tr>
-@if (!country.TenNuoc.Equals("Khác"))
-{
-                <td>@country.MaSo</td>
-                <td>@country.TenNuoc</td>
-               
+                @if (!country.TenNuoc.Equals("Khác"))
+                {
+                    <td>@country.MaSo</td>
+                    <td>@country.TenNuoc</td>
                     <td>
-                        <a href="user.html"><i class="fa fa-pencil"></i></a>
-                        <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                        @using (Html.BeginForm("EditCountry", "AdminCategory", FormMethod.Get))
+                        {
+
+
+                            <input style="width: 150px; float: left" type="text" class="form-control" name="newName" placeholder="Tên nước sản xuất">
+
+    <button class="btn btn-primary btn-sm" type="submit" style="margin-left: 10px" name="countryID" value="@country.MaSo"><i class="fa fa-pencil"></i></button>
+
+
+                        }
+                    </td>
+                    <td>
+
+
+
+                        @*<a href="#confirmDeleteModal" class="btn btn-default" id="open-Dialog" role="button" data-toggle="modal" data-id="@genre.MaSo"><i class="fa fa-trash-o"></i></a>*@
+
+                        <a class="btn btn-primary btn-sm" href="#confirmDeleteModal2" id="open-Dialog" data-toggle="modal" data-id="@country.MaSo"><i class="fa fa-trash-o"></i></a>
                     </td>
                 }
 
             </tr>
 
-            }
-            </tr>
+        }
 
-        </tbody>
-    </table>
+
+
+    </tbody>
+</table>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">THÊM MỚI NƯỚC SẢN XUẤT</h4>
+            </div>
+
+            @using (Html.BeginForm("CreateNewCountry", "AdminCategory", FormMethod.Get))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Nước sản xuất:</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmDeleteModal2" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 id="myModalLabel">Xác nhận xóa</h2>
+            </div>
+            <div class="modal-body">
+                <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn có chắc muốn xóa nước sản xuất này?<br>Những bộ phim liên quan sẽ được chuyển thành nước sản xuất "Khác".</p>
+            </div>
+            <div class="modal-footer">
+
+
+                @using (Html.BeginForm("DeleteCountry", "AdminCategory", FormMethod.Get))
+                {
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
+    <button class="btn btn-danger" type="submit" value="" id="countryID" name="countryID">Xóa</button>
+                }
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

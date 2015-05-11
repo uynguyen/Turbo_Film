@@ -75,19 +75,6 @@ namespace Business
         }
 
 
-        //public bool createNewFilm(Phim p)
-        //{
-        //    db.Phim.Add(p);
-
-        //    db.SaveChanges();
-        //    return true;
-        //}
-
-        /// <summary>
-        /// Chỉ đánh dấu trạng thái thành false chứ không xóa thật sự
-        /// </summary>
-        /// <param name="codeFilm"></param>
-        /// <returns></returns>
         public bool deleteFilm(string codeFilm)
         {
             int id = Int32.Parse(codeFilm);
@@ -125,12 +112,20 @@ namespace Business
 
         public bool createNewGenre(string name)
         {
-            DanhMucTheLoai genre = new DanhMucTheLoai();
-            genre.TenTheLoai = name;
-            genre.TinhTrang = true;
-            db.DanhMucTheLoai.Add(genre);
-            db.SaveChanges();
-            return true;
+            try
+            {
+                DanhMucTheLoai genre = new DanhMucTheLoai();
+                genre.TenTheLoai = name;
+                genre.TinhTrang = true;
+                db.DanhMucTheLoai.Add(genre);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
         }
 
 
@@ -138,48 +133,64 @@ namespace Business
 
         public bool deleteGenre(int id)
         {
-            DanhMucTheLoai genre = db.DanhMucTheLoai.Find(id);
-            genre.TinhTrang = false;
-
-            //Đổi thể loại của các bộ phim liên quan thành "khác"
-
-            List<DanhMucTheLoai> diffGenre = db.DanhMucTheLoai.Where(x => x.TenTheLoai.Equals("Khác") ).ToList();
-
-            List<Phim> lstFilms = db.Phim.Where(x => x.MS_TheLoai == id).ToList();
-            foreach (Phim item in lstFilms)
+            try
             {
-                item.MS_TheLoai = diffGenre[0].MaSo;
+                DanhMucTheLoai genre = db.DanhMucTheLoai.Find(id);
+                genre.TinhTrang = false;
+
+                //Đổi thể loại của các bộ phim liên quan thành "khác"
+
+                List<DanhMucTheLoai> diffGenre = db.DanhMucTheLoai.Where(x => x.TenTheLoai.Equals("Khác")).ToList();
+
+                List<Phim> lstFilms = db.Phim.Where(x => x.MS_TheLoai == id).ToList();
+                foreach (Phim item in lstFilms)
+                {
+                    item.MS_TheLoai = diffGenre[0].MaSo;
+                }
+
+
+                db.SaveChanges();
+
+
+
+                return true;
             }
-
-
-            db.SaveChanges();
-
-
-
-            return true;
+            catch(Exception e)
+            {
+                return false;
+            }
+           
 
 
         }
 
         public bool addNewFilmd(Phim p)
         {
-            if(p.MS_NuocSX == null)
-            {
-                  DanhMucNuocSanXuat diffCountry = db.DanhMucNuocSanXuat.Where(x => x.TenNuoc.Equals("Khác") ).FirstOrDefault();
-                  p.MS_NuocSX = diffCountry.MaSo;
+            try {
+                if (p.MS_NuocSX == null)
+                {
+                    DanhMucNuocSanXuat diffCountry = db.DanhMucNuocSanXuat.Where(x => x.TenNuoc.Equals("Khác")).FirstOrDefault();
+                    p.MS_NuocSX = diffCountry.MaSo;
+                }
+                if (p.MS_TheLoai == null)
+                {
+                    DanhMucTheLoai diffGenre = db.DanhMucTheLoai.Where(x => x.TenTheLoai.Equals("Khác")).FirstOrDefault();
+                    p.MS_TheLoai = diffGenre.MaSo;
+                }
+
+                db.Phim.Add(p);
+
+
+
+                db.SaveChanges();
+                return true;
             }
-            if (p.MS_TheLoai == null)
+            catch(Exception e)
             {
-                DanhMucTheLoai diffGenre = db.DanhMucTheLoai.Where(x => x.TenTheLoai.Equals("Khác")).FirstOrDefault();
-                p.MS_TheLoai = diffGenre.MaSo;
+                return false;
             }
 
-            db.Phim.Add(p);
-
-
-
-            db.SaveChanges();
-            return true;
+           
         }
 
         public Phim getFilmByID(string codeFilm)
@@ -189,17 +200,25 @@ namespace Business
 
         public bool editFilm(Phim p)
         {
-            
-            db.Entry(p).State = EntityState.Modified;
-            db.SaveChanges();
+            try
+            {
+                db.Entry(p).State = EntityState.Modified;
+                db.SaveChanges();
 
-            
-         
 
-            return true;
+                return true;
+            }
+           catch(Exception e)
+            {
+                return false;
+            }
 
         }
 
+        /// <summary>
+        /// Hàm tính toán số lượng page lớn nhất của danh sách phim được hiển thị
+        /// </summary>
+        /// <returns></returns>
         public int countPage()
         {
             int size = db.Phim.Where(x => x.TinhTrang == true).ToList().Count();
@@ -210,6 +229,86 @@ namespace Business
                 page++;
             }
             return page;
+        }
+
+        public bool editGenre(int p, string newName)
+        {
+            try
+            {
+                DanhMucTheLoai genre = db.DanhMucTheLoai.Find(p);
+                genre.TenTheLoai = newName;
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public bool createNewCountry(string name)
+        {
+            try
+            {
+                DanhMucNuocSanXuat country = new DanhMucNuocSanXuat();
+                country.TenNuoc = name;
+                country.TinhTrang = true;
+                db.DanhMucNuocSanXuat.Add(country);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public bool editCountry(int p, string newName)
+        {
+            try
+            {
+                DanhMucNuocSanXuat genre = db.DanhMucNuocSanXuat.Find(p);
+                genre.TenNuoc = newName;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public bool deleteCountry(int id)
+        {
+            try
+            {
+                DanhMucNuocSanXuat country = db.DanhMucNuocSanXuat.Find(id);
+                country.TinhTrang = false;
+
+                //Đổi nước sản xuấti của các bộ phim liên quan thành "khác"
+
+                List<DanhMucNuocSanXuat> diffCountry = db.DanhMucNuocSanXuat.Where(x => x.TenNuoc.Equals("Khác")).ToList();
+
+                List<Phim> lstFilms = db.Phim.Where(x => x.MS_NuocSX == id).ToList();
+                foreach (Phim item in lstFilms)
+                {
+                    item.MS_NuocSX = diffCountry[0].MaSo;
+                }
+
+
+                db.SaveChanges();
+
+
+
+                return true;
+            }
+           catch(Exception e)
+            {
+                return false;
+            }
         }
     }
 }
