@@ -58,9 +58,6 @@ namespace Turbo_Phim.Models
             return bus.addNewFilmd(p);
         }
 
-<<<<<<< HEAD
-
-=======
         internal PhimViewModels getFilmByID(string codeFilm)
         {
             PhimViewModels pvm = new PhimViewModels();
@@ -102,6 +99,5 @@ namespace Turbo_Phim.Models
         {
             return Business.FilmBus.MAX_INDEX_PAGE;
         }
->>>>>>> 5f44f5ce511f370e6ea1b6d8945bf30c5bd117fd
     }
 }

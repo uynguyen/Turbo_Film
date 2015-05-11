@@ -162,6 +162,7 @@
     <Compile Include="Controllers\AdminMainController.cs" />
     <Compile Include="Controllers\AdminMoviesController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
+    <Compile Include="Controllers\Bus.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />

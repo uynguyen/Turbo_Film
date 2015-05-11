@@ -118,7 +118,7 @@ namespace Business
         }
 
 
-        // Cac ham chuc nang search cua Xanh
+ // Cac ham chuc nang search cua Xanh
         public List<Phim> searchFilm(string nameFilm)
         {
             List<Phim> lst = db.Phim.ToList();
@@ -135,6 +135,5 @@ namespace Business
             return result;
         }
      
-
     }
 }
