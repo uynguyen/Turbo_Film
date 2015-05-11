@@ -9,12 +9,58 @@ namespace Turbo_Phim.Models
     public class FilmService
     {
         private FilmBus bus = new FilmBus();
+
         public List<PhimViewModels> getAllFilms(int? page, String strSort, bool isASC)
         {
             if (page == null)
                 page = 1;
             List<PhimViewModels> result = new List<PhimViewModels>();
             List<Phim> lstFilms = bus.getAllFilms((int)page, strSort, isASC);
+            foreach (Phim p in lstFilms)
+            {
+                PhimViewModels pvm = Phim2PhimViewModels(p, page, strSort, isASC);
+                result.Add(pvm);
+            }
+
+            return result;
+        }
+
+        private PhimViewModels Phim2PhimViewModels(Phim p,  int? page = 1,string strSort = "ID", bool isASC = true)
+        {
+            PhimViewModels pvm = new PhimViewModels();
+
+            pvm.MaSo = p.MaSo;
+            pvm.TenPhim = p.TenPhim;
+            pvm.NoiDung = p.NoiDung;
+            pvm.URL_Trailer = p.URL_Trailer;
+            pvm.DiemDanhGia = p.DiemDanhGia;
+            pvm.ThoiLuong = p.ThoiLuong;
+            pvm.DienVien = p.DienVien;
+            pvm.DaoDien = p.DaoDien;
+            pvm.HinhAnh = p.HinhAnh;
+            pvm.NgayPhatHanh = p.NgayPhatHanh;
+            pvm.TheLoai = bus.getTypeOfFilm(p.MS_TheLoai);
+            pvm.NuocSX = bus.getCountryOfFilm(p.MS_NuocSX);
+            pvm.DiemDanhGiaTrungBinh = bus.calculateAvgRank(p.MaSo);
+            pvm.LuotDanhGia = bus.countRateTimes(p.MaSo);
+
+            pvm.strSort = strSort;
+            pvm.currentPage = (int)page;
+            pvm.isASC = isASC;
+
+            pvm.MS_TheLoai = (int)p.MS_TheLoai;
+            pvm.MS_NuocSX = (int)p.MS_NuocSX;
+
+
+
+            return pvm;
+        }
+
+        public List<PhimViewModels> searchFilm(String nameFilm)
+        {
+            List<PhimViewModels> result = new List<PhimViewModels>();
+
+            List<Phim> lstFilms = bus.searchFilm(nameFilm);
             foreach (Phim p in lstFilms)
             {
                 PhimViewModels pvm = new PhimViewModels();
@@ -31,17 +77,12 @@ namespace Turbo_Phim.Models
                 pvm.TheLoai = bus.getTypeOfFilm(p.MS_TheLoai);
                 pvm.NuocSX = bus.getCountryOfFilm(p.MS_NuocSX);
 
-                pvm.strSort = strSort;
-                pvm.currentPage = (int) page;
-                pvm.isASC = isASC;
 
                 pvm.MS_TheLoai = (int)p.MS_TheLoai;
                 pvm.MS_NuocSX = (int)p.MS_NuocSX;
-           
 
                 result.Add(pvm);
             }
-
             return result;
         }
 
@@ -59,28 +100,14 @@ namespace Turbo_Phim.Models
         }
 
 
+
         internal PhimViewModels getFilmByID(string codeFilm)
         {
-            PhimViewModels pvm = new PhimViewModels();
+          
             Phim p = bus.getFilmByID(codeFilm);
 
-
-            pvm.MaSo = p.MaSo;
-            pvm.TenPhim = p.TenPhim;
-            pvm.NoiDung = p.NoiDung;
-            pvm.URL_Trailer = p.URL_Trailer;
-            pvm.DiemDanhGia = p.DiemDanhGia;
-            pvm.ThoiLuong = p.ThoiLuong;
-            pvm.DienVien = p.DienVien;
-            pvm.DaoDien = p.DaoDien;
-            pvm.HinhAnh = p.HinhAnh;
-            pvm.NgayPhatHanh = p.NgayPhatHanh;
-            pvm.TheLoai = bus.getTypeOfFilm(p.MS_TheLoai);
-            pvm.NuocSX = bus.getCountryOfFilm(p.MS_NuocSX);
-            pvm.MS_TheLoai = (int) p.MS_TheLoai;
-            pvm.MS_NuocSX = (int) p.MS_NuocSX;
-           
-
+            PhimViewModels pvm = Phim2PhimViewModels(p);
+         
 
             return pvm;
         }
@@ -101,5 +128,34 @@ namespace Turbo_Phim.Models
             return Business.FilmBus.MAX_INDEX_PAGE;
         }
 
+
+        internal int countPageSearch(List<PhimViewModels> searchResult)
+        {
+            int size = searchResult.Count;
+
+            int page = size / getMaxIndexPage();
+            if (size % FilmBus.MAX_PRODUCT_EACHPAGE != 0)
+            {
+                page++;
+            }
+            return page;
+        }
+
+
+        internal List<PhimViewModels> findByGenre(string genreID, int? page, string strSort, bool sortDirection)
+        {
+            if (page == null)
+                page = 1;
+            List<PhimViewModels> result = new List<PhimViewModels>();
+            List<Phim> lstFilms = bus.findByGenre( Int32.Parse(genreID), (int)page, strSort, sortDirection);
+            foreach (Phim p in lstFilms)
+            {
+                PhimViewModels pvm = Phim2PhimViewModels(p, page, strSort, sortDirection);
+
+                result.Add(pvm);
+            }
+
+            return result;
+        }
     }
 }

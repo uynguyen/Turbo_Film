@@ -311,7 +311,12 @@ namespace Business
             }
         }
 
+
         // Cac ham chuc nang search cua Xanh
+
+
+// Cac ham chuc nang search cua Xanh
+
         public List<Phim> searchFilm(string nameFilm)
         {
             List<Phim> lst = db.Phim.ToList();
@@ -328,10 +333,167 @@ namespace Business
             return result;
         }
 
-        private int LevenshteinDistance(string nameFilm, string p)
+
+
+        static int LevenshteinDistance(string s, string t)
         {
-            throw new NotImplementedException();
+            int[,] d = new int[s.Length + 1, t.Length + 1];
+            for (int i = 0; i <= s.Length; i++)
+                d[i, 0] = i;
+            for (int j = 0; j <= t.Length; j++)
+                d[0, j] = j;
+            for (int j = 1; j <= t.Length; j++)
+                for (int i = 1; i <= s.Length; i++)
+                    if (s[i - 1] == t[j - 1])
+                        d[i, j] = d[i - 1, j - 1];  //no operation
+                    else
+                        d[i, j] = Math.Min(Math.Min(
+                            d[i - 1, j] + 1,    //a deletion
+                            d[i, j - 1] + 1),   //an insertion
+                            d[i - 1, j - 1] + 1 //a substitution
+                            );
+            return d[s.Length, t.Length];
         }
-     
+
+        public bool testPun(string a)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == ',')
+                    return true;
+            }
+            return false;
+        }
+        public List<Phim> searchFilm4(string actor, string directer, string country, string type)
+        {
+            List<Phim> lst = db.Phim.ToList();
+
+            List<Phim> result = new List<Phim>();
+            int t1, t2, t3, t4;
+            foreach (Phim item in lst)
+            {
+                if (testPun(item.DienVien) == true)
+                {
+                    string[] dienVien = item.DienVien.Split(',');
+                    foreach (string word in dienVien)
+                    {
+                        t1 = LevenshteinDistance(actor, word);
+                        if (t1 <= 5)
+                        {
+                            result.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    t1 = LevenshteinDistance(actor, item.DienVien);
+                    if (t1 <= 5)
+                    {
+                        result.Add(item);
+                    }
+                }
+
+                if (testPun(item.DaoDien) == true)
+                {
+                    string[] daoDien = item.DaoDien.Split(',');
+                    foreach (string dd in daoDien)
+                    {
+                        t2 = LevenshteinDistance(directer, dd);
+                        if (t2 <= 5)
+                        {
+                            result.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    t2 = LevenshteinDistance(directer, item.DaoDien);
+                    if (t2 <= 5)
+                    {
+                        result.Add(item);
+                    }
+                }
+                string nuocSanXuat = getCountryOfFilm(item.DanhMucNuocSanXuat.MaSo);
+                t3 = LevenshteinDistance(country, nuocSanXuat);
+
+                string theLoai = getTypeOfFilm(item.DanhMucTheLoai.MaSo);
+                t4 = LevenshteinDistance(type, theLoai);
+
+                if (t3 <= 5)
+                {
+                    result.Add(item);
+                }
+                if (t4 <= 5)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+
+
+        public List<Phim> findByGenre(int genreID, int page, string strSort, bool isASC)
+        {
+            if (isASC)
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            else
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+        }
+
+        public float calculateAvgRank(int p)
+        {
+            float result = 0;
+
+            List<DanhGia> lstJudge = db.DanhGia.Where(x => x.MS_Phim == p).ToList();
+            if (lstJudge.Count == 0)
+                return 0;
+
+            foreach (DanhGia item in lstJudge)
+            {
+                result += (float) item.DiemDanhGia;
+
+            }
+
+            return result  / lstJudge.Count;
+        }
+
+        public int countRateTimes(int p)
+        {
+            return db.DanhGia.Where(x => x.MS_Phim == p).ToList().Count;
+
+        }
     }
 }

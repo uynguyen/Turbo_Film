@@ -12,12 +12,10 @@ namespace Turbo_Phim.Controllers
         // GET: Review
         public ActionResult Index(int? page)
         {
-
             ViewBag.HomeStatus = "inactive";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "active";
             ViewBag.ContactStatus = "inactive";
-
             if (page == null)
             {
                 if (TempData["currentPage"] != null)
@@ -33,25 +31,30 @@ namespace Turbo_Phim.Controllers
             else
                 TempData["currentPage"] = page;
 
-
-
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
             if (TempData["sortDirection"] == null)
                 TempData["sortDirection"] = "true";
 
-
-
             FilmService phimService = new FilmService();
-
-
-            ViewBag.maxPage = phimService.countPage();
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+        
+            ViewBag.maxPage = phimService.countPage();
 
+            if (TempData["ViewForGenre"] == null)
+            {
+                ViewBag.maxPage = phimService.countPage();
+                return View(phimService.getAllFilms(page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString())));
+            }
+            List<PhimViewModels> lstPhim = phimService.findByGenre(TempData["ViewForGenre"].ToString(), page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString()));
+            ViewBag.maxPage = phimService.countPageSearch(lstPhim);
+            return View(lstPhim);
 
-            return View(phimService.getAllFilms(page, (String)TempData["strSort"], Boolean.Parse(TempData["sortDirection"].ToString())));
+            
          
         }
+
+
 
         public ActionResult SortByName()
         {
@@ -72,9 +75,7 @@ namespace Turbo_Phim.Controllers
         //Hàm lấy các thông tin lưu trữ hiện tại trạng thái của page
         private void getInfo()
         {
-
             TempData["currentPage"] = TempData["indexPage"];
-
         }
 
         public ActionResult SortByRank()
@@ -106,5 +107,53 @@ namespace Turbo_Phim.Controllers
             ViewBag.ReviewStatus = "active";
             return View();
         }
+
+        public ActionResult Genre()
+        {
+            GenreService genre = new GenreService();
+            return View(genre.getAllGener());
+        }
+
+        public ActionResult ViewForGenre(String genreID, int ?page)
+        {
+            ViewBag.ViewForGenre = true;
+            ViewBag.genreID = genreID;
+
+            ViewBag.HomeStatus = "inactive";
+            ViewBag.VideoStatus = "inactive";
+            ViewBag.ReviewStatus = "active";
+            ViewBag.ContactStatus = "inactive";
+            if (page == null)
+            {
+                if (TempData["currentPage"] != null)
+                {
+                    page = Int32.Parse(TempData["currentPage"].ToString()); //Chuyển hướng từ action delete
+                }
+                else
+                {
+                    page = 1;
+                    TempData["currentPage"] = page;
+                }
+            }
+            else
+                TempData["currentPage"] = page;
+
+            if (TempData["strSort"] == null)
+                TempData["strSort"] = "ID";
+            if (TempData["sortDirection"] == null)
+                TempData["sortDirection"] = "true";
+
+            FilmService phimService = new FilmService();
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+
+        
+
+            List<PhimViewModels> lstPhim = phimService.findByGenre(genreID, page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString()));
+            ViewBag.maxPage = phimService.countPageSearch(lstPhim);
+          
+
+            return View("Index", lstPhim);
+        }
+
     }
 }

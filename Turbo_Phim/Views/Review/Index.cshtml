@@ -5,9 +5,18 @@
 }
 
 <div class="reviews-section">
-    <h3 class="head">Phim Review</h3>
+
+    @Html.Action("Genre", "Review")
+    <h3 class="head" style="text-align:center;margin-top:20px">DANH SÁCH PHIM</h3>
+
+  
+
+
+
+
     <div class="col-md-9 reviews-grids">
-        @foreach(Turbo_Phim.Models.PhimViewModels p in Model)
+
+        @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
         {
             <div class="review">
             <div class="movie-pic">
@@ -16,7 +25,7 @@
             <div class="review-info">
                 
                 @Html.ActionLink("Review " + p.TenPhim, "ReviewDetail", "Review", new { @class="span"})
-                <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
+                <p class="dirctr"><a href="">@p.NuocSX, </a>@p.NgayPhatHanh</p>
                 <p class="ratingview">Đánh giá của trang:</p>
                 <p class="ratingview">
                     &nbsp;@p.DiemDanhGia / 10
@@ -25,7 +34,7 @@
                 <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
                
                 <p class="ratingview c-rating">
-                    &nbsp; 3.3/5
+                    &nbsp; @p.DiemDanhGiaTrungBinh / 10 (@p.LuotDanhGia Lượt đánh giá)
                 </p>
                 <div class="clearfix"></div>
                 <div class="yrw">
@@ -69,10 +78,17 @@
             </div>
         }
         <div >
-
-            <ul class="pagination">
+            @if (Model.Count() == 0)
+            {
+                <h3>Không có bộ phim nào được tìm thấy ...</h3>
+            }
+            else
+            {
+                <ul class="pagination">
+              
+                 
                 <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
-                <li>@Html.ActionLink("«", "Index", "Review", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1 }, null)</li>
+                <li>@Html.ActionLink("«", (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1, genreID = @ViewBag.genreID }, null)</li>
 
                 @{
                     int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
@@ -86,11 +102,12 @@
                         
                           if (i == (int)TempData["currentPage"])
                             {
-                                <li class="active">@Html.ActionLink(i.ToString(), "Index", "Review", new { page = @i }, null)</li>
+                                <li class="active">@Html.ActionLink(i.ToString(), (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = @i, genreID = @ViewBag.genreID }, null)</li>
                             }
                             else
                             {
-                                <li >@Html.ActionLink(i.ToString(), "Index", "Review", new { page = @i }, null)</li>
+                              
+                                <li>@Html.ActionLink(i.ToString(), (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = @i, genreID = @ViewBag.genreID }, null)</li>
                             }
                       
                     }
@@ -98,9 +115,13 @@
                 }
 
 
-                <li>@Html.ActionLink("»", "Index", "Review", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1 }, null)</li>
+                <li>@Html.ActionLink("»", (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1,  genreID = @ViewBag.genreID }, null)</li>
 
             </ul>
+            }
+
+
+           
         </div>
 
 
@@ -108,6 +129,14 @@
 
        
     </div>
+
+  
+
+       
+
+
+
+
     <div class="col-md-3 side-bar">
         <div class="featured">
             <h3>Các bài review nổi bật</h3>
@@ -244,7 +273,7 @@
 
 <div class="review-slider">
     <ul id="flexiselDemo1">
-@foreach(Turbo_Phim.Models.PhimViewModels p in Model)
+@foreach (Turbo_Phim.Models.PhimViewModels p in Model)
         {
      <li><img src="@p.HinhAnh" alt="" /></li>
 }

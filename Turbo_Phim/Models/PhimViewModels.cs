@@ -65,13 +65,17 @@ namespace Turbo_Phim.Models
 
          public int MS_TheLoai { get; set; }
 
+         public float DiemDanhGiaTrungBinh { get; set; }
 
+         public int LuotDanhGia { get; set; }
          public String strSort { get; set; }
 
 
          public int currentPage { get; set; }
 
          public bool isASC { get; set; }
+
+
 
     }
 }
