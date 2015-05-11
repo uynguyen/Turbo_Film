@@ -11,11 +11,19 @@
             </a>
         </div>
         <div class="search">
-            <form>
-                <input type="text" value="Search.." onfocus="this.value = '';"
-                       onblur="if (this.value == '') {this.value = 'Search..';}" />
-                <input type="submit" value="">
-            </form>
+          
+                   @using(Html.BeginForm("SearchFilm","Review", FormMethod.Get))
+                         {
+                        <input type="text" placeholder="Search.." name="filmName"/>
+                        <input type="submit" value="">    
+
+
+            
+               
+                    }
+                    
+         
+          
         </div>
        
         <div class="clearfix"></div>
