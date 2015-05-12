@@ -164,6 +164,7 @@ label{
 	-ms-background-size:cover;
 	min-height:750px;	
    margin-top: -5em;
+   padding-top:5em;
 }
 .header-info {
 	float:right;
@@ -1415,7 +1416,7 @@ font-weight: 700;
 		min-height: 630px;
 	}
 	.logo {
-		width: 36%;
+		width: 33%;
 	}
 	.logo img {
 		width: 95%;

@@ -7,14 +7,23 @@
     <div class="user">
         <a href="#" data-toggle="modal" data-target="#register">
             <span class="glyphicon glyphicon-registration-mark padding-right-small" style="position:relative;top: 3px;"></span>
-            Register
+            Đăng ký
+        </a>
+    </div>
+    <div class="user">
+        <a href="#" data-toggle="modal" data-target="#editaccount">
+            <span class="glyphicon glyphicon-edit padding-right-small" style="position:relative;top: 3px;"></span>
+            Hiệu chỉnh TK
         </a>
     </div>
     <div class="user">
         <a href='@Url.Action("Index", "AdminMain")'>
             <span class="glyphicon glyphicon-log-in padding-right-small" style="position:relative;top: 3px;"></span>
-            Log in
+            Đăng nhập
         </a>
+    </div>
+    <div class="user search-advance padding-right-small">
+        <button class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"><i class="fa"></i> Tìm nâng cao</button>
     </div>
     <div class="search">
             @using (Html.BeginForm("SimpleSearch", "Search", FormMethod.Get))
@@ -24,9 +33,7 @@
             }
         </div>
 
-        <div>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Search - Advance</button>
-        </div>
+       
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
