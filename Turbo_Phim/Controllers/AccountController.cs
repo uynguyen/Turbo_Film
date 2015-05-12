@@ -32,13 +32,29 @@ namespace Turbo_Phim.Controllers
                 uas.AddNewAccount(account);
                 return View("RegisterSuccess", account);
             }
-            return View(account);
+            account = null;
+            return View("RegisterSuccess", account);
         }
 
         [HttpGet]
         public ActionResult RegisterSuccess(Models.AccountViewModel account)
         {           
             return View(account);
+        }
+
+        public ActionResult EditAccount()
+        {
+            return View(uas.getSomeAccountView(1, 1).First());          // Test code
+        }
+
+        [HttpPost]
+        public ActionResult EditAccount(Models.AccountViewModel account)
+        {
+          
+                uas.UpdateAccount(account);
+
+                return RedirectToAction("Index", "Home");
+         
         }
     }
 }

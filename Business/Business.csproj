@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountBus.cs" />
     <Compile Include="BaiNhanXet.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
@@ -60,7 +61,6 @@
     <Compile Include="BinhLuan.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
-    <Compile Include="Bus.cs" />
     <Compile Include="DanhGia.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
@@ -70,7 +70,6 @@
     <Compile Include="DanhMucTheLoai.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
-    <Compile Include="Metadata\Phim.cs" />
     <Compile Include="PhanQuyen.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>

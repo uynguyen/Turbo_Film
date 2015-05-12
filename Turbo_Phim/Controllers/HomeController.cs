@@ -13,8 +13,6 @@ namespace Turbo_Phim.Controllers
 
         public ActionResult Index()
         {
-
-
             ViewBag.HomeStatus = "active";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "inactive";

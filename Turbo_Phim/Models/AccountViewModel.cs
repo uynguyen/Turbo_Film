@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-
+using Business;
 
 namespace Turbo_Phim.Models
 {
     public class AccountViewModel
     {
+        private AccountBus bus = new AccountBus();
         public AccountViewModel()
         {
         }
@@ -41,12 +42,15 @@ namespace Turbo_Phim.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập họ và tên!")]
-        [Display(Name = "Họ và tên:")]
+        [Display(Name = "Họ và tên")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn giới tính!")]
         [Display(Name = "Giới tính")]
-        public string Sex { get; set; }
+        public string Gender { 
+            get{return _gender?"Nam":"Nữ";}
+            set { _gender = value == "Nam" ? true : false; }
+        }
 
         [Required(ErrorMessage = "Vui lòng chọn ngày tháng năm sinh!")]
         [Display(Name = "Ngày tháng năm sinh")]
@@ -59,13 +63,30 @@ namespace Turbo_Phim.Models
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
-        public System.Web.Mvc.SelectList getSex()
+        [Display(Name="Ngày đăng ký")]
+        public Nullable<DateTime> DayRegister { get; set; }
+        [Display(Name="Phân Quyền")]
+        public string Permission { get; set; }
+
+
+        [Display(Name="#")]
+        public int ID_Member { get; set; }
+
+        public int ID_Account { get; set; }
+
+        public int ID_Permission { get; set; }
+
+        public System.Web.Mvc.SelectList getPermissions()
         {
             List<System.Web.Mvc.SelectListItem> list = new List<System.Web.Mvc.SelectListItem>();
-            list.Add(new System.Web.Mvc.SelectListItem { Value = "Nam", Text = "Nam" });
-            list.Add(new System.Web.Mvc.SelectListItem { Value = "Nữ", Text = "Nữ" });
-            return new System.Web.Mvc.SelectList(list, "Value", "Text", Sex);
+            List<PhanQuyen> listpermissions = bus.getAllPermissions();
+            foreach (PhanQuyen p in listpermissions)
+            {
+                list.Add(new System.Web.Mvc.SelectListItem { Value = p.MaSo.ToString(), Text = p.TenQuyen });
+            }
+            return new System.Web.Mvc.SelectList(list, "Value", "Text", ID_Permission);
         }
 
+        public bool _gender;
     }
 }

@@ -1,38 +1,61 @@
 ﻿
-    <div class="top-header">
-        <div class="logo">
-            <a href="index.html"><img src="~/Content/images/logo.png" alt="" /></a>
-            <p>TURBO PHIM</p>
-        </div>
-        <div class="user">
-            <a href="#" data-toggle="modal" data-target="#registerModal">
-                <span class="glyphicon glyphicon-log-in padding-right-small" style="position:relative;top: 3px;"></span>
-                Log in
-            </a>
-        </div>
-        <div class="search">
-            <form>
-                <input type="text" value="Search.." onfocus="this.value = '';"
-                       onblur="if (this.value == '') {this.value = 'Search..';}" />
-                <input type="submit" value="">
-            </form>
-        </div>
-       
-        <div class="clearfix"></div>
+<div class="top-header">
+    <div class="logo">
+        <a href="index.html"><img src="~/Content/images/logo.png" alt="" /></a>
+        <p>TURBO PHIM</p>
+    </div>
+    <div class="user">
+        <a href="#" data-toggle="modal" data-target="#register">
+            <span class="glyphicon glyphicon-registration-mark padding-right-small" style="position:relative;top: 3px;"></span>
+            Register
+        </a>
+    </div>
+    <div class="user">
+        <a href="#" data-toggle="modal" data-target="#editaccount">
+            <span class="glyphicon glyphicon-registration-mark padding-right-small" style="position:relative;top: 3px;"></span>
+            Edit Account
+        </a>
+    </div>
+    <div class="search">
+        <form>
+            <input type="text" value="Search.." onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Search..';}" />
+            <input type="submit" value="">
+        </form>
     </div>
 
+    <div class="clearfix"></div>
+</div>
+
 <!-- Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="register">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Đăng ký tài khoản</h4>
             </div>
             <div class="modal-body">
-                @Html.Action("Register","Account")
+                @Html.Action("Register", "Account")
             </div>
-            
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="editaccount">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Chỉnh sửa tài khoản</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("EditAccount", "Account")
+            </div>
+
         </div>
     </div>
 </div>

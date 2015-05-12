@@ -1,0 +1,181 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Turbo_Phim.Models.AccountViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+
+}
+
+<script>
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker({
+            style: 'btn-inverse',
+            size: 3,
+        });
+
+        $('.selectpicker li').click(function (e) {
+            var oldselected = $(this).closest("td").find("select").find("option:selected").val();          
+            var permission = $(this).attr("data-original-index");
+            var id_member = $(this).closest("td").find("select").attr("data-id");
+            $('#confirm-modal').data('id_member', id_member);
+            $('#confirm-modal').data('permission', permission);
+            $('#confirm-modal').data('old_selected', oldselected);
+            $('#confirm-modal').modal('show');
+            e.preventDefault();
+            
+        });
+
+     
+        $('#confirm').click(function () {
+            var id_member = $('#confirm-modal').data('id_member');
+            var permission = $('#confirm-modal').data('permission');
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ChangePermission", "AdminUsers")',
+                    data: { id_member: id_member, id_permission: permission },
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            }
+            catch (e) { alert("Thay đổi không thành công!"); }
+            $('#confirm-modal').modal('hide');
+        });
+        $('#cancel').click(function () {
+            var id_member = $('#confirm-modal').data('id_member');
+            var permission = $('#confirm-modal').data('old_selected');
+            var p = $("select[id=" + id_member + "]");
+            p.val(permission);
+        });
+    });
+
+</script>
+
+
+<div class="content">
+    <div class="header-admin">
+
+        <h1 class="page-title">Users</h1>
+        <ul class="breadcrumb">
+            <li><a href='@Url.Action("Index","AdminMain")'>Home</a> </li>
+            <li class="active">Users</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        @using (Html.BeginForm("ListAllAccounts", "AdminUsers", FormMethod.Get, new { @class = "filter-form" }))
+        {
+            <p>
+                Tìm kiếm qua:
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.RadioButton("SearchField", "Tên đăng nhập", true)<text>Tên đăng nhập</text>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.RadioButton("SearchField", "Email")<text>Email</text>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.RadioButton("SearchField", "Họ và tên")<text>Họ và tên</text>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.RadioButton("SearchField", "Ngày đăng ký")<text>Ngày đăng ký</text>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Tìm kiếm" />
+            </p>
+        }
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().ID_Member, ViewData).DisplayName, "ListAllAccounts",
+                                 new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().UserName, ViewData).DisplayName, "ListAllAccounts",
+                                          new { sortOrder = ViewBag.UserNameSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Email, ViewData).DisplayName, "ListAllAccounts",
+                                 new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Name, ViewData).DisplayName, "ListAllAccounts",
+                                 new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Gender, ViewData).DisplayName, "ListAllAccounts",
+                                 new { sortOrder = ViewBag.SexSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Birthday, ViewData).DisplayName, "ListAllAccounts",
+                                         new { sortOrder = ViewBag.BirthdaySortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Permission, ViewData).DisplayName, "ListAllAccounts",
+                                 new { sortOrder = ViewBag.PermissionSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().DayRegister, ViewData).DisplayName, "ListAllAccounts",
+                                 new { sortOrder = ViewBag.DayRegisterSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.ID_Member</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Name</td>
+                        <td>@user.Gender</td>
+                        <td>@(user.Birthday != null ? user.Birthday.Value.ToShortDateString() : "")</td>
+                        <td>
+                            @Html.DropDownListFor(m => m.First().ID_Permission, user.getPermissions(),
+                    new { id = "permission", @class = "selectpicker", data_id = user.ID_Member })
+                        </td>
+                        <td>@(user.DayRegister != null ? user.DayRegister.Value.ToShortDateString() : "")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("ListAllAccounts",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+
+        <div class="modal small fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">Xác nhận phân quyền</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn thực sự muốn thay đổi quyền của thành viên này?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" id="cancel">Hủy</button>
+                        <button class="btn btn-danger" data-dismiss="modal" id="confirm">Đồng ý</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

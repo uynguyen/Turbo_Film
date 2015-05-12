@@ -40,3 +40,15 @@
            $(function () {
                $('.demo-cancel-click').click(function () { return false; });
            });
+
+
+           $(document).ready(function () {
+
+               $('.selectpicker').selectpicker();
+
+               $('#permission').change(function () {
+                   $("#myModal").modal();
+               });
+
+           });
+
