@@ -1,0 +1,22 @@
+﻿@model Turbo_Phim.Models.AccountViewModel
+
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <h3>
+        Chúc mừng bạn đã đăng ký tài khoản thành công trên trang Turbo Phim của chúng tôi. <br />
+        Bây giờ bạn có thể đăng nhập và viết bài hoặc bình luận các bài viết.
+    </h3>
+
+}
+else
+{
+    <h3>
+        Đăng ký thất bại!
+    </h3>
+}
+
+@Html.ActionLink("Quay về trang chủ", "Index", "Home");

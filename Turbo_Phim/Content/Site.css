@@ -63,3 +63,11 @@ input[type="checkbox"].input-validation-error {
     padding: 10px;
 
 }
+
+.btn-group bootstrap-select{
+    width:60%;
+}
+
+.textbox{
+    width: 85%;
+}
