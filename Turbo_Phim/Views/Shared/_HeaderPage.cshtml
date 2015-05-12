@@ -11,20 +11,72 @@
             </a>
         </div>
         <div class="search">
-          
-                   @using(Html.BeginForm("SearchFilm","Review", FormMethod.Get))
-                         {
-                        <input type="text" placeholder="Search.." name="filmName"/>
-                        <input type="submit" value="">    
-
-
-            
-               
-                    }
-                    
-         
-          
+            @using (Html.BeginForm("SimpleSearch", "Search", FormMethod.Get))
+            {
+                <input type="text" placeholder="Search.." name="filmName" />
+                <input type="submit" value="">
+            }
         </div>
+
+        <div>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i> Search - Advance</button>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">TÌM KIẾM NÂNG CAO</h4>
+                    </div>
+
+                    @using (Html.BeginForm("AdvanceSearch", "Search", FormMethod.Get))
+                    {
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">Diễn viên:</label>
+                                <input type="text" class="form-control" name="actor">
+
+                                <label for="recipient-name" class="control-label">Đạo diễn:</label>
+                                <input type="text" class="form-control" name="directer">             
+
+                                <label for="recipient-name" class="control-label">Nước sản xuất</label>
+                                <select class="form-control" name="country">
+                                    <option id="0">Việt Nam</option>
+                                    <option id="1">Mỹ 2</option>
+                                    <option id="2">Hàn Quốc</option>
+                                    <option id="3">Nhật Bản</option>
+                                </select>
+
+                                <label for="recipient-name" class="control-label">Thể loại</label>                         
+                                <select class="form-control" name="type">
+                                    <option id="0">Hành động</option>
+                                    <option id="1">Phiêu lưu</option>
+                                    <option id="2">Cổ trang</option>
+                                    <option id="3">Kinh dị</option>
+                                    <option id="3">Khác</option>
+                                </select>
+
+                           
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
        
         <div class="clearfix"></div>
     </div>

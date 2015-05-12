@@ -162,10 +162,10 @@
     <Compile Include="Controllers\AdminMainController.cs" />
     <Compile Include="Controllers\AdminMoviesController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
-    <Compile Include="Controllers\Bus.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -266,6 +266,8 @@
     <Content Include="Views\AdminMovies\Country.cshtml" />
     <Content Include="Views\AdminMovies\Edit.cshtml" />
     <Content Include="Views\AdminMovies\CreateFilmResult.cshtml" />
+    <Content Include="Views\Search\SimpleSearch.cshtml" />
+    <Content Include="Views\Search\AdvanceSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

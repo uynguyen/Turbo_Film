@@ -325,50 +325,37 @@ namespace Business
 
 
 // Cac ham chuc nang search cua Xanh
-        public List<Phim> searchFilm(string nameFilm, int page, out int maxPage)
-        {          
+        public List<Phim> searchFilm(string nameFilm)
+        {
+            List<Phim> lst = db.Phim.ToList();
 
     // Giải quyết vấn đề dạng 1
             var t = from entry in db.Phim select entry;
             if (!String.IsNullOrEmpty(nameFilm))
-                t = t.Where(e => e.TenPhim.Contains(nameFilm) && e.TinhTrang == true);
-            maxPage = countPageSearch(t.ToList());
+                t = t.Where(e => e.TenPhim.Contains(nameFilm));
+            
+            return t.ToList();
 
-            if(t.ToList().Count != 0)
-            return t.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            else
-            {
-                // Giải quyết vấn đề dạng 3
-                List<Phim> lst = db.Phim.ToList();
-                List<Phim> result = new List<Phim>();
-                foreach (Phim item in lst)
-                {
-                    int temp = LevenshteinDistance(nameFilm, item.TenPhim);
-                    if (temp <= 5)
-                    {
-                        result.Add(item);
-                    }
-                }
-                return result.Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            }
-        }
 
-        internal int countPageSearch(List<Phim> searchResult)
-        {
-            int size = searchResult.Count;
 
-            int page = size / MAX_INDEX_PAGE;
-            if (size % FilmBus.MAX_PRODUCT_EACHPAGE != 0)
-            {
-                page++;
-            }
-            return page;
+    // Giải quyết vấn đề dạng 3
+         
+            //List<Phim> result = new List<Phim>();
+            //foreach (Phim item in lst)
+            //{
+            //    int temp = LevenshteinDistance(nameFilm, item.TenPhim);
+            //    if (temp <= 5)
+            //    {
+            //        result.Add(item);
+            //    }
+            //}       
+            //return result;
+
+
         }
 
         static int LevenshteinDistance(string s, string t)
         {
-            s = s.ToLower();
-            t = t.ToLower();
             int[,] d = new int[s.Length + 1, t.Length + 1];
             for (int i = 0; i <= s.Length; i++)
                 d[i, 0] = i;
@@ -396,29 +383,60 @@ namespace Business
             }
             return false;
         }
-        public List<Phim> searchFilm4(string actor, string directer, string country, string type, int page, out int maxPage)
-        {            
+        public List<Phim> searchFilm4(string actor, string directer, string country, string type)
+        {
+
+            
             //List<Phim> lst = db.Phim.ToList();
             //List<Phim> result = new List<Phim>();
-            //return result;
 
-            int maNuoc = getIDOfCountry(country); 
-            int maTheLoai = getIDOfType(type); 
+            //return result;
+            int a1 = getIDOfCountry(country); 
+            int a2 = getIDOfType(type); 
+            // a1, a2 da lay dung gia tri, debug da dung
+
+            
 
             var t1 = from entry in db.Phim select entry;
-            if (!String.IsNullOrEmpty(actor) || !String.IsNullOrEmpty(directer))
-               t1 = t1.Where(e => e.DienVien.Contains(actor) && e.DaoDien.Contains(directer) 
-                                                && e.MS_NuocSX == maNuoc && e.MS_TheLoai == maTheLoai);
-            maxPage = countPageSearch(t1.ToList());
-       //     if (t1.ToList().Count != 0)
-       //     {
-                return t1.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-        //    }
-            //else
-            //{
+            if (!String.IsNullOrEmpty(actor) || !String.IsNullOrEmpty(directer))      
 
-            //}
+                t1 = t1.Where(e => e.DienVien.Contains(actor) && e.DaoDien.Contains(directer)
+            && e.MS_NuocSX.Equals(a1)
+             && e.MS_TheLoai.Equals(a2));
+            
+            return t1.ToList();
+
+            //       && getCountryOfFilm(e.DanhMucNuocSanXuat.MaSo).Contains(country)
+            //      && getTypeOfFilm(e.DanhMucTheLoai.MaSo).Contains(type));
+
+            //return t1.ToList();
+            //var t1 = from entry in db.Phim select entry;
+            //if (!String.IsNullOrEmpty(actor))
+            //    t1 = t1.Where(e => e.DienVien.Contains(actor));  
+
+            //var t2 = from entry in db.Phim select entry;
+            //if (!String.IsNullOrEmpty(directer))
+            //    t2 = t2.Where(e => e.DaoDien.Contains(directer));
+
+
+            //var q = (from pd in t1
+            //         join od in t2 on pd.MaSo equals od.MaSo
+            //         select*;
+            //List<Phim> result = new List<Phim>();
+         
+            //return result;
+            //var t3 = from entry in db.Phim select entry;
+            //if (!String.IsNullOrEmpty(country))
+            //    t3 = t3.Where(e => getCountryOfFilm(e.DanhMucNuocSanXuat.MaSo).Contains(country));
+
+            //var t4 = from entry in db.Phim select entry;
+            //if (!String.IsNullOrEmpty(type))
+            //    t4 = t4.Where(e => getTypeOfFilm(e.DanhMucTheLoai.MaSo).Contains(type));
+
+            
+          
         }
+
 
     }
 }
