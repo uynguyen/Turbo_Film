@@ -40,9 +40,22 @@
                     <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Thêm phim mới  </button>
                 }
 
-                @using (Html.BeginForm("SortDirection", "AdminMovies", FormMethod.Get, new { @id = "sortDirection" }))
+               
+
+
+
+                @using (Html.BeginForm("SortDirection", "AdminMovies", FormMethod.Get, new { @class = "sortDirection" }))
                 {
-                    //TODO: Thêm tính năng chọn số sản phẩm hiển thị
+
+                    <button type="submit" class="btn btn-primary btn-xs" name="sortDirection" value="true"> <i class="glyphicon glyphicon-arrow-up"></i> </button>
+                    <button type="submit" class="btn btn-primary btn-xs" name="sortDirection" value="false"> <i class="glyphicon glyphicon-arrow-down"></i>  </button>
+
+                }
+
+                @* Thay đổi số sản phẩm hiển thị 
+                @using (Html.BeginForm("ChangeMaxProductOnEachPage", "AdminMovies", FormMethod.Get, new { @class = "sortDirection" }))
+                {
+
                     <span>Số sản phẩm hiển thị: </span>
                     List<SelectListItem> productOnEachPage = new List<SelectListItem>();
                     for (float i = 5; i <= 50; i += 5)
@@ -51,15 +64,16 @@
                         SelectListItem temp = new SelectListItem();
                         temp.Value = i.ToString();
                         temp.Text = i.ToString();
+                        if( i == 30)
+                        {
+                            temp.Selected = true;
+                        }
                         productOnEachPage.Add(temp);
                     }
-                    @Html.DropDownList("productOnEachPage", productOnEachPage)
-
-                    <button type="submit" class="btn btn-primary btn-xs" name="sortDirection" value="true"> <i class="glyphicon glyphicon-arrow-up"></i> </button>
-                    <button type="submit" class="btn btn-primary btn-xs" name="sortDirection" value="false"> <i class="glyphicon glyphicon-arrow-down"></i>  </button>
-
-
-                }
+                    @Html.DropDownList("maxProductEachPage", productOnEachPage)
+                   
+                    <button type="submit" class="btn btn-primary btn-xs"> Đồng ý </button>
+                }*@
 
             </div>
 

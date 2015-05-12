@@ -188,7 +188,6 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\isotope.css" />
-    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\popuo-box.css" />
     <Content Include="Content\mystyle.css" />
     <Content Include="Content\customtheme.css" />

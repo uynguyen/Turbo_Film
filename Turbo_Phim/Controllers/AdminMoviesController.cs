@@ -185,7 +185,25 @@ namespace Turbo_Phim.Controllers
        
             return View();
 
+        
+        
+        
+        
+        
         }
+
+
+        public ActionResult ChangeMaxProductOnEachPage(string maxProductOnEachPage)
+        {
+            string strValue = Request.Form["maxProductEachPage"].ToString();
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
 
         public ActionResult EditFilm(HttpPostedFileBase file, String reissue, String genre, String country, String content, String codeFilm, PhimViewModels fvm) {
             String fileName = "";

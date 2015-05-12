@@ -24,7 +24,7 @@
 #indexPaging{
     text-align: center !important;
 }
-#sortDirection{
+.sortDirection{
     float:right;
     margin-right: 5px;
 }
