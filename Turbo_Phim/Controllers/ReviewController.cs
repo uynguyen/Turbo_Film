@@ -30,7 +30,6 @@ namespace Turbo_Phim.Controllers
             }
             else
                 TempData["currentPage"] = page;
-
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
             if (TempData["sortDirection"] == null)
@@ -41,6 +40,8 @@ namespace Turbo_Phim.Controllers
         
             ViewBag.maxPage = phimService.countPage();
 
+<<<<<<< HEAD
+=======
             if (TempData["ViewForGenre"] == null)
             {
                 ViewBag.maxPage = phimService.countPage();
@@ -50,8 +51,10 @@ namespace Turbo_Phim.Controllers
             ViewBag.maxPage = phimService.countPageSearch(lstPhim);
             return View(lstPhim);
 
+>>>>>>> 49043b56583098de5d811d015007d7d84138ae68
             
-         
+            ViewBag.maxPage = phimService.countPage();     
+            return View(phimService.getAllFilms(page,TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString())));                     
         }
 
 
@@ -114,6 +117,26 @@ namespace Turbo_Phim.Controllers
             return View(genre.getAllGener());
         }
 
+<<<<<<< HEAD
+ // Search
+        //public ActionResult SearchFilm(string filmName)
+        //{
+        //    TempData["actionSearch"] = "searchNameFilm1";
+        //    TempData["filmName"] = filmName;
+        //    getInfo();
+        //    return RedirectToAction("Index");
+        //}
+        //public ActionResult SearchFilm2(string actor, string directer, string country, string type)
+        //{
+        //    TempData["actionSearch"] = "searchNameFilm2";
+        //    TempData["actor"] = actor;
+        //    TempData["directer"] = directer;
+        //    TempData["country"] = country;
+        //    TempData["type"] = type;
+        //    getInfo();
+        //    return RedirectToAction("Index");
+        //}
+=======
         public ActionResult ViewForGenre(String genreID, int ?page)
         {
             ViewBag.ViewForGenre = true;
@@ -154,6 +177,7 @@ namespace Turbo_Phim.Controllers
 
             return View("Index", lstPhim);
         }
+>>>>>>> 49043b56583098de5d811d015007d7d84138ae68
 
     }
 }

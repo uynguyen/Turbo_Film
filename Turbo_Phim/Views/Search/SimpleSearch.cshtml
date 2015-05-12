@@ -1,0 +1,272 @@
+﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
+    ViewBag.Title = "SimpleSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="reviews-section">
+    <h3 class="head">Phim Review</h3>
+    <div class="col-md-9 reviews-grids">
+        @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+        {
+            <div class="review">
+                <div class="movie-pic">
+                    <a href="single.html"><img src="@p.HinhAnh" alt="" /></a>
+                </div>
+                <div class="review-info">
+
+                    @Html.ActionLink("Review " + p.TenPhim, "ReviewDetail", "Review", new { @class = "span" })
+                    <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
+                    <p class="ratingview">Đánh giá của trang:</p>
+                    <p class="ratingview">
+                        &nbsp;@p.DiemDanhGia / 10
+                    </p>
+                    <div class="clearfix"></div>
+                    <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
+
+                    <p class="ratingview c-rating">
+                        &nbsp; 3.3/5
+                    </p>
+                    <div class="clearfix"></div>
+                    <div class="yrw">
+                        @*<div class="dropdown-button">
+                                <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
+                                    <option value="0">Đánh giá của bạn</option>
+                                    <option value="1">1. Tệ</option>
+                                    <option value="2">1.5. Dưới trung bình</option>
+                                    <option value="3">2. Trung bình</option>
+                                    <option value="4">2.5. Trên trung bình</option>
+                                    <option value="5">3. Xem được</option>
+                                    <option value="6">3.5. Tốt</option>
+                                    <option value="7">4.5. Rất tốt</option>
+                                    <option value="8">5. Tuyệt vời</option>
+                                </select>
+                            </div>*@
+                        <div class="rtm text-center">
+                            <a class="button play-icon" href="#">Review phim</a>
+                        </div>
+                        <div class="wt text-center">
+                            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
+                        </div>
+
+
+                        <div id="small-dialog" class="mfp-hide">
+                            <iframe src="@p.URL_Trailer" frameborder="0" allowfullscreen></iframe>
+                        </div>
+
+
+
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <p class="info">Diễn viên:&nbsp; @p.DienVien</p>
+                    <p class="info">Đạo diễn: &nbsp; @p.DaoDien</p>
+                    <p class="info">Thể loại:&nbsp; @p.TheLoai</p>
+                    <p class="info">Thời lượng:&nbsp; @p.ThoiLuong Phút</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        }
+        <div>
+
+            <ul class="pagination">
+                <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
+                <li>@Html.ActionLink("«", "SimpleSearch", "Search", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1, filmName = ViewBag.filmName }, null)</li>
+
+                @{
+                    int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
+                    int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
+                    for (int i = startIndexPage; i < endIndexPage; i++)
+                    {
+                        if (i > (int)ViewBag.maxPage)
+                        {
+                            break;
+                        }
+                        <li>@Html.ActionLink(i.ToString(), "SimpleSearch", "Search", new { page = @i, filmName = ViewBag.filmName }, null)</li>
+                    }
+
+                }
+
+
+                <li>@Html.ActionLink("»", "SimpleSearch", "Search", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1, filmName = ViewBag.filmName }, null)</li>
+
+            </ul>
+        </div>
+
+
+
+
+
+    </div>
+    <div class="col-md-3 side-bar">
+        <div class="featured">
+            <h3>Các bài review nổi bật</h3>
+            <ul>
+                <li>
+                    <a href="single.html"><img src="~/Content/images/f1.jpg" alt="" /></a>
+                    <p>Plaguers - Review</p>
+                </li>
+                <li>
+                    <a href="single.html"><img src="~/Content/images/f2.jpg" alt="" /></a>
+                    <p>Priest - Review</p>
+                </li>
+                <li>
+                    <a href="single.html"><img src="~/Content/images/f3.jpg" alt="" /></a>
+                    <p>Avatar - Review</p>
+                </li>
+                <li>
+                    <a href="single.html"><img src="~/Content/images/f4.jpg" alt="" /></a>
+                    <p>Kỷ nguyên khủng long - Review</p>
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+
+        <div class="entertainment">
+            <h3>Các bộ phim nổi bật</h3>
+            <ul>
+                <li class="ent">
+                    <a href="single.html"><img src="~/Content/images/f6.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="single.html">Xem ‘Bombay Velvet’ trailer</a>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <ul>
+                <li class="ent">
+                    <a href="single.html"><img src="~/Content/images/f5.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="single.html">Xem ‘Bombay Velvet’ trailer </a>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <ul>
+                <li class="ent">
+                    <a href="single.html"><img src="~/Content/images/f3.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="single.html">Xem ‘Bombay Velvet’ trailer </a>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <ul>
+                <li class="ent">
+                    <a href="single.html"><img src="~/Content/images/f4.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="single.html">Xem ‘Bombay Velvet’ trailer </a>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <ul>
+                <li class="ent">
+                    <a href="single.html"><img src="~/Content/images/f2.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="single.html">Xem ‘Bombay Velvet’ trailer </a>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+            <ul>
+                <li class="ent">
+                    <a href="single.html"><img src="~/Content/images/f1.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="single.html">Xem ‘Bombay Velvet’ trailer </a>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+        </div>
+        <div class="might">
+            <h4>Có thể bạn sẽ thích</h4>
+            <div class="might-grid">
+                <div class="grid-might">
+                    <a href="single.html"><img src="~/Content/images/mi.jpg" class="img-responsive" alt=""> </a>
+                </div>
+                <div class="might-top">
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a href="single.html">Lorem Ipsum <i> </i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="might-grid">
+                <div class="grid-might">
+                    <a href="single.html"><img src="~/Content/images/mi1.jpg" class="img-responsive" alt=""> </a>
+                </div>
+                <div class="might-top">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a href="single.html">Lorem Ipsum <i> </i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="might-grid">
+                <div class="grid-might">
+                    <a href="single.html"><img src="~/Content/images/mi2.jpg" class="img-responsive" alt=""> </a>
+                </div>
+                <div class="might-top">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a href="single.html">Lorem Ipsum <i> </i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="might-grid">
+                <div class="grid-might">
+                    <a href="single.html"><img src="~/Content/images/mi3.jpg" class="img-responsive" alt=""> </a>
+                </div>
+                <div class="might-top">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a href="single.html">Lorem Ipsum <i> </i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="review-slider">
+    <ul id="flexiselDemo1">
+        @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+        {
+            <li><img src="@p.HinhAnh" alt="" /></li>
+        }
+
+
+    </ul>
+    <script type="text/javascript">
+        $(window).load(function () {
+
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 8,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,
+                pauseOnHover: false,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 2
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 3
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+        });
+    </script>
+</div>
