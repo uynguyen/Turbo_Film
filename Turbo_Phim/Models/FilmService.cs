@@ -54,6 +54,7 @@ namespace Turbo_Phim.Models
             pvm.MS_TheLoai = (int)p.MS_TheLoai;
             pvm.MS_NuocSX = (int)p.MS_NuocSX;
 
+         
 
 
             return pvm;
@@ -67,24 +68,8 @@ namespace Turbo_Phim.Models
             List<Phim> lstFilms = bus.searchFilm(nameFilm, page,out maxPage);
             foreach (Phim p in lstFilms)
             {
-                PhimViewModels pvm = new PhimViewModels();
-                pvm.MaSo = p.MaSo;
-                pvm.TenPhim = p.TenPhim;
-                pvm.NoiDung = p.NoiDung;
-                pvm.URL_Trailer = p.URL_Trailer;
-                pvm.DiemDanhGia = p.DiemDanhGia;
-                pvm.ThoiLuong = p.ThoiLuong;
-                pvm.DienVien = p.DienVien;
-                pvm.DaoDien = p.DaoDien;
-                pvm.HinhAnh = p.HinhAnh;
-                pvm.NgayPhatHanh = p.NgayPhatHanh;
-                pvm.TheLoai = bus.getTypeOfFilm(p.MS_TheLoai);
-                pvm.NuocSX = bus.getCountryOfFilm(p.MS_NuocSX);
-
-
-                pvm.MS_TheLoai = (int)p.MS_TheLoai;
-                pvm.MS_NuocSX = (int)p.MS_NuocSX;
-
+                PhimViewModels pvm = Phim2PhimViewModels(p);
+              
                 result.Add(pvm);
             }
             return result;
@@ -98,24 +83,8 @@ namespace Turbo_Phim.Models
             List<Phim> lstFilms = bus.searchFilm4(actor, directer, country, type, page, out maxPage);
             foreach (Phim p in lstFilms)
             {
-                PhimViewModels pvm = new PhimViewModels();
-                pvm.MaSo = p.MaSo;
-                pvm.TenPhim = p.TenPhim;
-                pvm.NoiDung = p.NoiDung;
-                pvm.URL_Trailer = p.URL_Trailer;
-                pvm.DiemDanhGia = p.DiemDanhGia;
-                pvm.ThoiLuong = p.ThoiLuong;
-                pvm.DienVien = p.DienVien;
-                pvm.DaoDien = p.DaoDien;
-                pvm.HinhAnh = p.HinhAnh;
-                pvm.NgayPhatHanh = p.NgayPhatHanh;
-                pvm.TheLoai = bus.getTypeOfFilm(p.MS_TheLoai);
-                pvm.NuocSX = bus.getCountryOfFilm(p.MS_NuocSX);
-
-
-                pvm.MS_TheLoai = (int)p.MS_TheLoai;
-                pvm.MS_NuocSX = (int)p.MS_NuocSX;
-
+                PhimViewModels pvm = Phim2PhimViewModels(p);
+               
                 result.Add(pvm);
             }
             return result;
@@ -194,5 +163,15 @@ namespace Turbo_Phim.Models
             return result;
         }
 
+
+        internal int getMaxProductOnEachPage()
+        {
+            return bus.getMaxProductOnEachPage();
+        }
+
+        internal bool changeMaxProdcuctOnEachPage(int maxProductOnEachPage)
+        {
+            return bus.changeMaxProductOnEachPage(maxProductOnEachPage);
+        }
     }
 }

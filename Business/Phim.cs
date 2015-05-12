@@ -18,6 +18,7 @@ namespace Business
         {
             this.BaiNhanXet = new HashSet<BaiNhanXet>();
             this.DanhGia = new HashSet<DanhGia>();
+            this.DanhSachPhimYeuThich = new HashSet<DanhSachPhimYeuThich>();
         }
     
         public int MaSo { get; set; }
@@ -38,5 +39,6 @@ namespace Business
         public virtual ICollection<DanhGia> DanhGia { get; set; }
         public virtual DanhMucNuocSanXuat DanhMucNuocSanXuat { get; set; }
         public virtual DanhMucTheLoai DanhMucTheLoai { get; set; }
+        public virtual ICollection<DanhSachPhimYeuThich> DanhSachPhimYeuThich { get; set; }
     }
 }

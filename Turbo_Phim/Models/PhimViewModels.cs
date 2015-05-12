@@ -75,7 +75,7 @@ namespace Turbo_Phim.Models
 
          public bool isASC { get; set; }
 
-         public int MaxProductOnEachPage { get; set; }
+       
 
     }
 }

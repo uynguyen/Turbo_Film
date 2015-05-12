@@ -12,6 +12,10 @@ namespace Turbo_Phim.Controllers
         // GET: Review
         public ActionResult Index(int? page)
         {
+            ViewBag.HomeStatus = "inactive";
+            ViewBag.VideoStatus = "inactive";
+            ViewBag.ReviewStatus = "active";
+            ViewBag.ContactStatus = "inactive";
 
             if (page == null)
             {
@@ -32,9 +36,7 @@ namespace Turbo_Phim.Controllers
 
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
-            if (TempData["sortDirection"] == null)
-                TempData["sortDirection"] = "true";
-
+            
 
 
             FilmService phimService = new FilmService();
@@ -44,7 +46,7 @@ namespace Turbo_Phim.Controllers
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
 
-            return View(phimService.getAllFilms(page, (String)TempData["strSort"], Boolean.Parse(TempData["sortDirection"].ToString())));
+            return View(phimService.getAllFilms(page, (String)TempData["strSort"], false));
         }
 
 
@@ -108,34 +110,25 @@ namespace Turbo_Phim.Controllers
         }
 
 
- // Search
-        //public ActionResult SearchFilm(string filmName)
-        //{
-        //    TempData["actionSearch"] = "searchNameFilm1";
-        //    TempData["filmName"] = filmName;
-        //    getInfo();
-        //    return RedirectToAction("Index");
-        //}
-        //public ActionResult SearchFilm2(string actor, string directer, string country, string type)
-        //{
-        //    TempData["actionSearch"] = "searchNameFilm2";
-        //    TempData["actor"] = actor;
-        //    TempData["directer"] = directer;
-        //    TempData["country"] = country;
-        //    TempData["type"] = type;
-        //    getInfo();
-        //    return RedirectToAction("Index");
-        //}
 
-        public ActionResult ViewForGenre(String genreID, int ?page)
+        public ActionResult ViewForGenre(String genreID, int? page, String strSort)
         {
+            TempData["strSort"] = strSort;
+            if(genreID == null) //Nếu không xem them thể loại thì xem tất cả các phim
+            {
+                return RedirectToAction("Index");
+            }
+
             ViewBag.ViewForGenre = true;
             ViewBag.genreID = genreID;
+
 
             ViewBag.HomeStatus = "inactive";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "active";
             ViewBag.ContactStatus = "inactive";
+
+
             if (page == null)
             {
                 if (TempData["currentPage"] != null)
@@ -153,15 +146,13 @@ namespace Turbo_Phim.Controllers
 
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
-            if (TempData["sortDirection"] == null)
-                TempData["sortDirection"] = "true";
-
+        
             FilmService phimService = new FilmService();
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
         
 
-            List<PhimViewModels> lstPhim = phimService.findByGenre(genreID, page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString()));
+            List<PhimViewModels> lstPhim = phimService.findByGenre(genreID, page, TempData["strSort"].ToString(), false);
             ViewBag.maxPage = phimService.countPageSearch(lstPhim);
           
 

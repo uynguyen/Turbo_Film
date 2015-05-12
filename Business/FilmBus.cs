@@ -13,14 +13,19 @@ namespace Business
         public static int MAX_PRODUCT_EACHPAGE = 0;
         public static int MAX_INDEX_PAGE = 0;
         public FilmBus(){
-             BangThamSo temp = db.BangThamSo.Where(x => x.TenThamSo == "SoPhimTrenMotTrang").FirstOrDefault();
-             MAX_PRODUCT_EACHPAGE = Int32.Parse(temp.GiaTri);
 
-             temp = db.BangThamSo.Where(x => x.TenThamSo == "GiaTriTrangLonNhatMoiLanPhanTrang").FirstOrDefault();
-             MAX_INDEX_PAGE = Int32.Parse(temp.GiaTri);
+             MAX_PRODUCT_EACHPAGE = getMaxProductOnEachPage();
+
+             
+             MAX_INDEX_PAGE = getMaxIndexPage();
                 
         }
         
+        public int  getMaxIndexPage(){
+            BangThamSo temp = db.BangThamSo.Where(x => x.TenThamSo == "GiaTriTrangLonNhatMoiLanPhanTrang").FirstOrDefault();
+            return Int32.Parse(temp.GiaTri);
+        }
+
         public List<Phim> getAllFilms(int page, String strSort, bool isASC)
         {
             if(isASC)
@@ -490,5 +495,19 @@ namespace Business
 
         }
 
+
+        public int getMaxProductOnEachPage()
+        {
+            BangThamSo temp = db.BangThamSo.Where(x => x.TenThamSo == "SoPhimTrenMotTrang").FirstOrDefault();
+            return Int32.Parse(temp.GiaTri);
+        }
+
+        public bool changeMaxProductOnEachPage(int maxProductOnEachPage)
+        {
+            BangThamSo temp = db.BangThamSo.Where(x => x.TenThamSo == "SoPhimTrenMotTrang").FirstOrDefault();
+            temp.GiaTri = maxProductOnEachPage.ToString();
+            db.SaveChanges();
+            return true;
+        }
     }
 }

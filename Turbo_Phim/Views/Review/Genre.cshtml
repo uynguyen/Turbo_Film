@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<div style="background-color: #383838">
+
     <div class="btn-group">
         <button type="button" class="btn btn-danger">Thể loại</button>
         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -12,11 +12,18 @@
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu" role="menu">
+            <li role="presentation" class="divider"></li>
+            <li>@Html.ActionLink("Tất cả phim", "Index", new { page = 1 })</li>
+            <li role="presentation" class="divider"></li>
            @foreach (Business.DanhMucTheLoai genre in Model)
            {
              <li>@Html.ActionLink(@genre.TenTheLoai, "ViewForGenre",  new { genreID = @genre.MaSo })</li>
            }
-            
+
+           
+
         </ul>
     </div>
-</div>
+
+
+

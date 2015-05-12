@@ -35,7 +35,7 @@ namespace Turbo_Phim.Controllers
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
             if (TempData["sortDirection"] == null)
-                TempData["sortDirection"] = "true";
+                TempData["sortDirection"] = "false";
           
 
 
@@ -44,7 +44,7 @@ namespace Turbo_Phim.Controllers
 
             ViewBag.maxPage = phimService.countPage();
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
-
+            ViewBag.maxProductOnEachPage = phimService.getMaxProductOnEachPage();
 
             return View(phimService.getAllFilms(page, (String)TempData["strSort"], Boolean.Parse(TempData["sortDirection"].ToString())));
         }
@@ -195,7 +195,15 @@ namespace Turbo_Phim.Controllers
 
         public ActionResult ChangeMaxProductOnEachPage(string maxProductOnEachPage)
         {
-            string strValue = Request.Form["maxProductEachPage"].ToString();
+            ViewBag.maxProductOnEachPage = maxProductOnEachPage;
+
+
+
+            FilmService filmService = new FilmService();
+            filmService.changeMaxProdcuctOnEachPage(Int32.Parse(maxProductOnEachPage));
+
+
+
             return RedirectToAction("Index");
         }
 

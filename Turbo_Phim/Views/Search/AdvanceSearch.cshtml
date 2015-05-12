@@ -16,7 +16,7 @@
                 <div class="review-info">
 
                     @Html.ActionLink("Review " + p.TenPhim, "ReviewDetail", "Review", new { @class = "span" })
-                    <p class="dirctr"><a href="">Tp Hồ Chí Minh, </a>Ngày 14 tháng 04 năm 2015</p>
+                    <p class="dirctr"><a href="">@p.NuocSX, </a>@p.NgayPhatHanh</p>
                     <p class="ratingview">Đánh giá của trang:</p>
                     <p class="ratingview">
                         &nbsp;@p.DiemDanhGia / 10
@@ -25,7 +25,7 @@
                     <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
 
                     <p class="ratingview c-rating">
-                        &nbsp; 3.3/5
+                        &nbsp; @p.DiemDanhGiaTrungBinh / 10 (@p.LuotDanhGia Lượt đánh giá)
                     </p>
                     <div class="clearfix"></div>
                     <div class="yrw">

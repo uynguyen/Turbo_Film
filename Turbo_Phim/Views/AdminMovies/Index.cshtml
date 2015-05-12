@@ -14,18 +14,6 @@
         });
 </script>
 
-
-
-
- 
-
-
-
-
-
-
-
-
 <div class="content">
 
     <div class="main-content">
@@ -47,39 +35,49 @@
                 @using (Html.BeginForm("SortDirection", "AdminMovies", FormMethod.Get, new { @class = "sortDirection" }))
                 {
 
-                    <button type="submit" class="btn btn-primary btn-xs" name="sortDirection" value="true"> <i class="glyphicon glyphicon-arrow-up"></i> </button>
-                    <button type="submit" class="btn btn-primary btn-xs" name="sortDirection" value="false"> <i class="glyphicon glyphicon-arrow-down"></i>  </button>
+                    <button type="submit" class="btn btn-primary btn-sm" name="sortDirection" value="true"> <i class="glyphicon glyphicon-arrow-up"></i> </button>
+                    <button type="submit" class="btn btn-primary btn-sm" name="sortDirection" value="false"> <i class="glyphicon glyphicon-arrow-down"></i>  </button>
 
                 }
 
-                @* Thay đổi số sản phẩm hiển thị 
-                @using (Html.BeginForm("ChangeMaxProductOnEachPage", "AdminMovies", FormMethod.Get, new { @class = "sortDirection" }))
-                {
+          
+                    <div class="btn-group sortDirection">
+                        <button type="button" class="btn btn-danger">Số bộ phim hiển thị / trang: @ViewBag.maxProductOnEachPage</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
 
-                    <span>Số sản phẩm hiển thị: </span>
-                    List<SelectListItem> productOnEachPage = new List<SelectListItem>();
-                    for (float i = 5; i <= 50; i += 5)
-                    {
 
-                        SelectListItem temp = new SelectListItem();
-                        temp.Value = i.ToString();
-                        temp.Text = i.ToString();
-                        if( i == 30)
-                        {
-                            temp.Selected = true;
-                        }
-                        productOnEachPage.Add(temp);
-                    }
-                    @Html.DropDownList("maxProductEachPage", productOnEachPage)
-                   
-                    <button type="submit" class="btn btn-primary btn-xs"> Đồng ý </button>
-                }*@
+                            @for (float i = 5; i <= 50; i += 5)
+                            {
+
+                                <li>@Html.ActionLink(i.ToString() + " bộ phim / trang", "ChangeMaxProductOnEachPage", new { maxProductOnEachPage = i.ToString() })</li>
+                            }
+
+
+
+
+
+                        </ul>
+                    </div>
+        
+
+    
+                  
+                  
+                    
+
+                    
+                
 
             </div>
 
             <table class="table">
                 <thead>
                     <tr>
+                        <th style="width: 1%">#</th>
                         <th style="width: 2%">@Html.DisplayNameFor(model => model.MaSo)</th>
                         <th style="width: 10%">@Html.ActionLink("Tên phim", "SortByName", "AdminMovies")</th>
                         <th style="width: 5%">@Html.ActionLink("Điểm", "SortByRank", "AdminMovies")</th>
@@ -90,27 +88,87 @@
                         <th style="width: 15%">@Html.DisplayNameFor(model => model.NuocSX)</th>
                         <th style="width: 10%">@Html.DisplayNameFor(model => model.HinhAnh)</th>
                         <th style="width: 15%">@Html.ActionLink("Ngày phát hành", "SortByDate", "AdminMovies")</th>
-                        <th style="width: 3%"></th>
+                        <th style="width: 2%"></th>
                     </tr>
                 </thead>
                 <tbody>
+                    @{int temp = 0;}
                     @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
                     {
+                        
+                        
                         TempData["strSort"] = p.strSort;
                         TempData["indexPage"] = p.currentPage;
                         TempData["sortDirection"] = p.isASC;
                         <tr>
-                            <td>@p.MaSo</td>
-                            <td>@p.TenPhim</td>
+                            <td>@temp</td>
+                            @if(p.strSort == "ID")
+                            {
+                                 <td class="active">@p.MaSo</td>
+                            }
+                           
+                            else
+                            {
+                                  <td >@p.MaSo</td>
+                            }
 
-                            <td>@p.DiemDanhGia</td>
-                            <td>@p.TheLoai</td>
-                            <td>@p.ThoiLuong</td>
+                            @if (p.strSort == "Name")
+                            {
+                                <td class="active">@p.TenPhim</td>
+                            }
+
+                            else
+                            {
+                                <td >@p.TenPhim</td>
+                            }
+                          
+                            @if (p.strSort == "Rank")
+                            {
+                                <td class="active">@p.DiemDanhGia</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.DiemDanhGia</td>
+                            }
+
+                            @if (p.strSort == "Genre")
+                            {
+                                <td class="active">@p.TheLoai</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.TheLoai</td>
+                            }
+
+                            @if (p.strSort == "Duration")
+                            {
+                                <td class="active">@p.ThoiLuong</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.ThoiLuong</td>
+                            }
+
+                         
+                           
                             <td>@p.DienVien</td>
                             <td>@p.DaoDien</td>
                             <td>@p.NuocSX</td>
                             <td><img class="ImageFilmAdmin" src="@p.HinhAnh" alt="" /></td>
-                            <td>@p.NgayPhatHanh.Value.ToShortDateString()</td>
+
+                            @if (p.strSort == "Date")
+                            {
+                                <td class="active">@p.NgayPhatHanh.Value.ToShortDateString()</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.NgayPhatHanh.Value.ToShortDateString()</td>
+                            }
+                     
 
                             <td>
                                 @*<a href="user.html"><i class="fa fa-pencil"></i></a>
@@ -125,6 +183,8 @@
 
                             </td>
                         </tr>
+                        temp++;
+                    
                     }
                 </tbody>
             </table>
