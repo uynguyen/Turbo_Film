@@ -12,7 +12,7 @@ namespace Business
     {
         private class PhimMetadata
         {
-            [Display(Name = "Tên đăng nhập")]
+            [Display(Name = "Tên phim")]
             public string TenPhim { get; set; }
         }
     }

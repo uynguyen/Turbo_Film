@@ -31,23 +31,23 @@ namespace Turbo_Phim.Models
          [Display(Name = "Điểm")]
         public double? DiemDanhGia { get; set; }
 
-         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Required(ErrorMessage = "Bạn chưa chọn {0}")]
          [Display(Name = "Thể loại")]
         public String TheLoai { get; set; }
 
-         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Required(ErrorMessage = "Bạn chưa chọn {0}")]
          [Display(Name = "Thời lượng")]
         public double? ThoiLuong { get; set; }
 
-         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Required(ErrorMessage = "Bạn chưa nhập tên {0}")]
          [Display(Name = "Diễn viên")]
         public string DienVien { get; set; }
 
-         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Required(ErrorMessage = "Bạn chưa nhập tên {0}")]
          [Display(Name = "Đạo diễn")]
         public string DaoDien { get; set; }
 
-         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Required(ErrorMessage = "Bạn chưa chọn {0}")]
          [Display(Name = "Nước sản xuất")]
         public String NuocSX { get; set; }
 
@@ -65,13 +65,17 @@ namespace Turbo_Phim.Models
 
          public int MS_TheLoai { get; set; }
 
+         public float DiemDanhGiaTrungBinh { get; set; }
 
+         public int LuotDanhGia { get; set; }
          public String strSort { get; set; }
 
 
          public int currentPage { get; set; }
 
          public bool isASC { get; set; }
+
+
 
     }
 }

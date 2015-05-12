@@ -31,3 +31,22 @@
     float:right;
     margin-right: 5px;
 }
+th{
+    text-align: center;
+}
+td
+{
+background-color: #f7f1d4;
+border:1px solid Black;
+}
+table
+{
+    width: 100%; 
+   
+    border-collapse:separate;
+    border-spacing:2px; 
+}
+
+.genreReview{
+    width: 20% !important;
+}

@@ -196,7 +196,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site1.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -227,7 +227,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\myscripts.js" />
+    <Content Include="Scripts\myscripts1.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -266,8 +266,12 @@
     <Content Include="Views\AdminMovies\Country.cshtml" />
     <Content Include="Views\AdminMovies\Edit.cshtml" />
     <Content Include="Views\AdminMovies\CreateFilmResult.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Search\SimpleSearch.cshtml" />
     <Content Include="Views\Search\AdvanceSearch.cshtml" />
+=======
+    <Content Include="Views\Review\Genre.cshtml" />
+>>>>>>> 49043b56583098de5d811d015007d7d84138ae68
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

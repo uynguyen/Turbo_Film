@@ -37,7 +37,21 @@ namespace Turbo_Phim.Controllers
 
             FilmService phimService = new FilmService();
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+        
+            ViewBag.maxPage = phimService.countPage();
 
+<<<<<<< HEAD
+=======
+            if (TempData["ViewForGenre"] == null)
+            {
+                ViewBag.maxPage = phimService.countPage();
+                return View(phimService.getAllFilms(page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString())));
+            }
+            List<PhimViewModels> lstPhim = phimService.findByGenre(TempData["ViewForGenre"].ToString(), page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString()));
+            ViewBag.maxPage = phimService.countPageSearch(lstPhim);
+            return View(lstPhim);
+
+>>>>>>> 49043b56583098de5d811d015007d7d84138ae68
             
             ViewBag.maxPage = phimService.countPage();     
             return View(phimService.getAllFilms(page,TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString())));                     
@@ -97,7 +111,13 @@ namespace Turbo_Phim.Controllers
             return View();
         }
 
+        public ActionResult Genre()
+        {
+            GenreService genre = new GenreService();
+            return View(genre.getAllGener());
+        }
 
+<<<<<<< HEAD
  // Search
         //public ActionResult SearchFilm(string filmName)
         //{
@@ -116,6 +136,48 @@ namespace Turbo_Phim.Controllers
         //    getInfo();
         //    return RedirectToAction("Index");
         //}
+=======
+        public ActionResult ViewForGenre(String genreID, int ?page)
+        {
+            ViewBag.ViewForGenre = true;
+            ViewBag.genreID = genreID;
+
+            ViewBag.HomeStatus = "inactive";
+            ViewBag.VideoStatus = "inactive";
+            ViewBag.ReviewStatus = "active";
+            ViewBag.ContactStatus = "inactive";
+            if (page == null)
+            {
+                if (TempData["currentPage"] != null)
+                {
+                    page = Int32.Parse(TempData["currentPage"].ToString()); //Chuyển hướng từ action delete
+                }
+                else
+                {
+                    page = 1;
+                    TempData["currentPage"] = page;
+                }
+            }
+            else
+                TempData["currentPage"] = page;
+
+            if (TempData["strSort"] == null)
+                TempData["strSort"] = "ID";
+            if (TempData["sortDirection"] == null)
+                TempData["sortDirection"] = "true";
+
+            FilmService phimService = new FilmService();
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+
+        
+
+            List<PhimViewModels> lstPhim = phimService.findByGenre(genreID, page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString()));
+            ViewBag.maxPage = phimService.countPageSearch(lstPhim);
+          
+
+            return View("Index", lstPhim);
+        }
+>>>>>>> 49043b56583098de5d811d015007d7d84138ae68
 
     }
 }

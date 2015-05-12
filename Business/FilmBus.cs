@@ -107,7 +107,7 @@ namespace Business
         }
         public List<DanhMucNuocSanXuat> getAllCountry()
         {
-            return db.DanhMucNuocSanXuat.ToList();
+            return db.DanhMucNuocSanXuat.Where(x => x.TinhTrang == true).ToList();
         }
 
         public bool createNewGenre(string name)
@@ -324,7 +324,11 @@ namespace Business
         }
 
 
+        // Cac ham chuc nang search cua Xanh
+
+
 // Cac ham chuc nang search cua Xanh
+
         public List<Phim> searchFilm(string nameFilm, int page, out int maxPage)
         {          
 
@@ -364,6 +368,8 @@ namespace Business
             }
             return page;
         }
+
+
 
         static int LevenshteinDistance(string s, string t)
         {
@@ -418,6 +424,70 @@ namespace Business
             //{
 
             //}
+        }
+
+        public List<Phim> findByGenre(int genreID, int page, string strSort, bool isASC)
+        {
+            if (isASC)
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            else
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+        }
+
+        public float calculateAvgRank(int p)
+        {
+            float result = 0;
+
+            List<DanhGia> lstJudge = db.DanhGia.Where(x => x.MS_Phim == p).ToList();
+            if (lstJudge.Count == 0)
+                return 0;
+
+            foreach (DanhGia item in lstJudge)
+            {
+                result += (float) item.DiemDanhGia;
+
+            }
+
+            return result  / lstJudge.Count;
+        }
+
+        public int countRateTimes(int p)
+        {
+            return db.DanhGia.Where(x => x.MS_Phim == p).ToList().Count;
+
         }
 
     }

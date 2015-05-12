@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Business.DanhMucTheLoai>
+@{
+    ViewBag.Title = "Genre";
+    Layout = null;
+}
+
+<div style="background-color: #383838">
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger">Thể loại</button>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+           @foreach (Business.DanhMucTheLoai genre in Model)
+           {
+             <li>@Html.ActionLink(@genre.TenTheLoai, "ViewForGenre",  new { genreID = @genre.MaSo })</li>
+           }
+            
+        </ul>
+    </div>
+</div>
