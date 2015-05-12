@@ -25,9 +25,9 @@ namespace Turbo_Phim.Models
             return result;
         }
 
-<<<<<<< HEAD
-        public List<PhimViewModels> searchFilm(String nameFilm, int page, out int maxPage)
-=======
+
+
+
         private PhimViewModels Phim2PhimViewModels(Phim p,  int? page = 1,string strSort = "ID", bool isASC = true)
         {
             PhimViewModels pvm = new PhimViewModels();
@@ -59,8 +59,8 @@ namespace Turbo_Phim.Models
             return pvm;
         }
 
-        public List<PhimViewModels> searchFilm(String nameFilm)
->>>>>>> 49043b56583098de5d811d015007d7d84138ae68
+        public List<PhimViewModels> searchFilm(String nameFilm, int page, out int maxPage)
+
         {
             List<PhimViewModels> result = new List<PhimViewModels>();
 
@@ -163,9 +163,7 @@ namespace Turbo_Phim.Models
             return Business.FilmBus.MAX_INDEX_PAGE;
         }
 
-<<<<<<< HEAD
-       
-=======
+
 
         internal int countPageSearch(List<PhimViewModels> searchResult)
         {
@@ -195,6 +193,6 @@ namespace Turbo_Phim.Models
 
             return result;
         }
->>>>>>> 49043b56583098de5d811d015007d7d84138ae68
+
     }
 }

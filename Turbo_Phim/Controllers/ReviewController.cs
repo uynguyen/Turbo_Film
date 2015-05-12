@@ -12,10 +12,7 @@ namespace Turbo_Phim.Controllers
         // GET: Review
         public ActionResult Index(int? page)
         {
-            ViewBag.HomeStatus = "inactive";
-            ViewBag.VideoStatus = "inactive";
-            ViewBag.ReviewStatus = "active";
-            ViewBag.ContactStatus = "inactive";
+
             if (page == null)
             {
                 if (TempData["currentPage"] != null)
@@ -30,31 +27,24 @@ namespace Turbo_Phim.Controllers
             }
             else
                 TempData["currentPage"] = page;
+
+
+
             if (TempData["strSort"] == null)
                 TempData["strSort"] = "ID";
             if (TempData["sortDirection"] == null)
                 TempData["sortDirection"] = "true";
 
+
+
             FilmService phimService = new FilmService();
-            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
-        
+
+
             ViewBag.maxPage = phimService.countPage();
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
-<<<<<<< HEAD
-=======
-            if (TempData["ViewForGenre"] == null)
-            {
-                ViewBag.maxPage = phimService.countPage();
-                return View(phimService.getAllFilms(page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString())));
-            }
-            List<PhimViewModels> lstPhim = phimService.findByGenre(TempData["ViewForGenre"].ToString(), page, TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString()));
-            ViewBag.maxPage = phimService.countPageSearch(lstPhim);
-            return View(lstPhim);
 
->>>>>>> 49043b56583098de5d811d015007d7d84138ae68
-            
-            ViewBag.maxPage = phimService.countPage();     
-            return View(phimService.getAllFilms(page,TempData["strSort"].ToString(), Boolean.Parse(TempData["sortDirection"].ToString())));                     
+            return View(phimService.getAllFilms(page, (String)TempData["strSort"], Boolean.Parse(TempData["sortDirection"].ToString())));
         }
 
 
@@ -117,7 +107,7 @@ namespace Turbo_Phim.Controllers
             return View(genre.getAllGener());
         }
 
-<<<<<<< HEAD
+
  // Search
         //public ActionResult SearchFilm(string filmName)
         //{
@@ -136,7 +126,7 @@ namespace Turbo_Phim.Controllers
         //    getInfo();
         //    return RedirectToAction("Index");
         //}
-=======
+
         public ActionResult ViewForGenre(String genreID, int ?page)
         {
             ViewBag.ViewForGenre = true;
@@ -177,7 +167,7 @@ namespace Turbo_Phim.Controllers
 
             return View("Index", lstPhim);
         }
->>>>>>> 49043b56583098de5d811d015007d7d84138ae68
+
 
     }
 }
