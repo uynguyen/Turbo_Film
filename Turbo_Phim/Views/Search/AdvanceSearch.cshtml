@@ -69,6 +69,12 @@
             </div>
         }
         <div>
+        @if (Model.Count() == 0)
+            {
+                <h3>Không có bộ phim nào được tìm thấy ...</h3>
+             }
+                else
+                {
 
             <ul class="pagination">
                 <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
@@ -92,6 +98,7 @@
                 <li>@Html.ActionLink("»", "AdvanceSearch", "Search", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1 }, null)</li>
 
             </ul>
+        }
         </div>
 
 
