@@ -30,5 +30,18 @@ namespace Turbo_Phim.Controllers
             return View();
         }
 
+        public ActionResult Genre()
+        {
+            GenreService genre = new GenreService();
+            return View(genre.getAllGener());
+        }
+
+        public ActionResult Country()
+        {
+        
+            CountryService country = new CountryService();
+
+            return View(country.getAllCountry());
+        }
     }
 }

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Business.DanhMucNuocSanXuat>
+@{
+    ViewBag.Title = "Country";
+}
+
+<label for="recipient-name" class="control-label">Nước sản xuất</label>
+<select class="form-control" name="type">
+    @foreach (Business.DanhMucNuocSanXuat p in Model)
+    {
+        <option>@p.TenNuoc</option>
+    }
+</select>
+
+
