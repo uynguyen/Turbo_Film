@@ -35,7 +35,7 @@
         </div>
         <div class="row">
             <label id="icon" for="name"><i class="glyphicon-time"></i></label>
-            @Html.TextBoxFor(m => m.Birthday, new { id = "name", @placeholder = Model.Birthday })
+            @Html.TextBoxFor(m => m.Birthday, new { id = "name", @placeholder = Model.Birthday.Value.ToShortDateString()})
         </div>
         <div class="row">
             <label id="icon" for="name"><i class="glyphicon-road"></i></label>

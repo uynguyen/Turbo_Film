@@ -64,6 +64,7 @@ namespace Turbo_Phim.Models
         public string Address { get; set; }
 
         [Display(Name="Ngày đăng ký")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<DateTime> DayRegister { get; set; }
         [Display(Name="Phân Quyền")]
         public string Permission { get; set; }

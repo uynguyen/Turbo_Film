@@ -56,11 +56,12 @@ input[type="checkbox"].input-validation-error {
     
     display: block;
     float: right;
-    width: 10%;
-    height: 100%;
+    width: 5% auto;
+    height: 90%;
     position: relative;
-    margin-left: 10px;
-    padding: 10px;
+    margin-left: 5px;
+    padding: 5px;
+    font-size:small;
 
 }
 
@@ -70,4 +71,8 @@ input[type="checkbox"].input-validation-error {
 
 .textbox{
     width: 85%;
+}
+
+#exampleModal modal-body{
+    padding: 2em;
 }
