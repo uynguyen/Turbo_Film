@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<Business.DanhMucTheLoai>
+
+@{
+    ViewBag.Title = "Genre";
+    Layout = null;
+}
+
+<label for="recipient-name" class="control-label">Thể loại</label>
+<select class="form-control" name="type">
+    @foreach (Business.DanhMucTheLoai p in Model)
+    { 
+         <option>@p.TenTheLoai</option>
+    }
+</select>

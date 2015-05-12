@@ -286,6 +286,8 @@
     <Content Include="Views\Search\SimpleSearch.cshtml" />
     <Content Include="Views\Search\AdvanceSearch.cshtml" />
     <Content Include="Views\Review\Genre.cshtml" />
+    <Content Include="Views\Home\Genre.cshtml" />
+    <Content Include="Views\Home\Country.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
