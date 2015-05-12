@@ -6,7 +6,47 @@
 .search{
     width: 35% !important;
 }
+.search_advance{
+    width: 10% !important;
+}
 .ImageFilmAdmin{
     width: 50px;
+    height: 90px;
+}
+.createImage{
+    width: 100% !important;
+    height: 400px !important;
+}
+.my-form-control{
+    margin-top: 10px !important;
+    height: 30px !important;
+}
+.btnAddNewFilm{
+   margin-left: 5px;
+}
+#indexPaging{
+    text-align: center !important;
+}
+.sortDirection{
+    float:right;
+    margin-right: 5px;
+}
+th{
+    text-align: center;
+}
+td
+{
+background-color: #f7f1d4;
+border:1px solid Black;
+}
+table
+{
+    width: 100%; 
+   
+    border-collapse:separate;
+    border-spacing:2px; 
+}
 
+.genreReview{
+    width: 20% !important;
 }

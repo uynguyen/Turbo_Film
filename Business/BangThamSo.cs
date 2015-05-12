@@ -15,5 +15,8 @@ namespace Business
     public partial class BangThamSo
     {
         public int MaSo { get; set; }
+        public string TenThamSo { get; set; }
+        public string KieuDuLieu { get; set; }
+        public string GiaTri { get; set; }
     }
 }

@@ -490,6 +490,7 @@ i.contact1 {
 	position: relative;
 	  width: 90%;
   margin: 0 5%;
+  height: 250px !important;
 }
 /*** Navigation ***/
 .nbs-flexisel-nav-left {
@@ -755,7 +756,7 @@ p.claim {
 }
 .reviews-section {
 	background: #fff;
-	padding:3em;
+	padding:1em;
 	border-top:1px solid #000;
 }
 h3.head {
@@ -770,6 +771,7 @@ h3.head {
 }
 .movie-pic img {
 	width: 100%;
+    height: 400px;
 }
 .review-info {
 	float:left;

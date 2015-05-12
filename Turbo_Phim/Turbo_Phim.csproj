@@ -165,16 +165,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminCategoryController.cs" />
     <Compile Include="Controllers\AdminMainController.cs" />
+    <Compile Include="Controllers\AdminMoviesController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\UserAccountService.cs" />
+    <Compile Include="Models\CountryService.cs" />
+    <Compile Include="Models\FilmService.cs" />
+    <Compile Include="Models\GenreService.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PhimViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -191,11 +200,13 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
     <Content Include="Content\registerpopup.css" />
+    <Content Include="Content\mystyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\customtheme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\Site1.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -221,12 +232,14 @@
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.flexisel.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myscripts1.js" />
     <Content Include="Scripts\myscripts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -258,10 +271,25 @@
     <Content Include="Views\Shared\_Admin_Header.cshtml" />
     <Content Include="Views\Shared\_Admin_NavigationMenu.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\AdminUsers\Index.cshtml" />
     <Content Include="Views\Account\RegisterSuccess.cshtml" />
     <Content Include="Views\AdminUsers\ListAllAccounts.cshtml" />
     <Content Include="Views\AdminUsers\ChangePermission.cshtml" />
     <Content Include="Views\Account\EditAccount.cshtml" />
+    <Content Include="Views\AdminCategory\Index.cshtml" />
+    <Content Include="Views\AdminCategory\Genre.cshtml" />
+    <Content Include="Views\AdminCategory\Country.cshtml" />
+    <Content Include="Views\AdminMovies\CreateNewFilm.cshtml" />
+    <Content Include="Views\AdminMovies\Genre.cshtml" />
+    <Content Include="Views\AdminMovies\Country.cshtml" />
+    <Content Include="Views\AdminMovies\Edit.cshtml" />
+    <Content Include="Views\AdminMovies\CreateFilmResult.cshtml" />
+
+    <Content Include="Views\Search\SimpleSearch.cshtml" />
+    <Content Include="Views\Search\AdvanceSearch.cshtml" />
+
+    <Content Include="Views\Review\Genre.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

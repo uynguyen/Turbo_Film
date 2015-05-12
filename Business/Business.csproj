@@ -61,6 +61,7 @@
     <Compile Include="BinhLuan.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
+    <Compile Include="FilmBus.cs" />
     <Compile Include="DanhGia.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
@@ -70,6 +71,7 @@
     <Compile Include="DanhMucTheLoai.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\Phim.cs" />
     <Compile Include="PhanQuyen.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>

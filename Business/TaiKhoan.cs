@@ -26,6 +26,7 @@ namespace Business
         public Nullable<int> MS_PhanQuyen { get; set; }
         public Nullable<bool> TinhTrang { get; set; }
         public Nullable<System.DateTime> NgayDangKy { get; set; }
+        public string HinhDaiDien { get; set; }
     
         public virtual PhanQuyen PhanQuyen { get; set; }
         public virtual ICollection<ThanhVien> ThanhVien { get; set; }
