@@ -17,6 +17,8 @@ namespace Turbo_Phim.Models {
         public string Name { get; set; }
         [Required]
         public string Password { get; set; }
+
+        public bool Remember { get; set; }
     }
 
     public class RoleEditModel {

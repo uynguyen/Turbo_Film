@@ -63,8 +63,33 @@ namespace Turbo_Phim.Controllers
                 return RedirectToAction("Index", "Home");
          
         }
+        private void AddErrorsFromResult(IdentityResult result)
+        {
+            foreach (string error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
 
-
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = new AppUser { UserName = model.Name, Email = model.Email };
+                IdentityResult result = await UserManager.CreateAsync(user,
+                    model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    AddErrorsFromResult(result);
+                }
+            }
+            return PartialView(model);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -74,10 +99,10 @@ namespace Turbo_Phim.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            //if (HttpContext.User.Identity.IsAuthenticated)
-            //{
-            //    return View("Error", new string[] { "Access Denied" });
-            //}
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View("Error", new string[] { "Access Denied" });
+            }
             ViewBag.returnUrl = returnUrl;
             return View();
         }
@@ -89,7 +114,7 @@ namespace Turbo_Phim.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser user = await UserManager.FindAsync(details.Name,
+                var user = await UserManager.FindAsync(details.Name,
                     details.Password);
                 if (user == null)
                 {

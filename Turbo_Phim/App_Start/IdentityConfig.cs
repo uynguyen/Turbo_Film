@@ -6,7 +6,7 @@ using Turbo_Phim.Infrastructure;
 
 namespace Turbo_Phim {
     public class IdentityConfig {
-        public void Configuration(IAppBuilder app) {
+        public static void Configuration(IAppBuilder app) {
 
             app.CreatePerOwinContext<AppIdentityDbContext>(AppIdentityDbContext.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
@@ -16,6 +16,9 @@ namespace Turbo_Phim {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
             });
+
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            
         }
     }
 }

@@ -17,10 +17,7 @@
         </a>
     </div>
     <div class="user">
-        <a href='@Url.Action("Index", "AdminMain")'>
-            <span class="glyphicon glyphicon-log-in padding-right-small" style="position:relative;top: 3px;"></span>
-            Đăng nhập
-        </a>
+       @Html.Partial("_LoginPartial")
     </div>
     <div class="user search-advance padding-right-small">
         <button class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"><i class="fa"></i> Tìm nâng cao</button>

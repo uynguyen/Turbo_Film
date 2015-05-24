@@ -208,9 +208,9 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\isotope.css" />
+    <Content Include="Content\LoginDropdownForm.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
-    <Content Include="Content\registerpopup.css" />
     <Content Include="Content\mystyle.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\customtheme.css" />
@@ -302,6 +302,8 @@
     <Content Include="Views\Home\Country.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
