@@ -4,21 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-<<<<<<< HEAD
-      <Diagram DiagramId="92035bcdbb9d41f18134c46c80f329a6" Name="Diagram1">
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BaiNhanXet" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BangThamSo" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhChon" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhLuan" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhGia" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucNuocSanXuat" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+      <Diagram DiagramId="b29833057b004b1e8d99a9728c37bfa9" Name="Diagram1">
+        <EntityTypeShape EntityType="TURBO_PHIMModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.AspNetRoles" Width="1.5" PointX="11.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.AspNetUserClaims" Width="1.5" PointX="16.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.AspNetUserLogins" Width="1.5" PointX="16.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.AspNetUsers" Width="1.5" PointX="14" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BaiNhanXet" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BangThamSo" Width="1.5" PointX="2.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhChon" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhLuan" Width="1.5" PointX="12.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhGia" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucNuocSanXuat" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucTheLoai" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhSachPhimYeuThich" Width="1.5" PointX="10.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhSachPhimYeuThich" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.PhanQuyen" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.Phim" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.TaiKhoan" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.ThanhVien" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.TaiKhoan" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TURBO_PHIMModel.ThanhVien" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="TURBO_PHIMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_BaiNhanXet_Phim" ManuallyRouted="false" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_BaiNhanXet_ThanhVien" ManuallyRouted="false" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_BinhChon_BaiNhanXet" ManuallyRouted="false" />
@@ -33,33 +38,7 @@
         <AssociationConnector Association="TURBO_PHIMModel.FK_DanhSachPhimYeuThich_ThanhVien" ManuallyRouted="false" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_TaiKhoan_PhanQuyen" ManuallyRouted="false" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_ThanhVien_TaiKhoan" ManuallyRouted="false" />
-=======
-      <Diagram DiagramId="54ddb6458b9641f9b0d82592c7d56ce6" Name="Diagram1">
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BaiNhanXet" Width="1.5" PointX="10.5" PointY="6.375" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BangThamSo" Width="1.5" PointX="0.75" PointY="3.25" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhChon" Width="1.5" PointX="12.75" PointY="6.75" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.BinhLuan" Width="1.5" PointX="15.75" PointY="6.75" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhGia" Width="1.5" PointX="7.5" PointY="6.75" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucNuocSanXuat" Width="1.5" PointX="6" PointY="3.375" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucTheLoai" Width="1.5" PointX="6" PointY="11" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.PhanQuyen" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.Phim" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="3.25" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.TaiKhoan" Width="1.5" PointX="3" PointY="6.625" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.ThanhVien" Width="1.5" PointX="5.25" PointY="6.25" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_BaiNhanXet_Phim" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_BaiNhanXet_ThanhVien" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhChon_BaiNhanXet" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhLuan_BaiNhanXet" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhChon_ThanhVien" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_BinhLuan_ThanhVien" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_DanhGia_Phim" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_DanhGia_ThanhVien" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_Phim_NuocSX" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_Phim_TheLoai" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_TaiKhoan_PhanQuyen" />
-        <AssociationConnector Association="TURBO_PHIMModel.FK_ThanhVien_TaiKhoan" />
->>>>>>> 6c94b696ea2eebbc225661a5a7983eb0ae258cac
+        <AssociationConnector Association="TURBO_PHIMModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

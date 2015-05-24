@@ -13,6 +13,7 @@ namespace Business
         // Thêm một tài khoản mới
         public bool AddNewAccount(TaiKhoan tk, ThanhVien tv)
         {
+            
             try
             {
                 tk = db.TaiKhoan.Add(tk);
