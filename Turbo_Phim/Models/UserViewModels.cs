@@ -21,11 +21,7 @@ namespace Turbo_Phim.Models {
         public bool Remember { get; set; }
     }
 
-    public class RoleEditModel {
-        public AppRole Role { get; set; }
-        public IEnumerable<AppUser> Members { get; set; }
-        public IEnumerable<AppUser> NonMembers { get; set; }
-    }
+
 
     public class RoleModificationModel {
         [Required]

@@ -11,7 +11,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Turbo_Phim.Infrastructure;
 
 namespace Turbo_Phim.Controllers
 {
@@ -77,7 +76,7 @@ namespace Turbo_Phim.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser user = new AppUser { UserName = model.Name, Email = model.Email };
+                ApplicationUser user = new ApplicationUser { UserName = model.Name, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user,
                     model.Password);
                 if (result.Succeeded)
@@ -95,7 +94,7 @@ namespace Turbo_Phim.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string id)
         {
-            AppUser user = await UserManager.FindByIdAsync(id);
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
             if (user != null)
             {
                 IdentityResult result = await UserManager.DeleteAsync(user);
@@ -116,7 +115,7 @@ namespace Turbo_Phim.Controllers
 
         public async Task<ActionResult> Edit(string id)
         {
-            AppUser user = await UserManager.FindByIdAsync(id);
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
             if (user != null)
             {
                 return View(user);
@@ -130,7 +129,7 @@ namespace Turbo_Phim.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(string id, string email, string password)
         {
-            AppUser user = await UserManager.FindByIdAsync(id);
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
             if (user != null)
             {
                 user.Email = email;
@@ -184,11 +183,11 @@ namespace Turbo_Phim.Controllers
             }
         }
 
-        private AppUserManager UserManager
+        private ApplicationUserManager UserManager
         {
             get
             {
-                return HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
     }

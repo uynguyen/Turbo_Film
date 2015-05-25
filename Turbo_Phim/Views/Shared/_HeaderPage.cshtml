@@ -86,7 +86,7 @@
                 <h4 class="modal-title" id="myModalLabel">Đăng ký tài khoản</h4>
             </div>
             <div class="modal-body">
-                @*@Html.Action("Register", "Account")*@
+              @Html.Partial("_RegisterPartial", new Turbo_Phim.Models.AccountViewModel())
             </div>
 
         </div>

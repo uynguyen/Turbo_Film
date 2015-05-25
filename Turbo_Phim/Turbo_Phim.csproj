@@ -172,23 +172,17 @@
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
-    <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
-    <Compile Include="Infrastructure\AppRoleManager.cs" />
-    <Compile Include="Infrastructure\AppUserManager.cs" />
-    <Compile Include="Infrastructure\CustomPasswordValidator.cs" />
-    <Compile Include="Infrastructure\CustomUserValidator.cs" />
-    <Compile Include="Infrastructure\IdentityHelpers.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
-    <Compile Include="Models\AppRole.cs" />
-    <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserAccountService.cs" />
     <Compile Include="Models\CountryService.cs" />
     <Compile Include="Models\FilmService.cs" />
@@ -304,6 +298,7 @@
     <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

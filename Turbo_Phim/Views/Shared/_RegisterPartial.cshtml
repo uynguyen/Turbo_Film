@@ -1,9 +1,11 @@
 ﻿@model Turbo_Phim.Models.AccountViewModel
 
 @{
-    ViewBag.Title = "Register";
     Layout = null;
+    
 }
+
+
 
 <script type="text/javascript">
     $(function () {
@@ -16,13 +18,14 @@
     });
 </script>
 <div class="register-form">
-    @using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
         <div class="row">
             <label id="icon" for="name"><i class="glyphicon-user"></i></label>
             @Html.TextBoxFor(m => m.UserName, new { id = "username", @placeholder = ModelMetadata.FromLambdaExpression(m => m.UserName, ViewData).DisplayName })
             @Html.ValidationMessageFor(m => m.UserName)
-    </div>
+        </div>
         <div class="row">
             <label id="icon" for="email"><i class="glyphicon-envelope"></i></label>
             @Html.TextBoxFor(m => m.Email, new { id = "email", @placeholder = ModelMetadata.FromLambdaExpression(m => m.Email, ViewData).DisplayName })
@@ -43,10 +46,10 @@
         </div>
         <div class="row">
             <div class="gender">
-                @*<input type="radio" value="None" id="male" name="gender" checked />*@
+        
                 @Html.RadioButton("gender", Model._gender, true, new { @Value = "None", id = "male" })
                 <label for="male" class="radio" chec>Nam</label>
-                @*<input type="radio" value="None" id="female" name="gender" />*@
+       
                 @Html.RadioButton("gender", Model._gender, false, new { @Value = "None", id = "female" })
                 <label for="female" class="radio">Nữ</label>
             </div>
