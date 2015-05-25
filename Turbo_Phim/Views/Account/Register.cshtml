@@ -1,66 +1,53 @@
-﻿@model Turbo_Phim.Models.AccountViewModel
+﻿@model Turbo_Phim.Models.RegisterViewModel
 
 @{
     ViewBag.Title = "Register";
     Layout = null;
 }
 
-<script type="text/javascript">
-    $(function () {
-        $(document).tooltip({
-            items: ".input-validation-error",
-            content: function () {
-                return $(this).attr('data-val-required');
-            }
-        });
-    });
-</script>
-<div class="register-form">
-    @using (Html.BeginForm(FormMethod.Post))
-    {
-        <div class="row">
-            <label id="icon" for="name"><i class="glyphicon-user"></i></label>
-            @Html.TextBoxFor(m => m.UserName, new { id = "username", @placeholder = ModelMetadata.FromLambdaExpression(m => m.UserName, ViewData).DisplayName })
-            @Html.ValidationMessageFor(m => m.UserName)
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-vertical", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+       
+        @Html.TextBoxFor(m => m.Email, new { @class="control-label", @placeholder="Email"})
+        @Html.ValidationMessageFor(m => m.Email)
+        <span class="help-block"></span>
     </div>
-        <div class="row">
-            <label id="icon" for="email"><i class="glyphicon-envelope"></i></label>
-            @Html.TextBoxFor(m => m.Email, new { id = "email", @placeholder = ModelMetadata.FromLambdaExpression(m => m.Email, ViewData).DisplayName })
-        </div>
-        <div class="row">
-            <label id="icon" for="name"><i class="glyphicon-lock"></i></label>
-            @Html.PasswordFor(m => m.Password, new { id = "password", @placeholder = ModelMetadata.FromLambdaExpression(m => m.Password, ViewData).DisplayName })
-        </div>
-        <div class="row">
-            <label id="icon" for="name"><i class="glyphicon-lock"></i></label>
-            @Html.PasswordFor(m => m.ConfirmPassword, new { id = "cf-pass", @placeholder = ModelMetadata.FromLambdaExpression(m => m.ConfirmPassword, ViewData).DisplayName })
-        </div>
-        <hr>
-        <h4>Thông tin cá nhân </h4>
-        <div class="row">
-            <label id="icon" for="name"><i class="glyphicon-user"></i></label>
-            @Html.TextBoxFor(m => m.Name, new { id = "name", @placeholder = ModelMetadata.FromLambdaExpression(m => m.Name, ViewData).DisplayName })
-        </div>
-        <div class="row">
-            <div class="gender">
-                @*<input type="radio" value="None" id="male" name="gender" checked />*@
-                @Html.RadioButton("gender", Model._gender, true, new { @Value = "None", id = "male" })
-                <label for="male" class="radio" chec>Nam</label>
-                @*<input type="radio" value="None" id="female" name="gender" />*@
-                @Html.RadioButton("gender", Model._gender, false, new { @Value = "None", id = "female" })
-                <label for="female" class="radio">Nữ</label>
-            </div>
-        </div>
-        <div class="row">
-            <label id="icon" for="name"><i class="glyphicon-time"></i></label>
-            @Html.TextBoxFor(m => m.Birthday, new { id = "name", @placeholder = ModelMetadata.FromLambdaExpression(m => m.Birthday, ViewData).DisplayName })
-        </div>
-        <div class="row">
-            <label id="icon" for="name"><i class="glyphicon-road"></i></label>
-            @Html.TextBoxFor(m => m.Address, new { id = "name", @placeholder = ModelMetadata.FromLambdaExpression(m => m.Address, ViewData).DisplayName })
-        </div>
-        <div class="row">
-            <input id="submit" class="btn btn-success" type="submit" value="Đăng ký" />
-        </div>
-    }
-</div>
+    <div class="form-group">
+       
+        @Html.PasswordFor(m => m.Password, new { @class = "control-label", @placeholder = "Mật khẩu" })
+        @Html.ValidationMessageFor(m => m.Password)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+       
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "control-label", @placeholder = "Nhập lại mật khẩu" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+
+        @Html.TextBoxFor(m => m.Name, new { @class = "control-label", @placeholder = "Họ và tên" })
+        @Html.ValidationMessageFor(m => m.Name)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Birthday, new { @class = "control-label", @placeholder = "Ngày sinh" })
+        @Html.ValidationMessageFor(m => m.Birthday)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Address, new { @class = "control-label", @placeholder = "Địa chỉ" })
+        @Html.ValidationMessageFor(m => m.Address)
+        <span class="help-block"></span>
+    </div>
+    <input type="submit" class="btn btn-success btn-block" value="Đăng ký">
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

@@ -34,7 +34,7 @@ namespace Turbo_Phim.Controllers
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
-            SignInManager = signInManager;
+            SignInManager = signInManager;    
         }
 
         public ApplicationSignInManager SignInManager
@@ -67,7 +67,7 @@ namespace Turbo_Phim.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return PartialView();
         }
 
         //
@@ -148,7 +148,7 @@ namespace Turbo_Phim.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return PartialView(new RegisterViewModel());
         }
 
         //
@@ -156,29 +156,40 @@ namespace Turbo_Phim.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(AccountViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+            {              
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            
+                try
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                   var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        uas.AddNewAccount(user, model);
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                catch (System.Exception)
+                {
+                   
+                }
+                            
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView(model);
         }
 
         //
@@ -491,51 +502,6 @@ namespace Turbo_Phim.Controllers
         }
         #endregion
      
-
-        //public ActionResult Register()
-        //{
-        //    return View(new Models.AccountViewModel());
-        //}
-
-        //[HttpPost]
-        //public ActionResult Register(Models.AccountViewModel account)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        uas.AddNewAccount(account);
-        //        return View("RegisterSuccess", account);
-        //    }
-        //    account = null;
-        //    return View("RegisterSuccess", account);
-        //}
-
-        //[HttpGet]
-        //public ActionResult RegisterSuccess(Models.AccountViewModel account)
-        //{           
-        //    return View(account);
-        //}
-
-        //public ActionResult EditAccount()
-        //{
-        //    return View(uas.getSomeAccountView(1, 1).First());          // Test code
-        //}
-
-        //[HttpPost]
-        //public ActionResult EditAccount(Models.AccountViewModel account)
-        //{
-          
-        //        uas.UpdateAccount(account);
-
-        //        return RedirectToAction("Index", "Home");
-         
-        //}
-        //private void AddErrorsFromResult(IdentityResult result)
-        //{
-        //    foreach (string error in result.Errors)
-        //    {
-        //        ModelState.AddModelError("", error);
-        //    }
-        //}
 
        
     }

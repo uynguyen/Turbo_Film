@@ -80,11 +80,7 @@ namespace Turbo_Phim.Models
         public System.Web.Mvc.SelectList getPermissions()
         {
             List<System.Web.Mvc.SelectListItem> list = new List<System.Web.Mvc.SelectListItem>();
-            List<PhanQuyen> listpermissions = bus.getAllPermissions();
-            foreach (PhanQuyen p in listpermissions)
-            {
-                list.Add(new System.Web.Mvc.SelectListItem { Value = p.MaSo.ToString(), Text = p.TenQuyen });
-            }
+           
             return new System.Web.Mvc.SelectList(list, "Value", "Text", ID_Permission);
         }
 

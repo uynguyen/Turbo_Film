@@ -11,23 +11,16 @@ namespace Turbo_Phim.Models
 
 
         // Thêm một tài khoản và thành viên
-        public void AddNewAccount(AccountViewModel account)
-        {
-            TaiKhoan tk = new TaiKhoan();
-            tk.TenDangNhap = account.UserName;
-            tk.MatKhau = account.Password;
-            tk.Email = account.Email;
-            tk.TinhTrang = true;
-            tk.MS_PhanQuyen = 1;
-            tk.NgayDangKy = DateTime.Today;
+        public void AddNewAccount(ApplicationUser user, RegisterViewModel account)
+        {           
             ThanhVien tv = new ThanhVien();
-            tv.HoTen = account.UserName;
+            tv.HoTen = account.Name;
             tv.DiaChi = account.Address;
             tv.NgaySinh = account.Birthday;
-            tv.GioiTinh = account.Gender=="Nam";
+            tv.MS_TaiKhoan = user.Id;
             tv.TinhTrang = true;
-
-            bus.AddNewAccount(tk, tv);
+            tv.NgayDangKy = DateTime.Today;
+            bus.AddNewAccount(tv);
         }
 
 
@@ -45,19 +38,15 @@ namespace Turbo_Phim.Models
             var members = bus.getSomeMembers(page, AccPerPage);
             foreach (ThanhVien mem in members)
             {
-                TaiKhoan acc = bus.getAccount(mem.MS_TaiKhoan);
-                PhanQuyen permiss = bus.getPermission(acc.MS_PhanQuyen);
+                
                 AccountViewModel viewModal = new AccountViewModel();
                 viewModal.Address = mem.DiaChi;
                 viewModal.Name = mem.HoTen;
                 viewModal.Birthday = mem.NgaySinh;
-                viewModal.DayRegister = acc.NgayDangKy;
-                viewModal.Email = acc.Email;
+               
                 viewModal.Gender = mem.GioiTinh==null?"":(mem.GioiTinh==true?"Nam":"Nữ");
-                viewModal.Permission = permiss.TenQuyen;
-                viewModal.UserName = acc.TenDangNhap;
-                viewModal.ID_Permission = permiss.MaSo;
-                viewModal.ID_Account = acc.MaSo;
+               
+             
                 viewModal.ID_Member = mem.MaSo;
                 result.Add(viewModal);
             }
@@ -68,9 +57,9 @@ namespace Turbo_Phim.Models
         public void ChangePermission(int id_member, int id_pm)
         {
             ThanhVien mem = bus.getMember(id_member);
-            TaiKhoan acc = bus.getAccount(mem.MaSo);
+         
 
-            bus.changePermission(acc.MaSo, id_pm);
+          
         }
 
         public void UpdateAccount(AccountViewModel account)

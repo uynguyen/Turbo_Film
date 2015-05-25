@@ -10,28 +10,12 @@ namespace Business
     {
         private TURBO_PHIMEntities db = new TURBO_PHIMEntities();
 
-        // Thêm một tài khoản mới
-        public bool AddNewAccount(TaiKhoan tk, ThanhVien tv)
-        {
-            
-            try
-            {
-                tk = db.TaiKhoan.Add(tk);
-                tv.MS_TaiKhoan = tk.MaSo;
-                db.ThanhVien.Add(tv);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+      
 
         // Kiểm tra tên đăng nhập có tồn tại hay chưa?
         public bool IsExistAccount(string username)
         {
-            return db.TaiKhoan.Where(e => e.TenDangNhap == username && e.TinhTrang == true).Count() > 0;
+            return db.AspNetUsers.Where(e => e.Email == username).Count() > 0;
         }
 
         // Lấy một số thành viên theo phân trang
@@ -45,9 +29,9 @@ namespace Business
         }
 
         // Lấy thông tin tài khoản của thành viên
-        public TaiKhoan getAccount(int? id)
+        public AspNetUsers getAccount(string id)
         {
-            return db.TaiKhoan.SingleOrDefault(e => e.MaSo == id && e.TinhTrang == true);
+            return db.AspNetUsers.SingleOrDefault(e => e.Id == id);
         }
 
         // Lấy thông tin thành viên
@@ -57,9 +41,9 @@ namespace Business
         }
 
         // Lấy quyền của tài khoản
-        public PhanQuyen getPermission(int? id)
+        public AspNetRoles getPermission(string id)
         {
-            return db.PhanQuyen.SingleOrDefault(e => e.MaSo == id);
+            return db.AspNetRoles.SingleOrDefault(e => e.Id == id);
         }
 
         // Thay đổi quyền của một tài khoản
@@ -67,13 +51,7 @@ namespace Business
         {
             try
             {
-                TaiKhoan tk = getAccount(idAccount);
-                if (tk != null)
-                {
-                    tk.MS_PhanQuyen = idPermission;
-                    db.SaveChanges();
-                    return true;
-                }
+                
             }
             catch (Exception)
             {
@@ -109,9 +87,19 @@ namespace Business
 
 
 
-        public List<PhanQuyen> getAllPermissions()
+
+        public bool AddNewAccount(ThanhVien tv)
         {
-            return db.PhanQuyen.ToList();
+            try
+            {
+                db.ThanhVien.Add(tv);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }           
         }
     }
 }

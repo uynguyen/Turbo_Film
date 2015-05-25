@@ -90,16 +90,10 @@
     </Compile>
     <Compile Include="FilmBus.cs" />
     <Compile Include="Metadata\Phim.cs" />
-    <Compile Include="PhanQuyen.cs">
-      <DependentUpon>Turbo_Phim.tt</DependentUpon>
-    </Compile>
     <Compile Include="Phim.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaiKhoan.cs">
-      <DependentUpon>Turbo_Phim.tt</DependentUpon>
-    </Compile>
     <Compile Include="ThanhVien.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>

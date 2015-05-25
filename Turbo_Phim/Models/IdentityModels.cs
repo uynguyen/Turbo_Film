@@ -21,7 +21,7 @@ namespace Turbo_Phim.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("TURBO_PHIMEntities", throwIfV1Schema: false)
+            : base("IdentityDbContext", throwIfV1Schema: false)
         {
         }
 

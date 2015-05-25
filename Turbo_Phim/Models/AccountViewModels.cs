@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Turbo_Phim.Models
@@ -65,20 +66,44 @@ namespace Turbo_Phim.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage="Vui lòng nhập đúng định dạng email.")]
         [Display(Name = "Email")]
+        [System.Web.Mvc.Remote("doesUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "Email đã được sử dụng! Vui lòng chọn email khác!")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(20, ErrorMessage = "Mật khẩu phải ít nhất 6 kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Nhập lại mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu nhập lại không trùng khớp")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập họ và tên!")]
+        [Display(Name = "Họ và tên")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn giới tính!")]
+        [Display(Name = "Giới tính")]
+        public string Gender
+        {
+            get { return _gender ? "Nam" : "Nữ"; }
+            set { _gender = value == "Nam" ? true : false; }
+        }
+        public bool _gender;
+        [Required(ErrorMessage = "Vui lòng chọn ngày tháng năm sinh!")]
+        [Display(Name = "Ngày tháng năm sinh")]
+        [DataType(DataType.Date, ErrorMessage = "Định dạng ngày tháng không đúng!"),
+        DisplayFormat(DataFormatString = "dd/MM/yyyy",
+            ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> Birthday { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ của bạn!")]
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
     }
 
     public class ResetPasswordViewModel

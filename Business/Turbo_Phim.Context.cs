@@ -38,9 +38,7 @@ namespace Business
         public virtual DbSet<DanhMucNuocSanXuat> DanhMucNuocSanXuat { get; set; }
         public virtual DbSet<DanhMucTheLoai> DanhMucTheLoai { get; set; }
         public virtual DbSet<DanhSachPhimYeuThich> DanhSachPhimYeuThich { get; set; }
-        public virtual DbSet<PhanQuyen> PhanQuyen { get; set; }
         public virtual DbSet<Phim> Phim { get; set; }
-        public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
         public virtual DbSet<ThanhVien> ThanhVien { get; set; }
     }
 }
