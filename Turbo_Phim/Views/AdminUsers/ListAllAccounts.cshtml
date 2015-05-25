@@ -1,7 +1,7 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
 
-@model IPagedList<Turbo_Phim.Models.AccountViewModel>
+@model IPagedList<Turbo_Phim.Models.AdminManageUserViewModel>
 
 @{
     Layout = "~/Views/Shared/_Admin_layout.cshtml";
@@ -99,13 +99,9 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().ID_Member, ViewData).DisplayName, "ListAllAccounts",
+                        @Html.ActionLink("#", "ListAllAccounts",
                                  new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                    <th>
-                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().UserName, ViewData).DisplayName, "ListAllAccounts",
-                                          new { sortOrder = ViewBag.UserNameSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
+                    </th>                  
                     <th>
                         @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Email, ViewData).DisplayName, "ListAllAccounts",
                                  new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -123,7 +119,7 @@
                                          new { sortOrder = ViewBag.BirthdaySortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Permission, ViewData).DisplayName, "ListAllAccounts",
+                        @Html.ActionLink(ModelMetadata.FromLambdaExpression(m => m.First().Role, ViewData).DisplayName, "ListAllAccounts",
                                  new { sortOrder = ViewBag.PermissionSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
@@ -137,13 +133,13 @@
                 {
                     <tr>
                         <td>@user.ID_Member</td>
-                        <td>@user.UserName</td>
+                       
                         <td>@user.Email</td>
                         <td>@user.Name</td>
                         <td>@user.Gender</td>
                         <td>@(user.Birthday != null ? user.Birthday.Value.ToShortDateString() : "")</td>
                         <td>
-                            @Html.DropDownListFor(m => m.First().ID_Permission, user.getPermissions(),
+                            @Html.DropDownListFor(m => m.First().ID_Role, user.getRoles(),
                     new { id = "permission", @class = "selectpicker", data_id = user.ID_Member })
                         </td>
                         <td>@(user.DayRegister != null ? user.DayRegister.Value.ToShortDateString() : "")</td>

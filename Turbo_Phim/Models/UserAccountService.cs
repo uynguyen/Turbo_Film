@@ -54,12 +54,11 @@ namespace Turbo_Phim.Models
             return result;
         }
 
-        public void ChangeRole(int id_member, int id_pm)
+        public void ChangeRole(int id_member, string id_pm)
         {
             ThanhVien mem = bus.getMember(id_member);
-         
 
-          
+            bus.changePermission(mem.MS_TaiKhoan, id_pm);          
         }
 
         public void UpdateAccount(AdminManageUserViewModel account)

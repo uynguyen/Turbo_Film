@@ -53,12 +53,12 @@ namespace Turbo_Phim.Controllers
 
             Accounts = uas.Sort(Accounts, sortOrder);
 
-            return View(Accounts.ToPagedList(page ?? 1, 2));
+            return View(Accounts.ToPagedList(page ?? 1, 3));
         }
 
 
         [HttpPost]
-        public ActionResult ChangePermission(int id_member, int id_permission)
+        public ActionResult ChangePermission(int id_member, string id_permission)
         {
             uas.ChangeRole(id_member, id_permission);
             return View("ListAllAccounts");

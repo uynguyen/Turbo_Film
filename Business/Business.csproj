@@ -58,6 +58,9 @@
     <Compile Include="AspNetUserLogins.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUserRoles.cs">
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetUsers.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>

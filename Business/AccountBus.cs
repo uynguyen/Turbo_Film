@@ -116,13 +116,26 @@ namespace Business
 
         public string getRoleID(ThanhVien mem)
         {
-            var user = db.AspNetUsers.SingleOrDefault(e => e.Id == mem.MS_TaiKhoan);
+            var userrole = db.AspNetUserRoles.SingleOrDefault(e => e.UserId == mem.MS_TaiKhoan);
+            if (userrole != null)
+                return userrole.RoleId;
             return "";
         }
 
         public string getUserID(ThanhVien mem)
         {
-            throw new NotImplementedException();
+            return mem.MS_TaiKhoan;
+        }
+
+        public void changePermission(string p, string id_pm)
+        {
+            AspNetUserRoles r = new AspNetUserRoles();
+            r.RoleId = id_pm;
+            r.UserId = p;
+            r.Id = "nope";
+            db.AspNetUserRoles.Add(r);
+            db.SaveChanges();
+
         }
     }
 }

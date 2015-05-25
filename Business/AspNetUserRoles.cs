@@ -12,16 +12,13 @@ namespace Business
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class AspNetUserRoles
     {
-        public AspNetRoles()
-        {
-            this.AspNetUserRoles = new HashSet<AspNetUserRoles>();
-        }
-    
+        public string UserId { get; set; }
+        public string RoleId { get; set; }
         public string Id { get; set; }
-        public string Name { get; set; }
     
-        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
