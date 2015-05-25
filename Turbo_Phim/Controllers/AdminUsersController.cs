@@ -14,14 +14,14 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Turbo_Phim.Controllers
 {
-     [Authorize(Roles = "Administrators")]
+     [Authorize(Roles = "Administrator")]
     public class AdminUsersController : Controller
     {
         UserAccountService uas = new UserAccountService();
         // GET: AdminUsers
         public ActionResult Index()
         {
-            return View("ListAllAccounts", uas.getSomeAccountView(0, 0).ToPagedList(1, 6));
+            return View("ListAllAccounts", uas.getAdminManageUserViewModels(0, 0).ToPagedList(1, 6));
         }
 
         public ActionResult ListAllAccounts(string sortOrder, string currentFilter, string SearchString, string SearchField, int? page)
@@ -47,7 +47,7 @@ namespace Turbo_Phim.Controllers
 
             ViewBag.CurrentFilter = SearchString;
 
-            var Accounts = uas.getSomeAccountView(0, 0);
+            var Accounts = uas.getAdminManageUserViewModels(0, 0);
 
             Accounts = uas.Filter(Accounts, SearchField, SearchString);
 
@@ -60,7 +60,7 @@ namespace Turbo_Phim.Controllers
         [HttpPost]
         public ActionResult ChangePermission(int id_member, int id_permission)
         {
-            uas.ChangePermission(id_member, id_permission);
+            uas.ChangeRole(id_member, id_permission);
             return View("ListAllAccounts");
         }
 

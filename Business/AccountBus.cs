@@ -101,5 +101,28 @@ namespace Business
                 return false;
             }           
         }
+
+        public List<AspNetRoles> getAllRoles()
+        {
+            return db.AspNetRoles.ToList();
+        }
+
+        public string getEmail(ThanhVien mem)
+        {
+            var user = db.AspNetUsers.SingleOrDefault(e => e.Id == mem.MS_TaiKhoan);
+            if (user != null) return user.Email;
+            return "";
+        }
+
+        public string getRoleID(ThanhVien mem)
+        {
+            var user = db.AspNetUsers.SingleOrDefault(e => e.Id == mem.MS_TaiKhoan);
+            return "";
+        }
+
+        public string getUserID(ThanhVien mem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

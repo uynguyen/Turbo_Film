@@ -1,4 +1,6 @@
-﻿<div class="navbar navbar-default" role="navigation">
+﻿@using Microsoft.AspNet.Identity
+
+<div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -11,16 +13,19 @@
 
     <div class="navbar-collapse collapse">
         <ul id="main-menu" class="nav navbar-nav navbar-right">
-            <li class="hidden-xs">
-                <a href='@Url.Action("Index", "Home")' id="logout">
-                    <span class="glyphicon glyphicon-log-out padding-right-small"></span> Log out
-                </a>
-            </li>
-            <li class="hidden-xs">
-                <a href="#">
-                    <span class="glyphicon glyphicon-user padding-right-small"></span> Vin Le
-                </a>
-            </li>
+           
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                    @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    </ul>
+                    }         
         </ul>
     </div>
 </div>

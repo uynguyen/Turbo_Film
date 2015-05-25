@@ -32,21 +32,21 @@ namespace Turbo_Phim.Models
 
 
         // Lấy một số tài khoản
-        public List<AccountViewModel> getSomeAccountView(int page, int AccPerPage)
+        public List<AdminManageUserViewModel> getAdminManageUserViewModels(int page, int AccPerPage)
         {
-            List<AccountViewModel> result = new List<AccountViewModel>();
+            List<AdminManageUserViewModel> result = new List<AdminManageUserViewModel>();
             var members = bus.getSomeMembers(page, AccPerPage);
             foreach (ThanhVien mem in members)
-            {
-                
-                AccountViewModel viewModal = new AccountViewModel();
+            {              
+                AdminManageUserViewModel viewModal = new AdminManageUserViewModel();
                 viewModal.Address = mem.DiaChi;
                 viewModal.Name = mem.HoTen;
                 viewModal.Birthday = mem.NgaySinh;
-               
-                viewModal.Gender = mem.GioiTinh==null?"":(mem.GioiTinh==true?"Nam":"Nữ");
-               
-             
+                viewModal.Email = bus.getEmail(mem);
+                viewModal.DayRegister = mem.NgayDangKy;
+                viewModal.ID = bus.getUserID(mem);
+                viewModal.ID_Role = bus.getRoleID(mem);
+                viewModal._gender = mem.GioiTinh ?? true;            
                 viewModal.ID_Member = mem.MaSo;
                 result.Add(viewModal);
             }
@@ -54,7 +54,7 @@ namespace Turbo_Phim.Models
             return result;
         }
 
-        public void ChangePermission(int id_member, int id_pm)
+        public void ChangeRole(int id_member, int id_pm)
         {
             ThanhVien mem = bus.getMember(id_member);
          
@@ -62,7 +62,7 @@ namespace Turbo_Phim.Models
           
         }
 
-        public void UpdateAccount(AccountViewModel account)
+        public void UpdateAccount(AdminManageUserViewModel account)
         {
             ThanhVien mem = new ThanhVien();
             mem.MaSo = account.ID_Member;
@@ -73,13 +73,13 @@ namespace Turbo_Phim.Models
             bus.updateProfile(account.ID_Member, mem);
         }
 
-        public List<AccountViewModel> Filter(List<AccountViewModel> Accounts, string SearchField, string SearchString)
+        public List<AdminManageUserViewModel> Filter(List<AdminManageUserViewModel> Accounts, string SearchField, string SearchString)
         {
             if (!String.IsNullOrEmpty(SearchString))
             {
                 switch (SearchField)
                 {
-                    case "Tên đăng nhập": Accounts = Accounts.Where(s => s.UserName.Contains(SearchString)).ToList(); break;
+                    case "Tên đăng nhập": Accounts = Accounts.Where(s => s.Email.Contains(SearchString)).ToList(); break;
                     case "Email": Accounts = Accounts.Where(s => s.Email.Contains(SearchString)).ToList(); break;
                     case "Họ và tên": Accounts = Accounts.Where(s => s.Name.Contains(SearchString)).ToList(); break;
                     case "Ngày đăng ký": Accounts = Accounts.Where(s => s.DayRegister.Value
@@ -91,13 +91,13 @@ namespace Turbo_Phim.Models
             return Accounts;
         }
 
-        public List<AccountViewModel> Sort(List<AccountViewModel> Accounts, string sortOrder)
+        public List<AdminManageUserViewModel> Sort(List<AdminManageUserViewModel> Accounts, string sortOrder)
         {
             switch (sortOrder)
             {
                 case "ID_desc": Accounts = Accounts.OrderByDescending(c => c.ID_Member).ToList(); break;
-                case "UserName": Accounts = Accounts.OrderBy(c => c.UserName).ToList(); break;
-                case "UserName_desc": Accounts = Accounts.OrderByDescending(c => c.UserName).ToList(); break;
+                case "UserName": Accounts = Accounts.OrderBy(c => c.Email).ToList(); break;
+                case "UserName_desc": Accounts = Accounts.OrderByDescending(c => c.Email).ToList(); break;
                 case "Email": Accounts = Accounts.OrderBy(c => c.Email).ToList(); break;
                 case "Email_desc": Accounts = Accounts.OrderByDescending(c => c.Email).ToList(); break;
                 case "Name": Accounts = Accounts.OrderBy(c => c.Name).ToList(); break;
@@ -105,9 +105,9 @@ namespace Turbo_Phim.Models
                 case "Sex": Accounts = Accounts.OrderBy(c => c.Gender).ToList(); break;
                 case "Sex_desc": Accounts = Accounts.OrderByDescending(c => c.Gender).ToList(); break;
                 case "Birthday": Accounts = Accounts.OrderBy(c => c.Birthday).ToList(); break;
-                case "Birthday_desc": Accounts = Accounts.OrderByDescending(c => c.Permission).ToList(); break;
+                case "Birthday_desc": Accounts = Accounts.OrderByDescending(c => c.Role).ToList(); break;
                 case "Permission": Accounts = Accounts.OrderBy(c => c.Birthday).ToList(); break;
-                case "Permission_desc": Accounts = Accounts.OrderByDescending(c => c.Permission).ToList(); break;
+                case "Permission_desc": Accounts = Accounts.OrderByDescending(c => c.Role).ToList(); break;
                 case "DayRegister": Accounts = Accounts.OrderBy(c => c.DayRegister).ToList(); break;
                 case "DayRegister_desc": Accounts = Accounts.OrderByDescending(c => c.DayRegister).ToList(); break;
 

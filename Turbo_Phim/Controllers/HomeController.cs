@@ -12,7 +12,11 @@ namespace Turbo_Phim.Controllers
 
         public ActionResult Index()
         {
-
+            if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Administrator"))
+                return RedirectToAction("Index", "AdminMain");
+            }
             ViewBag.HomeStatus = "active";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "inactive";
