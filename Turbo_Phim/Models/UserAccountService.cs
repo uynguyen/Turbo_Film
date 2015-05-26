@@ -19,6 +19,7 @@ namespace Turbo_Phim.Models
             tv.NgaySinh = account.Birthday;
             tv.MS_TaiKhoan = user.Id;
             tv.TinhTrang = true;
+            tv.GioiTinh = account.IsMale;
             tv.NgayDangKy = DateTime.Today;
             bus.AddNewAccount(tv);
         }
@@ -54,11 +55,11 @@ namespace Turbo_Phim.Models
             return result;
         }
 
-        public void ChangeRole(int id_member, string id_pm)
+        public bool ChangeRole(int id_member, string id_pm)
         {
             ThanhVien mem = bus.getMember(id_member);
 
-            bus.changePermission(mem.MS_TaiKhoan, id_pm);          
+            return bus.changePermission(mem.MS_TaiKhoan, id_pm);          
         }
 
 

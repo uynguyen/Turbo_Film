@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Turbo_Phim.Controllers
 {
+    [Authorize(Roles="Administrator")]
     public class AdminMainController : Controller
     {
         // GET: AdminMain

@@ -60,8 +60,10 @@ namespace Turbo_Phim.Controllers
         [HttpPost]
         public ActionResult ChangePermission(int id_member, string id_permission)
         {
-            uas.ChangeRole(id_member, id_permission);
-            return View("ListAllAccounts");
+            if (uas.ChangeRole(id_member, id_permission))
+                return Content("Cấp quyền thành công!");
+            else
+                return Content("Cấp quyền thất bại!");
         }
 
 
