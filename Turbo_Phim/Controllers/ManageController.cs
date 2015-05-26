@@ -75,14 +75,14 @@ namespace Turbo_Phim.Controllers
             return View(model);
         }
 
-
         public  ActionResult UpdateProfile()
         {
             var profilemodal = uas.GetUpdateProfileViewModal(User.Identity.GetUserId());
-            return PartialView(profilemodal);
+            return View(profilemodal);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateProfile(UpdateProfileViewModal model)
         {
             if (ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace Turbo_Phim.Controllers
                 uas.UpdateAccount(id, model);
                 return RedirectToAction("Index", "Home");
             }
-            return PartialView(model);
+            return View(model);
         }
 
         //
