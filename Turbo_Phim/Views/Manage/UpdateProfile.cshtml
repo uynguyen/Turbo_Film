@@ -4,79 +4,79 @@
 @{
     ViewBag.Title = User.Identity.Name;
     Layout = null;
-
+    
 }
+<body class="bg-dark">
 
 
-
-
-
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/jquery")
-<br />
-<br />
-<br />
-<br />
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h2> Thông tin cá nhân</h2>
-            <br />
-            <script>
-                $(document).ready(function () {
-                    $(function () {
-                        $("#datepicker").datepicker({ dateFormat: 'dd/mm/yyyy' });
-                        
-                    });
-                });
-            </script>
-            @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary()
-                <div class="form-group">
-                    @Html.Label("Email:")
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = true })
-                    @Html.ValidationMessageFor(m => m.Email)
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Họ và tên:")
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Name)
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Giới tính:") <br />
-                    @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) Nam
-                    @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) Nữ
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Ngày sinh:")
-                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
-                    @Html.ValidationMessageFor(m => m.Birthday)
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Địa chỉ:")
-                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Address)
-                    <span class="help-block"></span>
-                </div>
-                <input type="submit" class="btn btn-success btn-block" value="Cập nhật">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h2> Thông tin cá nhân</h2>
                 <br />
-                @Html.ActionLink("Về trang chủ", "Index", "Home")
-            }
+                <script>
+                    $(document).ready(function () {
+                        $(function () {
+                            $("#datepicker").datepicker({ dateFormat: 'dd/mm/yyyy' });
+
+                        });
+                    });
+                </script>
+                @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        @Html.Label("Email:")
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(m => m.Email)
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Họ và tên:")
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name)
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Giới tính:") <br />
+                        @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) <label> Name </label>
+                        @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) <label>Nữ</label>
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Ngày sinh:")
+                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
+                        @Html.ValidationMessageFor(m => m.Birthday)
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Địa chỉ:")
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Address)
+                        <span class="help-block"></span>
+                    </div>
+                    <input type="submit" class="btn btn-success btn-block" value="Cập nhật">
+                    <br />
+                    @Html.ActionLink("Về trang chủ", "Index", "Home")
+                }
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>
