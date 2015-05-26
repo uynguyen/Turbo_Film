@@ -62,18 +62,17 @@ namespace Business
         }
 
         // Cập nhật thông tin tài khoản
-        public bool updateProfile(int idMember, ThanhVien member)
+        public bool updateProfile(string idUser, ThanhVien member)
         {
             try
             {
-                ThanhVien mem = getMember(idMember);
+                ThanhVien mem = db.ThanhVien.SingleOrDefault(e => e.MS_TaiKhoan == idUser);
                 if (mem != null)
                 {
                     mem.HoTen = member.HoTen;
                     mem.NgaySinh = member.NgaySinh;
                     mem.GioiTinh = member.GioiTinh;
                     mem.DiaChi = member.DiaChi;
-
                     db.SaveChanges();
                     return true;
                 }
@@ -136,6 +135,11 @@ namespace Business
             db.AspNetUserRoles.Add(r);
             db.SaveChanges();
 
+        }
+
+        public ThanhVien getMemberFromUserID(string id)
+        {
+            return db.ThanhVien.SingleOrDefault(e => e.MS_TaiKhoan == id);
         }
     }
 }

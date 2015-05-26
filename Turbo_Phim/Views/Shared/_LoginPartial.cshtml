@@ -11,7 +11,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>@User.Identity.GetUserName()</b> <span class="caret"></span></a>
                 <ul id="login-dp" class="dropdown-menu">
                     <li>
-                        @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        <a href="#" data-toggle="modal" data-target="#updateprofile">Thông tin cá nhân</a>
+
                     </li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
                 </ul>
@@ -32,7 +33,7 @@ else
 
  <!-- Modal -->
 <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div id="login-overlay" class="modal-dialog">
+    <div id="login-overlay" class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
@@ -53,3 +54,23 @@ else
 
 
 
+ <!-- Modal -->
+<div class="modal fadesm" id="updateprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="login-overlay" class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Thông tin cá nhân</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="well">
+                            @Html.Action("UpdateProfile", "Manage")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

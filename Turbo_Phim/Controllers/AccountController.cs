@@ -87,10 +87,8 @@ namespace Turbo_Phim.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
-                    {                  
-                        return RedirectToLocal(returnUrl);
-                    }
+                case SignInStatus.Success:                                  
+                        return RedirectToLocal(returnUrl);                  
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -164,8 +162,7 @@ namespace Turbo_Phim.Controllers
             {              
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             
-                try
-                {
+     
                    var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
@@ -182,16 +179,12 @@ namespace Turbo_Phim.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                     AddErrors(result);
-                }
-                catch (System.Exception)
-                {
-                   
-                }
-                            
+                           
             }
 
             // If we got this far, something failed, redisplay form
             return PartialView(model);
+            
         }
 
         //

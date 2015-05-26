@@ -1,0 +1,40 @@
+﻿@model Turbo_Phim.Models.UpdateProfileViewModal
+
+
+@{
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Không thể tạo tài khoản. Vui lòng kiểm tra lại thông tin đăng ký!")
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new { @class = "control-label", @placeholder = Model.Email, @readonly = true })
+        @Html.ValidationMessageFor(m => m.Email)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Name, new { @class = "control-label", @placeholder = Model.Name })
+        @Html.ValidationMessageFor(m => m.Name)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) Nam
+        @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) Nữ
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Birthday.Value.ToShortDateString(), new { @class = "control-label", @placeholder = Model.Birthday == null?"":Model.Birthday.Value.ToShortDateString()})
+        @Html.ValidationMessageFor(m => m.Birthday)
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Address, new { @class = "control-label", @placeholder = Model.Address })
+        @Html.ValidationMessageFor(m => m.Address)
+        <span class="help-block"></span>
+    </div>
+    <input type="submit" class="btn btn-success btn-block" value="Cập nhật">
+}
+

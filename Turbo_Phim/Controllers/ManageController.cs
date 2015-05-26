@@ -15,7 +15,7 @@ namespace Turbo_Phim.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private UserAccountService uas = new UserAccountService();
         public ManageController()
         {
         }
@@ -73,6 +73,25 @@ namespace Turbo_Phim.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+
+        public  ActionResult UpdateProfile()
+        {
+            var profilemodal = uas.GetUpdateProfileViewModal(User.Identity.GetUserId());
+            return PartialView(profilemodal);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateProfile(UpdateProfileViewModal model)
+        {
+            if (ModelState.IsValid)
+            {
+                var id = User.Identity.GetUserId();
+                uas.UpdateAccount(id, model);
+                return RedirectToAction("Index", "Home");
+            }
+            return PartialView(model);
         }
 
         //

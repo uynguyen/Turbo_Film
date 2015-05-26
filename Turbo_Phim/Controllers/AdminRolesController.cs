@@ -16,15 +16,15 @@ namespace Turbo_Phim.Controllers
         // GET: AdminRoles
         public ActionResult Index()
         {
-            return View(RoleManager.Roles);
+            return View();
         }
 
-        private AppRoleManager RoleManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
-            }
-        }
+        //private AppRoleManager RoleManager
+        //{
+        //    get
+        //    {
+        //        return HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
+        //    }
+        //}
     }
 }

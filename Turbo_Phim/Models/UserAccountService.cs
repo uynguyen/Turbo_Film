@@ -61,16 +61,6 @@ namespace Turbo_Phim.Models
             bus.changePermission(mem.MS_TaiKhoan, id_pm);          
         }
 
-        public void UpdateAccount(AdminManageUserViewModel account)
-        {
-            ThanhVien mem = new ThanhVien();
-            mem.MaSo = account.ID_Member;
-            mem.HoTen = account.Name;
-            mem.GioiTinh = account.Gender=="Nam";
-            mem.NgaySinh = account.Birthday;
-            mem.DiaChi = account.Address;
-            bus.updateProfile(account.ID_Member, mem);
-        }
 
         public List<AdminManageUserViewModel> Filter(List<AdminManageUserViewModel> Accounts, string SearchField, string SearchString)
         {
@@ -113,6 +103,29 @@ namespace Turbo_Phim.Models
                 default: Accounts = Accounts.OrderBy(c => c.ID_Member).ToList(); break;
             }
             return Accounts;
+        }
+
+        public void UpdateAccount(string id, UpdateProfileViewModal model)
+        {
+            ThanhVien tv = new ThanhVien();
+            tv.HoTen = model.Name;
+            tv.NgaySinh = model.Birthday;
+            tv.GioiTinh = model.IsMale;
+            tv.DiaChi = model.Address;
+            bus.updateProfile(id, tv);
+        }
+
+        public UpdateProfileViewModal GetUpdateProfileViewModal(string userID)
+        {
+            var tv = bus.getMemberFromUserID(userID);
+            UpdateProfileViewModal model = new UpdateProfileViewModal();
+            model.Email = bus.getAccount(userID).Email;
+            model.IsMale = tv.GioiTinh ?? true;
+            model.Name = tv.HoTen;
+            model.Birthday = tv.NgaySinh;
+            model.Address = tv.DiaChi;
+
+            return model;
         }
     }
 }
