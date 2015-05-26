@@ -68,7 +68,7 @@ namespace Turbo_Phim.Models
         [Required]
         [EmailAddress(ErrorMessage="Vui lòng nhập đúng định dạng email.")]
         [Display(Name = "Email")]
-        [System.Web.Mvc.Remote("doesUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "Email đã được sử dụng! Vui lòng chọn email khác!")]
+        //[System.Web.Mvc.Remote("doesUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "Email đã được sử dụng! Vui lòng chọn email khác!")]
         public string Email { get; set; }
 
         [Required]
@@ -82,26 +82,23 @@ namespace Turbo_Phim.Models
         [Compare("Password", ErrorMessage = "Mật khẩu nhập lại không trùng khớp")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập họ và tên!")]
         [Display(Name = "Họ và tên")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn giới tính!")]
         [Display(Name = "Giới tính")]
         public string Gender
         {
-            get { return _gender ? "Nam" : "Nữ"; }
-            set { _gender = value == "Nam" ? true : false; }
+            get { return IsMale ? "Nam" : "Nữ"; }
+            set { IsMale = value == "Nam" ? true : false; }
         }
-        public bool _gender;
-        [Required(ErrorMessage = "Vui lòng chọn ngày tháng năm sinh!")]
+        public bool IsMale { get; set; }
+       
         [Display(Name = "Ngày tháng năm sinh")]
         [DataType(DataType.Date, ErrorMessage = "Định dạng ngày tháng không đúng!"),
         DisplayFormat(DataFormatString = "dd/MM/yyyy",
             ApplyFormatInEditMode = true)]
         public Nullable<DateTime> Birthday { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập địa chỉ của bạn!")]
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
     }

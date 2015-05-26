@@ -87,10 +87,8 @@ namespace Turbo_Phim.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-
                 case SignInStatus.Success:
-                    {
-                       
+                    {                  
                         return RedirectToLocal(returnUrl);
                     }
                 case SignInStatus.LockedOut:
@@ -152,7 +150,7 @@ namespace Turbo_Phim.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return PartialView(new RegisterViewModel());
+            return PartialView(new RegisterViewModel { IsMale = true });
         }
 
         //
