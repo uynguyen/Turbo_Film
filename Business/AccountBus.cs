@@ -84,7 +84,10 @@ namespace Business
             return false;
         }
 
-
+        private string getRoleID(string name)
+        {
+            return db.AspNetRoles.SingleOrDefault(e => e.Name == name).Id;
+        }
 
 
         public bool AddNewAccount(ThanhVien tv)
@@ -92,6 +95,10 @@ namespace Business
             try
             {
                 db.ThanhVien.Add(tv);
+                AspNetUserRoles r = new AspNetUserRoles();
+                r.RoleId = getRoleID("Member");
+                r.UserId = tv.MS_TaiKhoan;
+                db.AspNetUserRoles.Add(r);
                 db.SaveChanges();
                 return true;
             }
@@ -126,15 +133,31 @@ namespace Business
             return mem.MS_TaiKhoan;
         }
 
-        public void changePermission(string p, string id_pm)
+        public bool changePermission(string p, string id_pm)
         {
-            AspNetUserRoles r = new AspNetUserRoles();
-            r.RoleId = id_pm;
-            r.UserId = p;
-            r.Id = "nope";
-            db.AspNetUserRoles.Add(r);
-            db.SaveChanges();
-
+            AspNetUserRoles r = db.AspNetUserRoles.SingleOrDefault(e => e.UserId == p);
+            try
+            {
+                if (r != null)
+            {
+                r.RoleId = id_pm;                   
+                db.SaveChanges();
+            }
+            else
+            {
+                r = new AspNetUserRoles();
+                r.UserId = p;
+                r.RoleId = id_pm;
+                db.AspNetUserRoles.Add(r);
+                db.SaveChanges();
+            }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+           
         }
 
         public ThanhVien getMemberFromUserID(string id)
