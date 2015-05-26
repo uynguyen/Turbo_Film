@@ -58,16 +58,17 @@ namespace Turbo_Phim.Controllers
 
 
         [HttpPost]
-        public ActionResult ChangePermission(int id_member, string id_permission)
+        public async Task<ActionResult> ChangePermission(int id_member, string id_permission)
         {
-            
-            if (uas.ChangeRole(id_member, id_permission))
+            Business.AccountBus bus = new Business.AccountBus();
+            ApplicationUser user = UserManager.FindById(bus.getUserID(id_member));
+           var result = await UserManager.RemoveFromRolesAsync(user.Id, bus.getAllRoleName().ToArray());
+           result = await UserManager.AddToRoleAsync(user.Id, bus.getAllRoles().SingleOrDefault(e => e.Id == id_permission).Name);
+            if (result.Succeeded)
                 return Content("Cấp quyền thành công!");
             else
                 return Content("Cấp quyền thất bại!");
         }
-
-
 
         public ActionResult Create()
         {

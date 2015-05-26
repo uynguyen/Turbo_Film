@@ -95,7 +95,7 @@ namespace Turbo_Phim.Models
        
         [Display(Name = "Ngày tháng năm sinh")]
         [DataType(DataType.Date, ErrorMessage = "Định dạng ngày tháng không đúng!"),
-        DisplayFormat(DataFormatString = "dd/MM/yyyy",
+        DisplayFormat(DataFormatString = "MM/dd/yyyy",
             ApplyFormatInEditMode = true)]
         public Nullable<DateTime> Birthday { get; set; }
 

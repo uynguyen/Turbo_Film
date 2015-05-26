@@ -26,6 +26,13 @@ namespace Turbo_Phim.Controllers
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
+
+        public ApplicationRoleManager RoleManager
+        {
+            get { return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>(); }
+            set { _roleManager = value; }
+        }
 
         public AccountController()
         {
@@ -164,10 +171,13 @@ namespace Turbo_Phim.Controllers
             
      
                    var result = await UserManager.CreateAsync(user, model.Password);
+                    
+               
                     if (result.Succeeded)
                     {
+                        result = await UserManager.AddToRoleAsync(user.Id, "Member");
                         uas.AddNewAccount(user, model);
-
+                       
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

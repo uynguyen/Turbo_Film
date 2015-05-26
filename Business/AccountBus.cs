@@ -140,7 +140,9 @@ namespace Business
             {
                 if (r != null)
             {
-               r.RoleId = id_pm;                   
+                   
+               r.RoleId = id_pm;    
+                   
                 db.SaveChanges();
             }
             else
@@ -163,6 +165,24 @@ namespace Business
         public ThanhVien getMemberFromUserID(string id)
         {
             return db.ThanhVien.SingleOrDefault(e => e.MS_TaiKhoan == id);
+        }
+
+        public string getUserID(int id_member)
+        {
+            var mem = db.ThanhVien.SingleOrDefault(e => e.MaSo == id_member);
+            if (mem != null)
+                return mem.MS_TaiKhoan;
+            return "";
+        }
+
+        public List<string> getAllRoleName()
+        {
+            List<string> roleNames = new List<string>();
+            foreach (AspNetRoles r in getAllRoles())
+            {
+                roleNames.Add(r.Name);
+            }
+            return roleNames;
         }
     }
 }
