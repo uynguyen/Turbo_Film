@@ -6,6 +6,17 @@
     Layout = null;
    
 }
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    });
+</script>
+
+
+
 @Styles.Render("~/Content/css")
 <br />
 <br />
@@ -40,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     @Html.Label("Ngày sinh:")
-                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
                     @Html.ValidationMessageFor(m => m.Birthday)
                     <span class="help-block"></span>
                 </div>
@@ -59,6 +70,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

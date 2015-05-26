@@ -203,6 +203,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\isotope.css" />
+    <Content Include="Content\jqueryui.css" />
     <Content Include="Content\LoginDropdownForm.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
