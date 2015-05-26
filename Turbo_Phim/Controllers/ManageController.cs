@@ -89,7 +89,6 @@ namespace Turbo_Phim.Controllers
             {
                 var id = User.Identity.GetUserId();
                 uas.UpdateAccount(id, model);
-                return RedirectToAction("Index", "Home");
             }
             return View(model);
         }

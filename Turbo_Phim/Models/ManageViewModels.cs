@@ -93,16 +93,6 @@ namespace Turbo_Phim.Models
         //[System.Web.Mvc.Remote("doesUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "Email đã được sử dụng! Vui lòng chọn email khác!")]
         public string Email { get; set; }
 
-        //[Required]
-        //[StringLength(20, ErrorMessage = "Mật khẩu phải ít nhất 6 kí tự.", MinimumLength = 6)]
-        //[DataType(DataType.Password)]
-        //[Display(Name = "Mật khẩu")]
-        //public string Password { get; set; }
-
-        //[DataType(DataType.Password)]
-        //[Display(Name = "Nhập lại mật khẩu")]
-        //[Compare("Password", ErrorMessage = "Mật khẩu nhập lại không trùng khớp")]
-        //public string ConfirmPassword { get; set; }
 
         [Display(Name = "Họ và tên")]
         public string Name { get; set; }
