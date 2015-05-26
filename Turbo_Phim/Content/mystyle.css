@@ -2341,7 +2341,7 @@ font-weight: 700;
     background-color:#323233;
 }
 
-.bg-dark h2, label{
+.bg-dark h2, .bg-dark label{
     color:white;
 }
 
