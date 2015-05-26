@@ -2335,3 +2335,17 @@ font-weight: 700;
     margin-left: 10px;
 
 }
+
+
+.bg-dark{
+    background-color:#323233;
+}
+
+.bg-dark h2, .bg-dark label{
+    color:white;
+}
+
+.bg-dark input[type="radio"]{
+    width: 5%;
+    margin-left: 10%;
+}

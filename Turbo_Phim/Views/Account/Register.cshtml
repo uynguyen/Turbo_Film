@@ -4,28 +4,36 @@
     ViewBag.Title = "Register";
     Layout = null;
 }
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+    });
+</script>
+
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-vertical", role = "form"}))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("Không thể tạo tài khoản. Vui lòng kiểm tra lại thông tin đăng ký!")
     <div class="form-group">     
-        @Html.TextBoxFor(m => m.Email, new { @class="control-label", @placeholder="Email"})
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
         @Html.ValidationMessageFor(m => m.Email)
         <span class="help-block"></span>
     </div>
     <div class="form-group">       
-        @Html.PasswordFor(m => m.Password, new { @class = "control-label", @placeholder = "Mật khẩu" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
         @Html.ValidationMessageFor(m => m.Password)
         <span class="help-block"></span>
     </div>
     <div class="form-group">      
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "control-label", @placeholder = "Nhập lại mật khẩu" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập lại mật khẩu" })
         @Html.ValidationMessageFor(m => m.ConfirmPassword)
         <span class="help-block"></span>
     </div>
     <div class="form-group">
-        @Html.TextBoxFor(m => m.Name, new { @class = "control-label", @placeholder = "Họ và tên" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Họ và tên" })
         @Html.ValidationMessageFor(m => m.Name)
         <span class="help-block"></span>
     </div>
@@ -34,13 +42,13 @@
         @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) Nữ
         <span class="help-block"></span>
     </div>
-    <div class="form-group">
-        @Html.TextBoxFor(m => m.Birthday, new { @class = "control-label", @placeholder = "Ngày sinh" })
+    <div class="form-group">         
+        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @placeholder = "Ngày sinh" , id="datepicker"})
         @Html.ValidationMessageFor(m => m.Birthday)
         <span class="help-block"></span>
     </div>
     <div class="form-group">
-        @Html.TextBoxFor(m => m.Address, new { @class = "control-label", @placeholder = "Địa chỉ" })
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
         @Html.ValidationMessageFor(m => m.Address)
         <span class="help-block"></span>
     </div>
