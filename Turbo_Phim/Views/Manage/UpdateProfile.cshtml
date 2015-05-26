@@ -4,9 +4,15 @@
 @{
     ViewBag.Title = User.Identity.Name;
     Layout = null;
-   
+
 }
+
+
+
+
+
 @Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/jquery")
 <br />
 <br />
 <br />
@@ -16,6 +22,14 @@
         <div class="col-md-4 col-md-offset-4">
             <h2> Thông tin cá nhân</h2>
             <br />
+            <script>
+                $(document).ready(function () {
+                    $(function () {
+                        $("#datepicker").datepicker({ dateFormat: 'dd/mm/yyyy' });
+                        
+                    });
+                });
+            </script>
             @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
             {
                 @Html.AntiForgeryToken()
@@ -33,14 +47,14 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                   @Html.Label("Giới tính:") <br />
+                    @Html.Label("Giới tính:") <br />
                     @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) Nam
                     @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) Nữ
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
                     @Html.Label("Ngày sinh:")
-                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
                     @Html.ValidationMessageFor(m => m.Birthday)
                     <span class="help-block"></span>
                 </div>
@@ -59,6 +73,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

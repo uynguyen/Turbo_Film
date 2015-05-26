@@ -60,6 +60,7 @@ namespace Turbo_Phim.Controllers
         [HttpPost]
         public ActionResult ChangePermission(int id_member, string id_permission)
         {
+            
             if (uas.ChangeRole(id_member, id_permission))
                 return Content("Cấp quyền thành công!");
             else
