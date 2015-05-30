@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Models;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers
 {

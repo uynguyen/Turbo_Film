@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Turbo_Phim.Models;
+﻿using System.Web.Mvc;
+using Turbo_Phim.Services;
 
-namespace Turbo_Phim.Controllers
-{
-    public class HomeController : Controller
-    {
-
+namespace Turbo_Phim.Controllers {
+    public class HomeController : Controller {
         public ActionResult Index()
         {
             if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("Administrator"))
-                return RedirectToAction("Index", "AdminMain");
+                if (User.IsInRole("Admin"))
+                    return RedirectToAction("Index", "AdminMain");
             }
             ViewBag.HomeStatus = "active";
             ViewBag.VideoStatus = "inactive";
@@ -24,9 +17,16 @@ namespace Turbo_Phim.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult About() {
+            ViewBag.Message = "Your app description page.";
 
-        public ActionResult Contact()
-        {
+            return View();
+        }
+
+        public ActionResult Contact() {
+            ViewBag.Message = "Your contact page.";
+
             return View();
         }
 
@@ -38,7 +38,7 @@ namespace Turbo_Phim.Controllers
 
         public ActionResult Country()
         {
-        
+
             CountryService country = new CountryService();
 
             return View(country.getAllCountry());

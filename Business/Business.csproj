@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{121EBFAF-1ABF-4CCD-BC82-4C1FB956DD18}</ProjectGuid>
+    <ProjectGuid>{1CD84080-71CA-4CAE-A4DC-DBE655DC12E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Business</RootNamespace>
     <AssemblyName>Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -50,91 +50,84 @@
   <ItemGroup>
     <Compile Include="AccountBus.cs" />
     <Compile Include="AspNetRoles.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserClaims.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserLogins.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetUserRoles.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUsers.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="BaiNhanXet.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="BangThamSo.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="BinhChon.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="BinhLuan.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="DanhGia.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="DanhMucNuocSanXuat.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="DanhMucTheLoai.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="DanhSachPhimYeuThich.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="FilmBus.cs" />
-    <Compile Include="Metadata\Phim.cs" />
     <Compile Include="Phim.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThanhVien.cs">
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
-    <Compile Include="TURBO_PHIM.Context.cs">
+    <Compile Include="Turbo_Phim.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TURBO_PHIM.Context.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="TURBO_PHIM.cs">
+    <Compile Include="Turbo_Phim.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TURBO_PHIM.tt</DependentUpon>
+      <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
-    <Compile Include="TURBO_PHIM.Designer.cs">
+    <Compile Include="Turbo_Phim.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TURBO_PHIM.edmx</DependentUpon>
+      <DependentUpon>Turbo_Phim.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="TURBO_PHIM.edmx">
+    <EntityDeploy Include="Turbo_Phim.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TURBO_PHIM.Designer.cs</LastGenOutput>
+      <LastGenOutput>Turbo_Phim.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="TURBO_PHIM.Context.tt">
+    <None Include="Turbo_Phim.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TURBO_PHIM.edmx</DependentUpon>
-      <LastGenOutput>TURBO_PHIM.Context.cs</LastGenOutput>
+      <DependentUpon>Turbo_Phim.edmx</DependentUpon>
+      <LastGenOutput>Turbo_Phim.Context.cs</LastGenOutput>
     </None>
-    <None Include="TURBO_PHIM.edmx.diagram">
-      <DependentUpon>TURBO_PHIM.edmx</DependentUpon>
+    <None Include="Turbo_Phim.edmx.diagram">
+      <DependentUpon>Turbo_Phim.edmx</DependentUpon>
     </None>
-    <None Include="TURBO_PHIM.tt">
+    <None Include="Turbo_Phim.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TURBO_PHIM.edmx</DependentUpon>
-      <LastGenOutput>TURBO_PHIM.cs</LastGenOutput>
+      <DependentUpon>Turbo_Phim.edmx</DependentUpon>
+      <LastGenOutput>Turbo_Phim.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

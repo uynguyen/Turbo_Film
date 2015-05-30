@@ -25,13 +25,12 @@ namespace Business
     
         public int MaSo { get; set; }
         public string HoTen { get; set; }
-        public string MS_TaiKhoan { get; set; }
         public string DiaChi { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public Nullable<bool> TinhTrang { get; set; }
         public Nullable<bool> GioiTinh { get; set; }
         public string Avatar { get; set; }
-        public Nullable<System.DateTime> NgayDangKy { get; set; }
+        public string MS_TaiKhoan { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }

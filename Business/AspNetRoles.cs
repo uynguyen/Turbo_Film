@@ -16,12 +16,12 @@ namespace Business
     {
         public AspNetRoles()
         {
-            this.AspNetUserRoles = new HashSet<AspNetUserRoles>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

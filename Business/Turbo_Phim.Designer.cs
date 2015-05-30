@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\UyNguyen.ITUS\Desktop\TURBO_PHIM\Business\TURBO_PHIM.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Vin\Desktop\Turbo_Phim\Business\Turbo_Phim.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

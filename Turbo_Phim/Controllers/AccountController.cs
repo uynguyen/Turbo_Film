@@ -1,61 +1,33 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Globalization;
 using Turbo_Phim.Models;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Owin.Security;
-using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        // GET: Account
-        Models.UserAccountService uas = new Models.UserAccountService();
-
-        [HttpPost]
-        public JsonResult doesUserNameExist(string username)
-        {
-            return Json(!uas.IsExistAccount(username));
-        }
-
-
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        private ApplicationRoleManager _roleManager;
-
-        public ApplicationRoleManager RoleManager
-        {
-            get { return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>(); }
-            set { _roleManager = value; }
-        }
-
+        private AccountService AC = new AccountService();
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
-            SignInManager = signInManager;    
         }
 
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
+        private ApplicationUserManager _userManager;
+       
         public ApplicationUserManager UserManager
         {
             get
@@ -77,6 +49,20 @@ namespace Turbo_Phim.Controllers
             return PartialView();
         }
 
+        private SignInHelper _helper;
+
+        private SignInHelper SignInHelper
+        {
+            get
+            {
+                if (_helper == null)
+                {
+                    _helper = new SignInHelper(UserManager, AuthenticationManager);
+                }
+                return _helper;
+            }
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -89,18 +75,18 @@ namespace Turbo_Phim.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            // This doen't count login failures towards lockout only two factor authentication
+            // To enable password failures to trigger lockout, change to shouldLockout: true
+            var result = await SignInHelper.PasswordSignIn(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:                                  
-                        return RedirectToLocal(returnUrl);                  
-                case SignInStatus.LockedOut:
+                case Turbo_Phim.Models.SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case Turbo_Phim.Models.SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
+                case Turbo_Phim.Models.SignInStatus.RequiresTwoFactorAuthentication:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                case Turbo_Phim.Models.SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -110,14 +96,20 @@ namespace Turbo_Phim.Controllers
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
+        public async Task<ActionResult> VerifyCode(string provider, string returnUrl)
         {
             // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
+            if (!await SignInHelper.HasBeenVerified())
             {
                 return View("Error");
             }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            var user = await UserManager.FindByIdAsync(await SignInHelper.GetVerifiedUserIdAsync());
+            if (user != null)
+            {
+                // To exercise the flow without actually sending codes, uncomment the following line
+                ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " + await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+            }
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
         }
 
         //
@@ -132,18 +124,14 @@ namespace Turbo_Phim.Controllers
                 return View(model);
             }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInHelper.TwoFactorSignIn(model.Provider, model.Code, isPersistent: false, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
-                case SignInStatus.Success:
+                case Turbo_Phim.Models.SignInStatus.Success:
                     return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
+                case Turbo_Phim.Models.SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.Failure:
+                case Turbo_Phim.Models.SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
@@ -155,7 +143,7 @@ namespace Turbo_Phim.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return PartialView(new RegisterViewModel { IsMale = true });
+            return View(new RegisterViewModel { IsMale = true });
         }
 
         //
@@ -166,35 +154,28 @@ namespace Turbo_Phim.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
-            {              
+            {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            
-     
-                   var result = await UserManager.CreateAsync(user, model.Password);
-                    
-               
-                    if (result.Succeeded)
-                    {
-                        result = await UserManager.AddToRoleAsync(user.Id, "Member");
-                        uas.AddNewAccount(user, model);
-                       
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+              
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "Member");
+                    AC.CreateProfile(user, model);
+                    await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        return RedirectToAction("Index", "Home");
-                    }
-                    AddErrors(result);
-                           
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    //return View("DisplayEmail");
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return PartialView(model);
-            
+            return View(model);
         }
 
         //
@@ -207,7 +188,12 @@ namespace Turbo_Phim.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if (result.Succeeded)
+            {
+                return View("ConfirmEmail");
+            }
+            AddErrors(result);
+            return View();
         }
 
         //
@@ -234,12 +220,11 @@ namespace Turbo_Phim.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                ViewBag.Link = callbackUrl;
+                return View("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form
@@ -310,16 +295,16 @@ namespace Turbo_Phim.Controllers
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
-        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
+        public async Task<ActionResult> SendCode(string returnUrl)
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
+            var userId = await SignInHelper.GetVerifiedUserIdAsync();
             if (userId == null)
             {
                 return View("Error");
             }
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl });
         }
 
         //
@@ -329,17 +314,17 @@ namespace Turbo_Phim.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
+            // Generate the token and send it
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
+            if (!await SignInHelper.SendTwoFactorCode(model.SelectedProvider))
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl });
         }
 
         //
@@ -354,16 +339,16 @@ namespace Turbo_Phim.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await SignInHelper.ExternalSignIn(loginInfo, isPersistent: false);
             switch (result)
             {
-                case SignInStatus.Success:
+                case Turbo_Phim.Models.SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
+                case Turbo_Phim.Models.SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
+                case Turbo_Phim.Models.SignInStatus.RequiresTwoFactorAuthentication:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                case Turbo_Phim.Models.SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
@@ -399,7 +384,7 @@ namespace Turbo_Phim.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -430,21 +415,11 @@ namespace Turbo_Phim.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && _userManager != null)
             {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
+                _userManager.Dispose();
+                _userManager = null;
             }
-
             base.Dispose(disposing);
         }
 
@@ -506,8 +481,5 @@ namespace Turbo_Phim.Controllers
             }
         }
         #endregion
-     
-
-       
     }
 }

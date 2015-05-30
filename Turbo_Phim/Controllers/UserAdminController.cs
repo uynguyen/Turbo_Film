@@ -1,4 +1,4 @@
-﻿using IdentitySample.Models;
+﻿using Turbo_Phim.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace IdentitySample.Controllers
+namespace Turbo_Phim.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
@@ -98,7 +98,7 @@ namespace IdentitySample.Controllers
                 {
                     if (selectedRoles != null)
                     {
-                        var result = await UserManager.AddToRolesAsync(user.Id, selectedRoles);
+                        var result = await UserManager.AddUserToRolesAsync(user.Id, selectedRoles);
                         if (!result.Succeeded)
                         {
                             ModelState.AddModelError("", result.Errors.First());
@@ -170,14 +170,14 @@ namespace IdentitySample.Controllers
 
                 selectedRole = selectedRole ?? new string[] { };
 
-                var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>());
+                var result = await UserManager.AddUserToRolesAsync(user.Id, selectedRole.Except(userRoles).ToList<string>());
 
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", result.Errors.First());
                     return View();
                 }
-                result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>());
+                result = await UserManager.RemoveUserFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToList<string>());
 
                 if (!result.Succeeded)
                 {

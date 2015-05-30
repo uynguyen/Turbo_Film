@@ -1,55 +1,7 @@
-﻿@*@using Business;
-@model IEnumerable<Business.Phim>*@
-
-
-@{
-    ViewBag.Title = "Turbo Phim";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.Title = "Trang chủ";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenPhim)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.URL_Trailer)
-        </th>
-        <th></th>
-    </tr>
- 
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenPhim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NuocSX)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "User") |
-                @Html.ActionLink("Details", "Details", "User") |
-                @Html.ActionLink("Delete", "Delete", "User")
-            </td>
-        </tr>
-    }
-
-
-
-</table>*@
-
-
-
-
-
 
 <div class="header">
 
@@ -72,18 +24,18 @@
         </p>
         <a class="video" href="#"><i class="video1"></i>TRAILER</a>
     </div>
-</div> 
-       
-        <div class="review-slider">
-            <ul id="flexiselDemo1">
-                <li><img src="~/Content/images/r1.jpg" alt="" /></li>
-                <li><img src="~/Content/images/r2.jpg" alt="" /></li>
-                <li><img src="~/Content/images/r3.jpg" alt="" /></li>
-                <li><img src="~/Content/images/r4.jpg" alt="" /></li>
-                <li><img src="~/Content/images/r5.jpg" alt="" /></li>
-                <li><img src="~/Content/images/r6.jpg" alt="" /></li>
-            </ul>
-            <script type="text/javascript">
+</div>
+
+<div class="review-slider">
+    <ul id="flexiselDemo1">
+        <li><img src="~/Content/images/r1.jpg" alt="" /></li>
+        <li><img src="~/Content/images/r2.jpg" alt="" /></li>
+        <li><img src="~/Content/images/r3.jpg" alt="" /></li>
+        <li><img src="~/Content/images/r4.jpg" alt="" /></li>
+        <li><img src="~/Content/images/r5.jpg" alt="" /></li>
+        <li><img src="~/Content/images/r6.jpg" alt="" /></li>
+    </ul>
+    <script type="text/javascript">
                 $(window).load(function () {
 
                     $("#flexiselDemo1").flexisel({
@@ -109,110 +61,110 @@
                         }
                     });
                 });
-            </script>
-           
+    </script>
+
+</div>
+<div class="news">
+    <div class="col-md-6 news-right-grid">
+        <h3>Phim mới</h3>
+
+        <div class="news-grid">
+            <h5>Kẻ cướp mặt trăng III</h5>
+            <label>Dự kiến khởi chiếu: 11 tháng 04 năm 2014</label>
+
+            <p>
+                Chuyện kể về hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý
+                nghĩa và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
+            </p>
+            <a class="more" href="#">MORE</a>
         </div>
-        <div class="news">
-            <div class="col-md-6 news-right-grid">
-                <h3>Phim mới</h3>
+        <div class="news-grid">
+            <h5>Biệt đội siêu anh hùng III</h5>
+            <label>Dự kiến khởi chiếu: 30 tháng 04 năm 2014</label>
 
-                <div class="news-grid">
-                    <h5>Kẻ cướp mặt trăng III</h5>
-                    <label>Dự kiến khởi chiếu: 11 tháng 04 năm 2014</label>
-
-                    <p>
-                        Chuyện kể về hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý
-                        nghĩa và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
-                    </p>
-                    <a class="more" href="#">MORE</a>
-                </div>
-                <div class="news-grid">
-                    <h5>Biệt đội siêu anh hùng III</h5>
-                    <label>Dự kiến khởi chiếu: 30 tháng 04 năm 2014</label>
-
-                    <p>
-                        Chuyện kể về hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý
-                        nghĩa và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
-                    </p>
-                    <a class="more" href="#">MORE</a>
-                </div>
-                <nav>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-
-            </div>
-
-            <div class="col-md-6 news-right-grid">
-                <h3>Đánh giá phim</h3>
-
-                <div class="news-grid">
-                    <h5>HOME - Hành trình trở về</h5>
-                    <label>11 tháng 04 năm 2014</label>
-
-                    <p>
-                        Home – Hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý nghĩa
-                        và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
-                    </p>
-                    <a class="more" href="#">MORE</a>
-                </div>
-                <div class="news-grid">
-                    <h5>The land of the God - Vùng đất thần thánh</h5>
-                    <label>11 tháng 05 năm 2014</label>
-
-                    <p>
-                        The land of the God – Là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý nghĩa và
-                        thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng.
-                    </p>
-                    <a class="more" href="#">MORE</a>
-                </div>
-                <nav>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
-            <div class="clearfix"></div>
+            <p>
+                Chuyện kể về hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý
+                nghĩa và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
+            </p>
+            <a class="more" href="#">MORE</a>
         </div>
-        <div class="more-reviews">
-            <ul id="flexiselDemo2">
-                <li><img src="~/Content/images/m1.jpg" alt="" /></li>
-                <li><img src="~/Content/images/m2.jpg" alt="" /></li>
-                <li><img src="~/Content/images/m3.jpg" alt="" /></li>
-                <li><img src="~/Content/images/m4.jpg" alt="" /></li>
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
             </ul>
-            <script type="text/javascript">
+        </nav>
+
+
+    </div>
+
+    <div class="col-md-6 news-right-grid">
+        <h3>Đánh giá phim</h3>
+
+        <div class="news-grid">
+            <h5>HOME - Hành trình trở về</h5>
+            <label>11 tháng 04 năm 2014</label>
+
+            <p>
+                Home – Hành trình trở về là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý nghĩa
+                và thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng....
+            </p>
+            <a class="more" href="#">MORE</a>
+        </div>
+        <div class="news-grid">
+            <h5>The land of the God - Vùng đất thần thánh</h5>
+            <label>11 tháng 05 năm 2014</label>
+
+            <p>
+                The land of the God – Là câu chuyện ngắn gọn, tình cảm và đầy màu sắc dành cho trẻ em. Những ý nghĩa và
+                thông điệp sâu sắc cũng khiến khán giả lớn cảm thấy hài lòng.
+            </p>
+            <a class="more" href="#">MORE</a>
+        </div>
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="more-reviews">
+    <ul id="flexiselDemo2">
+        <li><img src="~/Content/images/m1.jpg" alt="" /></li>
+        <li><img src="~/Content/images/m2.jpg" alt="" /></li>
+        <li><img src="~/Content/images/m3.jpg" alt="" /></li>
+        <li><img src="~/Content/images/m4.jpg" alt="" /></li>
+    </ul>
+    <script type="text/javascript">
                 $(window).load(function () {
 
                     $("#flexiselDemo2").flexisel({
@@ -238,8 +190,8 @@
                         }
                     });
                 });
-            </script>
-           
-        </div>
-        
+    </script>
+
+</div>
+
 

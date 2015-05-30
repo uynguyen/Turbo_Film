@@ -4,19 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Models;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers
 {
     public class SearchController : Controller
     {
-        //
-        // GET: /Search/
+        // GET: Search
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult SimpleSearch(int?page, String filmName)
+        public ActionResult SimpleSearch(int? page, String filmName)
         {
             ViewBag.filmName = filmName;
 
@@ -28,7 +28,7 @@ namespace Turbo_Phim.Controllers
             {
                 if (TempData["currentPage"] != null)
                 {
-                    page = Int32.Parse(TempData["currentPage"].ToString()); 
+                    page = Int32.Parse(TempData["currentPage"].ToString());
                 }
                 else
                 {
@@ -50,7 +50,7 @@ namespace Turbo_Phim.Controllers
 
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
-            List<PhimViewModels> searchResult = phimService.searchFilm(filmName,(int) page, out maxPage);
+            List<PhimViewModels> searchResult = phimService.searchFilm(filmName, (int)page, out maxPage);
             ViewBag.maxPage = maxPage;
 
             return View(searchResult);
@@ -94,13 +94,12 @@ namespace Turbo_Phim.Controllers
 
             List<PhimViewModels> searchResult = phimService.searchFilm4(actor, directer, country, type, (int)page, out maxPage);
             ViewBag.maxPage = maxPage;
-            
+
             return View(searchResult);
 
-    
+
         }
 
 
-
-	}
+    }
 }
