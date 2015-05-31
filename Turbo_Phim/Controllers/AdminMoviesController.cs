@@ -10,7 +10,7 @@ using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin, Administrator")]
     public class AdminMoviesController : Controller
     {
         // GET: AdminMovies
