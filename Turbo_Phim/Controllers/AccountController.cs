@@ -72,7 +72,7 @@ namespace Turbo_Phim.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return Content("Lỗi! Đăng nhập không thành công! Vui lòng kiểm tra lại thông tin của bạn!");
             }
 
             // This doen't count login failures towards lockout only two factor authentication
@@ -89,7 +89,7 @@ namespace Turbo_Phim.Controllers
                 case Turbo_Phim.Models.SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return Content("Lỗi! Đăng nhập không thành công! Vui lòng kiểm tra lại thông tin của bạn!");
             }
         }
 
@@ -175,7 +175,7 @@ namespace Turbo_Phim.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
         }
 
         //

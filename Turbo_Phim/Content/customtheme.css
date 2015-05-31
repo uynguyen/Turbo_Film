@@ -731,7 +731,7 @@ a.panel-heading:hover,
   padding: .75em;
 }
 .modal .modal-body {
-  padding: 2em;
+  /*padding: 2em;*/
 }
 .modal p {
   margin: 0em;
