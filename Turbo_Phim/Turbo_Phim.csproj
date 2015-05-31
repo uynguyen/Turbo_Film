@@ -415,6 +415,15 @@
     <Content Include="Views\Shared\_Admin_NavigationMenu.cshtml" />
     <Content Include="Views\AdminUsers\ChangePermission.cshtml" />
     <Content Include="Views\AdminUsers\ListAllAccounts.cshtml" />
+    <Content Include="Views\AdminCategory\Country.cshtml" />
+    <Content Include="Views\AdminCategory\Genre.cshtml" />
+    <Content Include="Views\AdminCategory\Index.cshtml" />
+    <Content Include="Views\AdminMovies\Country.cshtml" />
+    <Content Include="Views\AdminMovies\CreateFilmResult.cshtml" />
+    <Content Include="Views\AdminMovies\createNewFilm.cshtml" />
+    <Content Include="Views\AdminMovies\Edit.cshtml" />
+    <Content Include="Views\AdminMovies\Genre.cshtml" />
+    <Content Include="Views\AdminMovies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

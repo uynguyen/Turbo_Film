@@ -1,0 +1,266 @@
+﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+}
+@*//TODO bỏ qua file scripts *@
+<script type="text/javascript">
+        $(document).on("click", "#open-AddBookDialog", function () {
+            var myBookId = $(this).data('id');
+            $("#bookId").val(myBookId);
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+</script>
+
+<div class="content">
+
+    <div class="main-content">
+
+        <div class="main-content">
+
+            <div class="btn-toolbar list-toolbar btnAddNewFilm">
+
+                @using (Html.BeginForm("CreateNewFilm", "AdminMovies", FormMethod.Get))
+                {
+
+                    <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Thêm phim mới  </button>
+                }
+
+               
+
+
+
+                @using (Html.BeginForm("SortDirection", "AdminMovies", FormMethod.Get, new { @class = "sortDirection" }))
+                {
+
+                    <button type="submit" class="btn btn-primary btn-sm" name="sortDirection" value="true"> <i class="glyphicon glyphicon-arrow-up"></i> </button>
+                    <button type="submit" class="btn btn-primary btn-sm" name="sortDirection" value="false"> <i class="glyphicon glyphicon-arrow-down"></i>  </button>
+
+                }
+
+          
+                    <div class="btn-group sortDirection">
+                        <button type="button" class="btn btn-danger">Số bộ phim hiển thị / trang: @ViewBag.maxProductOnEachPage</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+
+
+                            @for (float i = 5; i <= 50; i += 5)
+                            {
+
+                                <li>@Html.ActionLink(i.ToString() + " bộ phim / trang", "ChangeMaxProductOnEachPage", new { maxProductOnEachPage = i.ToString() })</li>
+                            }
+
+
+
+
+
+                        </ul>
+                    </div>
+        
+
+    
+                  
+                  
+                    
+
+                    
+                
+
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">#</th>
+                        <th style="width: 2%">@Html.DisplayNameFor(model => model.MaSo)</th>
+                        <th style="width: 10%">@Html.ActionLink("Tên phim", "SortByName", "AdminMovies")</th>
+                        <th style="width: 5%">@Html.ActionLink("Điểm", "SortByRank", "AdminMovies")</th>
+                        <th style="width: 10%">@Html.ActionLink("Thể loại", "SortByGenre", "AdminMovies")</th>
+                        <th style="width: 10%">@Html.ActionLink("Thời lượng", "SortByDuration", "AdminMovies")</th>
+                        <th style="width: 10%">@Html.DisplayNameFor(model => model.DienVien)</th>
+                        <th style="width: 10%">@Html.DisplayNameFor(model => model.DaoDien)</th>
+                        <th style="width: 15%">@Html.DisplayNameFor(model => model.NuocSX)</th>
+                        <th style="width: 10%">@Html.DisplayNameFor(model => model.HinhAnh)</th>
+                        <th style="width: 15%">@Html.ActionLink("Ngày phát hành", "SortByDate", "AdminMovies")</th>
+                        <th style="width: 2%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int temp = 0;}
+                    @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+                    {
+                        
+                        
+                        TempData["strSort"] = p.strSort;
+                        TempData["indexPage"] = p.currentPage;
+                        TempData["sortDirection"] = p.isASC;
+                        <tr>
+                            <td>@temp</td>
+                            @if(p.strSort == "ID")
+                            {
+                                 <td class="active">@p.MaSo</td>
+                            }
+                           
+                            else
+                            {
+                                  <td >@p.MaSo</td>
+                            }
+
+                            @if (p.strSort == "Name")
+                            {
+                                <td class="active">@p.TenPhim</td>
+                            }
+
+                            else
+                            {
+                                <td >@p.TenPhim</td>
+                            }
+                          
+                            @if (p.strSort == "Rank")
+                            {
+                                <td class="active">@p.DiemDanhGia</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.DiemDanhGia</td>
+                            }
+
+                            @if (p.strSort == "Genre")
+                            {
+                                <td class="active">@p.TheLoai</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.TheLoai</td>
+                            }
+
+                            @if (p.strSort == "Duration")
+                            {
+                                <td class="active">@p.ThoiLuong</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.ThoiLuong</td>
+                            }
+
+                         
+                           
+                            <td>@p.DienVien</td>
+                            <td>@p.DaoDien</td>
+                            <td>@p.NuocSX</td>
+                            <td><img class="ImageFilmAdmin" src="@p.HinhAnh" alt="" /></td>
+
+                            @if (p.strSort == "Date")
+                            {
+                                <td class="active">@p.NgayPhatHanh.Value.ToShortDateString()</td>
+                            }
+
+                            else
+                            {
+                                <td>@p.NgayPhatHanh.Value.ToShortDateString()</td>
+                            }
+                     
+
+                            <td>
+                                @*<a href="user.html"><i class="fa fa-pencil"></i></a>
+                                    <a href="#myModal" class="open-AddBookDialog" role="button" data-toggle="modal" data-id="@p.MaSo"><i class="fa fa-trash-o"></i></a>*@
+                                @using (Html.BeginForm("Edit", "AdminMovies", FormMethod.Get))
+                                {
+                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" name="codeFilm" value="@p.MaSo"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-pencil"></i></button>
+                                }
+
+                                <a href="#myModal" class="btn btn-default" id="open-AddBookDialog" role="button" data-toggle="modal" data-id="@p.MaSo"><i class="fa fa-trash-o"></i></a>
+
+
+                            </td>
+                        </tr>
+                        temp++;
+                    
+                    }
+                </tbody>
+            </table>
+
+
+       
+
+
+            <div id="indexPaging">
+
+                <ul class="pagination">
+                    <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
+                    <li>@Html.ActionLink("«", "Index", "AdminMovies", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1 }, null)</li>
+
+                    @{
+                        int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
+                        int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
+                        for (int i = startIndexPage; i < endIndexPage; i++)
+                        {
+                            if (i > (int)ViewBag.maxPage)
+                            {
+                                break;
+                            }
+                            if (i == (int)TempData["currentPage"])
+                            {
+                                <li class="active">@Html.ActionLink(i.ToString(), "Index", "AdminMovies", new { page = @i }, null)</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink(i.ToString(), "Index", "AdminMovies", new { page = @i }, null)</li>
+                            }
+
+                        }
+
+                    }
+
+
+                    <li>@Html.ActionLink("»", "Index", "AdminMovies", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1 }, null)</li>
+
+                </ul>
+            </div>
+
+            <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h2 id="myModalLabel">Xác nhận xóa bộ phim</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn có chắc muốn xóa bộ phim này?<br>Những bài đánh giá liên quan cũng sẽ bị xóa.</p>
+                        </div>
+                        <div class="modal-footer">
+
+
+                            @using (Html.BeginForm("Delete", "AdminMovies", FormMethod.Get))
+                            {
+                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
+                                <button class="btn btn-danger" type="submit" value="" id="bookId" name="codeFilm">Xóa</button>
+                            }
+
+
+
+
+                            @*<button class="btn btn-danger" data-dismiss="modal">@Html.ActionLink("Xóa", "Index", "AdminMovies")</button>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
