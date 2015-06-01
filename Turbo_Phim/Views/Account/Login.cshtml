@@ -5,15 +5,17 @@
 }
 
 
+
+
 <li>
     <div class="row">
         <div class="col-md-12">
-            Đăng nhập qua
+           <div id="login-message"></div>
             <div class="social-buttons">
                 <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                 <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
             </div>
-            hoặc
+            
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
                                     new { @class = "form", @role = "form", id = "login-nav", @accept_charset = "UTF-8" }))
             {
@@ -40,9 +42,32 @@
         </div>
 
         <div class="bottom text-center">
-            <a href="#" data-toggle="modal" data-target="#register"><b>Đăng kí ngay!</b></a>
+
+            <button onclick="openRegisterDialog()">register</button>
+
+            <script>
+                function openRegisterDialog() {
+                   
+        $.ajax({
+            url: '@Url.Action("Register", "Account")',
+            contentType: 'application/html',
+            success: function (content) {
+                $('#dialogPlaceholder').html(content);
+            },
+            error: function (e) { alert("Failure!"); }
+        });
+    }
+            </script>
+
+         
+            
+            
+                   
+            @*<script>
+
+                
+            </script>*@
 
         </div>
     </div>
 </li>
-

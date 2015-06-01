@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Turbo Phim</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
 
 </head>
 <body>
+    <div id="dialogPlaceholder"></div>
     <div class="full">
         @RenderPage("~/Views/Shared/_NavigationMenu.cshtml")
         <div class="main">
@@ -20,8 +21,5 @@
             @RenderPage("~/Views/Shared/_FooterPage.cshtml")
         </div>
     </div>
-
-   
-    @RenderSection("scripts", required: false)
 </body>
 </html>
