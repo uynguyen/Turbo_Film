@@ -1294,25 +1294,18 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-<<<<<<< HEAD
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="ckfinder\userfiles\.htaccess" />
     <Content Include="ckeditor\.htaccess" />
-    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-=======
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
->>>>>>> 14c573be6204f39af0baa542494024f789a525cf
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.flexisel.js" />
@@ -1328,14 +1321,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-<<<<<<< HEAD
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\myscripts.js" />
     <Content Include="Scripts\myscripts1.js" />
-=======
     <Content Include="Scripts\login-dropdown.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
->>>>>>> 14c573be6204f39af0baa542494024f789a525cf
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -1430,7 +1419,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\bootstrap-select.js.map" />
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201505291903476_InitialCreate.resx">
