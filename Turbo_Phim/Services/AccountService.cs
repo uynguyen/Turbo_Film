@@ -48,6 +48,7 @@ namespace Turbo_Phim.Services
             tv.NgaySinh = model.Birthday;
             tv.GioiTinh = model.IsMale;
             tv.DiaChi = model.Address;
+            tv.TinhTrang = true;
             return bus.updateProfile(id, tv);
         }
     }

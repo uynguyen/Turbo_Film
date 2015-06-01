@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Turbo Phim</title>
     @Styles.Render("~/Content/css")
+<<<<<<< HEAD
     @Scripts.Render("~/bundles/jquery")
   
     @*@Scripts.Render("~/bundles/ckfinder")
     @Scripts.Render("~/bundles/ckeditor")*@
+=======
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+>>>>>>> 14c573be6204f39af0baa542494024f789a525cf
 
 
 
@@ -17,6 +23,7 @@
    
 </head>
 <body>
+    <div id="dialogPlaceholder"></div>
     <div class="full">
         @RenderPage("~/Views/Shared/_NavigationMenu.cshtml")
         <div class="main">
@@ -26,8 +33,11 @@
             @RenderPage("~/Views/Shared/_FooterPage.cshtml")
         </div>
     </div>
+<<<<<<< HEAD
 
   
     @*@RenderSection("scripts", required: false)*@
+=======
+>>>>>>> 14c573be6204f39af0baa542494024f789a525cf
 </body>
 </html>

@@ -174,5 +174,21 @@ namespace Turbo_Phim.Services
         {
             return bus.changeMaxProductOnEachPage(maxProductOnEachPage);
         }
+
+        public List<PhimViewModels> filmMax()
+        {
+            List<PhimViewModels> result = new List<PhimViewModels>();
+
+            List<Phim> lstFilms = bus.filmMax();
+            foreach (Phim p in lstFilms)
+            {
+                PhimViewModels pvm = Phim2PhimViewModels(p);
+
+                result.Add(pvm);
+            }
+            return result;
+        }
+
+
     }
 }
