@@ -6,13 +6,22 @@ using System.Web.Mvc;
 
 namespace Turbo_Phim.Models
 {
-    public class ReviewModels
+    public class TopReviewModels
     {
-          [AllowHtml]
+      
         public String content { get; set; }
 
 
-        public String IDPhim { get; set; }
+        public String UserName { get; set; }
+
+        public int totalRank { get; set; }
+
+      
+
+        public DateTime postDate { get; set; }
+
+           
+
 
 
 

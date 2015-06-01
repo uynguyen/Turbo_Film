@@ -77,11 +77,9 @@
 
             <div class="clearfix"></div>
         </div>
-        <div class="best-review">
-                <h4>Bài viết hay nhất:</h4>
-                <p>Interstellar là một bộ phim điện ảnh thuộc thể loại khoa học viễn tưởng do Mỹ sản xuất, đặc biệt hơn đây chính là tác phẩm của đạo diễn bậc tài Christopher Nolan sản xuất, ngoài ra dàn diễn viên đáng chú ý như là Jessica Chastain, Anne Hathaway, Matt Damon, Matthew McConaughe, Wes Bentley, Topher Grace, Michael Caine....Nội dung bộ phim Interstellar xoay quanh mở đầu cho sự kiện con người lần đầu tiên bước ra ngoài không gian cho đến thời điểm hiện tại, một nhóm nhà du hành thời gian chuẩn bị làm một việc hết sức điên rồ từ trước đến nay, họ sẽ vào trung tâm của lỗ đen vũ trụ để tim hiểu cấu tạo của nó và bí mật không thể lí giải về hiện tượng siêu nhiên này. Bộ phim được đầu tư kỉ lưỡng chăm chút đến từng chi tiết nhằm mang lại cho khán giả trải nghiệm hoàn toàn khác.</p>
-            
-         </div>
+
+        @Html.Action("TopReview", "ReviewDetail", new  { IDPhim = @Model.MaSo })
+        
         @*<div class="story-review">
                 <h4>REVIEW:</h4>
                 <p>

@@ -49,9 +49,16 @@ namespace Turbo_Phim.Controllers
         [Authorize]
         public ActionResult CreatePost(String IDPhim)
         {
-            PhimViewModels temp = new PhimViewModels();
+           
             FilmService bus = new FilmService();
             return View(bus.getFilmByID(IDPhim));
+        }
+
+
+        public ActionResult TopReview(String IDPhim)
+        {
+            ReviewFilmService reviewS = new ReviewFilmService();
+            return View(reviewS.getTopReview(IDPhim));
         }
 
     }

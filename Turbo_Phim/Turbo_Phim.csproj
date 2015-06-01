@@ -193,7 +193,7 @@
     <Compile Include="Models\ImagesViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
-    <Compile Include="Models\ReviewModels.cs" />
+    <Compile Include="Models\TopReviewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\CountryService.cs" />
@@ -1407,6 +1407,7 @@
     <Content Include="Views\AdminMovies\Index.cshtml" />
     <Content Include="Views\ReviewDetail\CreatePost.cshtml" />
     <Content Include="Views\ReviewDetail\CreateNewPost.cshtml" />
+    <Content Include="Views\ReviewDetail\TopReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
