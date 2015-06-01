@@ -1,8 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using Turbo_Phim.Models;
 using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers {
     public class HomeController : Controller {
+
         public ActionResult Index(bool? homepage)
         {
             if (Request.IsAuthenticated)
@@ -14,7 +17,13 @@ namespace Turbo_Phim.Controllers {
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "inactive";
             ViewBag.ContactStatus = "inactive";
-            return View();
+           FilmService phimService = new FilmService();
+
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+
+            List<PhimViewModels> result = phimService.filmMax();
+
+            return View(result[0]);
         }
 
         [Authorize]
@@ -43,5 +52,16 @@ namespace Turbo_Phim.Controllers {
 
             return View(country.getAllCountry());
         }
+
+    //    public ActionResult filmMaxPoint()
+    //    {      
+    //        ViewBag.HomeStatus = "inactive";
+    //        ViewBag.VideoStatus = "inactive";
+    //        ViewBag.ReviewStatus = "active";
+    //        ViewBag.ContactStatus = "inactive";
+ 
+
+            
+    //    }
     }
 }

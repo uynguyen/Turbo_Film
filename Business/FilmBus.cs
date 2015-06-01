@@ -13,6 +13,7 @@ namespace Business
         private TURBO_PHIMEntities db = new TURBO_PHIMEntities();
         public static int MAX_PRODUCT_EACHPAGE = 0;
         public static int MAX_INDEX_PAGE = 0;
+
         public FilmBus(){
 
              MAX_PRODUCT_EACHPAGE = getMaxProductOnEachPage();
@@ -517,6 +518,45 @@ namespace Business
             temp.GiaTri = maxProductOnEachPage.ToString();
             db.SaveChanges();
             return true;
+        }
+
+
+
+
+
+// Cac chuc nang ve trang chu
+        public List<Phim> filmMax()
+        {
+            //List<Phim> lst = db.Phim.ToList();
+            List<Phim> result = new List<Phim>();
+
+            List<Phim> lst = db.Phim.ToList();
+
+            Phim temp = lst[0];
+            //foreach (Phim item in lst)
+            //{
+            //    if (item.DiemDanhGia > 0)
+            //    {
+            //        temp = item;
+            //    }
+
+            //}
+            for (int i = 1; i < lst.Count(); i++ )
+            {
+                if(lst[i].DiemDanhGia > temp.DiemDanhGia)
+                {
+                    temp = lst[i];
+                }
+                else
+                    if(lst[i].DiemDanhGia == temp.DiemDanhGia)
+                    {
+                        if (lst[i].NgayPhatHanh > temp.NgayPhatHanh)
+                            lst[i] = temp;
+                    }
+            }                       
+            result.Add(temp);
+            return result;
+
         }
     }
 }
