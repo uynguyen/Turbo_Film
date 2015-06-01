@@ -64,6 +64,7 @@ namespace Turbo_Phim.Controllers
         {
             UpdateProfileViewModal profileModel = AC.GetUpdateProfileViewModal(User.Identity.GetUserId());
             if (profileModel == null) return Content("Không thể cập nhật tài khoản!");
+            profileModel.Email = User.Identity.Name;
             return View(profileModel);
         }
 
