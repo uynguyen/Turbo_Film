@@ -5,7 +5,18 @@
 }
 
 <div class="best-review">
-    <h4>Bài viết hay nhất:</h4>
-    @Model.content
+   
+    @if (@Model == null)
+    {
+        <h4>Bài viết hay nhất:</h4>
+        <h1> Hiện chưa có bài đánh giá nào</h1>
+    }
+    else
+    {
+        <h4>Bài viết hay nhất được đăng bởi @Model.UserName lúc @Model.postDate:</h4>
+    <h5>Tổng số lượt bình chọn @Model.totalRank:</h5>
+        @Html.Raw(@Model.content)
+    }
+   
 
 </div>

@@ -18,7 +18,13 @@ namespace Turbo_Phim.Services
         {
             ReviewFilmsBus bus = new ReviewFilmsBus();
             BaiNhanXet topReview = bus.getTopReview(Int32.Parse(IDPhim));
-            return BaiNhanXet2BaiNhanXetViewModels(topReview);
+            if (topReview != null)
+            {
+                return BaiNhanXet2BaiNhanXetViewModels(topReview);
+            }
+            else
+                return null;
+            
         }
 
         public TopReviewModels BaiNhanXet2BaiNhanXetViewModels(BaiNhanXet topReview)

@@ -58,7 +58,10 @@ namespace Turbo_Phim.Controllers
         public ActionResult TopReview(String IDPhim)
         {
             ReviewFilmService reviewS = new ReviewFilmService();
-            return View(reviewS.getTopReview(IDPhim));
+            TopReviewModels result = reviewS.getTopReview(IDPhim);
+            
+
+            return View(result);
         }
 
     }
