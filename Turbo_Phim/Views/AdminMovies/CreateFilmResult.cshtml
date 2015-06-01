@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "CreateFilmResult";
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+}
+
+<div class="content">
+    <div class="header-admin">
+        <div>
+        @{
+          if(Boolean.Parse(TempData["CreateFilmResult"].ToString()))
+          {
+              <div>Thêm bộ phim mới thành công</div>
+          }
+          else
+          {
+              <div>Thêm bộ phim mới thất bại</div>
+          }
+          
+          
+        }
+
+            
+        </div>
+        @*<div class="list-group">
+            <a href="#" class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
+            <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
+        </div>*@
+    </div>
+</div>
+

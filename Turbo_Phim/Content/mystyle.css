@@ -2349,3 +2349,8 @@ font-weight: 700;
     width: 5%;
     margin-left: 10%;
 }
+
+
+#main-menu ul {
+    margin-right: -9px;
+}

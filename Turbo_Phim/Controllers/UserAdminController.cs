@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace Turbo_Phim.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Administrator")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()

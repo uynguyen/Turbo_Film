@@ -342,6 +342,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -415,6 +418,15 @@
     <Content Include="Views\Shared\_Admin_NavigationMenu.cshtml" />
     <Content Include="Views\AdminUsers\ChangePermission.cshtml" />
     <Content Include="Views\AdminUsers\ListAllAccounts.cshtml" />
+    <Content Include="Views\AdminCategory\Country.cshtml" />
+    <Content Include="Views\AdminCategory\Genre.cshtml" />
+    <Content Include="Views\AdminCategory\Index.cshtml" />
+    <Content Include="Views\AdminMovies\Country.cshtml" />
+    <Content Include="Views\AdminMovies\CreateFilmResult.cshtml" />
+    <Content Include="Views\AdminMovies\createNewFilm.cshtml" />
+    <Content Include="Views\AdminMovies\Edit.cshtml" />
+    <Content Include="Views\AdminMovies\Genre.cshtml" />
+    <Content Include="Views\AdminMovies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
