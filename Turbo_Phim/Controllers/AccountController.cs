@@ -88,7 +88,7 @@ namespace Turbo_Phim.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
                 case Turbo_Phim.Models.SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Lỗi! Đăng nhập không thành công! Vui lòng kiểm tra lại thông tin của bạn!");
                     return Content("Lỗi! Đăng nhập không thành công! Vui lòng kiểm tra lại thông tin của bạn!");
             }
         }

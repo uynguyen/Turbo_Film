@@ -56,12 +56,12 @@ namespace Turbo_Phim.Models {
 
     public class RegisterViewModel {
 
-        [Required]
+        [Required(ErrorMessage="Phải nhập {0} của bạn.")]
         [EmailAddress(ErrorMessage = "{0} không đúng định dạng.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+         [Required(ErrorMessage = "Phải nhập {0} của bạn.")]
         [StringLength(20, ErrorMessage = "{0} phải ít nhất 6 kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
@@ -84,7 +84,7 @@ namespace Turbo_Phim.Models {
         public bool IsMale { get; set; }
 
         [Display(Name = "Ngày tháng năm sinh")]
-        [DataType(DataType.Date, ErrorMessage = "Định dạng ngày tháng không đúng!"),
+        [DataType(DataType.Date, ErrorMessage = "Định dạng {0} không đúng!"),
         DisplayFormat(DataFormatString = "MM/dd/yyyy",
             ApplyFormatInEditMode = true)]
         public DateTime? Birthday { get; set; }
