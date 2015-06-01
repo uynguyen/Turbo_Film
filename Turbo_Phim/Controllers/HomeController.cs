@@ -3,12 +3,12 @@ using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers {
     public class HomeController : Controller {
-        public ActionResult Index()
+        public ActionResult Index(bool? homepage)
         {
             if (Request.IsAuthenticated)
             {
-                if (User.IsInRole("Admin"))
-                    return RedirectToAction("Index", "AdminMain");
+                if (User.IsInRole("Admin") && (!(homepage ?? false)))
+                    return RedirectToAction("Index", "AdminMain");             
             }
             ViewBag.HomeStatus = "active";
             ViewBag.VideoStatus = "inactive";

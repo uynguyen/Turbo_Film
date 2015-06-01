@@ -5,17 +5,18 @@
 }
 
 <div class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span> Turbo Phim Admin</span></a>
-    </div>
 
-    <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse">
+            <ul id="main-menu" class="nav navbar-nav">
+                <li>
+                    <a class="" href='@Url.Action("Index", "AdminMain")'><span class="navbar-brand"><span class="fa fa-paper-plane"></span> Turbo Phim Admin</span></a>
+                </li>
+                <li>
+                    <a class="" href='@Url.Action("Index", "Home", new { homepage = true})'><span class="navbar-brand"><span class="fa fa-paper-plane"></span>Chuyển sang trang chủ</span></a>
+                </li>
+
+            </ul>
+
         <ul id="main-menu" class="nav navbar-nav navbar-right">
            
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
