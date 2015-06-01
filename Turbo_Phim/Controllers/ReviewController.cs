@@ -98,11 +98,7 @@ namespace Turbo_Phim.Controllers
 
         }
 
-        public ActionResult ReviewDetail()
-        {
-            ViewBag.ReviewStatus = "active";
-            return View();
-        }
+      
 
         public ActionResult Genre()
         {

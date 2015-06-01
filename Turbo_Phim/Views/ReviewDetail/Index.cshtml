@@ -1,0 +1,211 @@
+﻿@model Turbo_Phim.Models.PhimViewModels
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<div class="reviews-section">
+    <h3 class="head">Phim Review</h3>
+    <div class="col-md-9 reviews-grids">
+
+
+        <div class="review">
+            <div class="movie-pic">
+                <a href="single.html"><img src="@Model.HinhAnh" alt="" /></a>
+            </div>
+            <div class="review-info">
+
+                <a class="span" href="single.html"> <i>@Model.TenPhim</i></a>
+                <p class="dirctr"><a href="">@Model.NuocSX, </a>@Model.NgayPhatHanh</p>
+                <p class="ratingview">Đánh giá của trang:</p>
+                <p class="ratingview">
+                    &nbsp;@Model.DiemDanhGia / 10
+                </p>
+                <div class="clearfix"></div>
+                <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
+
+                <p class="ratingview c-rating">
+                    &nbsp; @Model.DiemDanhGiaTrungBinh / 10 (@Model.LuotDanhGia Lượt đánh giá)
+                </p>
+                <div class="clearfix"></div>
+                <div class="yrw">
+                    @*<div class="dropdown-button">
+                            <select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
+                                <option value="0">Đánh giá của bạn</option>
+                                <option value="1">1. Tệ</option>
+                                <option value="2">1.5. Dưới trung bình</option>
+                                <option value="3">2. Trung bình</option>
+                                <option value="4">2.5. Trên trung bình</option>
+                                <option value="5">3. Xem được</option>
+                                <option value="6">3.5. Tốt</option>
+                                <option value="7">4.5. Rất tốt</option>
+                                <option value="8">5. Tuyệt vời</option>
+                            </select>
+                        </div>*@
+                    <div class="rtm text-center">
+                        <a class="button play-icon" href='@Url.Action("CreatePost", "ReviewDetail", new { IDPhim = @Model.MaSo})'>Thêm Review phim</a>
+                    </div>
+                    <div class="wt text-center">
+                        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
+                    </div>
+
+
+                    <div id="small-dialog" class="mfp-hide">
+                        <iframe src="@Model.URL_Trailer" frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+                <p class="info">Diễn viên:&nbsp; @Model.DienVien</p>
+                <p class="info">Đạo diễn: &nbsp; @Model.DaoDien</p>
+                <p class="info">Thể loại:&nbsp; @Model.TheLoai</p>
+                <p class="info">Thời lượng:&nbsp; @Model.ThoiLuong Phút</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="single">
+
+            <p>
+                CỐT TRUYỆN:
+            </p>
+            <p class="postReivew"> @Model.NoiDung</p>
+
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="best-review">
+                <h4>Bài viết hay nhất:</h4>
+                <p>Interstellar là một bộ phim điện ảnh thuộc thể loại khoa học viễn tưởng do Mỹ sản xuất, đặc biệt hơn đây chính là tác phẩm của đạo diễn bậc tài Christopher Nolan sản xuất, ngoài ra dàn diễn viên đáng chú ý như là Jessica Chastain, Anne Hathaway, Matt Damon, Matthew McConaughe, Wes Bentley, Topher Grace, Michael Caine....Nội dung bộ phim Interstellar xoay quanh mở đầu cho sự kiện con người lần đầu tiên bước ra ngoài không gian cho đến thời điểm hiện tại, một nhóm nhà du hành thời gian chuẩn bị làm một việc hết sức điên rồ từ trước đến nay, họ sẽ vào trung tâm của lỗ đen vũ trụ để tim hiểu cấu tạo của nó và bí mật không thể lí giải về hiện tượng siêu nhiên này. Bộ phim được đầu tư kỉ lưỡng chăm chút đến từng chi tiết nhằm mang lại cho khán giả trải nghiệm hoàn toàn khác.</p>
+            
+         </div>
+        @*<div class="story-review">
+                <h4>REVIEW:</h4>
+                <p>
+                    <article>
+                        <blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+
+                            Đạo diễn Chiristoppher Nolan với góc nhìn siêu tưởng về vũ trụ bao la dựa trên các thuyết vật lý học đã mang đến cho người xem một trải nghiệm cực kỳ mạnh mẽ về không gian và thời gian theo giả thuyết của riêng ông, hoặc cũng có thể là tương lai gần của nhân loại.<br>
+                            <br>
+                            <div style="text-align: center">
+
+                                <img src="~/Content/images/r4.jpg" alt="interstellar-movie-poster." class="blockImg" style="">
+
+                            </div>Phim của Chiristoppher Nolan luôn luôn khó nhằn và phải sử dụng “cái đầu”, thế nên khán giả sẽ được chia làm 2 phe. 1 bên là xem xong lắc đầu ngao ngán và thậm chí là “chẳng hiểu phim nói về cái gì”, phe còn lại thì phát cuồng với tất tần tật những gì dính dáng đến ông, bởi những gì thuộc về Nolan luôn là kinh điển, vĩ đại và đáng suy ngẫm.<br>
+                            <br>
+                            <a href="tags/interstellar/" class="Tinhte_XenTag_TagLink" target="_blank">Interstellar</a> có thời lượng khoảng 169 phút. Nói chung với khoảng thời gian đó là rất dài cho 1 bộ phim, tuy nhiên vì thuộc phe thứ 2 nên cá nhân mình cảm thấy phim rất lôi cuốn và khâm phục vị đạo diễn tài năng này. Nếu đã từng xem các tác phẩm trước đó của Nolan như The Prestige, Memento, Inception hay đặc biệt loạt phim The Dark Knight thì chắc chắn những lời khen ngợi dành cho ông hoàn toàn xứng đáng.<br>
+                            <br>
+                            Trở lại với Interstellar, kịch bản lấy bối cảnh về một thế giới trong tương lai khi trái đất bị tàn phá bởi hạn hán và biến đổi khí hậu khiến môi trường bị ô nhiễm nghiêm trọng, điều đó đồng nghĩa với việc con người sẽ chết đói, bệnh tật và bị diệt vong. Các nhà nghiên cứu khoa học sử dụng hố sâu vũ trụ ngoài không gian với mong muốn tìm kiếm sự sống ở các dải ngân hà khác. Với mong muốn cứu gia đình và cả thế giới, Cooper (<a href="tags/matthew+mcconaughey/" class="Tinhte_XenTag_TagLink" target="_blank">Matthew McConaughey</a>) đã tham gia vào hành trình tìm kiếm và chinh phục các vì sao.<br>
+                            <br>
+                            <div style="text-align: center"><iframe width="560" height="315" src="https://www.youtube.com/embed/zSWdZVtXT7E?wmode=opaque" frameborder="0" allowfullscreen=""></iframe></div><br>
+                            Kịch bản của Interstellar được viết dựa trên những lý thuyết về lỗ đen và các hiểu biết về vũ trụ của nhà vật lý học Kip Thorne. Có nghĩa là bộ phim được xây dựng và bám sát khoa học chứ không chỉ là “lý thuyết suông” của người viết kịch bản. Điều đó thể hiện khá rõ ở những phút đầu của phim với rất nhiều thuật ngữ trong chuyên nghành vật lý, lượng tử. Và khi nắm được những hiện tượng vật lý theo cách giải thích logic của các tình tiết trong phim, khán giả sẽ đặt ra những câu hỏi như hố đen vũ trụ là gì? Các thuyết tương đối và chiều không gian?. Đến đây thì một số sẽ bị rối, còn lại bắt đầu cảm thấy kích thích và bị cuốn bởi cốt truyện.<br>
+                            <br>
+                            Với lập luận “loài người được sinh ra trên Trái Đất, không có nghĩa là kết thúc tại đây” thể hiện tham vọng và cái nhìn khoa học về thế giới tương lai mà loài người sẽ phải đối mặt. Với dân số hơn 7 tỉ người cùng với môi trường mất cân bằng và bị hủy hoại nặng nề bởi các nguyên nhân từ trực tiếp đến gián tiếp. Và lúc đó giải pháp duy nhất là di dời và tìm kiếm một “ngôi nhà mới”.<br>
+                            <br>
+                            <div style="text-align: center">
+
+                                <img src="~/Content/images/2635247_156.jpg" alt="15(6)." class="blockImg" style="">
+
+                            </div>Một số khán giả cho rằng Interstellar giống kịch bản Gravity (2013), tuy nhiên với Gravity thì đa số các hiện tượng vật lý đều được giải thích cụ thể. Cái nhìn trong Interstellar mới mẻ và phức tạp hơn rất nhiều, đặc biệt là ý tưởng về không gian 5 chiều. Nói nôm na thì với thời gian trở thành một đại lượng vật lý, có nghĩa là con người sẽ biết những gì thuộc về quá khứ, hiện tại và cả tương lai, và thậm chí có thể quay ngược lại toàn bộ quy trình.<br>
+                            <br>
+                            Ngoài các giả thuyết buộc khán giả phải sử dụng chất xám như một số phim trước đó của Nolan, Interstellar cung cấp những hình ảnh đẹp tuyệt vời về không gian bao la của vũ trụ. Ê kíp đã xây dựng mô hình khép kín, mô phỏng theo hình dáng và kích thước thật của con tàu vũ trụ Ranger. Họ phải mất nhiều tháng để hoàn thành con tàu, bao gồm nội thất, buồng lái và phòng ở đúng như thiết kế của một tàu vũ trụ. Hơn nữa để truyền cảm hứng cho các diễn viên, ê kíp sử dụng những hình ảnh thật trình chiếu lên màn mình bên ngoài cửa sổ, để khi nhìn ra ngoài họ sẽ thấy những thiên thể thay vì các phông màu xanh giống như những phim khoa học giả tưởng khác.<br>
+                            <br>
+                            Đây chính là chất riêng trong hầu hết các phim của Nolan, một sự đòi hỏi gắt gao về kỹ thuật và sự hoàn thiện. Chính vì thế khi thưởng thức khán giả sẽ thấy được những hình ảnh thật sự choáng ngợp và lung linh nhất.<br>
+                            <br>
+                            <div style="text-align: center">
+
+                                <img src="~/Content/images/2635241_828738635505429981243250INTERSTELLAR03.jpg" alt="828738635505429981243250INTERSTELLAR03." class="blockImg" style="">
+
+                            </div>Ngoài cốt truyện lôi cuốn, diễn viên trong Interstellar giống như linh hồn của phim với sự thể hiện của dàn diễn viên tên tuổi như <a href="tags/anne+hathaway/" class="Tinhte_XenTag_TagLink" target="_blank">Anne Hathaway</a>, Ellen Burstyn, Michael Caine, , Jessica Chastain, Casey Affleck và đặc biệt là sự có mặt của nam diễn viên Matthew McConaughey trong vai Cooper. Mặc dù là một bộ phim về đề tài khoa học nhưng có những trường đoạn gây xúc động mạnh về tình cha con của nhân vật Cooper. Chính các tình tiết đan xen giữa tình cảm nhân vật  và các giả thuyết về khoa học, Interstellar là sự kết hợp giữa bộ não và trái tim khiến bộ phim không trở lên quá khô cứng hay sến sẩm.<br>
+                            <br>
+                            Một trong những yếu tố làm nên thành công của Interstellar chính là âm nhạc. Mới mẻ, độc đáo chính là những gì nhà soạn nhạc Hans Zimmer viết cho bộ phim. Âm nhạc của ông luôn tạo ra sự khác biệt, những sáng tác của Hans Zimmer thể hiện thành công trong rất nhiều bộ phim nổi tiếng, và trước đó là sự hợp tác với Nolan trong Inception và The Dark Knight.<br>
+                            <br>
+                            <div style="text-align: center">
+
+                                <img src="~/Content/images/2635240_u6uq8TO.jpg" alt="u6uq8TO." class="blockImg" style="">
+
+                            </div>Phần kết phim gây bất ngờ và chắc chắn sẽ có tranh cãi khi giả thuyết cuối cùng được đặt ra một lần nữa khiến người xem đặt ra vô vàn câu hỏi và câu trả lời lại là một ẩn số.<br>
+
+                            <br>
+
+                            <div class="messageTextEndMarker">&nbsp;</div>
+                        </blockquote>
+                    </article>
+                </p>
+            </div>*@
+        <!-- comments-section-starts -->
+        <div class="comments-section">
+            <div class="comments-section-head">
+                <div class="comments-section-head-text">
+                    <h3>25 Bình luận</h3>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="comments-section-grids">
+                <div class="comments-section-grid">
+                    <div class="col-md-2 comments-section-grid-image">
+                        <img src="~/Content/images/eye-brow.jpg" class="img-responsive" alt="" />
+                    </div>
+                    <div class="col-md-10 comments-section-grid-text">
+                        <h4><a href="#">Bill Gates</a></h4>
+                        <label>5/4/2014 at 22:00   </label>
+                        <p>Với số tiền của tui, tui sẵn sàng làm 10 bộ phim như thế này. Nhưng với cả 10 bộ phim, thì còn lâu con người mới đạt được như những điều trong phim.</p>
+                        <span><a href="#">Trả lời</a></span>
+                        <i class="rply-arrow"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="comments-section-grid comments-section-middle-grid">
+                    <div class="col-md-2 comments-section-grid-image">
+                        <img src="~/Content/images/beauty.jpg" class="img-responsive" alt="" />
+                    </div>
+                    <div class="col-md-10 comments-section-grid-text">
+                        <h4><a href="#">Lê Quốc Vin</a></h4>
+                        <label>5/4/2014 at 22:00   </label>
+                        <p>Một bộ phim hay, ý nghĩa. Không phải bởi những điều viễn tưởng, mà bởi vì ý nghĩa nhân văn trong đó.</p>
+                        <span><a href="#">Trả lời</a></span>
+                        <i class="rply-arrow"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="comments-section-grid">
+                    <div class="col-md-2 comments-section-grid-image">
+                        <img src="~/Content/images/stylish.jpg" class="img-responsive" alt="" />
+                    </div>
+                    <div class="col-md-10 comments-section-grid-text">
+                        <h4><a href="#">Nguyễn Long Uy</a></h4>
+                        <label>5/4/2014 at 22:00   </label>
+                        <p>Cảm động quá. Mình coi muốn khóc luôn các bạn ạ.</p>
+                        <span><a href="#">Trả lời</a></span>
+                        <i class="rply-arrow"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- comments-section-ends -->
+        <div class="Trả lời-section">
+            <div class="Trả lời-section-head">
+                <div class="Trả lời-section-head-text">
+                    <h3>Để lại bình luận</h3>
+                </div>
+            </div>
+            <div class="blog-form">
+                <form>
+
+                    <textarea></textarea>
+                    <input type="button" value="Đăng bình luận">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+</div>
+
+
+

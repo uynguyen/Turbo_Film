@@ -50,3 +50,9 @@ table
 .genreReview{
     width: 20% !important;
 }
+
+.postReivew{
+      text-align: justify;
+    text-justify: inter-word;
+
+}

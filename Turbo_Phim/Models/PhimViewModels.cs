@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Turbo_Phim.Models
 {
@@ -60,6 +61,8 @@ namespace Turbo_Phim.Models
          public DateTime? NgayPhatHanh { get; set; }
 
 
+         [AllowHtml]
+         public String contentPost { get; set; }
 
          public int MS_NuocSX { get; set; }
 

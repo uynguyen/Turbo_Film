@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TURBO_PHIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TURBO_PHIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -63,7 +73,7 @@
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MS_Phim" Type="int" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_TaiKhoan" Type="nvarchar" MaxLength="128" />
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="datetime" />
           <Property Name="TinhTrang" Type="bit" />
@@ -82,7 +92,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" Nullable="false" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="int" Nullable="false" />
           <Property Name="BinhChon" Type="bit" Nullable="false" />
           <Property Name="TinhTrang" Type="bit" />
@@ -92,7 +102,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_BaiNhanXet" Type="int" />
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="date" />
@@ -102,7 +112,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_Phim" Type="int" />
           <Property Name="DiemDanhGia" Type="float" />
         </EntityType>
@@ -127,7 +137,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_Phim" Type="int" />
         </EntityType>
         <EntityType Name="Phim">
@@ -149,11 +159,21 @@
           <Property Name="TinhTrang" Type="bit" />
           <Property Name="AnhBanner" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
-          <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaSo" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySinh" Type="date" />
@@ -162,6 +182,18 @@
           <Property Name="Avatar" Type="nchar" MaxLength="100" />
           <Property Name="MS_TaiKhoan" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <Association Name="FK_BaiNhanXet_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BaiNhanXet">
+              <PropertyRef Name="MS_TaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BaiNhanXet_Phim">
           <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
           <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="*" />
@@ -171,18 +203,6 @@
             </Principal>
             <Dependent Role="BaiNhanXet">
               <PropertyRef Name="MS_Phim" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BaiNhanXet_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
-            </Principal>
-            <Dependent Role="BaiNhanXet">
-              <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -362,7 +382,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ThanhVien_AspNetusers">
+        <Association Name="FK_ThanhVien_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
           <ReferentialConstraint>
@@ -375,6 +395,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TURBO_PHIMModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -389,13 +410,14 @@
           <EntitySet Name="DanhMucTheLoai" EntityType="Self.DanhMucTheLoai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhSachPhimYeuThich" EntityType="Self.DanhSachPhimYeuThich" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phim" EntityType="Self.Phim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThanhVien" EntityType="Self.ThanhVien" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BaiNhanXet_Phim" Association="Self.FK_BaiNhanXet_Phim">
-            <End Role="Phim" EntitySet="Phim" />
+          <AssociationSet Name="FK_BaiNhanXet_AspNetUsers" Association="Self.FK_BaiNhanXet_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
           </AssociationSet>
-          <AssociationSet Name="FK_BaiNhanXet_ThanhVien" Association="Self.FK_BaiNhanXet_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
+          <AssociationSet Name="FK_BaiNhanXet_Phim" Association="Self.FK_BaiNhanXet_Phim">
+            <End Role="Phim" EntitySet="Phim" />
             <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
           </AssociationSet>
           <AssociationSet Name="FK_BinhChon_BaiNhanXet" Association="Self.FK_BinhChon_BaiNhanXet">
@@ -454,16 +476,25 @@
             <End Role="DanhMucTheLoai" EntitySet="DanhMucTheLoai" />
             <End Role="Phim" EntitySet="Phim" />
           </AssociationSet>
-          <AssociationSet Name="FK_ThanhVien_AspNetusers" Association="Self.FK_ThanhVien_AspNetusers">
+          <AssociationSet Name="FK_ThanhVien_AspNetUsers" Association="Self.FK_ThanhVien_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="ThanhVien" EntitySet="ThanhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TURBO_PHIMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -512,8 +543,9 @@
           <Property Name="DayRegister" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_ThanhVien_AspNetusers" FromRole="AspNetUsers" ToRole="ThanhVien" />
+          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_ThanhVien_AspNetUsers" FromRole="AspNetUsers" ToRole="ThanhVien" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="BaiNhanXet" Relationship="TURBO_PHIMModel.FK_BaiNhanXet_AspNetUsers" FromRole="AspNetUsers" ToRole="BaiNhanXet" />
         </EntityType>
         <EntityType Name="BaiNhanXet">
           <Key>
@@ -521,7 +553,7 @@
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MS_Phim" Type="Int32" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_TaiKhoan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="3" />
           <Property Name="TinhTrang" Type="Boolean" />
@@ -529,6 +561,7 @@
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BaiNhanXet_ThanhVien" FromRole="BaiNhanXet" ToRole="ThanhVien" />
           <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhChon" />
           <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhLuan" />
+          <NavigationProperty Name="AspNetUsers" Relationship="TURBO_PHIMModel.FK_BaiNhanXet_AspNetUsers" FromRole="BaiNhanXet" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="BangThamSo">
           <Key>
@@ -544,7 +577,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" Nullable="false" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="Int32" Nullable="false" />
           <Property Name="BinhChon1" Type="Boolean" Nullable="false" />
           <Property Name="TinhTrang" Type="Boolean" />
@@ -556,7 +589,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MS_BaiNhanXet" Type="Int32" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="0" />
@@ -568,7 +601,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MS_Phim" Type="Int32" />
           <Property Name="DiemDanhGia" Type="Double" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhGia_Phim" FromRole="DanhGia" ToRole="Phim" />
@@ -597,7 +630,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MS_Phim" Type="Int32" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhSachPhimYeuThich_Phim" FromRole="DanhSachPhimYeuThich" ToRole="Phim" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_DanhSachPhimYeuThich_ThanhVien" FromRole="DanhSachPhimYeuThich" ToRole="ThanhVien" />
@@ -630,7 +663,7 @@
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
-          <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaSo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
@@ -638,7 +671,7 @@
           <Property Name="GioiTinh" Type="Boolean" />
           <Property Name="Avatar" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="MS_TaiKhoan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_ThanhVien_AspNetusers" FromRole="ThanhVien" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_ThanhVien_AspNetUsers" FromRole="ThanhVien" ToRole="AspNetUsers" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BaiNhanXet_ThanhVien" FromRole="ThanhVien" ToRole="BaiNhanXet" />
           <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_ThanhVien" FromRole="ThanhVien" ToRole="BinhChon" />
           <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="ThanhVien" ToRole="BinhLuan" />
@@ -673,7 +706,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ThanhVien_AspNetusers">
+        <Association Name="FK_ThanhVien_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
           <ReferentialConstraint>
@@ -705,7 +738,7 @@
               <PropertyRef Name="MaSo" />
             </Principal>
             <Dependent Role="BaiNhanXet">
-              <PropertyRef Name="MS_ThanhVien" />
+              <PropertyRef Name="MS_TaiKhoan" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -834,6 +867,7 @@
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
         <EntityContainer Name="TURBO_PHIMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
@@ -856,7 +890,7 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_ThanhVien_AspNetusers" Association="Self.FK_ThanhVien_AspNetusers">
+          <AssociationSet Name="FK_ThanhVien_AspNetUsers" Association="Self.FK_ThanhVien_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="ThanhVien" EntitySet="ThanhVien" />
           </AssociationSet>
@@ -912,13 +946,50 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="TURBO_PHIMModel.sysdiagrams" />
+          <AssociationSet Name="FK_BaiNhanXet_AspNetUsers" Association="TURBO_PHIMModel.FK_BaiNhanXet_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_BaiNhanXet_AspNetUsers">
+          <End Type="TURBO_PHIMModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="TURBO_PHIMModel.BaiNhanXet" Role="BaiNhanXet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BaiNhanXet">
+              <PropertyRef Name="MS_TaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TURBO_PHIMModelStoreContainer" CdmEntityContainer="TURBO_PHIMEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="TURBO_PHIMModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -970,7 +1041,7 @@
               <MappingFragment StoreEntitySet="BaiNhanXet">
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MS_Phim" ColumnName="MS_Phim" />
-                <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
+                <ScalarProperty Name="MS_TaiKhoan" ColumnName="MS_TaiKhoan" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
                 <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
@@ -1088,6 +1159,17 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TURBO_PHIMModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1104,7 +1186,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
