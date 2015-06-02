@@ -11,17 +11,18 @@ using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Services;
 using Business;
+using System.Collections.Generic;
 
 namespace Turbo_Phim.Controllers
 {
     public class ReviewDetailController : Controller
     {
         // GET: ReviewDetail
-        public ActionResult Index(String IDPhim)
+        public ActionResult Index(String IDPhim, String IDReview = "-1")
         {
 
             FilmService filmS = new FilmService();
-
+            TempData["MaSoReview"] = IDReview;
 
             return View(filmS.getFilmByID(IDPhim));
         }
@@ -33,7 +34,7 @@ namespace Turbo_Phim.Controllers
             BaiNhanXet baiNhanXet = new BaiNhanXet();
             baiNhanXet.TinhTrang = true;
             baiNhanXet.MS_Phim = phim.MaSo;
-            
+            baiNhanXet.TieuDe = phim.title;
             baiNhanXet.NgayDang = System.DateTime.Now;
             baiNhanXet.NoiDung = phim.contentPost;
             baiNhanXet.MS_TaiKhoan = User.Identity.GetUserId();
@@ -55,11 +56,29 @@ namespace Turbo_Phim.Controllers
         }
 
 
-        public ActionResult TopReview(String IDPhim)
+        public ActionResult TopReview(String IDPhim, String IDReview = "-1")
+        {
+            TopReviewModels result = null;
+            ReviewFilmService reviewS = new ReviewFilmService();
+            if(IDReview.Equals("-1"))
+            {
+               
+              result   = reviewS.getTopReview(IDPhim);
+            }
+            else{
+                result = reviewS.getReview(IDReview);
+            }
+            
+            
+
+            return View(result);
+        }
+
+        public ActionResult Top10Review(String IDPhim)
         {
             ReviewFilmService reviewS = new ReviewFilmService();
-            TopReviewModels result = reviewS.getTopReview(IDPhim);
-            
+            List<TopReviewModels> result = reviewS.getTop10Review(IDPhim);
+
 
             return View(result);
         }

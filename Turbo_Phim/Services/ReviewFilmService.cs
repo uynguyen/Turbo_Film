@@ -42,13 +42,48 @@ namespace Turbo_Phim.Services
             result.content = topReview.NoiDung;
             result.totalRank = bus.getTotalRank(topReview.MaSo);
 
-
-
+            result.title = topReview.TieuDe;
+            result.MS_Phim = (int) topReview.MS_Phim;
+            result.MS_ReView = (int) topReview.MaSo;
 
 
 
 
             return result;
+        }
+
+        internal List<TopReviewModels> getTop10Review(string IDPhim)
+        {
+            ReviewFilmsBus bus = new ReviewFilmsBus();
+            List<BaiNhanXet> topReview = bus.getTop10Review(Int32.Parse(IDPhim));
+            if (topReview != null)
+            {
+
+                List<TopReviewModels> result = new List<TopReviewModels>();
+                foreach(BaiNhanXet bai in topReview){
+                    TopReviewModels temp =  BaiNhanXet2BaiNhanXetViewModels(bai);
+                    result.Add(temp);
+                }
+
+
+
+                return result;
+            }
+            else
+                return null;
+        }
+
+        internal TopReviewModels getReview(string IDReview)
+        {
+
+            ReviewFilmsBus bus = new ReviewFilmsBus();
+            BaiNhanXet Review = bus.getReview(Int32.Parse(IDReview));
+            if (Review != null)
+            {
+                return BaiNhanXet2BaiNhanXetViewModels(Review);
+            }
+            else
+                return null;
         }
     }
 }

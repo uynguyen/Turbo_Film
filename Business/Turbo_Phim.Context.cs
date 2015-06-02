@@ -39,7 +39,7 @@ namespace Business
         public DbSet<DanhMucTheLoai> DanhMucTheLoai { get; set; }
         public DbSet<DanhSachPhimYeuThich> DanhSachPhimYeuThich { get; set; }
         public DbSet<Phim> Phim { get; set; }
-        public DbSet<ThanhVien> ThanhVien { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<ThanhVien> ThanhVien { get; set; }
     }
 }

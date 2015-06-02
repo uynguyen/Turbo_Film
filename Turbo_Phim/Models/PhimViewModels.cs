@@ -64,6 +64,8 @@ namespace Turbo_Phim.Models
          [AllowHtml]
          public String contentPost { get; set; }
 
+         public String title { get; set; }
+
          public int MS_NuocSX { get; set; }
 
          public int MS_TheLoai { get; set; }

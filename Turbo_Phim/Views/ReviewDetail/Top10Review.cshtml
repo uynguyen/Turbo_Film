@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Turbo_Phim.Models.TopReviewModels>
+@{
+    ViewBag.Title = "Top10Review";
+    Layout = null;
+}
+
+<div class="col-md-3 side-bar">
+
+
+    <div class="entertainment">
+        <h3>Top 10 các bài Review</h3>
+        @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
+        {
+            <ul>
+                <li class="ent">
+                    <a ><img src="~/Images/avatar_default.png" alt="" /></a>
+                </li>
+                <li>
+
+                    @Html.ActionLink(p.title, "Index", "ReviewDetail", new { IDPhim = p.MS_Phim, IDReview = p.MS_ReView }, new { @class = "span" })
+             
+                  
+
+                </li>
+                <li>Được đăng bởi @p.UserName</li>
+                <li>Lúc @p.postDate.ToString("dd/MM/yyyy hh:mm:ss")</li>
+                <li>@p.totalRank lượt bình chọn</li>
+                <div class="clearfix"></div>
+            </ul>
+        }
+       
+    </div>
+    <div class="might">
+        <h4>Có thể bạn sẽ thích</h4>
+        <div class="might-grid">
+            <div class="grid-might">
+                <a href="single.html"><img src="~/Content/images/mi.jpg" class="img-responsive" alt=""> </a>
+            </div>
+            <div class="might-top">
+                <p>Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <a href="single.html">Lorem Ipsum <i> </i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="might-grid">
+            <div class="grid-might">
+                <a href="single.html"><img src="~/Content/images/mi1.jpg" class="img-responsive" alt=""> </a>
+            </div>
+            <div class="might-top">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <a href="single.html">Lorem Ipsum <i> </i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="might-grid">
+            <div class="grid-might">
+                <a href="single.html"><img src="~/Content/images/mi2.jpg" class="img-responsive" alt=""> </a>
+            </div>
+            <div class="might-top">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <a href="single.html">Lorem Ipsum <i> </i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="might-grid">
+            <div class="grid-might">
+                <a href="single.html"><img src="~/Content/images/mi3.jpg" class="img-responsive" alt=""> </a>
+            </div>
+            <div class="might-top">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <a href="single.html">Lorem Ipsum <i> </i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+

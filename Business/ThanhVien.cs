@@ -16,8 +16,6 @@ namespace Business
     {
         public ThanhVien()
         {
-            this.BaiNhanXet = new HashSet<BaiNhanXet>();
-            this.BinhChon = new HashSet<BinhChon>();
             this.BinhLuan = new HashSet<BinhLuan>();
             this.DanhGia = new HashSet<DanhGia>();
             this.DanhSachPhimYeuThich = new HashSet<DanhSachPhimYeuThich>();
@@ -33,8 +31,6 @@ namespace Business
         public string MS_TaiKhoan { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }
-        public virtual ICollection<BinhChon> BinhChon { get; set; }
         public virtual ICollection<BinhLuan> BinhLuan { get; set; }
         public virtual ICollection<DanhGia> DanhGia { get; set; }
         public virtual ICollection<DanhSachPhimYeuThich> DanhSachPhimYeuThich { get; set; }

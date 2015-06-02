@@ -40,7 +40,7 @@ namespace Business
                 int MS0 = lstReviews[0].MaSo;
                 int temp = db.BinhChon.Where(y => y.MS_BaiNhanXet == MS0).ToList().Count;
 
-                
+
 
 
 
@@ -48,7 +48,7 @@ namespace Business
                 {
                     int MS = lstReviews[i].MaSo;
                     int tmp2 = db.BinhChon.Where(x => x.MS_BaiNhanXet == MS).ToList().Count;
-                    
+
 
                     if (tmp2 > temp)
                     {
@@ -76,6 +76,62 @@ namespace Business
         public int getTotalRank(int? IDBaiNhanXet)
         {
             return db.BinhChon.Where(x => x.MS_BaiNhanXet == IDBaiNhanXet).Count();
+        }
+
+        public List<BaiNhanXet> getTop10Review(int IDPhim)
+        {
+            List<BaiNhanXet> result = new List<BaiNhanXet>();
+            try
+            {
+                List<BaiNhanXet> lstReviews = db.BaiNhanXet.Where(x => x.MS_Phim == IDPhim).ToList();
+
+                Dictionary<BaiNhanXet, int> Rank = new Dictionary<BaiNhanXet, int>();
+
+                for (int i = 0; i < lstReviews.Count; i++)
+                {
+
+                    int MS = lstReviews[i].MaSo;
+                    int tmp = db.BinhChon.Where(x => x.MS_BaiNhanXet == MS).ToList().Count;
+                    Rank.Add(lstReviews[i], tmp);
+
+                }
+
+
+                foreach (KeyValuePair<BaiNhanXet, int> author in Rank.OrderByDescending(key => key.Value))
+                {
+                    result.Add(author.Key);
+                }
+               
+                   
+                
+                return result;
+
+
+            }
+
+            catch (Exception e)
+            {
+                return null;
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+        public BaiNhanXet getReview(int p)
+        {
+            return db.BaiNhanXet.Where(x => x.MaSo == p).FirstOrDefault();
         }
     }
 }

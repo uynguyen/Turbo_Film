@@ -18,9 +18,10 @@ namespace Business
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.BaiNhanXet = new HashSet<BaiNhanXet>();
+            this.BinhChon = new HashSet<BinhChon>();
             this.ThanhVien = new HashSet<ThanhVien>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
-            this.BaiNhanXet = new HashSet<BaiNhanXet>();
         }
     
         public string Id { get; set; }
@@ -39,8 +40,9 @@ namespace Business
     
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }
+        public virtual ICollection<BinhChon> BinhChon { get; set; }
         public virtual ICollection<ThanhVien> ThanhVien { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
-        public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }
     }
 }

@@ -77,9 +77,16 @@
 
             <div class="clearfix"></div>
         </div>
+        @if (@TempData["MaSoReview"].Equals("-1"))
+        {
+            @Html.Action("TopReview", "ReviewDetail", new { IDPhim = @Model.MaSo })
+        }
+        else
+        {
+            @Html.Action("TopReview", "ReviewDetail", new { IDPhim = @Model.MaSo, IDReview = @TempData["MaSoReview"] })
+        }
 
-        @Html.Action("TopReview", "ReviewDetail", new  { IDPhim = @Model.MaSo })
-        
+
         @*<div class="story-review">
                 <h4>REVIEW:</h4>
                 <p>
@@ -201,8 +208,10 @@
         </div>
     </div>
 
+    @Html.Action("Top10Review", "ReviewDetail", new { IDPhim = @Model.MaSo })
+    
 
-    <div class="clearfix"></div>
+    
 </div>
 
 

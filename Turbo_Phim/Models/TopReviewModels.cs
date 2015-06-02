@@ -16,10 +16,15 @@ namespace Turbo_Phim.Models
 
         public int totalRank { get; set; }
 
+        public String title { get; set; }
       
 
         public DateTime postDate { get; set; }
 
+
+        public int MS_Phim { get; set; }
+
+        public int MS_ReView { get; set; }
            
 
 

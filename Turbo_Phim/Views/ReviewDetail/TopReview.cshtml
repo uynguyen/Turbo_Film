@@ -13,8 +13,10 @@
     }
     else
     {
-        <h4>Bài viết hay nhất được đăng bởi @Model.UserName lúc @Model.postDate:</h4>
-    <h5>Tổng số lượt bình chọn @Model.totalRank:</h5>
+        <h1>@Model.title</h1>
+        <h5>Bài viết hay nhất được đăng bởi @Model.UserName lúc @Model.postDate:</h5>
+        <h5>Tổng số lượt bình chọn @Model.totalRank:</h5>
+        
         @Html.Raw(@Model.content)
     }
    

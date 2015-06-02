@@ -26,11 +26,11 @@ namespace Business
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayDang { get; set; }
         public Nullable<bool> TinhTrang { get; set; }
+        public string TieuDe { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Phim Phim { get; set; }
-        public virtual ThanhVien ThanhVien { get; set; }
         public virtual ICollection<BinhChon> BinhChon { get; set; }
         public virtual ICollection<BinhLuan> BinhLuan { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
