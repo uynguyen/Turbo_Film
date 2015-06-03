@@ -434,6 +434,7 @@
     <Content Include="Views\AdminMovies\Edit.cshtml" />
     <Content Include="Views\AdminMovies\Genre.cshtml" />
     <Content Include="Views\AdminMovies\Index.cshtml" />
+    <Content Include="Views\Account\LoginUnauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
