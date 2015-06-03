@@ -49,6 +49,15 @@ namespace Turbo_Phim.Controllers
             return PartialView();
         }
 
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult LoginUnauthorized(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return PartialView();
+        }
+
         private SignInHelper _helper;
 
         private SignInHelper SignInHelper
