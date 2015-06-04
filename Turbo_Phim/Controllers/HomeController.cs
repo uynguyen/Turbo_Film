@@ -52,16 +52,5 @@ namespace Turbo_Phim.Controllers {
 
             return View(country.getAllCountry());
         }
-
-    //    public ActionResult filmMaxPoint()
-    //    {      
-    //        ViewBag.HomeStatus = "inactive";
-    //        ViewBag.VideoStatus = "inactive";
-    //        ViewBag.ReviewStatus = "active";
-    //        ViewBag.ContactStatus = "inactive";
- 
-
-            
-    //    }
     }
 }

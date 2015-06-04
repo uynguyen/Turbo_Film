@@ -527,21 +527,11 @@ namespace Business
 
 // Cac chuc nang ve trang chu
         public List<Phim> filmMax()
-        {
-            //List<Phim> lst = db.Phim.ToList();
+        {            
             List<Phim> result = new List<Phim>();
-
             List<Phim> lst = db.Phim.ToList();
-
             Phim temp = lst[0];
-            //foreach (Phim item in lst)
-            //{
-            //    if (item.DiemDanhGia > 0)
-            //    {
-            //        temp = item;
-            //    }
 
-            //}
             for (int i = 1; i < lst.Count(); i++ )
             {
                 if(lst[i].DiemDanhGia > temp.DiemDanhGia)
@@ -551,13 +541,44 @@ namespace Business
                 else
                     if(lst[i].DiemDanhGia == temp.DiemDanhGia)
                     {
-                        if (lst[i].NgayPhatHanh > temp.NgayPhatHanh)
-                            lst[i] = temp;
+                        DateTime date1 = (DateTime)lst[i].NgayPhatHanh;
+                        DateTime date2 = (DateTime)temp.NgayPhatHanh;
+                        int ss = DateTime.Compare(date1, date2);
+                        if (ss > 0) // date1 > date2
+                            temp = lst[i];
                     }
             }                       
             result.Add(temp);
             return result;
-
         }
+
+        public List<Phim> findFilmNew()
+        {
+            List<Phim> result = new List<Phim>();
+
+            List<Phim> lst = db.Phim.ToList();
+            DateTime saveNow = DateTime.Now;
+            for (int i = 0; i < lst.Count(); i++ )
+            {
+// Những bộ phim nào mà phát hành trong vòng 1 tháng thì được xem là phim mới        
+                DateTime date = (DateTime)lst[i].NgayPhatHanh;
+                System.TimeSpan diff = saveNow.Subtract(date);
+                if(diff.Days <= 30)
+                {
+                    result.Add(lst[i]);
+                }
+            }
+              return result;
+        }
+// 1. Hiển thị list những bài những xét được bình chọn nhiều nhất, top 10
+// 2. Hiển thị những bài nhận xét cho các bộ phim mới 
+        public List<BaiNhanXet> findThink()
+        {
+            List<BaiNhanXet> result = new List<BaiNhanXet>();
+
+            return result;
+        }
+
+
     }
 }
