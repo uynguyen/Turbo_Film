@@ -367,7 +367,7 @@ namespace Turbo_Phim.Controllers
         {
             ReviewFilmService reviewS = new ReviewFilmService();
             List<TopReviewModels> result = reviewS.getMyListReview(User.Identity.GetUserId());
-           
+
 
             return View(result);
 
