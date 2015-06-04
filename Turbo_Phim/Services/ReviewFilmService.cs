@@ -85,5 +85,29 @@ namespace Turbo_Phim.Services
             else
                 return null;
         }
+
+        internal List<TopReviewModels> getMyListReview(string IDUser)
+        {
+            List<TopReviewModels> result = new List<TopReviewModels>();
+            ReviewFilmsBus bus = new ReviewFilmsBus();
+            List<BaiNhanXet> Review = bus.getMyListReview(IDUser);
+            if (Review != null)
+            {
+                foreach(BaiNhanXet bainhanxet in Review)
+                {
+                    result.Add(BaiNhanXet2BaiNhanXetViewModels(bainhanxet));
+                }
+                return result;
+            }
+            else
+                return null;
+        }
+
+
+        internal bool editPost(BaiNhanXet baiNhanXet)
+        {
+            ReviewFilmsBus bus = new ReviewFilmsBus();
+            return bus.editPost(baiNhanXet);
+        }
     }
 }

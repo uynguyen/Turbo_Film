@@ -1409,6 +1409,8 @@
     <Content Include="Views\ReviewDetail\CreateNewPost.cshtml" />
     <Content Include="Views\ReviewDetail\TopReview.cshtml" />
     <Content Include="Views\ReviewDetail\Top10Review.cshtml" />
+    <Content Include="Views\Manage\MyListReview.cshtml" />
+    <Content Include="Views\ReviewDetail\EditPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

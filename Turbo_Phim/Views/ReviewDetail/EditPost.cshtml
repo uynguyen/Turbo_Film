@@ -1,7 +1,8 @@
-﻿@model Turbo_Phim.Models.PhimViewModels
+﻿
+@model Turbo_Phim.Models.PhimViewModels
 
 @{
-    ViewBag.Title = "CreatePost";
+    ViewBag.Title = "EditPost";
 }
 
 
@@ -12,7 +13,7 @@
 
 <div class="reviews-section">
 
-    <div >
+    <div>
 
         <div class="review">
             <div class="movie-pic">
@@ -72,13 +73,13 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("CreateNewPost", "ReviewDetail", FormMethod.Post))
+    @using (Html.BeginForm("EditedPost", "ReviewDetail", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        @Html.TextBoxFor(@model => @model.title, new { @class = "form-control my-form-control" ,@placeholder = "Tiêu đề bài nhận xét" })
-        @Html.TextAreaFor(@model => @model.contentPost, new {@placeholder = "Nội dung bài nhận xét"})
+        @Html.TextBoxFor(@model => @model.title, new { @class = "form-control my-form-control", @placeholder = "Tiêu đề bài nhận xét" })
+        @Html.TextAreaFor(@model => @model.contentPost, new { @placeholder = "Nội dung bài nhận xét" })
 
-        @Html.TextAreaFor(@model => @model.MaSo, 1, 1, new { @class = "hidden"})
+        @Html.TextAreaFor(@model => @model.MaSo, 1, 1, new { @class = "hidden" })
 
 
         <button type="submit">Thêm mới</button>
@@ -99,11 +100,3 @@
 
     </script>
 </div>
-
-
-
-
-
-
-
-

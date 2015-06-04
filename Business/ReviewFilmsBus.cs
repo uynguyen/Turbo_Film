@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -132,6 +133,28 @@ namespace Business
         public BaiNhanXet getReview(int p)
         {
             return db.BaiNhanXet.Where(x => x.MaSo == p).FirstOrDefault();
+        }
+
+        public List<BaiNhanXet> getMyListReview(String p)
+        {
+            return db.BaiNhanXet.Where(x => x.MS_TaiKhoan.Equals(p)).ToList();
+        }
+
+        public bool editPost(BaiNhanXet baiNhanXet)
+        {
+            try
+            {
+                db.Entry(baiNhanXet).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+                return true;
+            }
+            catch (Exception e)
+            {
+             
+                return false;
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Services;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Turbo_Phim.Controllers
 {
@@ -359,6 +361,16 @@ namespace Turbo_Phim.Controllers
                 _userManager = null;
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult MyListReview()
+        {
+            ReviewFilmService reviewS = new ReviewFilmService();
+            List<TopReviewModels> result = reviewS.getMyListReview(User.Identity.GetUserId());
+           
+
+            return View(result);
+
         }
 
         #region Helpers
