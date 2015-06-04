@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Services;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace Turbo_Phim.Controllers
 {
@@ -162,6 +164,52 @@ namespace Turbo_Phim.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
+            var response = Request["g-recaptcha-response"];
+            //secret that was generated in key value pair
+            const string secret = "6LfM3wcTAAAAALCOa3vDbWM7XZyu0EaIa9kD28_z";
+
+            var client = new WebClient();
+            var reply =
+                client.DownloadString(
+                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
+
+            var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
+
+            //when response is false check for the error message
+            if (!captchaResponse.Success)
+            {
+                if (captchaResponse.ErrorCodes.Count <= 0) return View(model);
+
+                var error = captchaResponse.ErrorCodes[0].ToLower();
+                switch (error)
+                {
+                    case ("missing-input-secret"):
+                        ViewBag.Message = "The secret parameter is missing.";
+                        break;
+                    case ("invalid-input-secret"):
+                        ViewBag.Message = "The secret parameter is invalid or malformed.";
+                        break;
+
+                    case ("missing-input-response"):
+                        ViewBag.Message = "The response parameter is missing.";
+                        break;
+                    case ("invalid-input-response"):
+                        ViewBag.Message = "The response parameter is invalid or malformed.";
+                        break;
+
+                    default:
+                        ViewBag.Message = "Error occured. Please try again";
+                        break;
+                }
+                return View(model);
+            }
+            else
+            {
+                ViewBag.Message = "Valid";
+            }
+
+     
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
