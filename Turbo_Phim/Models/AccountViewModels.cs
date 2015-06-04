@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
-namespace Turbo_Phim.Models {
-    public class ExternalLoginConfirmationViewModel {
+namespace Turbo_Phim.Models
+{
+    public class ExternalLoginConfirmationViewModel
+    {
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
-    public class ExternalLoginListViewModel {
+    public class ExternalLoginListViewModel
+    {
         public string ReturnUrl { get; set; }
     }
 
-    public class SendCodeViewModel {
+    public class SendCodeViewModel
+    {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
     }
 
-    public class VerifyCodeViewModel {
+    public class VerifyCodeViewModel
+    {
         [Required]
         public string Provider { get; set; }
 
@@ -32,13 +38,15 @@ namespace Turbo_Phim.Models {
         public bool RememberBrowser { get; set; }
     }
 
-    public class ForgotViewModel {
+    public class ForgotViewModel
+    {
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
-    public class LoginViewModel {
+    public class LoginViewModel
+    {
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
@@ -54,14 +62,15 @@ namespace Turbo_Phim.Models {
 
     }
 
-    public class RegisterViewModel {
+    public class RegisterViewModel
+    {
 
-        [Required(ErrorMessage="Phải nhập {0} của bạn.")]
+        [Required(ErrorMessage = "Phải nhập {0} của bạn.")]
         [EmailAddress(ErrorMessage = "{0} không đúng định dạng.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-         [Required(ErrorMessage = "Phải nhập {0} của bạn.")]
+        [Required(ErrorMessage = "Phải nhập {0} của bạn.")]
         [StringLength(20, ErrorMessage = "{0} phải ít nhất 6 kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
@@ -69,7 +78,7 @@ namespace Turbo_Phim.Models {
 
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "{0} không trùng khớp")]
-        [Display(Name = "Nhập lại mật khẩu")]       
+        [Display(Name = "Nhập lại mật khẩu")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Họ và tên")]
@@ -94,7 +103,8 @@ namespace Turbo_Phim.Models {
 
     }
 
-    public class ResetPasswordViewModel {
+    public class ResetPasswordViewModel
+    {
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -114,10 +124,20 @@ namespace Turbo_Phim.Models {
         public string Code { get; set; }
     }
 
-    public class ForgotPasswordViewModel {
+    public class ForgotPasswordViewModel
+    {
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class CaptchaResponse
+    {
+        [JsonProperty("success")]
+        public bool Success { get; set; }
+
+        [JsonProperty("error-codes")]
+        public List<string> ErrorCodes { get; set; }
     }
 }
