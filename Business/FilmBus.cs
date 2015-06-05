@@ -570,29 +570,25 @@ namespace Business
             }
               return result;
         }
-// I. Hiển thị list những bài những xét được bình chọn nhiều nhất, top 10
-        // 1. Lọc những bài nhận xét nào tình trạng k còn dùng bỏ ra
-        // 2. Count Các bình chọn cho các mã số bài nhận xét, rồi sort và lấy ra top 10
-        // 3. TỪ mã số bài nhận xét, lấy ra list những bài nhận xét để show lên
 
-// II. Hiển thị những bài nhận xét cho các bộ phim mới 
+
+// II. Hiển thị những bài nhận xét mới 
         public List<BaiNhanXet> findThink()
         {
             List<BaiNhanXet> result = new List<BaiNhanXet>();
 
             List<BaiNhanXet> lst_nx = db.BaiNhanXet.ToList();
 
-            List<Phim> lst = new List<Phim>();
-            lst = findFilmNew();
+            DateTime saveNow = DateTime.Now;
+            
 
-            for (int i = 0; i < lst.Count(); i++)
+            for (int i = 0; i < lst_nx.Count(); i++)
             {
-                for (int h = 0; h < lst_nx.Count(); h++)
-                { 
-                    if(lst_nx[h].MS_Phim == lst[i].MaSo)
-                    {
-                        result.Add(lst_nx[h]);
-                    }
+                DateTime date = (DateTime)lst_nx[i].NgayDang;
+                System.TimeSpan diff = saveNow.Subtract(date);
+                if (diff.Days <= 30)
+                {
+                    result.Add(lst_nx[i]);
                 }
             }
 
