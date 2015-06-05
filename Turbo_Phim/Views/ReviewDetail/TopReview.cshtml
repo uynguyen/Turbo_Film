@@ -17,7 +17,7 @@
         <h5>Được đăng bởi @Model.UserName lúc @Model.postDate:</h5>
         <h5>Tổng số lượt bình chọn @Model.totalRank:</h5>
         
-        @Html.Raw(@Model.content)
+        @Html.Raw("<div class='postReivew'>" + @Model.content + "</div>")
     }
    
 

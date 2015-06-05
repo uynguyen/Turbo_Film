@@ -31,7 +31,7 @@ namespace Turbo_Phim.Services
         {
             
             AccountBus acBus = new AccountBus();
-              ReviewFilmsBus bus = new ReviewFilmsBus();
+            ReviewFilmsBus bus = new ReviewFilmsBus();
             ThanhVien temp = acBus.getMemberByUserId(topReview.MS_TaiKhoan);
 
             TopReviewModels result = new TopReviewModels();
@@ -46,9 +46,11 @@ namespace Turbo_Phim.Services
             result.MS_Phim = (int) topReview.MS_Phim;
             result.MS_ReView = (int) topReview.MaSo;
 
+            FilmBus filmBus = new FilmBus();
 
-
-
+            Phim p = filmBus.getFilmByID(result.MS_Phim.ToString());
+            result.ulr_HinhAnh = p.HinhAnh;
+            result.TenPhim = p.TenPhim;
             return result;
         }
 
@@ -108,6 +110,12 @@ namespace Turbo_Phim.Services
         {
             ReviewFilmsBus bus = new ReviewFilmsBus();
             return bus.editPost(baiNhanXet);
+        }
+
+        internal bool deletePost(string IDPost)
+        {
+            ReviewFilmsBus bus = new ReviewFilmsBus();
+            return bus.deletePost(Int32.Parse(IDPost));
         }
     }
 }

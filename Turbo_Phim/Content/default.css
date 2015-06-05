@@ -56,5 +56,14 @@ table
     text-justify: inter-word;
 
 }
+.ImageFilmMyListReview{
 
+}
+.myReview{
+    background: #f7f1d4 !important;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
     

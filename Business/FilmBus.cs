@@ -225,7 +225,7 @@ namespace Business
         {
             try
             {
-                db.Entry(p).State = EntityState.Modified;
+                db.Entry(p).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
 

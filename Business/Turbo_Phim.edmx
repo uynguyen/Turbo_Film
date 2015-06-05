@@ -77,7 +77,7 @@
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="datetime" />
           <Property Name="TinhTrang" Type="bit" />
-          <Property Name="TieuDe" Type="text" />
+          <Property Name="TieuDe" Type="ntext" />
         </EntityType>
         <EntityType Name="BangThamSo">
           <Key>
@@ -101,7 +101,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
+          <Property Name="MS_ThanhVien" Type="int" />
           <Property Name="MS_BaiNhanXet" Type="int" />
           <Property Name="NoiDung" Type="ntext" />
           <Property Name="NgayDang" Type="date" />
@@ -111,7 +111,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
+          <Property Name="MS_ThanhVien" Type="int" />
           <Property Name="MS_Phim" Type="int" />
           <Property Name="DiemDanhGia" Type="float" />
         </EntityType>
@@ -136,7 +136,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
+          <Property Name="MS_ThanhVien" Type="int" />
           <Property Name="MS_Phim" Type="int" />
         </EntityType>
         <EntityType Name="Phim">
@@ -172,10 +172,10 @@
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
-          <Property Name="MaSo" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
-          <Property Name="NgaySinh" Type="date" />
+          <Property Name="NgaySinh" Type="datetime" />
           <Property Name="TinhTrang" Type="bit" />
           <Property Name="GioiTinh" Type="bit" />
           <Property Name="Avatar" Type="nchar" MaxLength="100" />
@@ -558,7 +558,7 @@
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="3" />
           <Property Name="TinhTrang" Type="Boolean" />
-          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_BaiNhanXet_AspNetUsers" FromRole="BaiNhanXet" ToRole="AspNetUsers" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_BaiNhanXet_Phim" FromRole="BaiNhanXet" ToRole="Phim" />
           <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BaiNhanXet" ToRole="BinhChon" />
@@ -588,7 +588,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MS_ThanhVien" Type="Int32" />
           <Property Name="MS_BaiNhanXet" Type="Int32" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayDang" Type="DateTime" Precision="0" />
@@ -600,7 +600,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MS_ThanhVien" Type="Int32" />
           <Property Name="MS_Phim" Type="Int32" />
           <Property Name="DiemDanhGia" Type="Double" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhGia_Phim" FromRole="DanhGia" ToRole="Phim" />
@@ -629,7 +629,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MS_ThanhVien" Type="Int32" />
           <Property Name="MS_Phim" Type="Int32" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhSachPhimYeuThich_Phim" FromRole="DanhSachPhimYeuThich" ToRole="Phim" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_DanhSachPhimYeuThich_ThanhVien" FromRole="DanhSachPhimYeuThich" ToRole="ThanhVien" />
@@ -672,10 +672,10 @@
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
-          <Property Name="MaSo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <Property Name="TinhTrang" Type="Boolean" />
           <Property Name="GioiTinh" Type="Boolean" />
           <Property Name="Avatar" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
@@ -1166,7 +1166,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

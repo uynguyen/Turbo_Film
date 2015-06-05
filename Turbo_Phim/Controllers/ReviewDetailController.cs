@@ -61,8 +61,8 @@ namespace Turbo_Phim.Controllers
 
             temp.contentPost = baiNhanXet.content;
             temp.title = baiNhanXet.title;
-
-
+            temp.MaSoBaiNhanXet = baiNhanXet.MS_ReView;
+            
 
 
 
@@ -76,6 +76,7 @@ namespace Turbo_Phim.Controllers
             FilmService bus = new FilmService();
 
             BaiNhanXet baiNhanXet = new BaiNhanXet();
+            baiNhanXet.MaSo = phim.MaSoBaiNhanXet;
             baiNhanXet.TinhTrang = true;
             baiNhanXet.MS_Phim = phim.MaSo;
             baiNhanXet.TieuDe = phim.title;
@@ -89,6 +90,20 @@ namespace Turbo_Phim.Controllers
 
 
             return View();
+        }
+
+      
+        [HttpPost]
+        [Authorize]
+        public String DeletePost(String IDPost)
+        {
+            ReviewFilmService reviewS = new ReviewFilmService();
+            bool result = reviewS.deletePost(IDPost);
+
+            if (result)
+                return "success";
+            else
+                return "failed";
         }
 
         [Authorize]

@@ -25,11 +25,14 @@ namespace Turbo_Phim.Models
         public int MS_Phim { get; set; }
 
         public int MS_ReView { get; set; }
-           
+
+        public String TenPhim { get; set; }
+
+        
 
 
 
-
+        public String ulr_HinhAnh { get; set; }
 
 
 

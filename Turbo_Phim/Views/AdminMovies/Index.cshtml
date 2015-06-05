@@ -171,8 +171,7 @@
                      
 
                             <td>
-                                @*<a href="user.html"><i class="fa fa-pencil"></i></a>
-                                    <a href="#myModal" class="open-AddBookDialog" role="button" data-toggle="modal" data-id="@p.MaSo"><i class="fa fa-trash-o"></i></a>*@
+                                
                                 @using (Html.BeginForm("Edit", "AdminMovies", FormMethod.Get))
                                 {
                                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" name="codeFilm" value="@p.MaSo"><a href="#myModal" role="button" data-toggle="modal" name="codeFilm"><i class="fa fa-pencil"></i></button>

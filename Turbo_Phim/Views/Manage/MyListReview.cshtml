@@ -3,43 +3,95 @@
     ViewBag.Title = "MyListReview";
 }
 
-<div class="col-md-9 reviews-grids">
 
-   @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
-   {
+<script type="text/javascript">
+        $(document).on("click", "#open-AddBookDialog", function () {
+            var myBookId = $(this).data('id');
+            $("#btnDeleteReview").val(myBookId);
+
+        });
+
+        $(document).ready(function () {
+            $("#btnDeleteReview").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("DeletePost", "ReviewDetail")',
+                    data: { IDPost: $(this).val() },
+                    success: function (data) {
+                       
+                        $("#myModal").modal('hide');
+                     
+                        var id = $("#btnDeleteReview").val();
+                        $("#" + id).remove();
+                    },
+                    error: function (data) {
+                      
+                       
+                    }
+
+                    
+                });
+
+            });
+        });
+</script>
 
 
 
-        <div class="review">
-            
+<div class="col-md-7 reviews-grids">
+
+    @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
+    {
+
+        <div class="review myReview" id="@p.MS_ReView">
+            <img class="ImageFilmMyListReview" src="@p.ulr_HinhAnh" alt="" />
             <div class="review-info">
 
                 @Html.ActionLink("Tiêu đề: " + p.title, "Index", "ReviewDetail", new { IDPhim = @p.MS_Phim, IDReview = p.MS_ReView }, new { @class = "span" })
                 <p class="dirctr">Ngày đăng: @p.postDate.ToString("dd/MM/yyyy hh:mm:ss")</p>
+                <p>Đánh giá phim: @p.TenPhim</p>
                 <div class="clearfix"></div>
                 <div class="yrw">
- 
-                
-                    <div class="wt text-center">
-                        <a class="button play-icon" href="#">Xóa bài nhận xét</a>
-                    </div>
+
+                  
                     <div class="rtm text-center">
+                        <a href="#myModal" class="button play-icon" id="open-AddBookDialog" role="button" data-toggle="modal" data-id="@p.MS_ReView">Xóa bài nhận xét</a>
+                    </div>
+                    <div class="wt text-center">
                         <a class="button play-icon" href="@Url.Action("EditPost", "ReviewDetail", new { IDReview = @p.MS_ReView })">Edit bài nhận xét</a>
                     </div>
 
-
-
-
-
                     <div class="clearfix"></div>
                 </div>
-             
-              
             </div>
             <div class="clearfix"></div>
         </div>
-   }
+    }
+  
 </div>
 
 
+<div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 id="myModalLabel">Xác nhận xóa bài nhận xét</h2>
+            </div>
+            <div class="modal-body">
+                <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn có chắc muốn xóa bài nhận xét này?</p>
+            </div>
+            <div class="modal-footer">
 
+
+                @*   @using (Html.BeginForm("Delete", "AdminMovies", FormMethod.Get))*@
+
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
+                <button class="btn btn-danger" type="submit" value="" id="btnDeleteReview" name="codeFilm">Xóa</button>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

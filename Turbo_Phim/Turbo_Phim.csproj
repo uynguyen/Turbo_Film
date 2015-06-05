@@ -354,13 +354,12 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login-dropdown.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -419,7 +418,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Review\Genre.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
-    <Content Include="Views\Review\ReviewDetail.cshtml" />
     <Content Include="Views\Video\Index.cshtml" />
     <Content Include="Views\Manage\UpdateProfile.cshtml" />
     <Content Include="Views\AdminMain\Index.cshtml" />
@@ -444,6 +442,8 @@
     <Content Include="Views\Manage\MyListReview.cshtml" />
     <Content Include="Views\ReviewDetail\EditPost.cshtml" />
     <Content Include="Views\Account\LoginUnauthorized.cshtml" />
+    <Content Include="Views\ReviewDetail\EditedPost.cshtml" />
+    <Content Include="Views\ReviewDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

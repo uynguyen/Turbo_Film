@@ -66,6 +66,9 @@ namespace Turbo_Phim.Models
 
          public String title { get; set; }
 
+         public int MaSoBaiNhanXet { get; set; }
+
+
          public int MS_NuocSX { get; set; }
 
          public int MS_TheLoai { get; set; }
@@ -73,6 +76,11 @@ namespace Turbo_Phim.Models
          public float DiemDanhGiaTrungBinh { get; set; }
 
          public int LuotDanhGia { get; set; }
+
+
+        
+
+        //-----------------------------SẮP XÊP & PHÂN TRANG GIỮA KỲ
          public String strSort { get; set; }
 
 

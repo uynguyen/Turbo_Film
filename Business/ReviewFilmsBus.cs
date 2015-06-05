@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,6 +154,24 @@ namespace Business
             catch (Exception e)
             {
              
+                return false;
+            }
+        }
+
+        public bool deletePost(int IDPost)
+        {
+            try
+            {
+                BaiNhanXet temp = db.BaiNhanXet.Where(x => x.MaSo == IDPost).FirstOrDefault();
+                db.BaiNhanXet.Remove(temp);
+                db.SaveChanges();
+
+
+                return true;
+            }
+            catch (Exception e)
+            {
+
                 return false;
             }
         }
