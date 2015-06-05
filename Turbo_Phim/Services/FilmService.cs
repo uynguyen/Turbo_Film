@@ -203,6 +203,12 @@ namespace Turbo_Phim.Services
             return result;
         }
 
+        // Minh se tao mot models moi o day 
+        //public List<BaiNhanXet> findThink()
+        //{
+
+        //}
+
 
     }
 }

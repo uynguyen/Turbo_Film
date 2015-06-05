@@ -109,5 +109,22 @@ namespace Turbo_Phim.Services
             ReviewFilmsBus bus = new ReviewFilmsBus();
             return bus.editPost(baiNhanXet);
         }
+
+        //private List<ReviewFilmService> showReview(List<BaiNhanXet> baiNhanXet)
+        //{
+        //    ReviewFilmsBus bus = new ReviewFilmsBus();
+
+        //}
+        
+
+
+
+
+
+
+
+
+
+
     }
 }
