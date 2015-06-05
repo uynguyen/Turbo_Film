@@ -2,56 +2,45 @@
     @{
         ViewBag.Title = "filmNew";
         Layout = null;
-    }              
-            @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
-            {
+    }
+    @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+    {
 
-                <div class="news-grid">
-                    <h5>@p.TenPhim</h5>
-                    <label>Dự kiến khởi chiếu: @p.NgayPhatHanh </label>
+        <div class="news-grid">
+            <h5>@p.TenPhim</h5>
+            <label>Dự kiến khởi chiếu: @p.NgayPhatHanh </label>
 
-                    <p class="new-content">                      
-                        @p.NoiDung.Substring(0, @p.NoiDung.IndexOf(".")+1)...
-                    </p>
-                    <p class="hidden">
-                        @p.NoiDung
-                    </p>
-                    <a class="more">MORE</a>
-                </div>
-            }
-               <script>
+            <p class="new-content">
+                @p.NoiDung.Substring(0, @p.NoiDung.IndexOf(".") + 1)...
+            </p>
 
+            <p class="hidden" id="c1">
+                @p.NoiDung
+            </p>
+            <p class="hidden" id="c2">
+                @p.NoiDung.Substring(0, @p.NoiDung.IndexOf(".") + 1)...
+            </p>
 
-                   $(document).ready(function () {
-                       $(".more").click(function () {
-                           
-                           var parent = $(this).parent();
-                           var p = $("p[class='new-content']", parent);
-                           var phidden = $("p[class='hidden']", parent);
-                           p.html(phidden.text());
-                       });
-                   });
-                  
+            <a class="more">MORE</a>
+        </div>
+    }
+    <script>
+        $(document).ready(function () {
+            $(".more").click(function () {
+                var parent = $(this).parent();
+                var p = $("p[class='new-content']", parent);
+                if ($(this).hasClass("ex")) {
+                    var phidden = $("p[id='c2']", parent);
+                    p.html(phidden.text());
+                    $(this).removeClass("ex");
+                }
+                else {
+                    var phidden = $("p[id='c1']", parent);
+                    p.html(phidden.text());
+                    $(this).addClass("ex");
+                }
+            });
+        });
+    </script>
 
-               </script>
-
-               <nav>
-                   <ul class="pagination">
-                       <li>
-                           <a href="#" aria-label="Previous">
-                               <span aria-hidden="true">&laquo;</span>
-                           </a>
-                       </li>
-                       <li><a href="#">1</a></li>
-                       <li><a href="#">2</a></li>
-                       <li><a href="#">3</a></li>
-                       <li><a href="#">4</a></li>
-                       <li><a href="#">5</a></li>
-                       <li>
-                           <a href="#" aria-label="Next">
-                               <span aria-hidden="true">&raquo;</span>
-                           </a>
-                       </li>
-                   </ul>
-               </nav>
 

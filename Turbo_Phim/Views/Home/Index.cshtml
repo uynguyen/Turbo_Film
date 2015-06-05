@@ -21,7 +21,7 @@
             <p class="review">Ngày phát hành &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;@Model.NgayPhatHanh</p>
 
             <p class="special">
-                @Model.NoiDung
+                @Model.NoiDung.Substring(0, @Model.NoiDung.IndexOf(".") + 1)...
             </p>
             <a class="video" href="@Model.URL_Trailer"><i class="video1"></i>TRAILER</a>
 
