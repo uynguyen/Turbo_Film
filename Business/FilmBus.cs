@@ -570,11 +570,27 @@ namespace Business
             }
               return result;
         }
-// 1. Hiển thị list những bài những xét được bình chọn nhiều nhất, top 10
-// 2. Hiển thị những bài nhận xét cho các bộ phim mới 
+
+
+// II. Hiển thị những bài nhận xét mới 
         public List<BaiNhanXet> findThink()
         {
             List<BaiNhanXet> result = new List<BaiNhanXet>();
+
+            List<BaiNhanXet> lst_nx = db.BaiNhanXet.ToList();
+
+            DateTime saveNow = DateTime.Now;
+            
+
+            for (int i = 0; i < lst_nx.Count(); i++)
+            {
+                DateTime date = (DateTime)lst_nx[i].NgayDang;
+                System.TimeSpan diff = saveNow.Subtract(date);
+                if (diff.Days <= 30)
+                {
+                    result.Add(lst_nx[i]);
+                }
+            }
 
             return result;
         }

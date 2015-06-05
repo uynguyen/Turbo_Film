@@ -26,6 +26,24 @@ namespace Turbo_Phim.Controllers {
             return View(result[0]);
         }
 
+        public ActionResult filmNew()
+        {
+            FilmService phimService = new FilmService();
+
+            List<PhimViewModels> result = phimService.findFilmNew();
+            return PartialView(result);
+        }
+
+        public ActionResult showReview()
+        {
+            ReviewFilmService review = new ReviewFilmService();
+
+            List<TopReviewModels> result = review.showReview();
+
+            return PartialView(result);
+        }
+
+
         [Authorize]
         public ActionResult About() {
             ViewBag.Message = "Your app description page.";
