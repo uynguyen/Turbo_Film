@@ -217,16 +217,26 @@ namespace Turbo_Phim.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "Member");
-                    AC.CreateProfile(user, model);
-                    await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                   //if(!AC.CreateProfile(user, model))
+                   //{
+                   //    await UserManager.DeleteAsync(user);
+                   //    return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
+                   //}
 
-                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    //ViewBag.Link = callbackUrl;
-                    //return View("DisplayEmail");
-                    return RedirectToAction("Index", "Home");
+                    await UserManager.AddToRoleAsync(user.Id, "Member");
+
+                  //  await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                       new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                    await UserManager.SendEmailAsync(user.Id,
+                       "Xác nhận tài khoản của bạn", "Vui lòng xác nhận tài khoản bằng cách nhấn vào <a href=\""
+                       + callbackUrl + "\">đây</a>");
+
+                    return View("DisplayEmail");
                 }
                 AddErrors(result);
             }
