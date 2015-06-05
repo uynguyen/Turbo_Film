@@ -53,11 +53,7 @@ namespace Turbo_Phim.Services
             pvm.isASC = isASC;
 
             pvm.MS_TheLoai = (int)p.MS_TheLoai;
-            pvm.MS_NuocSX = (int)p.MS_NuocSX;
-
-         
-
-
+            pvm.MS_NuocSX = (int)p.MS_NuocSX;       
             return pvm;
         }
 
@@ -203,11 +199,6 @@ namespace Turbo_Phim.Services
             return result;
         }
 
-        // Minh se tao mot models moi o day 
-        //public List<BaiNhanXet> findThink()
-        //{
-
-        //}
 
 
     }

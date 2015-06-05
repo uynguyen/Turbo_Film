@@ -1,10 +1,8 @@
 ﻿@model List<Turbo_Phim.Models.PhimViewModels>
-
     @{
         ViewBag.Title = "filmNew";
         Layout = null;
-    }
-
+    }              
             @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
             {
 
@@ -12,13 +10,30 @@
                     <h5>@p.TenPhim</h5>
                     <label>Dự kiến khởi chiếu: @p.NgayPhatHanh </label>
 
-                    <p>
-                        @*@int pos = @p.NoiDung.IndexOf(".")*@
+                    <p class="new-content">                      
                         @p.NoiDung.Substring(0, @p.NoiDung.IndexOf(".")+1)...
                     </p>
-                    <a class="more" href="Action">MORE</a>
+                    <p class="hidden">
+                        @p.NoiDung
+                    </p>
+                    <a class="more">MORE</a>
                 </div>
             }
+               <script>
+
+
+                   $(document).ready(function () {
+                       $(".more").click(function () {
+                           
+                           var parent = $(this).parent();
+                           var p = $("p[class='new-content']", parent);
+                           var phidden = $("p[class='hidden']", parent);
+                           p.html(phidden.text());
+                       });
+                   });
+                  
+
+               </script>
 
                <nav>
                    <ul class="pagination">
