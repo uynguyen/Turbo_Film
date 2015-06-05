@@ -163,10 +163,18 @@ namespace Business
             try
             {
                 BaiNhanXet temp = db.BaiNhanXet.Where(x => x.MaSo == IDPost).FirstOrDefault();
-                db.BaiNhanXet.Remove(temp);
+                temp.TinhTrang = false;
+               
+
+                List<BinhChon> lstBinhChon = db.BinhChon.ToList();
+                foreach (BinhChon binhChon in lstBinhChon) //Đánh dấu bỏ những bài bình chọn liên quan
+                {
+                    if (binhChon.MS_BaiNhanXet == IDPost)
+                    {
+                        binhChon.TinhTrang = false;
+                    }
+                }
                 db.SaveChanges();
-
-
                 return true;
             }
             catch (Exception e)

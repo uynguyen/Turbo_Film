@@ -15,23 +15,25 @@ namespace Business
         public static int MAX_PRODUCT_EACHPAGE = 0;
         public static int MAX_INDEX_PAGE = 0;
 
-        public FilmBus(){
+        public FilmBus()
+        {
 
-             MAX_PRODUCT_EACHPAGE = getMaxProductOnEachPage();
+            MAX_PRODUCT_EACHPAGE = getMaxProductOnEachPage();
 
-             
-             MAX_INDEX_PAGE = getMaxIndexPage();
-                
+
+            MAX_INDEX_PAGE = getMaxIndexPage();
+
         }
-        
-        public int  getMaxIndexPage(){
+
+        public int getMaxIndexPage()
+        {
             BangThamSo temp = db.BangThamSo.Where(x => x.TenThamSo == "GiaTriTrangLonNhatMoiLanPhanTrang").FirstOrDefault();
             return Int32.Parse(temp.GiaTri);
         }
 
         public List<Phim> getAllFilms(int page, String strSort, bool isASC)
         {
-            if(isASC)
+            if (isASC)
             {
                 switch (strSort)
                 {
@@ -67,8 +69,8 @@ namespace Business
                         return db.Phim.Where(x => x.TinhTrang == true).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
                 }
             }
-            return  db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-           
+            return db.Phim.Where(x => x.TinhTrang == true).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+
         }
 
 
@@ -134,7 +136,7 @@ namespace Business
                 Debug.Print(e.Message);
                 return false;
             }
-           
+
         }
 
 
@@ -164,19 +166,20 @@ namespace Business
 
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.Message);
                 return false;
             }
-           
+
 
 
         }
 
         public bool addNewFilmd(Phim p)
         {
-            try {
+            try
+            {
                 if (p.MS_NuocSX == null)
                 {
                     DanhMucNuocSanXuat diffCountry = db.DanhMucNuocSanXuat.Where(x => x.TenNuoc.Equals("Khác")).FirstOrDefault();
@@ -195,13 +198,13 @@ namespace Business
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.Message);
                 return false;
             }
 
-           
+
         }
 
         public Phim getFilmByID(string codeFilm)
@@ -213,7 +216,7 @@ namespace Business
         {
             int t = (from entry in db.DanhMucNuocSanXuat where entry.TenNuoc.Equals(country) select entry.MaSo).Single();
             return t;
-            
+
         }
         public int getIDOfType(string type)
         {
@@ -231,7 +234,7 @@ namespace Business
 
                 return true;
             }
-           catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.Message);
                 return false;
@@ -264,12 +267,12 @@ namespace Business
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.Message);
                 return false;
             }
-           
+
         }
 
         public bool createNewCountry(string name)
@@ -288,7 +291,7 @@ namespace Business
                 Debug.Print(e.Message);
                 return false;
             }
-           
+
         }
 
         public bool editCountry(int p, string newName)
@@ -305,7 +308,7 @@ namespace Business
                 Debug.Print(e.Message);
                 return false;
             }
-           
+
         }
 
         public bool deleteCountry(int id)
@@ -332,7 +335,7 @@ namespace Business
 
                 return true;
             }
-           catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.Message);
                 return false;
@@ -343,19 +346,19 @@ namespace Business
         // Cac ham chuc nang search cua Xanh
 
 
-// Cac ham chuc nang search cua Xanh
+        // Cac ham chuc nang search cua Xanh
 
         public List<Phim> searchFilm(string nameFilm, int page, out int maxPage)
-        {          
+        {
 
-    // Giải quyết vấn đề dạng 1
+            // Giải quyết vấn đề dạng 1
             var t = from entry in db.Phim select entry;
             if (!String.IsNullOrEmpty(nameFilm))
                 t = t.Where(e => e.TenPhim.Contains(nameFilm) && e.TinhTrang == true);
             maxPage = countPageSearch(t.ToList());
 
-            if(t.ToList().Count != 0)
-            return t.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            if (t.ToList().Count != 0)
+                return t.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
             else
             {
                 // Giải quyết vấn đề dạng 3
@@ -419,23 +422,23 @@ namespace Business
             return false;
         }
         public List<Phim> searchFilm4(string actor, string directer, string country, string type, int page, out int maxPage)
-        {            
+        {
             //List<Phim> lst = db.Phim.ToList();
             //List<Phim> result = new List<Phim>();
             //return result;
 
-            int maNuoc = getIDOfCountry(country); 
-            int maTheLoai = getIDOfType(type); 
+            int maNuoc = getIDOfCountry(country);
+            int maTheLoai = getIDOfType(type);
 
             var t1 = from entry in db.Phim select entry;
             if (!String.IsNullOrEmpty(actor) || !String.IsNullOrEmpty(directer))
-               t1 = t1.Where(e => e.DienVien.Contains(actor) && e.DaoDien.Contains(directer) 
-                                                && e.MS_NuocSX == maNuoc && e.MS_TheLoai == maTheLoai);
+                t1 = t1.Where(e => e.DienVien.Contains(actor) && e.DaoDien.Contains(directer)
+                                                 && e.MS_NuocSX == maNuoc && e.MS_TheLoai == maTheLoai);
             maxPage = countPageSearch(t1.ToList());
-       //     if (t1.ToList().Count != 0)
-       //     {
-                return t1.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-        //    }
+            //     if (t1.ToList().Count != 0)
+            //     {
+            return t1.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+            //    }
             //else
             //{
 
@@ -493,11 +496,11 @@ namespace Business
 
             foreach (DanhGia item in lstJudge)
             {
-                result += (float) item.DiemDanhGia;
+                result += (float)item.DiemDanhGia;
 
             }
 
-            return result  / lstJudge.Count;
+            return result / lstJudge.Count;
         }
 
         public int countRateTimes(int p)
@@ -522,24 +525,98 @@ namespace Business
         }
 
 
+        //Thống kê phần trăm thể loại phim được quan tâm nhiều nhất (Dựa vào số lượng bài nhận xét của từng thể loại phim)
+        public Dictionary<int, float> statisticPhimForGenre()
+        {
+            try
+            {
+                Dictionary<int, float> result = new Dictionary<int, float>();
+
+
+                Dictionary<int, int> total = new Dictionary<int, int>();
+                List<BaiNhanXet> lstBaiNhanXet = db.BaiNhanXet.ToList();
+
+
+                FilmBus filmBus = new FilmBus();
+                foreach (BaiNhanXet baiNhanXet in lstBaiNhanXet)
+                {
+
+                    int MSPhim = (int)baiNhanXet.MS_Phim;
+                    Phim phim = filmBus.getFilmByID(MSPhim.ToString());
+                    int MS_TheLoai = (int)phim.MS_TheLoai;
+                    if (total.ContainsKey(MS_TheLoai))
+                    {
+                        total[MS_TheLoai]++;
+                    }
+                    else
+                    {
+                        total.Add(MS_TheLoai, 1);
+                    }
+
+                }
+                //List<DanhMucTheLoai> lstTheLoai = db.DanhMucTheLoai.ToList();
+
+
+                //int totalCount = db.BaiNhanXet.ToList().Count();
+                //foreach (DanhMucTheLoai theLoai in lstTheLoai)
+                //{
+                //    float persent = 0f;
+                //    int temp = total[theLoai.MaSo];
+                //    if(temp != 0)
+                //    {
+                //        persent = temp / totalCount; 
+                //    }
+                //    result.Add(theLoai.MaSo, persent);
+
+                //}
+
+                return result;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+
+        }
+
+        //Thống kê phần trăm thể loại phim được quan tâm nhiều nhất (Dựa vào số lượng bài nhận xét của từng thể loại phim)
+        public Dictionary<int, float> statisticPhimForCountry()
+        {
+            Dictionary<int, float> result = new Dictionary<int, float>();
 
 
 
-// Cac chuc nang ve trang chu
+
+            return result;
+
+        }
+
+
+
+
+
+
+
+
+
+
+        // Cac chuc nang ve trang chu
         public List<Phim> filmMax()
-        {            
+        {
             List<Phim> result = new List<Phim>();
             List<Phim> lst = db.Phim.ToList();
             Phim temp = lst[0];
 
-            for (int i = 1; i < lst.Count(); i++ )
+            for (int i = 1; i < lst.Count(); i++)
             {
-                if(lst[i].DiemDanhGia > temp.DiemDanhGia)
+                if (lst[i].DiemDanhGia > temp.DiemDanhGia)
                 {
                     temp = lst[i];
                 }
                 else
-                    if(lst[i].DiemDanhGia == temp.DiemDanhGia)
+                    if (lst[i].DiemDanhGia == temp.DiemDanhGia)
                     {
                         DateTime date1 = (DateTime)lst[i].NgayPhatHanh;
                         DateTime date2 = (DateTime)temp.NgayPhatHanh;
@@ -547,7 +624,7 @@ namespace Business
                         if (ss > 0) // date1 > date2
                             temp = lst[i];
                     }
-            }                       
+            }
             result.Add(temp);
             return result;
         }
@@ -558,21 +635,21 @@ namespace Business
 
             List<Phim> lst = db.Phim.ToList();
             DateTime saveNow = DateTime.Now;
-            for (int i = 0; i < lst.Count(); i++ )
+            for (int i = 0; i < lst.Count(); i++)
             {
-// Những bộ phim nào mà phát hành trong vòng 1 tháng thì được xem là phim mới        
+                // Những bộ phim nào mà phát hành trong vòng 1 tháng thì được xem là phim mới        
                 DateTime date = (DateTime)lst[i].NgayPhatHanh;
                 System.TimeSpan diff = saveNow.Subtract(date);
-                if(diff.Days <= 30)
+                if (diff.Days <= 30)
                 {
                     result.Add(lst[i]);
                 }
             }
-              return result;
+            return result;
         }
 
 
-// II. Hiển thị những bài nhận xét mới 
+        // II. Hiển thị những bài nhận xét mới 
         public List<BaiNhanXet> findThink()
         {
             List<BaiNhanXet> result = new List<BaiNhanXet>();
@@ -580,7 +657,7 @@ namespace Business
             List<BaiNhanXet> lst_nx = db.BaiNhanXet.ToList();
 
             DateTime saveNow = DateTime.Now;
-            
+
 
             for (int i = 0; i < lst_nx.Count(); i++)
             {

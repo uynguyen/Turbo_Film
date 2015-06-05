@@ -156,19 +156,19 @@ label{
 	background: rgba(255, 255, 255, 0.47);
 }
 .header {
-	background: url('./images/header-bg.jpg') no-repeat 0px 0px;
+	background: url('./images/1.jpg') no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
 	-o-background-size:cover;
 	-ms-background-size:cover;
 	min-height:750px;	
-   margin-top: -5em;
+   margin-top: -7em;
    padding-top:5em;
 }
 .header-info {
 	float:right;
-	padding-top:4em;
+	padding-top:2em;
 	width:25%;
 	margin-right: 2.5%;
 }
@@ -1406,8 +1406,8 @@ font-weight: 700;
 	.header-info {
 		float: right;
           padding-top: 2em;
-          width: 31%;
-          margin-right: 2%;
+          width: 40%;
+          margin-right: -10%;
 	}
 	p.special {
 		font-size: 0.95em;

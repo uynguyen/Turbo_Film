@@ -1,7 +1,13 @@
-﻿@{
+﻿@model Business.DanhMucNuocSanXuat
+@{
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_Admin_layout.cshtml";
 }
+
+
+<script type="text/javascript" src="~/Scripts/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jqplot.pieRenderer.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/jquery.jqplot.min.css" />
 
 
 <div class="content">
@@ -20,8 +26,61 @@
 
     </div>
     <div class="main-content">
+        @{
+            Dictionary<int, float> test = new Dictionary<int, float>();
+
+            test.Add(1, 10f);
+            test.Add(2, 90f);
+        }
 
 
+        @{
+
+            string json = "[";
+            foreach (int key in test.Keys)
+            {
+                json += "['" + key + "'," + test[key] + "],";
+            }
+            json += "]";
+        }
+        <div class="hidden" id="data" data-value="[['9',10],['2',90]]">[['9',10],['2',90]]</div>
+        <div id="pie8" style="margin-top:20px; margin-left:20px; width:400px; height:400px;"></div>
+        <script class="code" type="text/javascript">
+            $(document).ready(function () {
+                var json = [['Sony', 7], ['Samsumg', 13.3], ['LG', 14.7], ['Vizio', 5.2], ['Insignia', 1.2]];
+            
+                var plot8 = $.jqplot('pie8', [json], {
+                    grid: {
+                        drawBorder: false,
+                        drawGridlines: false,
+                        background: '#ffffff',
+                        shadow: false
+                    },
+                    axesDefaults: {
+
+                    },
+                    seriesDefaults: {
+                        renderer: $.jqplot.PieRenderer,
+                        rendererOptions: {
+                            showDataLabels: true
+                        }
+                    },
+                    legend: {
+                        show: true,
+                        rendererOptions: {
+                            numberRows: 1
+                        },
+                        location: 's'
+                    }
+                });
+            });
+
+
+
+
+
+
+        </script>
 
 
 
@@ -211,3 +270,4 @@
         </footer>
     </div>
 </div>
+

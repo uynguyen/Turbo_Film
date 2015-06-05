@@ -1,4 +1,6 @@
-﻿@model List<Turbo_Phim.Models.TopReviewModels>
+﻿
+@model List<Turbo_Phim.Models.TopReviewModels>
+@using System.Text.RegularExpressions;
     @{
         ViewBag.Title = "showReview";
         Layout = null;
@@ -6,6 +8,7 @@
 
     @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
     {
+        p.content = Regex.Replace(p.content, "<.*?>", string.Empty);
         <div class="news-grid">
             <h5> @p.title </h5>
             <label> @p.postDate </label>

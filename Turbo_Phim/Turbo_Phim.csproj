@@ -185,6 +185,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\CommentViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Content\jquery.jqplot.min.css" />
     <Content Include="Content\jqueryui.css" />
     <Content Include="Content\LoginDropdownForm.css" />
     <Content Include="Content\mystyle.css" />
@@ -347,6 +349,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\jqplot.pieRenderer.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -354,6 +357,8 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.jqplot.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -441,14 +446,12 @@
     <Content Include="Views\Manage\MyListReview.cshtml" />
     <Content Include="Views\ReviewDetail\EditPost.cshtml" />
     <Content Include="Views\Account\LoginUnauthorized.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\ReviewDetail\EditedPost.cshtml" />
     <Content Include="Views\ReviewDetail\Index.cshtml" />
-=======
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\filmNew.cshtml" />
     <Content Include="Views\Home\showReview.cshtml" />
->>>>>>> 6a2792321a4e494b0f0554cc0efd2bb9a1acdf15
+    <Content Include="Views\ReviewDetail\CommentsOfTopReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

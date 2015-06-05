@@ -95,23 +95,24 @@
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="int" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_BaiNhanXet" Type="int" />
           <Property Name="NoiDung" Type="ntext" />
-          <Property Name="NgayDang" Type="date" />
+          <Property Name="NgayDang" Type="datetime" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_Phim" Type="int" />
           <Property Name="DiemDanhGia" Type="float" />
         </EntityType>
@@ -136,7 +137,7 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MS_ThanhVien" Type="int" />
+          <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_Phim" Type="int" />
         </EntityType>
         <EntityType Name="Phim">
@@ -172,14 +173,14 @@
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
-          <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySinh" Type="datetime" />
           <Property Name="TinhTrang" Type="bit" />
           <Property Name="GioiTinh" Type="bit" />
           <Property Name="Avatar" Type="nchar" MaxLength="100" />
-          <Property Name="MS_TaiKhoan" Type="nvarchar" MaxLength="128" />
+          <Property Name="MS_TaiKhoan" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MaSo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK_BaiNhanXet_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
@@ -229,6 +230,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BinhLuan_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="MS_ThanhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BinhLuan_BaiNhanXet">
           <End Role="BaiNhanXet" Type="Self.BaiNhanXet" Multiplicity="0..1" />
           <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
@@ -241,14 +254,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BinhLuan_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+        <Association Name="FK_DanhGia_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BinhLuan">
+            <Dependent Role="DanhGia">
               <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
@@ -265,14 +278,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DanhGia_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+        <Association Name="FK_DanhSachPhimYeuThich_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="DanhSachPhimYeuThich" Type="Self.DanhSachPhimYeuThich" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DanhGia">
+            <Dependent Role="DanhSachPhimYeuThich">
               <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
@@ -286,18 +299,6 @@
             </Principal>
             <Dependent Role="DanhSachPhimYeuThich">
               <PropertyRef Name="MS_Phim" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DanhSachPhimYeuThich_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="DanhSachPhimYeuThich" Type="Self.DanhSachPhimYeuThich" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
-            </Principal>
-            <Dependent Role="DanhSachPhimYeuThich">
-              <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,7 +383,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ThanhVien_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -427,28 +428,28 @@
             <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
             <End Role="BinhChon" EntitySet="BinhChon" />
           </AssociationSet>
+          <AssociationSet Name="FK_BinhLuan_AspNetUsers" Association="Self.FK_BinhLuan_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          </AssociationSet>
           <AssociationSet Name="FK_BinhLuan_BaiNhanXet" Association="Self.FK_BinhLuan_BaiNhanXet">
             <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
             <End Role="BinhLuan" EntitySet="BinhLuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          <AssociationSet Name="FK_DanhGia_AspNetUsers" Association="Self.FK_DanhGia_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
           <AssociationSet Name="FK_DanhGia_Phim" Association="Self.FK_DanhGia_Phim">
             <End Role="Phim" EntitySet="Phim" />
             <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
-          <AssociationSet Name="FK_DanhGia_ThanhVien" Association="Self.FK_DanhGia_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="DanhGia" EntitySet="DanhGia" />
+          <AssociationSet Name="FK_DanhSachPhimYeuThich_AspNetUsers" Association="Self.FK_DanhSachPhimYeuThich_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DanhSachPhimYeuThich" EntitySet="DanhSachPhimYeuThich" />
           </AssociationSet>
           <AssociationSet Name="FK_DanhSachPhimYeuThich_Phim" Association="Self.FK_DanhSachPhimYeuThich_Phim">
             <End Role="Phim" EntitySet="Phim" />
-            <End Role="DanhSachPhimYeuThich" EntitySet="DanhSachPhimYeuThich" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhSachPhimYeuThich_ThanhVien" Association="Self.FK_DanhSachPhimYeuThich_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
             <End Role="DanhSachPhimYeuThich" EntitySet="DanhSachPhimYeuThich" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -545,6 +546,9 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BaiNhanXet_AspNetUsers" FromRole="AspNetUsers" ToRole="BaiNhanXet" />
           <NavigationProperty Name="BinhChon" Relationship="Self.FK_BinhChon_AspNetUsers" FromRole="AspNetUsers" ToRole="BinhChon" />
+          <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_AspNetUsers" FromRole="AspNetUsers" ToRole="BinhLuan" />
+          <NavigationProperty Name="DanhGia" Relationship="Self.FK_DanhGia_AspNetUsers" FromRole="AspNetUsers" ToRole="DanhGia" />
+          <NavigationProperty Name="DanhSachPhimYeuThich" Relationship="Self.FK_DanhSachPhimYeuThich_AspNetUsers" FromRole="AspNetUsers" ToRole="DanhSachPhimYeuThich" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_ThanhVien_AspNetUsers" FromRole="AspNetUsers" ToRole="ThanhVien" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
@@ -580,6 +584,7 @@
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="Int32" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_BinhChon_AspNetUsers" FromRole="BinhChon" ToRole="AspNetUsers" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BinhChon" ToRole="BaiNhanXet" />
         </EntityType>
@@ -588,23 +593,23 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MS_BaiNhanXet" Type="Int32" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NgayDang" Type="DateTime" Precision="0" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_BinhLuan_AspNetUsers" FromRole="BinhLuan" ToRole="AspNetUsers" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhLuan_BaiNhanXet" FromRole="BinhLuan" ToRole="BaiNhanXet" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="BinhLuan" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MS_Phim" Type="Int32" />
           <Property Name="DiemDanhGia" Type="Double" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_DanhGia_AspNetUsers" FromRole="DanhGia" ToRole="AspNetUsers" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhGia_Phim" FromRole="DanhGia" ToRole="Phim" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_DanhGia_ThanhVien" FromRole="DanhGia" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="DanhMucNuocSanXuat">
           <Key>
@@ -629,10 +634,10 @@
             <PropertyRef Name="MaSo" />
           </Key>
           <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MS_ThanhVien" Type="Int32" />
+          <Property Name="MS_ThanhVien" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="MS_Phim" Type="Int32" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_DanhSachPhimYeuThich_AspNetUsers" FromRole="DanhSachPhimYeuThich" ToRole="AspNetUsers" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhSachPhimYeuThich_Phim" FromRole="DanhSachPhimYeuThich" ToRole="Phim" />
-          <NavigationProperty Name="ThanhVien" Relationship="Self.FK_DanhSachPhimYeuThich_ThanhVien" FromRole="DanhSachPhimYeuThich" ToRole="ThanhVien" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -672,18 +677,15 @@
           <Key>
             <PropertyRef Name="MaSo" />
           </Key>
-          <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <Property Name="TinhTrang" Type="Boolean" />
           <Property Name="GioiTinh" Type="Boolean" />
           <Property Name="Avatar" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="MS_TaiKhoan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MS_TaiKhoan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaSo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_ThanhVien_AspNetUsers" FromRole="ThanhVien" ToRole="AspNetUsers" />
-          <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="ThanhVien" ToRole="BinhLuan" />
-          <NavigationProperty Name="DanhGia" Relationship="Self.FK_DanhGia_ThanhVien" FromRole="ThanhVien" ToRole="DanhGia" />
-          <NavigationProperty Name="DanhSachPhimYeuThich" Relationship="Self.FK_DanhSachPhimYeuThich_ThanhVien" FromRole="ThanhVien" ToRole="DanhSachPhimYeuThich" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -737,8 +739,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ThanhVien_AspNetUsers">
+        <Association Name="FK_BinhLuan_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="MS_ThanhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhGia_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DanhGia">
+              <PropertyRef Name="MS_ThanhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhSachPhimYeuThich_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="DanhSachPhimYeuThich" Type="Self.DanhSachPhimYeuThich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DanhSachPhimYeuThich">
+              <PropertyRef Name="MS_ThanhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThanhVien_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -785,18 +823,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BinhLuan_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
-            </Principal>
-            <Dependent Role="BinhLuan">
-              <PropertyRef Name="MS_ThanhVien" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DanhGia_Phim">
           <End Role="Phim" Type="Self.Phim" Multiplicity="0..1" />
           <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
@@ -806,18 +832,6 @@
             </Principal>
             <Dependent Role="DanhGia">
               <PropertyRef Name="MS_Phim" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DanhGia_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="DanhGia" Type="Self.DanhGia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
-            </Principal>
-            <Dependent Role="DanhGia">
-              <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -854,18 +868,6 @@
             </Principal>
             <Dependent Role="DanhSachPhimYeuThich">
               <PropertyRef Name="MS_Phim" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DanhSachPhimYeuThich_ThanhVien">
-          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1" />
-          <End Role="DanhSachPhimYeuThich" Type="Self.DanhSachPhimYeuThich" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThanhVien">
-              <PropertyRef Name="MaSo" />
-            </Principal>
-            <Dependent Role="DanhSachPhimYeuThich">
-              <PropertyRef Name="MS_ThanhVien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -906,6 +908,18 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="BinhChon" EntitySet="BinhChon" />
           </AssociationSet>
+          <AssociationSet Name="FK_BinhLuan_AspNetUsers" Association="Self.FK_BinhLuan_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BinhLuan" EntitySet="BinhLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGia_AspNetUsers" Association="Self.FK_DanhGia_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DanhGia" EntitySet="DanhGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhSachPhimYeuThich_AspNetUsers" Association="Self.FK_DanhSachPhimYeuThich_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DanhSachPhimYeuThich" EntitySet="DanhSachPhimYeuThich" />
+          </AssociationSet>
           <AssociationSet Name="FK_ThanhVien_AspNetUsers" Association="Self.FK_ThanhVien_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="ThanhVien" EntitySet="ThanhVien" />
@@ -922,16 +936,8 @@
             <End Role="BaiNhanXet" EntitySet="BaiNhanXet" />
             <End Role="BinhLuan" EntitySet="BinhLuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
-            <End Role="BinhLuan" EntitySet="BinhLuan" />
-          </AssociationSet>
           <AssociationSet Name="FK_DanhGia_Phim" Association="Self.FK_DanhGia_Phim">
             <End Role="Phim" EntitySet="Phim" />
-            <End Role="DanhGia" EntitySet="DanhGia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhGia_ThanhVien" Association="Self.FK_DanhGia_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
             <End Role="DanhGia" EntitySet="DanhGia" />
           </AssociationSet>
           <AssociationSet Name="FK_Phim_NuocSX" Association="Self.FK_Phim_NuocSX">
@@ -944,10 +950,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_DanhSachPhimYeuThich_Phim" Association="Self.FK_DanhSachPhimYeuThich_Phim">
             <End Role="Phim" EntitySet="Phim" />
-            <End Role="DanhSachPhimYeuThich" EntitySet="DanhSachPhimYeuThich" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhSachPhimYeuThich_ThanhVien" Association="Self.FK_DanhSachPhimYeuThich_ThanhVien">
-            <End Role="ThanhVien" EntitySet="ThanhVien" />
             <End Role="DanhSachPhimYeuThich" EntitySet="DanhSachPhimYeuThich" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
@@ -1046,6 +1048,7 @@
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
                 <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1131,7 +1134,6 @@
           <EntitySetMapping Name="ThanhVien">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.ThanhVien">
               <MappingFragment StoreEntitySet="ThanhVien">
-                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
@@ -1139,6 +1141,7 @@
                 <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
                 <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="MS_TaiKhoan" ColumnName="MS_TaiKhoan" />
+                <ScalarProperty Name="MaSo" ColumnName="MaSo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

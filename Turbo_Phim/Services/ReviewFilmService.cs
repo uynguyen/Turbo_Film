@@ -113,13 +113,13 @@ namespace Turbo_Phim.Services
             return bus.editPost(baiNhanXet);
         }
 
-<<<<<<< HEAD
+
         internal bool deletePost(string IDPost)
         {
             ReviewFilmsBus bus = new ReviewFilmsBus();
             return bus.deletePost(Int32.Parse(IDPost));
         }
-=======
+
 
 
         public List<TopReviewModels> showReview()
@@ -137,6 +137,50 @@ namespace Turbo_Phim.Services
             return result;
 
         }
+
+
+        public List<CommentViewModels> getComment(String IDPost)
+        {
+
+
+            CommentBus cmtBus = new CommentBus(); 
+
+            List<CommentViewModels> result = new List<CommentViewModels>();
+
+            List<BinhLuan> lst = cmtBus.getComments(Int32.Parse(IDPost));
+
+            foreach (BinhLuan p in lst)
+            {
+                CommentViewModels pvm = BinhLuan2BinhLuan2ViewModels(p);
+                result.Add(pvm);
+            }
+
+            return result;
+
+
+
+
+
+        }
+
+        private CommentViewModels BinhLuan2BinhLuan2ViewModels(BinhLuan p)
+        {
+            CommentViewModels result = new CommentViewModels();
+
+            result.datePost = (DateTime) p.NgayDang;
+            result.content = p.NoiDung;
+
+            AccountBus acBus = new AccountBus();
+            
+            ThanhVien temp = acBus.getMemberByUserId(p.MS_ThanhVien.ToString());
+
+            result.url_Avatar = temp.Avatar;
+            result.fullName = temp.HoTen;
+
+            return result;
+
+
+        }
         
 
 
@@ -148,6 +192,5 @@ namespace Turbo_Phim.Services
 
 
 
->>>>>>> 6a2792321a4e494b0f0554cc0efd2bb9a1acdf15
     }
 }

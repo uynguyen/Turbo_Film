@@ -201,5 +201,11 @@ namespace Turbo_Phim.Services
 
 
 
+
+        internal void test()
+        {
+            FilmBus t = new FilmBus();
+            t.statisticPhimForGenre();
+        }
     }
 }

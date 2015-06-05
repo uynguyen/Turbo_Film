@@ -14,14 +14,6 @@ namespace Business
     
     public partial class ThanhVien
     {
-        public ThanhVien()
-        {
-            this.BinhLuan = new HashSet<BinhLuan>();
-            this.DanhGia = new HashSet<DanhGia>();
-            this.DanhSachPhimYeuThich = new HashSet<DanhSachPhimYeuThich>();
-        }
-    
-        public int MaSo { get; set; }
         public string HoTen { get; set; }
         public string DiaChi { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
@@ -29,10 +21,8 @@ namespace Business
         public Nullable<bool> GioiTinh { get; set; }
         public string Avatar { get; set; }
         public string MS_TaiKhoan { get; set; }
+        public int MaSo { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual ICollection<BinhLuan> BinhLuan { get; set; }
-        public virtual ICollection<DanhGia> DanhGia { get; set; }
-        public virtual ICollection<DanhSachPhimYeuThich> DanhSachPhimYeuThich { get; set; }
     }
 }

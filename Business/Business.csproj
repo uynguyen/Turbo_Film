@@ -75,6 +75,7 @@
     <Compile Include="BinhLuan.cs">
       <DependentUpon>TURBO_PHIM.tt</DependentUpon>
     </Compile>
+    <Compile Include="CommentBus.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>TURBO_PHIM.tt</DependentUpon>
     </Compile>

@@ -20,6 +20,9 @@ namespace Business
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
             this.BaiNhanXet = new HashSet<BaiNhanXet>();
             this.BinhChon = new HashSet<BinhChon>();
+            this.BinhLuan = new HashSet<BinhLuan>();
+            this.DanhGia = new HashSet<DanhGia>();
+            this.DanhSachPhimYeuThich = new HashSet<DanhSachPhimYeuThich>();
             this.ThanhVien = new HashSet<ThanhVien>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
         }
@@ -42,6 +45,9 @@ namespace Business
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<BaiNhanXet> BaiNhanXet { get; set; }
         public virtual ICollection<BinhChon> BinhChon { get; set; }
+        public virtual ICollection<BinhLuan> BinhLuan { get; set; }
+        public virtual ICollection<DanhGia> DanhGia { get; set; }
+        public virtual ICollection<DanhSachPhimYeuThich> DanhSachPhimYeuThich { get; set; }
         public virtual ICollection<ThanhVien> ThanhVien { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }

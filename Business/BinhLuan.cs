@@ -15,12 +15,12 @@ namespace Business
     public partial class BinhLuan
     {
         public int MaSo { get; set; }
-        public Nullable<int> MS_ThanhVien { get; set; }
+        public string MS_ThanhVien { get; set; }
         public Nullable<int> MS_BaiNhanXet { get; set; }
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayDang { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual BaiNhanXet BaiNhanXet { get; set; }
-        public virtual ThanhVien ThanhVien { get; set; }
     }
 }

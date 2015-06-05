@@ -27,6 +27,37 @@ namespace Turbo_Phim.Controllers
             return View(filmS.getFilmByID(IDPhim));
         }
     
+
+
+
+
+
+        
+
+        public ActionResult CommentsOfTopReview(String IDPhim)
+        {
+
+            
+            List<CommentViewModels> result = null;
+            ReviewFilmService reviewS = new ReviewFilmService();
+
+
+            TopReviewModels top = reviewS.getTopReview(IDPhim);
+
+            result = reviewS.getComment(top.MS_ReView.ToString());
+        
+            
+        
+      
+
+
+            return View(result);
+        }
+    
+
+
+
+
         [Authorize]
 
         public ActionResult CreateNewPost(PhimViewModels phim)
@@ -121,8 +152,9 @@ namespace Turbo_Phim.Controllers
             ReviewFilmService reviewS = new ReviewFilmService();
             if(IDReview.Equals("-1"))
             {
+              
+                 result   = reviewS.getTopReview(IDPhim);
                
-              result   = reviewS.getTopReview(IDPhim);
             }
             else{
                 result = reviewS.getReview(IDReview);

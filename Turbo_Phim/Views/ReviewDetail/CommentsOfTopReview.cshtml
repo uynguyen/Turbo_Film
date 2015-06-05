@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Turbo_Phim.Models.CommentViewModels>
+@{
+    ViewBag.Title = "CommentsOfTopReview";
+    Layout = null;
+}
+
+<div class="comments-section">
+
+@foreach (Turbo_Phim.Models.CommentViewModels p in Model)
+{
+    <div class="comments-section-grids">
+        <div class="comments-section-grid">
+            <div class="col-md-2 comments-section-grid-image">
+                <img src="~/Content/images/eye-brow.jpg" class="img-responsive" alt="" />
+            </div>
+            <div class="col-md-10 comments-section-grid-text">
+                <h4>@p.fullName</h4>
+                <label>@p.datePost.ToString("dd/MM/yyyy hh:ms:ss")</label>
+                <p>@p.content</p>
+          
+            </div>
+            <div class="clearfix"></div>
+        </div>
+     
+
+
+       
+    </div>
+    
+}
+</div>
+

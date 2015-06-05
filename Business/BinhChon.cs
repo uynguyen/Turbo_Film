@@ -17,6 +17,7 @@ namespace Business
         public int MaSo { get; set; }
         public string MS_ThanhVien { get; set; }
         public int MS_BaiNhanXet { get; set; }
+        public bool TinhTrang { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual BaiNhanXet BaiNhanXet { get; set; }

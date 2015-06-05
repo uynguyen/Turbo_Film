@@ -80,6 +80,7 @@
         @if (@TempData["MaSoReview"].Equals("-1"))
         {
             @Html.Action("TopReview", "ReviewDetail", new { IDPhim = @Model.MaSo })
+            @Html.Action("CommentsOfTopReview", "ReviewDetail", new { IDPhim = @Model.MaSo })
         }
         else
         {
@@ -142,55 +143,7 @@
                 </p>
             </div>*@
         <!-- comments-section-starts -->
-        <div class="comments-section">
-            <div class="comments-section-head">
-                <div class="comments-section-head-text">
-                    <h3>25 Bình luận</h3>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="comments-section-grids">
-                <div class="comments-section-grid">
-                    <div class="col-md-2 comments-section-grid-image">
-                        <img src="~/Content/images/eye-brow.jpg" class="img-responsive" alt="" />
-                    </div>
-                    <div class="col-md-10 comments-section-grid-text">
-                        <h4><a href="#">Bill Gates</a></h4>
-                        <label>5/4/2014 at 22:00   </label>
-                        <p>Với số tiền của tui, tui sẵn sàng làm 10 bộ phim như thế này. Nhưng với cả 10 bộ phim, thì còn lâu con người mới đạt được như những điều trong phim.</p>
-                        <span><a href="#">Trả lời</a></span>
-                        <i class="rply-arrow"></i>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="comments-section-grid comments-section-middle-grid">
-                    <div class="col-md-2 comments-section-grid-image">
-                        <img src="~/Content/images/beauty.jpg" class="img-responsive" alt="" />
-                    </div>
-                    <div class="col-md-10 comments-section-grid-text">
-                        <h4><a href="#">Lê Quốc Vin</a></h4>
-                        <label>5/4/2014 at 22:00   </label>
-                        <p>Một bộ phim hay, ý nghĩa. Không phải bởi những điều viễn tưởng, mà bởi vì ý nghĩa nhân văn trong đó.</p>
-                        <span><a href="#">Trả lời</a></span>
-                        <i class="rply-arrow"></i>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="comments-section-grid">
-                    <div class="col-md-2 comments-section-grid-image">
-                        <img src="~/Content/images/stylish.jpg" class="img-responsive" alt="" />
-                    </div>
-                    <div class="col-md-10 comments-section-grid-text">
-                        <h4><a href="#">Nguyễn Long Uy</a></h4>
-                        <label>5/4/2014 at 22:00   </label>
-                        <p>Cảm động quá. Mình coi muốn khóc luôn các bạn ạ.</p>
-                        <span><a href="#">Trả lời</a></span>
-                        <i class="rply-arrow"></i>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
+       
         <!-- comments-section-ends -->
         <div class="Trả lời-section">
             <div class="Trả lời-section-head">
