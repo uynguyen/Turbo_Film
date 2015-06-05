@@ -8,6 +8,7 @@ namespace Turbo_Phim.Services
 {
     public class ReviewFilmService
     {
+        private FilmBus filmBus = new FilmBus();
         internal bool addPost(Business.BaiNhanXet baiNhanXet)
         {
             ReviewFilmsBus bus = new ReviewFilmsBus();
@@ -110,11 +111,23 @@ namespace Turbo_Phim.Services
             return bus.editPost(baiNhanXet);
         }
 
-        //private List<ReviewFilmService> showReview(List<BaiNhanXet> baiNhanXet)
-        //{
-        //    ReviewFilmsBus bus = new ReviewFilmsBus();
 
-        //}
+
+        public List<TopReviewModels> showReview()
+        {
+            List<TopReviewModels> result = new List<TopReviewModels>();
+
+            List<BaiNhanXet> lst = filmBus.findThink();
+
+            foreach (BaiNhanXet p in lst)
+            {
+                TopReviewModels pvm = BaiNhanXet2BaiNhanXetViewModels(p);
+                    result.Add(pvm);
+            }
+
+            return result;
+
+        }
         
 
 

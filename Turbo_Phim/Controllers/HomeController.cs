@@ -34,6 +34,14 @@ namespace Turbo_Phim.Controllers {
             return PartialView(result);
         }
 
+        public ActionResult showReview()
+        {
+            ReviewFilmService review = new ReviewFilmService();
+
+            List<TopReviewModels> result = review.showReview();
+
+            return PartialView(result);
+        }
 
 
         [Authorize]

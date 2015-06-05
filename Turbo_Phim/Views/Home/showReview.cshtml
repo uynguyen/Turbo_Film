@@ -1,0 +1,60 @@
+﻿@model List<Turbo_Phim.Models.TopReviewModels>
+    @{
+        ViewBag.Title = "showReview";
+        Layout = null;
+    }
+    @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
+    {
+       
+        <div class="news-grid">
+            <h5> @p.title </h5>
+            <label> @p.postDate </label>
+
+            <p class="new-content">
+                @p.content.Substring(0, @p.content.IndexOf(".")+1)...
+            </p>
+
+            <p class="hidden">
+                @p.content
+            </p>
+            <a class="more">MORE</a>
+        </div>       
+                  
+    }
+    <script>
+
+
+        $(document).ready(function () {
+            $(".more").click(function () {
+
+                var parent = $(this).parent();
+                var p = $("p[class='new-content']", parent);
+                var phidden = $("p[class='hidden']", parent);
+                p.html(phidden.text());
+            });
+        });
+
+
+    </script>
+
+    <nav>
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
