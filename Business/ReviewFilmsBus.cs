@@ -138,7 +138,7 @@ namespace Business
 
         public List<BaiNhanXet> getMyListReview(String p)
         {
-            return db.BaiNhanXet.Where(x => x.MS_TaiKhoan.Equals(p)).ToList();
+            return db.BaiNhanXet.Where(x => x.MS_TaiKhoan.Equals(p) && x.TinhTrang == true).ToList();
         }
 
         public bool editPost(BaiNhanXet baiNhanXet)
@@ -174,6 +174,21 @@ namespace Business
                         binhChon.TinhTrang = false;
                     }
                 }
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
+        }
+
+        public bool addComment(BinhLuan binhLuan)
+        {
+            try
+            {
+                db.BinhLuan.Add(binhLuan);
                 db.SaveChanges();
                 return true;
             }

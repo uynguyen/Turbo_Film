@@ -7,6 +7,7 @@ namespace Turbo_Phim.Models
 {
     public class CommentViewModels
     {
+        public string IDPost { get; set; }
         public string url_Avatar { get; set; }
         public string content { get; set; }
         public DateTime datePost { get; set; }

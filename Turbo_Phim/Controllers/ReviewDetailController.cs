@@ -38,15 +38,17 @@ namespace Turbo_Phim.Controllers
         {
 
             
-            List<CommentViewModels> result = null;
+            List<CommentViewModels> result = new List<CommentViewModels>();
             ReviewFilmService reviewS = new ReviewFilmService();
 
 
             TopReviewModels top = reviewS.getTopReview(IDPhim);
+            if(top != null)
+            {
+                result = reviewS.getComment(top.MS_ReView.ToString());
 
-            result = reviewS.getComment(top.MS_ReView.ToString());
-        
-            
+                TempData["IDPost"] = top.MS_ReView;
+            }
         
       
 
@@ -174,5 +176,29 @@ namespace Turbo_Phim.Controllers
             return View(result);
         }
 
+       
+        public String AddComment(String CommentContent , String IDPost)
+        {
+            ReviewFilmService reviewS = new ReviewFilmService();
+
+            string IDUser = User.Identity.GetUserId();
+            reviewS.addComment(CommentContent, IDPost, IDUser);
+
+
+            String result = "<div class='comments-section-grids'>" +
+               "<div class='comments-section-grid'>" +
+               "<div class='col-md-2 comments-section-grid-image'>" +
+                  " <img src='~/Content/images/eye-brow.jpg' class='img-responsive'/>" +
+               "</div>" +
+               "<div class='col-md-10 comments-section-grid-text'>" +
+                   "<h4>123</h4>" +
+                   "<label>p.datePost.ToString()</label>" +
+                   "<p>XYZ</p>" +
+               "</div>" +
+              " <div class='clearfix'></div>" +
+           "</div></div>";
+
+            return result;
+        }
     }
 }

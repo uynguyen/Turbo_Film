@@ -4,29 +4,81 @@
     Layout = null;
 }
 
-<div class="comments-section">
+<script type="text/javascript">
 
-@foreach (Turbo_Phim.Models.CommentViewModels p in Model)
-{
-    <div class="comments-section-grids">
-        <div class="comments-section-grid">
-            <div class="col-md-2 comments-section-grid-image">
-                <img src="~/Content/images/eye-brow.jpg" class="img-responsive" alt="" />
-            </div>
-            <div class="col-md-10 comments-section-grid-text">
-                <h4>@p.fullName</h4>
-                <label>@p.datePost.ToString("dd/MM/yyyy hh:ms:ss")</label>
-                <p>@p.content</p>
-          
-            </div>
-            <div class="clearfix"></div>
+    $(document).ready(function () {
+
+
+        $("#btnSubmitComment").click(function () {
+            var IDPost = $("#IDPost").val();
+            var Content = $("#CommentContent").val();
+            $.ajax({
+                type: "get",
+                url: '@Url.Action("AddComment", "ReviewDetail")',
+                data:  "CommentContent=" +Content  + "&IDPost=" + IDPost ,
+                success: function (data) {
+
+                  
+                    $("#commentssection").after(data);
+
+                    //var id = $("#btnDeleteReview").val();
+                    //$("#" + id).remove();
+                },
+                error: function (data) {
+
+                    alert("failed");
+                }
+
+
+            });
+
+        });
+    });
+</script>
+
+<div class="comments-section" id="commentssection">
+    <div class="comments-section-head">
+        <div class="comments-section-head-text">
+            <h3>Ý kiến người xem ( @Model.Count() Bình luận )</h3>
         </div>
-     
-
-
-       
+        <div class="clearfix"></div>
     </div>
-    
-}
+    @foreach (Turbo_Phim.Models.CommentViewModels p in Model)
+    {
+        <div class="comments-section-grids">
+            <div class="comments-section-grid">
+                <div class="col-md-2 comments-section-grid-image">
+                    <img src="~/Content/images/eye-brow.jpg" class="img-responsive" alt="" />
+                </div>
+                <div class="col-md-10 comments-section-grid-text">
+                    <h4>@p.fullName</h4>
+                    <label>@p.datePost.ToString("dd/MM/yyyy hh:mm:ss")</label>
+                    <p>@p.content</p>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+
+
+
+        </div>
+
+    }
+</div>
+<textarea id="IDPost" class="hidden">@TempData["IDPost"]</textarea>
+<div class="Trả lời-section">
+    <div class="Trả lời-section-head">
+        <div class="Trả lời-section-head-text">
+            <h3>Để lại bình luận</h3>
+        </div>
+    </div>
+    <div class="blog-form">
+       
+            <textarea class="form-control" rows="10" placeholder="Nội dung" id="CommentContent"></textarea>
+            <input id="btnSubmitComment" type="submit" class="btn btn-info" value="Đăng bình luận">
+        
+
+    </div>
 </div>
 

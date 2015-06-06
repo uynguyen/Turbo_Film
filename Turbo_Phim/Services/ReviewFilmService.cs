@@ -177,11 +177,12 @@ namespace Turbo_Phim.Services
             result.url_Avatar = temp.Avatar;
             result.fullName = temp.HoTen;
 
+            result.IDPost = p.MS_BaiNhanXet.ToString();
+
             return result;
 
 
         }
-        
 
 
 
@@ -192,5 +193,22 @@ namespace Turbo_Phim.Services
 
 
 
+
+
+        internal void addComment(string CommentContent, string IDPost, string IDUser)
+        {
+            ReviewFilmsBus reviewBus = new ReviewFilmsBus();
+
+            BinhLuan binhLuan = new BinhLuan();
+
+            binhLuan.MS_BaiNhanXet = Int32.Parse(IDPost);
+            binhLuan.MS_ThanhVien = IDUser;
+            binhLuan.NoiDung = CommentContent;
+            binhLuan.NgayDang = System.DateTime.Now;
+            reviewBus.addComment(binhLuan);
+
+
+
+        }
     }
 }
