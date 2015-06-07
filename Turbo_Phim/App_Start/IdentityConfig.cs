@@ -14,6 +14,7 @@ using System.Net;
 using SendGrid;
 using System.Configuration;
 using System.Net.Mail;
+using System.Web.Mvc;
 
 namespace Turbo_Phim.Models
 {
@@ -385,5 +386,22 @@ namespace Turbo_Phim.Models
         }
     }
 
-    
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class AuthorizeUserAttribute : AuthorizeAttribute
+    {
+        protected override void HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext filterContext)
+        {
+            if (!filterContext.HttpContext.Request.IsAuthenticated)
+            {
+                filterContext.HttpContext.Session["OpenAuthorizationPopup"] = "true";
+
+                filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.PathAndQuery);
+                
+            }
+            else
+            {
+                base.HandleUnauthorizedRequest(filterContext);
+            }
+        }
+    }
 }

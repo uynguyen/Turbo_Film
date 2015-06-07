@@ -5,7 +5,7 @@
     Layout = null;
 }
 
-@Scripts.Render("~/bundles/jqueryval")
+
 
 <script>
     $(document).ready(function () {
@@ -16,24 +16,6 @@
             show: false,
             backdrop: 'static',
             keyboard: false
-        });
-    });
-
-
-    $(function () {
-        $("#registerform").submit(function () {
-            if ($(this).valid()) {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (result) {
-                        $('.text-danger').hide();
-                        $('#result').html(result);
-                    }
-                });
-            }
-            return false;
         });
     });
 </script>
@@ -50,91 +32,84 @@
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                             <h4 class="modal-title" id="myModalLabel">Đăng ký tài khoản</h4>
                         </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="well">
+                        <div class="well">
 
-                                        @using (Ajax.BeginForm("Register", "Account", new AjaxOptions
+                            @using (Ajax.BeginForm("Register", "Account", new AjaxOptions
                             {
                                 HttpMethod = "POST",
                                 InsertionMode = InsertionMode.Replace,
-                                OnSuccess = "registerSuccess()",
-                                OnFailure = "dialogFailure()",
-                                OnBegin = "dialogBegin()",
-                                OnComplete = "dialogComplete()",
                                 UpdateTargetId = "result"
                             }))
-                                        {
-                                            <div id="result" class="text-danger"></div>
+                            {
+                                <div id="result" class="text-danger"></div>
 
-                                            @Html.AntiForgeryToken()
-                                            @Html.ValidationSummary("Lỗi! Vui lòng kiểm tra lại thông tin!", new { @class = "text-danger" })
-                                          
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
-                                                @Html.ValidationMessageFor(m => m.Email)
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary("Lỗi! Vui lòng kiểm tra lại thông tin!", new { @class = "text-danger" })
 
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
-                                                @Html.ValidationMessageFor(m => m.Password)
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập lại mật khẩu" })
-                                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Họ và tên" })
-                                                @Html.ValidationMessageFor(m => m.Name)
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) Nam
-                                                @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) Nữ
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @placeholder = "Ngày sinh", id = "datepicker" })
-                                                @Html.ValidationMessageFor(m => m.Birthday)
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <span class="help-block">@ViewBag.Message</span>
-                                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
-                                                @Html.ValidationMessageFor(m => m.Address)
-                                                <span class="help-block"></span>
-                                            </div>
-                                            <style>
-                                                iframe{
-                                                    min-height: 70px !important;
-                                                }
-                                            </style>
-                                            <div class="g-recaptcha" data-sitekey="6LfM3wcTAAAAAK4Q3nlAVXhalji_ePWlO5XZrEnL"></div>
-                                            <span class="help-block"></span>
-                                            <input type="submit" class="btn btn-success btn-block" value="Đăng ký">
-                                        }
-                                        <script src='https://www.google.com/recaptcha/api.js'></script>
-                                        <script>
-                                            $(document).ready(function () {
-                                                $('#register').modal();
-                                            });
-                                            function registerSuccess() {
-                                                $('#register').modal("hide");
-                                            }
-                                        </script>
-                                    </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+
+                                    <span class="help-block"></span>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Nhập lại mật khẩu" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Họ và tên" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) Nam
+                                    @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) Nữ
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @placeholder = "Ngày sinh", id = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.Birthday)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <span class="help-block">@ViewBag.Message</span>
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
+                                    @Html.ValidationMessageFor(m => m.Address)
+                                    <span class="help-block"></span>
+                                </div>
+                                <style>
+                                    iframe {
+                                        min-height: 70px !important;
+                                    }
+                                </style>
+                                <div class="g-recaptcha" data-sitekey="6LfM3wcTAAAAAK4Q3nlAVXhalji_ePWlO5XZrEnL"></div>
+                                <span class="help-block"></span>
+                                
+                                <input type="submit" class="btn btn-success btn-block" value="Đăng ký">
+                            }
+                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#register').modal();
+                                });
+                                function registerSuccess() {
+                                    $('#register').modal("hide");
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-       
     </div>
 </div>
+
+@section Script {
+    @Scripts.Render("~/bundles/jqueryval")
+}

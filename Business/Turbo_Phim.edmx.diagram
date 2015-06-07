@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b65df2e8c6cd475facddad66b3c25282" Name="Diagram1">
+      <Diagram DiagramId="ee3f008785ec4ccea899f400848dd2e8" Name="Diagram1">
         <EntityTypeShape EntityType="TURBO_PHIMModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="TURBO_PHIMModel.DanhMucTheLoai" Width="1.5" PointX="3.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.DanhSachPhimYeuThich" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.Phim" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TURBO_PHIMModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TURBO_PHIMModel.ThanhVien" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="TURBO_PHIMModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />

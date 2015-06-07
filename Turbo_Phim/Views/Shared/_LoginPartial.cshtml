@@ -39,11 +39,13 @@ else
            <li id="login-body"></li>
         </ul>
         <script>
+
     function openLoginDialog() {
 
         $.ajax({
             url: '@Url.Action("Login", "Account")',
             contentType: 'application/html',
+            data: {returnurl: window.location.href},
             success: function (content) {
                 $('#login-body').html(content);
             },
@@ -57,7 +59,13 @@ else
 }
 
 
-
+@if ((Session["OpenAuthorizationPopup"] ?? "false") == "true")
+{
+    Session["OpenAuthorizationPopup"] = "false";
+    <script>
+        openLoginDialog();
+    </script>
+}
 
 
 

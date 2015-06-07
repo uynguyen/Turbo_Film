@@ -104,7 +104,7 @@ namespace Turbo_Phim.Controllers
             switch (result)
             {
                 case Turbo_Phim.Models.SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return JavaScript("location.reload()");
                 case Turbo_Phim.Models.SignInStatus.LockedOut:
                     return View("Lockout");
                 case Turbo_Phim.Models.SignInStatus.RequiresTwoFactorAuthentication:
@@ -214,7 +214,7 @@ namespace Turbo_Phim.Controllers
                         ViewBag.Message = "Error occured. Please try again";
                         break;
                 }
-                return Content("Vui lòng xác nhận Captcha!");
+                return Content("Vui lòng xác nhận Captcha!", "text/html");
             }
             else
             {
@@ -230,11 +230,11 @@ namespace Turbo_Phim.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                   //if(!AC.CreateProfile(user, model))
-                   //{
-                   //    await UserManager.DeleteAsync(user);
-                   //    return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
-                   //}
+                    if (!AC.CreateProfile(user, model))
+                    {
+                        await UserManager.DeleteAsync(user);
+                        return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
+                    }
 
                     await UserManager.AddToRoleAsync(user.Id, "Member");
 
