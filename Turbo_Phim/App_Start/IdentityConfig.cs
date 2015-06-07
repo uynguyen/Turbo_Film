@@ -11,7 +11,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Net;
-using SendGrid;
+
 using System.Configuration;
 using System.Net.Mail;
 using System.Web.Mvc;
