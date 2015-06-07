@@ -88,6 +88,18 @@ namespace Turbo_Phim.Controllers
 
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return Content("Tài khoản không tồn tại!");
+            }
+
+            if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+            {
+                return Content("Tài khoản chưa được xác nhận! Vui lòng xác nhận email trước!");
+            }
+    
+          
             var result = await SignInHelper.PasswordSignIn(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -154,7 +166,7 @@ namespace Turbo_Phim.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View(new RegisterViewModel { IsMale = true });
+            return PartialView(new RegisterViewModel { IsMale = true });
         }
 
         //
@@ -202,7 +214,7 @@ namespace Turbo_Phim.Controllers
                         ViewBag.Message = "Error occured. Please try again";
                         break;
                 }
-                return View(model);
+                return Content("Vui lòng xác nhận Captcha!");
             }
             else
             {
@@ -213,7 +225,8 @@ namespace Turbo_Phim.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-              
+
+                user.DayRegister = DateTime.Today;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
