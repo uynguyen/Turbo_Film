@@ -34,13 +34,28 @@ else
 {
 
     <li class="dropdown" id="login-dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="dropdownLogin(true)"><b>Đăng nhập</b> <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="openLoginDialog()"><b>Đăng nhập</b> <span class="caret"></span></a>
         <ul id="login-dp" class="dropdown-menu  dropdown-menu-right">
-            @Html.Action("Login", "Account")
+           <li id="login-body"></li>
         </ul>
+        <script>
+    function openLoginDialog() {
+
+        $.ajax({
+            url: '@Url.Action("Login", "Account")',
+            contentType: 'application/html',
+            success: function (content) {
+                $('#login-body').html(content);
+            },
+            error: function (e) { alert("Failure!"); }
+        });
+    }
+        </script>
+
     </li>
 
 }
+
 
 
 
