@@ -55,12 +55,12 @@ namespace Turbo_Phim.Controllers
 
             return View(result);
         }
-    
 
 
 
 
-        [Authorize]
+
+        [AuthorizeUser]
 
         public ActionResult CreateNewPost(PhimViewModels phim)
         {
@@ -80,7 +80,7 @@ namespace Turbo_Phim.Controllers
             return View();
         }
 
-        [Authorize]
+        [AuthorizeUser]
 
         public ActionResult EditPost(String IDReview)
         {
@@ -102,7 +102,7 @@ namespace Turbo_Phim.Controllers
             return View(temp);
         }
 
-        [Authorize]
+        [AuthorizeUser]
         public ActionResult EditedPost(PhimViewModels phim)
         {
 
@@ -127,7 +127,7 @@ namespace Turbo_Phim.Controllers
 
       
         [HttpPost]
-        [Authorize]
+        [AuthorizeUser]
         public String DeletePost(String IDPost)
         {
             ReviewFilmService reviewS = new ReviewFilmService();
@@ -139,7 +139,7 @@ namespace Turbo_Phim.Controllers
                 return "failed";
         }
 
-        [Authorize]
+        [AuthorizeUser]
         public ActionResult CreatePost(String IDPhim)
         {
            

@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Turbo_Phim.Controllers
 {
-    [Authorize]
+    [AuthorizeUser]
     public class ManageController : Controller
     {
         private AccountService AC = new AccountService();

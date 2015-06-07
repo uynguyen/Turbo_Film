@@ -10,6 +10,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
+using System.Net;
+using SendGrid;
+using System.Configuration;
+using System.Net.Mail;
+using System.Web.Mvc;
 
 namespace Turbo_Phim.Models
 {
@@ -118,6 +123,17 @@ namespace Turbo_Phim.Models
             // Call update once when all roles are removed
             return await UpdateAsync(user).ConfigureAwait(false);
         }
+
+
+        public override async Task SendEmailAsync(string userId, string subject, string body)
+        {
+            IdentityMessage message = new IdentityMessage();
+            message.Destination = await this.GetEmailAsync(userId);
+            message.Subject = subject;
+            message.Body = body;
+            await EmailService.SendAsync(message);
+            return;
+        }
     }
 
     // Configure the RoleManager used in the application. RoleManager is defined in the ASP.NET Identity core assembly
@@ -138,13 +154,39 @@ namespace Turbo_Phim.Models
 
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+
+        public Task SendAsync(IdentityMessage message)        
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return configCustomSendAsync(message);
+        }
+
+        private Task configCustomSendAsync(IdentityMessage message)
+        {
+            var fromAddress = new MailAddress(ConfigurationManager.AppSettings["mailAccount"], "Turbo Phim");
+            var toAddress = new MailAddress(message.Destination, "Member");
+            string fromPassword = ConfigurationManager.AppSettings["mailPassword"];
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+
+            MailMessage m = new MailMessage(
+               fromAddress.Address,
+               message.Destination,
+               message.Subject,
+               message.Body
+                );
+            m.IsBodyHtml = true;
+                smtp.Send(m);
+                return Task.FromResult(0);
         }
     }
-
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
@@ -344,5 +386,22 @@ namespace Turbo_Phim.Models
         }
     }
 
-    
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class AuthorizeUserAttribute : AuthorizeAttribute
+    {
+        protected override void HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext filterContext)
+        {
+            if (!filterContext.HttpContext.Request.IsAuthenticated)
+            {
+                filterContext.HttpContext.Session["OpenAuthorizationPopup"] = "true";
+
+                filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.PathAndQuery);
+                
+            }
+            else
+            {
+                base.HandleUnauthorizedRequest(filterContext);
+            }
+        }
+    }
 }

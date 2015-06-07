@@ -88,11 +88,23 @@ namespace Turbo_Phim.Controllers
 
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return Content("Tài khoản không tồn tại!");
+            }
+
+            if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+            {
+                return Content("Tài khoản chưa được xác nhận! Vui lòng xác nhận email trước!");
+            }
+    
+          
             var result = await SignInHelper.PasswordSignIn(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case Turbo_Phim.Models.SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return JavaScript("location.reload()");
                 case Turbo_Phim.Models.SignInStatus.LockedOut:
                     return View("Lockout");
                 case Turbo_Phim.Models.SignInStatus.RequiresTwoFactorAuthentication:
@@ -154,7 +166,7 @@ namespace Turbo_Phim.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View(new RegisterViewModel { IsMale = true });
+            return PartialView(new RegisterViewModel { IsMale = true });
         }
 
         //
@@ -202,7 +214,7 @@ namespace Turbo_Phim.Controllers
                         ViewBag.Message = "Error occured. Please try again";
                         break;
                 }
-                return View(model);
+                return Content("Vui lòng xác nhận Captcha!", "text/html");
             }
             else
             {
@@ -213,20 +225,31 @@ namespace Turbo_Phim.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-              
+
+                user.DayRegister = DateTime.Today;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "Member");
-                    AC.CreateProfile(user, model);
-                    await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    if (!AC.CreateProfile(user, model))
+                    {
+                        await UserManager.DeleteAsync(user);
+                        return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
+                    }
 
-                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    //ViewBag.Link = callbackUrl;
-                    //return View("DisplayEmail");
-                    return RedirectToAction("Index", "Home");
+                    await UserManager.AddToRoleAsync(user.Id, "Member");
+
+                  //  await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                       new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                    await UserManager.SendEmailAsync(user.Id,
+                       "Xác nhận tài khoản của bạn", "Vui lòng xác nhận tài khoản bằng cách nhấn vào <a href=\""
+                       + callbackUrl + "\">đây</a>");
+
+                    return View("DisplayEmail");
                 }
                 AddErrors(result);
             }

@@ -8,12 +8,6 @@
 
     @Scripts.Render("~/bundles/jquery")
   
-
-
-
-
-
-   
 </head>
 <body>
     <div id="dialogPlaceholder"></div>
@@ -26,6 +20,6 @@
             @RenderPage("~/Views/Shared/_FooterPage.cshtml")
         </div>
     </div>
-
+    @RenderSection("scripts", required: false)
 </body>
 </html>
