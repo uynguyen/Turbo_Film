@@ -202,10 +202,18 @@ namespace Turbo_Phim.Services
 
 
 
-        internal void test()
+   
+
+        internal Dictionary<string, int> getStatisticPhimForGenre()
         {
             FilmBus t = new FilmBus();
-            t.statisticPhimForGenre();
+            return t.statisticPhimForGenre();
+        }
+
+        internal Dictionary<string, int> getStatisticPhimForCountry()
+        {
+            FilmBus t = new FilmBus();
+            return t.statisticPhimForCountry();
         }
     }
 }

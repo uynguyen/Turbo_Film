@@ -11,7 +11,7 @@ namespace Business
         private TURBO_PHIMEntities db = new TURBO_PHIMEntities();
         public List<BinhLuan> getComments(int IDPost)
         {
-            return db.BinhLuan.Where(x => x.MS_BaiNhanXet == IDPost).ToList();
+            return db.BinhLuan.Where(x => x.MS_BaiNhanXet == IDPost).OrderByDescending(x=>x.NgayDang).ToList();
 
 
         }

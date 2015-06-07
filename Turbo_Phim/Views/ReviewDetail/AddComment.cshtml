@@ -1,0 +1,18 @@
+﻿@model Turbo_Phim.Models.CommentViewModels
+@{
+    ViewBag.Title = "AddComment";
+    Layout = null;
+}
+<div class='comments-section-grids'>
+    <div class='comments-section-grid'>
+        <div class='col-md-2 comments-section-grid-image'>
+            <img src='~/Content/images/eye-brow.jpg' class='img-responsive' />
+        </div>
+        <div class='col-md-10 comments-section-grid-text'>
+            <h4>@Model.fullName</h4>
+            <label>@Model.datePost.ToString("dd/MM/yyyy hh:mm:ss")</label>
+            <p>@Model.content</p>
+        </div>
+     
+    </div>
+</div>

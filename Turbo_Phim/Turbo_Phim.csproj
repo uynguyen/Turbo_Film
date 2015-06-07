@@ -452,6 +452,7 @@
     <Content Include="Views\Home\filmNew.cshtml" />
     <Content Include="Views\Home\showReview.cshtml" />
     <Content Include="Views\ReviewDetail\CommentsOfTopReview.cshtml" />
+    <Content Include="Views\ReviewDetail\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

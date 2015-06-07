@@ -21,8 +21,7 @@
                   
                     $("#commentssection").after(data);
 
-                    //var id = $("#btnDeleteReview").val();
-                    //$("#" + id).remove();
+                 
                 },
                 error: function (data) {
 
@@ -35,13 +34,20 @@
         });
     });
 </script>
+<div class="Trả lời-section">
+    <p>Để lại bình luận</p>
+    <div class="blog-form">
 
-<div class="comments-section" id="commentssection">
-    <div class="comments-section-head">
-        <div class="comments-section-head-text">
-            <h3>Ý kiến người xem ( @Model.Count() Bình luận )</h3>
-        </div>
-        <div class="clearfix"></div>
+        <textarea class="form-control" rows="10" placeholder="Nội dung" id="CommentContent"></textarea>
+        <input id="btnSubmitComment" type="submit" class="btn btn-info" value="Đăng bình luận">
+
+
+    </div>
+</div>
+<div class="comments-section" >
+    <div class="comments-section-head" id="commentssection">
+        <p>Ý kiến người xem</p>
+         <div class="clearfix"></div>
     </div>
     @foreach (Turbo_Phim.Models.CommentViewModels p in Model)
     {
@@ -56,7 +62,7 @@
                     <p>@p.content</p>
 
                 </div>
-                <div class="clearfix"></div>
+           
             </div>
 
 
@@ -67,18 +73,5 @@
     }
 </div>
 <textarea id="IDPost" class="hidden">@TempData["IDPost"]</textarea>
-<div class="Trả lời-section">
-    <div class="Trả lời-section-head">
-        <div class="Trả lời-section-head-text">
-            <h3>Để lại bình luận</h3>
-        </div>
-    </div>
-    <div class="blog-form">
-       
-            <textarea class="form-control" rows="10" placeholder="Nội dung" id="CommentContent"></textarea>
-            <input id="btnSubmitComment" type="submit" class="btn btn-info" value="Đăng bình luận">
-        
 
-    </div>
-</div>
 

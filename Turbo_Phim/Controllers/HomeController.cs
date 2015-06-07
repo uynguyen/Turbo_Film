@@ -19,7 +19,7 @@ namespace Turbo_Phim.Controllers {
             ViewBag.ContactStatus = "inactive";
            FilmService phimService = new FilmService();
 
-           phimService.test();
+        
 
 
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();

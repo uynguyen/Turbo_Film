@@ -526,11 +526,11 @@ namespace Business
 
 
         //Thống kê phần trăm thể loại phim được quan tâm nhiều nhất (Dựa vào số lượng bài nhận xét của từng thể loại phim)
-        public Dictionary<int, float> statisticPhimForGenre()
+        public Dictionary<string, int> statisticPhimForGenre()
         {
             try
             {
-                Dictionary<int, float> result = new Dictionary<int, float>();
+                Dictionary<string, int> result = new Dictionary<string, int>();
 
 
                 Dictionary<int, int> total = new Dictionary<int, int>();
@@ -554,21 +554,25 @@ namespace Business
                     }
 
                 }
-                //List<DanhMucTheLoai> lstTheLoai = db.DanhMucTheLoai.ToList();
+                List<DanhMucTheLoai> lstTheLoai = db.DanhMucTheLoai.ToList();
 
 
-                //int totalCount = db.BaiNhanXet.ToList().Count();
-                //foreach (DanhMucTheLoai theLoai in lstTheLoai)
-                //{
-                //    float persent = 0f;
-                //    int temp = total[theLoai.MaSo];
-                //    if(temp != 0)
-                //    {
-                //        persent = temp / totalCount; 
-                //    }
-                //    result.Add(theLoai.MaSo, persent);
+                int totalCount = db.BaiNhanXet.ToList().Count();
+                foreach (DanhMucTheLoai theLoai in lstTheLoai)
+                {
+                    DanhMucTheLoai theLoai1 = db.DanhMucTheLoai.Find(theLoai.MaSo);
+                  
+                    if(total.ContainsKey(theLoai.MaSo))
+                    {
+         
+                      
+                        result.Add(theLoai1.TenTheLoai, total[theLoai.MaSo]);
+                    }
+                    
+                    else
+                        result.Add(theLoai1.TenTheLoai, 0);
 
-                //}
+                }
 
                 return result;
 
@@ -582,14 +586,61 @@ namespace Business
         }
 
         //Thống kê phần trăm thể loại phim được quan tâm nhiều nhất (Dựa vào số lượng bài nhận xét của từng thể loại phim)
-        public Dictionary<int, float> statisticPhimForCountry()
+        public Dictionary<string, int> statisticPhimForCountry()
         {
-            Dictionary<int, float> result = new Dictionary<int, float>();
+            try
+            {
+                Dictionary<string, int> result = new Dictionary<string, int>();
 
 
+                Dictionary<int, int> total = new Dictionary<int, int>();
+                List<BaiNhanXet> lstBaiNhanXet = db.BaiNhanXet.ToList();
 
 
-            return result;
+                FilmBus filmBus = new FilmBus();
+                foreach (BaiNhanXet baiNhanXet in lstBaiNhanXet)
+                {
+
+                    int MSPhim = (int)baiNhanXet.MS_Phim;
+                    Phim phim = filmBus.getFilmByID(MSPhim.ToString());
+                    int MS_TheLoai = (int)phim.MS_NuocSX;
+                    if (total.ContainsKey(MS_TheLoai))
+                    {
+                        total[MS_TheLoai]++;
+                    }
+                    else
+                    {
+                        total.Add(MS_TheLoai, 1);
+                    }
+
+                }
+                List<DanhMucNuocSanXuat> lstTheLoai = db.DanhMucNuocSanXuat.ToList();
+
+
+                int totalCount = db.BaiNhanXet.ToList().Count();
+                foreach (DanhMucNuocSanXuat theLoai in lstTheLoai)
+                {
+                    DanhMucNuocSanXuat theLoai1 = db.DanhMucNuocSanXuat.Find(theLoai.MaSo);
+
+                    if (total.ContainsKey(theLoai.MaSo))
+                    {
+
+
+                        result.Add(theLoai1.TenNuoc, total[theLoai.MaSo]);
+                    }
+
+                    else
+                        result.Add(theLoai1.TenNuoc, 0);
+
+                }
+
+                return result;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
 
         }
 

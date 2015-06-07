@@ -26,61 +26,142 @@
 
     </div>
     <div class="main-content">
-        @{
-            Dictionary<int, float> test = new Dictionary<int, float>();
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div id="pie8" style="margin-top:20px; margin-left:20px; width:100%; height:450px;"></div>
 
-            test.Add(1, 10f);
-            test.Add(2, 90f);
-        }
+                    <script class="code" type="text/javascript">
+                        $(document).ready(function () {
+
+                            $.ajax({
+                                type: "get",
+                                url: '@Url.Action("getStatisticPhimForGenre", "AdminMain")',
+
+                                success: function (data) {
 
 
-        @{
+                                    var obj = $.parseJSON(data);
 
-            string json = "[";
-            foreach (int key in test.Keys)
-            {
-                json += "['" + key + "'," + test[key] + "],";
-            }
-            json += "]";
-        }
-        <div class="hidden" id="data" data-value="[['9',10],['2',90]]">[['9',10],['2',90]]</div>
-        <div id="pie8" style="margin-top:20px; margin-left:20px; width:400px; height:400px;"></div>
-        <script class="code" type="text/javascript">
-            $(document).ready(function () {
-                var json = [['Sony', 7], ['Samsumg', 13.3], ['LG', 14.7], ['Vizio', 5.2], ['Insignia', 1.2]];
-            
-                var plot8 = $.jqplot('pie8', [json], {
-                    grid: {
-                        drawBorder: false,
-                        drawGridlines: false,
-                        background: '#ffffff',
-                        shadow: false
-                    },
-                    axesDefaults: {
 
-                    },
-                    seriesDefaults: {
-                        renderer: $.jqplot.PieRenderer,
-                        rendererOptions: {
-                            showDataLabels: true
-                        }
-                    },
-                    legend: {
-                        show: true,
-                        rendererOptions: {
-                            numberRows: 1
-                        },
-                        location: 's'
-                    }
-                });
-            });
+                                    jQuery.jqplot.config.enablePlugins = true;
 
 
 
+                                    var json = obj;//[['Sony', 7], ['Samsumg', 13.3], ['LG', 14.7], ['Vizio', 5.2], ['Insignia', 1.2]] ;
+
+                                    var plot8 = $.jqplot("pie8", [json], {
+                                        title: 'Biểu đồ % danh mục thể loại phim được đánh giá',
+                                        grid: {
+                                            drawBorder: false,
+                                            drawGridlines: false,
+                                            background: '#ffffff',
+                                            shadow: false
+                                        },
+                                        axesDefaults: {
+
+                                        },
+                                        seriesDefaults: {
+                                            renderer: $.jqplot.PieRenderer,
+                                            rendererOptions: {
+                                                sliceMargin: 4,
+                                                showDataLabels: true
+                                            }
+                                        },
+                                        legend: {
+                                            show: true,
+                                            rendererOptions: {
+                                                numberRows: 5
+                                            },
+                                            location: 's'
+                                        }
+                                    });
+
+                                },
+                                error: function (data) {
+
+                                    alert("failed");
+                                }
+
+
+                            });
+
+                        });
+
+                    </script>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <div id="pie9" style="margin-top:20px; margin-left:20px; width:100%; height:450px;"></div>
+                    <script class="code" type="text/javascript">
+                        $(document).ready(function () {
+
+                            $.ajax({
+                                type: "get",
+                                url: '@Url.Action("getStatisticPhimForCountry", "AdminMain")',
+
+                                success: function (data) {
+
+
+                                    var obj = $.parseJSON(data);
+
+
+                                    jQuery.jqplot.config.enablePlugins = true;
 
 
 
-        </script>
+                                    var json = obj;
+
+                                    var plot8 = $.jqplot("pie9", [json], {
+                                        title: 'Biểu đồ % danh mục nước sản xuất được đánh giá',
+                                        grid: {
+                                            drawBorder: false,
+                                            drawGridlines: false,
+                                            background: '#ffffff',
+                                            shadow: false
+                                        },
+                                        axesDefaults: {
+
+                                        },
+                                        seriesDefaults: {
+                                            renderer: $.jqplot.PieRenderer,
+                                            rendererOptions: {
+                                                showDataLabels: true
+                                            }
+                                        },
+                                        legend: {
+                                            show: true,
+                                            rendererOptions: {
+                                                numberRows: 5
+                                            },
+                                            location: 's'
+                                        }
+                                    });
+
+                                },
+                                error: function (data) {
+
+                                    alert("failed");
+                                }
+
+
+                            });
+
+                        });
+
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
 
 
 

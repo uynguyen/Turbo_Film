@@ -151,7 +151,7 @@ namespace Turbo_Phim.Services
 
             foreach (BinhLuan p in lst)
             {
-                CommentViewModels pvm = BinhLuan2BinhLuan2ViewModels(p);
+                CommentViewModels pvm = BinhLuan2ViewModels(p);
                 result.Add(pvm);
             }
 
@@ -163,7 +163,7 @@ namespace Turbo_Phim.Services
 
         }
 
-        private CommentViewModels BinhLuan2BinhLuan2ViewModels(BinhLuan p)
+        private CommentViewModels BinhLuan2ViewModels(BinhLuan p)
         {
             CommentViewModels result = new CommentViewModels();
 
@@ -195,8 +195,9 @@ namespace Turbo_Phim.Services
 
 
 
-        internal void addComment(string CommentContent, string IDPost, string IDUser)
+        internal CommentViewModels addComment(string CommentContent, string IDPost, string IDUser)
         {
+            CommentViewModels result = new CommentViewModels();
             ReviewFilmsBus reviewBus = new ReviewFilmsBus();
 
             BinhLuan binhLuan = new BinhLuan();
@@ -205,9 +206,17 @@ namespace Turbo_Phim.Services
             binhLuan.MS_ThanhVien = IDUser;
             binhLuan.NoiDung = CommentContent;
             binhLuan.NgayDang = System.DateTime.Now;
-            reviewBus.addComment(binhLuan);
+            if(reviewBus.addComment(binhLuan))
+            {
+                result = BinhLuan2ViewModels(binhLuan);
+            }
 
 
+         
+
+
+            
+            return result;
 
         }
     }
