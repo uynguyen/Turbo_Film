@@ -67,7 +67,7 @@ namespace Turbo_Phim.Controllers
             UpdateProfileViewModal profileModel = AC.GetUpdateProfileViewModal(User.Identity.GetUserId());
             if (profileModel == null) return Content("Không thể cập nhật tài khoản!");
             profileModel.Email = User.Identity.Name;
-            return View(profileModel);
+            return PartialView(profileModel);
         }
 
         [HttpPost]
@@ -78,8 +78,9 @@ namespace Turbo_Phim.Controllers
             {
                 var id = User.Identity.GetUserId();
                 AC.UpdateAccount(id, model);
+                return Content("Cập nhật thành công!");
             }
-            return View(model);
+            return Content("Không thể cập nhật! Vui lòng kiểm tra lại thông tin!");
         }
 
 
@@ -248,7 +249,7 @@ namespace Turbo_Phim.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            return View();
+            return PartialView();
         }
 
         //
@@ -259,7 +260,7 @@ namespace Turbo_Phim.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return Content("Dữ liệu nhập không đúng!");
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -269,10 +270,10 @@ namespace Turbo_Phim.Controllers
                 {
                     await SignInAsync(user, isPersistent: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return  JavaScript("location.reload()");
             }
             AddErrors(result);
-            return View(model);
+            return Content("Không thể thay đổi mật khẩu!");
         }
 
         //

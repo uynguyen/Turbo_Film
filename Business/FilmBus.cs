@@ -554,13 +554,13 @@ namespace Business
                     }
 
                 }
-                List<DanhMucTheLoai> lstTheLoai = db.DanhMucTheLoai.ToList();
+                List<DanhMucTheLoai> lstTheLoai = db.DanhMucTheLoai.Where(x => x.TinhTrang == true).ToList();
 
 
                 int totalCount = db.BaiNhanXet.ToList().Count();
                 foreach (DanhMucTheLoai theLoai in lstTheLoai)
                 {
-                    DanhMucTheLoai theLoai1 = db.DanhMucTheLoai.Find(theLoai.MaSo);
+                    DanhMucTheLoai theLoai1 = db.DanhMucTheLoai.Where(x => x.TinhTrang == true && x.MaSo == theLoai.MaSo).FirstOrDefault();
                   
                     if(total.ContainsKey(theLoai.MaSo))
                     {
@@ -614,13 +614,13 @@ namespace Business
                     }
 
                 }
-                List<DanhMucNuocSanXuat> lstTheLoai = db.DanhMucNuocSanXuat.ToList();
+                List<DanhMucNuocSanXuat> lstTheLoai = db.DanhMucNuocSanXuat.Where(x=>x.TinhTrang == true).ToList();
 
 
                 int totalCount = db.BaiNhanXet.ToList().Count();
                 foreach (DanhMucNuocSanXuat theLoai in lstTheLoai)
                 {
-                    DanhMucNuocSanXuat theLoai1 = db.DanhMucNuocSanXuat.Find(theLoai.MaSo);
+                    DanhMucNuocSanXuat theLoai1 = db.DanhMucNuocSanXuat.Where(x=>x.TinhTrang == true && x.MaSo == theLoai.MaSo).FirstOrDefault();
 
                     if (total.ContainsKey(theLoai.MaSo))
                     {
@@ -724,5 +724,26 @@ namespace Business
         }
 
 
+
+        public int[] statisticReview()
+        {
+            int[] result = new int[12]{0,0,0,0,0,0,0,0,0,0,0,0};
+
+
+            List<BaiNhanXet> lst_nx = db.BaiNhanXet.ToList();
+
+            foreach (BaiNhanXet baiNhanXet in lst_nx)
+            {
+                int thang = baiNhanXet.NgayDang.Value.Month;
+
+                result[thang - 1]++;
+
+            }
+
+
+
+
+            return result;
+        }
     }
 }

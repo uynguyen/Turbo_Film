@@ -4,77 +4,96 @@
 @{
     ViewBag.Title = User.Identity.Name;
     Layout = null;
-    
 }
-<body class="bg-dark">
 
 
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/jquery")
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <h2> Thông tin cá nhân</h2>
-                <br />
-                <script>
-                    $(document).ready(function () {
-                        $(function () {
-                            $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        });
+        $('#updateprofile').modal({
+            show: false,
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+</script>
 
-                        });
-                    });
-                </script>
-                @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary()
-                    <div class="form-group">
-                        @Html.Label("Email:")
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = true })
-                        @Html.ValidationMessageFor(m => m.Email)
-                        <span class="help-block"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Họ và tên:")
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Name)
-                        <span class="help-block"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Giới tính:") <br />
-                        @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) <label> Name </label>
-                        @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) <label>Nữ</label>
-                        <span class="help-block"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Ngày sinh:")
-                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
-                        @Html.ValidationMessageFor(m => m.Birthday)
-                        <span class="help-block"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Địa chỉ:")
-                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Address)
-                        <span class="help-block"></span>
-                    </div>
-                    <input type="submit" class="btn btn-success btn-block" value="Cập nhật">
-                    <br />
-                    @Html.ActionLink("Về trang chủ", "Index", "Home")
-                }
+<!-- Modal -->
+<div class="modal fade" id="updateprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="login-overlay" class="modal-dialog modal-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Cập nhật thông tin cá nhân</h4>
+                        </div>
+                        <div class="well">
+                            @using (Ajax.BeginForm("UpdateProfile", "Manage", new AjaxOptions { UpdateTargetId="message" }, new { @class = "form-vertical", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary()
+                            <div id ="message" class="text-danger"></div>
+                                <div class="form-group">
+                                    @Html.Label("Email:")
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = true })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Họ và tên:")
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Giới tính:") <br />
+                                    @Html.RadioButtonFor(m => m.IsMale, "true", new { id = "male" }) <label> Name </label>
+                                    @Html.RadioButtonFor(m => m.IsMale, "false", new { id = "female" }) <label>Nữ</label>
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Ngày sinh:")
+                                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.Birthday)
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Địa chỉ:")
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Address)
+                                    <span class="help-block"></span>
+                                </div>
+                                <input type="submit" class="btn btn-success btn-block" value="Cập nhật">
+                            }
 
-
+                            <script>
+                                $(document).ready(function () {
+                                    $('#updateprofile').modal();
+                                });
+                                function updateprofileSuccess() {
+                                    $('#updateprofile').modal("hide");
+                                }
+                                $("input").change(function () {
+                                    $("#message").html("");
+                                });
+                                $("input[type=text]").bind('textchange', function () {
+                                    $("#message").html("");
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
-</body>

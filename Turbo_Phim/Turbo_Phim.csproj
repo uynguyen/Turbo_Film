@@ -361,7 +361,10 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\jqplot.barRenderer.min.js" />
+    <Content Include="Scripts\jqplot.categoryAxisRenderer.min.js" />
     <Content Include="Scripts\jqplot.pieRenderer.min.js" />
+    <Content Include="Scripts\jqplot.pointLabels.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

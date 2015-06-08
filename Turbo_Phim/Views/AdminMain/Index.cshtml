@@ -7,6 +7,9 @@
 
 <script type="text/javascript" src="~/Scripts/jquery.jqplot.min.js"></script>
 <script type="text/javascript" src="~/Scripts/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jqplot.pointLabels.min.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.jqplot.min.css" />
 
 
@@ -51,7 +54,8 @@
                                     var json = obj;//[['Sony', 7], ['Samsumg', 13.3], ['LG', 14.7], ['Vizio', 5.2], ['Insignia', 1.2]] ;
 
                                     var plot8 = $.jqplot("pie8", [json], {
-                                        title: 'Biểu đồ % danh mục thể loại phim được đánh giá',
+                                        title: 'Biểu đồ % danh mục thể loại phim được đánh giá',
+
                                         grid: {
                                             drawBorder: false,
                                             drawGridlines: false,
@@ -64,7 +68,8 @@
                                         seriesDefaults: {
                                             renderer: $.jqplot.PieRenderer,
                                             rendererOptions: {
-                                                sliceMargin: 4,
+                                                sliceMargin: 4,
+
                                                 showDataLabels: true
                                             }
                                         },
@@ -154,7 +159,42 @@
                 </div>
 
             </div>
-        </div>
+            <div class="row">
+                <div id="chart1" style="height:300px; width:1000px;"></div>
+                <script>
+                    $(document).ready(function () {
+
+                        $.ajax({
+                            type: "get",
+                            url: '@Url.Action("getStatisticReview", "AdminMain")',
+
+                            success: function (data) {
+                              
+                                var line1 = $.parseJSON(data);
+                                var plot1 = $.jqplot('chart1', [line1], {
+                                    title: 'Số lượng bài Review trong năm',
+                                    seriesDefaults: {
+                                        showMarker: true,
+                                        pointLabels: { show: true }
+                                    },
+                                    axes: { xaxis: { pad: 0.5 } }
+                                });
+
+                            }
+                        });
+
+
+                        
+                    });
+
+
+
+
+                </script>
+
+
+
+            </div>
 
 
 
@@ -352,3 +392,4 @@
     </div>
 </div>
 
+</div>

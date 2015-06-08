@@ -215,5 +215,11 @@ namespace Turbo_Phim.Services
             FilmBus t = new FilmBus();
             return t.statisticPhimForCountry();
         }
+
+        internal int[] getStatisticReview()
+        {
+            FilmBus t = new FilmBus();
+            return t.statisticReview();
+        }
     }
 }

@@ -75,5 +75,20 @@ namespace Turbo_Phim.Controllers
 
             return Content(temp);
         }
+
+        public ActionResult getStatisticReview()
+        {
+
+            FilmService filmService = new FilmService();
+            int [] result = filmService.getStatisticReview();
+
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = jsonSerialiser.Serialize(result);
+
+
+            return Content(json);
+        }
+
+       
     }
 }
