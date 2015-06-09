@@ -248,14 +248,22 @@ namespace Turbo_Phim.Controllers
                     await UserManager.SendEmailAsync(user.Id,
                        "Xác nhận tài khoản của bạn", "Vui lòng xác nhận tài khoản bằng cách nhấn vào <a href=\""
                        + callbackUrl + "\">đây</a>");
-
-                    return View("DisplayEmail");
+                    string script = "window.location.href='" + Url.Action("DisplayEmail", "Account") + "'";
+                    return JavaScript(script);
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
+        }
+
+        //
+        // GET: /Account/DisplayEmail
+        [AllowAnonymous]
+        public ActionResult DisplayEmail()
+        {
+            return View();
         }
 
         //
