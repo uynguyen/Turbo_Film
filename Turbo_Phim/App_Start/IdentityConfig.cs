@@ -393,11 +393,15 @@ namespace Turbo_Phim.Models
         {
             if (!filterContext.HttpContext.Request.IsAuthenticated)
             {
-                filterContext.HttpContext.Session["OpenAuthorizationPopup"] = "true";
+                //filterContext.HttpContext.Session["OpenAuthorizationPopup"] = "true";
+                //filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.PathAndQuery);
 
-                filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.PathAndQuery);
+                JavaScriptResult script = new JavaScriptResult();
+                script.Script = "openLoginDialog(true)";
+                filterContext.Result = script;
                 
-            }
+                
+            } 
             else
             {
                 base.HandleUnauthorizedRequest(filterContext);

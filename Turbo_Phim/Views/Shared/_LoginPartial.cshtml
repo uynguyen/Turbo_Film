@@ -69,14 +69,16 @@ else
         </ul>
         <script>
 
-    function openLoginDialog() {
-
+    function openLoginDialog(t) {
+        window.scroll(0, 0);
         $.ajax({
             url: '@Url.Action("Login", "Account")',
             contentType: 'application/html',
             data: { returnurl: window.location.href },
             success: function (content) {
                 $('#login-body').html(content);
+                if (t != null)
+                    $("#dialogResult").html("Vui lòng đăng nhập!");
             },
             error: function (e) { alert("Failure!"); }
         });

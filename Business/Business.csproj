@@ -92,6 +92,7 @@
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="FilmBus.cs" />
+    <Compile Include="FilmLikeBus.cs" />
     <Compile Include="Phim.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>

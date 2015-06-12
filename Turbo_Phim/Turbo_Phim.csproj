@@ -193,6 +193,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CommentViewModels.cs" />
+    <Compile Include="Models\FilmLikeModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
@@ -205,6 +206,7 @@
     </Compile>
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\FilmLikeService.cs" />
     <Compile Include="Services\FilmService.cs" />
     <Compile Include="Services\GenreService.cs" />
     <Compile Include="Services\ReviewFilmService.cs" />
@@ -361,10 +363,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Scripts\jqplot.barRenderer.min.js" />
-    <Content Include="Scripts\jqplot.categoryAxisRenderer.min.js" />
     <Content Include="Scripts\jqplot.pieRenderer.min.js" />
-    <Content Include="Scripts\jqplot.pointLabels.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
