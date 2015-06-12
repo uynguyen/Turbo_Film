@@ -11,18 +11,18 @@ using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Services;
 using System.Collections.Generic;
+using Business;
 namespace Turbo_Phim.Controllers
 {
     public class ReviewController : Controller
     {
-        // GET: Review
+      //   GET: Review
         public ActionResult Index(int? page)
         {
             ViewBag.HomeStatus = "inactive";
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "active";
             ViewBag.ContactStatus = "inactive";
-
             if (page == null)
             {
                 if (TempData["currentPage"] != null)
@@ -38,25 +38,32 @@ namespace Turbo_Phim.Controllers
             else
                 TempData["currentPage"] = page;
 
-
-
             if (TempData["strSort"] == null)
-                TempData["strSort"] = "ID";
-            
-
+                TempData["strSort"] = "ID";           
 
             FilmService phimService = new FilmService();
-
 
             ViewBag.maxPage = phimService.countPage();
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
-
             return View(phimService.getAllFilms(page, (String)TempData["strSort"], false));
         }
 
+        [AuthorizeUser]
+        [HttpPost]
+        public ActionResult Insert_Film_Like(int MS_Phim)
+        {
+            AccountBus ac = new AccountBus();
+            ThanhVien result = ac.getMemberByUserId(User.Identity.GetUserId());
+            FilmLikeService film = new FilmLikeService();
+            if (film.addFilmLike(result.MS_TaiKhoan, MS_Phim))
+                return Content("success");
+            else
+                return Content("failure");
+        }
 
-
+        
+        
         public ActionResult SortByName()
         {
             TempData["strSort"] = "Name";

@@ -10,9 +10,12 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>@User.Identity.GetUserName()</b> <span class="caret"></span></a>
                 <ul id="login-dp" class="dropdown-menu">
+                    <li>                      
+                        <a href="#" onclick="openProfileDialog()">Thông tin cá nhân</a>
+                    </li>
                     <li>
-                       
-                        @Html.ActionLink("Thông tin cá nhân", "UpdateProfile", "Manage")
+                       <a href="#" onclick="openChangePasswordDialog()">Thay đổi mật khẩu</a>
+                        
                     </li>
                     @if (User.IsInRole("Admin") || User.IsInRole("Administrator"))
                     {
@@ -28,6 +31,32 @@
                 </ul>
             </li>                     
         </ul>
+    <script>
+        function openChangePasswordDialog() {
+
+            $.ajax({
+                url: '@Url.Action("ChangePassword", "Manage")',
+                contentType: 'application/html',
+                data: { returnurl: window.location.href },
+                success: function (content) {
+                    $('#dialogPlaceholder').html(content);
+                },
+                error: function (e) { alert("Failure!"); }
+            });
+        }
+        function openProfileDialog() {
+
+            $.ajax({
+                url: '@Url.Action("UpdateProfile", "Manage")',
+                contentType: 'application/html',
+                data: { returnurl: window.location.href },
+                success: function (content) {
+                    $('#dialogPlaceholder').html(content);
+                },
+                error: function (e) { alert("Failure!"); }
+            });
+        }
+    </script>
     }
 }
 else
@@ -40,18 +69,22 @@ else
         </ul>
         <script>
 
-    function openLoginDialog() {
-
+    function openLoginDialog(t) {
+        window.scroll(0, 0);
         $.ajax({
             url: '@Url.Action("Login", "Account")',
             contentType: 'application/html',
-            data: {returnurl: window.location.href},
+            data: { returnurl: window.location.href },
             success: function (content) {
                 $('#login-body').html(content);
+                if (t != null)
+                    $("#dialogResult").html("Vui lòng đăng nhập!");
             },
             error: function (e) { alert("Failure!"); }
         });
     }
+
+    
         </script>
 
     </li>

@@ -184,17 +184,6 @@ namespace Turbo_Phim.Services
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
         internal CommentViewModels addComment(string CommentContent, string IDPost, string IDUser)
         {
             CommentViewModels result = new CommentViewModels();
@@ -210,11 +199,6 @@ namespace Turbo_Phim.Services
             {
                 result = BinhLuan2ViewModels(binhLuan);
             }
-
-
-         
-
-
             
             return result;
 
