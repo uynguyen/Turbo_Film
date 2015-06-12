@@ -203,5 +203,43 @@ namespace Turbo_Phim.Services
             return result;
 
         }
+
+        internal List<TopReviewModels> getAllReviewFilm()
+        {
+            ReviewFilmsBus reviewBus = new ReviewFilmsBus();
+
+            List<BaiNhanXet> lstBaiNhanXet = reviewBus.getAllReviewFilm();
+
+            List<TopReviewModels> result = BaiNhanXet2TopReviewModel(lstBaiNhanXet);
+
+            return result;
+        }
+
+        private List<TopReviewModels> BaiNhanXet2TopReviewModel(List<BaiNhanXet> lstBaiNhanXet)
+        {
+            List<TopReviewModels> result = new List<TopReviewModels>();
+
+            AccountBus acBus = new AccountBus();
+            foreach (BaiNhanXet baiNhanXet in lstBaiNhanXet)
+            {
+                TopReviewModels temp = new TopReviewModels();
+
+
+                temp.MS_Phim = (int) baiNhanXet.MS_Phim;
+                temp.MS_ReView = baiNhanXet.MaSo;
+                temp.MS_TaiKhoan = baiNhanXet.MS_TaiKhoan;
+                ThanhVien thanhVien = acBus.getMemberByUserId(temp.MS_TaiKhoan);
+                temp.UserName = thanhVien.HoTen;
+                temp.postDate = (DateTime) baiNhanXet.NgayDang;
+                temp.TenPhim = baiNhanXet.Phim.TenPhim;
+                temp.title = baiNhanXet.TieuDe;
+                temp.content = baiNhanXet.NoiDung;
+                temp.ulr_HinhAnh = baiNhanXet.Phim.HinhAnh;
+                result.Add(temp);
+
+            }
+            return result;
+
+        }
     }
 }

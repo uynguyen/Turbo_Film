@@ -198,5 +198,19 @@ namespace Business
                 return false;
             }
         }
+
+        public List<BaiNhanXet> getAllReviewFilm()
+        {
+            try
+            {
+                return db.BaiNhanXet.Where(X => X.TinhTrang == true).ToList();
+               
+            }
+            catch (Exception e)
+            {
+
+                return null;
+            }
+        }
     }
 }

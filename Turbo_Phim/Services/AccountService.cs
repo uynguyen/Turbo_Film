@@ -51,5 +51,38 @@ namespace Turbo_Phim.Services
             tv.TinhTrang = true;
             return bus.updateProfile(id, tv);
         }
+
+        public List<HistoryViewModels> getActivitiesLog(string IDUser)
+        {
+            //ReviewFilmsBus reviewFilmsBus = new ReviewFilmsBus();
+
+
+
+
+
+            //List<BaiNhanXet> lstBaiNhanXet = reviewFilmsBus.getMyListReview(IDUser);
+
+
+            //CommentBus commentBus = new CommentBus();
+
+
+            //List<BinhLuan> lstBinhLuan = commentBus.getMyComment(IDUser);
+
+
+
+            //BinhChonBus binhChonBus = new BinhChonBus();
+
+
+
+            //List<BinhChon> lstBinhChon = binhChonBus.getMyBinhChon(IDUser);
+
+
+            return null;
+           
+
+
+
+        }
+
     }
 }
