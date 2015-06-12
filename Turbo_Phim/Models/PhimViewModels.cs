@@ -52,7 +52,7 @@ namespace Turbo_Phim.Models
          [Display(Name = "Nước sản xuất")]
         public String NuocSX { get; set; }
 
-         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Required(ErrorMessage = "Bạn chưa chọn {0}")]
          [Display(Name = "Hình ảnh")]
         public string HinhAnh { get; set; }
 
@@ -60,6 +60,9 @@ namespace Turbo_Phim.Models
          [Display(Name = "Ngày phát hành")]
          public DateTime? NgayPhatHanh { get; set; }
 
+         [Required(ErrorMessage = "Bạn chưa chọn {0}")]
+         [Display(Name = "Hình banner")]
+         public string Banner { get; set; }
 
          [AllowHtml]
          public String contentPost { get; set; }

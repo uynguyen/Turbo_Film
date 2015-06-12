@@ -47,7 +47,7 @@ namespace Turbo_Phim.Services
             pvm.NuocSX = bus.getCountryOfFilm(p.MS_NuocSX);
             pvm.DiemDanhGiaTrungBinh = bus.calculateAvgRank(p.MaSo);
             pvm.LuotDanhGia = bus.countRateTimes(p.MaSo);
-
+            pvm.Banner = p.AnhBanner;
             pvm.strSort = strSort;
             pvm.currentPage = (int)page;
             pvm.isASC = isASC;

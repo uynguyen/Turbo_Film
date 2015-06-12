@@ -57,6 +57,11 @@ table
 
 }
 .ImageFilmMyListReview{
+    width: 150px;
+    height: 250px;
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-bottom:20px;
 
 }
 .myReview{

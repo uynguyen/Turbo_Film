@@ -13,7 +13,23 @@
     });
 </script>
 
+<script>
 
+    $(function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah1').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+        $("#imgInp1").change(function () {
+            readURL2(this);
+        });
+    });
+</script>
 
 <div class="content">
     <div class="header-admin">
@@ -28,6 +44,22 @@
         <div class="main-content">
             @using (Html.BeginForm("EditFilm", "AdminMovies", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                <div class="col-md-12">
+
+                    <img id="blah1" class="createImage" src="@Model.Banner" alt="" />
+
+
+                    <input type='file' name="banner" id="imgInp1" />
+
+                    @{
+                     TempData["currentBanner"] = Model.Banner;
+                    }
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3">

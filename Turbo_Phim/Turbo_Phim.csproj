@@ -282,7 +282,6 @@
     <Content Include="Content\images\gridallbum7.jpg" />
     <Content Include="Content\images\gridallbum8.jpg" />
     <Content Include="Content\images\gridallbum9.jpg" />
-    <Content Include="Content\images\header-bg.jpg" />
     <Content Include="Content\images\img-sprite-social.png" />
     <Content Include="Content\images\img-sprite.png" />
     <Content Include="Content\images\less.png" />
@@ -385,6 +384,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login-dropdown.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myscripts.js" />
+    <Content Include="Scripts\myscripts1.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

@@ -138,7 +138,7 @@ namespace Turbo_Phim.Controllers
         }
 
 
-        public ActionResult AddNewFilm(HttpPostedFileBase file, String reissue,  String genre, String country, String content, PhimViewModels fvm)//String name, String rank, String actor,
+        public ActionResult AddNewFilm(HttpPostedFileBase file, HttpPostedFileBase banner, String reissue,  String genre, String country, String content, PhimViewModels fvm)//String name, String rank, String actor,
         //    String director, String duration, String reissue, String genre, String country, String content, String trailer)
         {
             String fileName = "";
@@ -151,6 +151,19 @@ namespace Turbo_Phim.Controllers
             else
             {
                 fileName = "defaultAvatar.jpg";
+            }
+
+
+            String fileNameBanner = "";
+            if (banner != null && banner.ContentLength > 0)
+            {
+                fileNameBanner = Path.GetFileName(banner.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/"), fileNameBanner);
+                banner.SaveAs(path);
+            }
+            else
+            {
+                fileNameBanner = "defaultBanner.jpg";
             }
 
 
@@ -169,7 +182,7 @@ namespace Turbo_Phim.Controllers
             p.MS_NuocSX = Int32.Parse(country);
             p.URL_Trailer = fvm.URL_Trailer;
             p.HinhAnh = "/Images/" + fileName;
-
+            p.AnhBanner = "/Images/" + fileNameBanner;
             FilmService filmsv = new FilmService();
 
             TempData["CreateFilmResult"] = filmsv.addNewFilmd(p);
@@ -215,7 +228,7 @@ namespace Turbo_Phim.Controllers
 
 
 
-        public ActionResult EditFilm(HttpPostedFileBase file, String reissue, String genre, String country, String content, String codeFilm, PhimViewModels fvm) {
+        public ActionResult EditFilm(HttpPostedFileBase file, HttpPostedFileBase banner, String reissue, String genre, String country, String content, String codeFilm, PhimViewModels fvm) {
             String fileName = "";
             if (file != null && file.ContentLength > 0)
             {
@@ -223,7 +236,16 @@ namespace Turbo_Phim.Controllers
                 var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
                 file.SaveAs(path);
             }
-            
+
+            String fileNameBanner = "";
+            if (banner != null && banner.ContentLength > 0)
+            {
+                fileNameBanner = Path.GetFileName(banner.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/"), fileNameBanner);
+                banner.SaveAs(path);
+            }
+
+
 
 
             Phim p = new Phim();
@@ -248,6 +270,12 @@ namespace Turbo_Phim.Controllers
                 p.HinhAnh = "/Images/" + fileName;
             else
                 p.HinhAnh = (String)TempData["currentAvatar"];
+
+
+            if (fileNameBanner != "")
+                p.AnhBanner = "/Images/" + fileNameBanner;
+            else
+                p.AnhBanner = (String)TempData["currentBanner"];
 
             FilmService filmsv = new FilmService();
             filmsv.EditFilm(p);
