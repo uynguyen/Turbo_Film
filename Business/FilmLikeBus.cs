@@ -27,19 +27,20 @@ namespace Business
             }
         }
 
-        public bool checkList(String ms_thanhVien, int ms_phim)
+        public bool checkList(string username, int ms_phim)
         {
+            AspNetUsers user = db.AspNetUsers.SingleOrDefault(e=>e.UserName == username);
+            if (user == null) return false;           
+
             try
             {
-                List<DanhSachPhimYeuThich> lst = new List<DanhSachPhimYeuThich>();
-                lst = db.DanhSachPhimYeuThich.ToList();
-                for (int i = 1; i < lst.Count(); i++)
-                {
-                    if (lst[i].MS_ThanhVien == ms_thanhVien && lst[i].MS_Phim == ms_phim)
-                        return true;
-                }
-                return false;
-            }
+                DanhSachPhimYeuThich ds = db.DanhSachPhimYeuThich.Where(
+                    e => e.MS_ThanhVien == user.Id && e.MS_Phim == ms_phim).FirstOrDefault();
+                if (ds != null)
+                    return true;
+                else
+                    return false;
+            } 
             catch (Exception e)
             {
                 return false;

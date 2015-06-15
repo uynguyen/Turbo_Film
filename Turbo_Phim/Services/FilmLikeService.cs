@@ -16,9 +16,9 @@ namespace Turbo_Phim.Services
             return bus.addFilmLike(ms_thanhVien, ms_Phim);
         }
 
-        public bool checkList(String ms_thanhVien, int ms_phim)
+        public bool checkList(string username, int ms_phim)
         {
-            return bus.checkList(ms_thanhVien, ms_phim);
+            return bus.checkList(username, ms_phim);
         }
 
         public FilmLikeModels showFilmLike(DanhSachPhimYeuThich p)

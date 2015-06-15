@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Models
 {
@@ -91,7 +92,13 @@ namespace Turbo_Phim.Models
 
          public bool isASC { get; set; }
 
-       
 
+
+
+         public bool IsLikedByUser(string p, int ms_phim)
+         {
+             FilmLikeService sv = new FilmLikeService();
+             return sv.checkList(p, ms_phim);
+         }
     }
 }

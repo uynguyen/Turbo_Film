@@ -56,13 +56,39 @@ namespace Turbo_Phim.Controllers
             AccountBus ac = new AccountBus();
             ThanhVien result = ac.getMemberByUserId(User.Identity.GetUserId());
             FilmLikeService film = new FilmLikeService();
+
+            
+            // true đã có
+            // false chưa có;
             if (film.addFilmLike(result.MS_TaiKhoan, MS_Phim))
                 return Content("success");
             else
                 return Content("failure");
         }
 
-        
+ 
+        [HttpPost]
+        public ActionResult IsLiked(int MS_Phim)
+        {
+
+            // o tren nay se kiem tra no dang nhap hay chua
+            if (User == null)
+            {
+                return Content("");
+            }
+            else
+            {
+                // doan nay la no ra dang nhap roi
+                AccountBus ac = new AccountBus();
+                ThanhVien result = ac.getMemberByUserId(User.Identity.GetUserId());
+                FilmLikeService film = new FilmLikeService();
+
+                if (film.checkList(result.MS_TaiKhoan, MS_Phim))
+                    return Content("btn-success");
+                else
+                    return Content("");
+            }
+        }
         
         public ActionResult SortByName()
         {
