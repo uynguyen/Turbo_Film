@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Turbo_Phim.Models.TopReviewModels>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin_layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).on("click", "#open-AddBookDialog", function () {
+        var myBookId = $(this).data('id');
+        $("#btnDeleteReview").val(myBookId);
+        // As pointed out in comments,
+        // it is superfluous to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+
+    $(document).ready(function () {
+        $("#btnDeleteReview").click(function () {
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("DeletePost", "AdminReviewPost")',
+                data: { codeReview: $("#btnDeleteReview").val() },
+                success: function (data) {
+
+                    $("#myModal").modal('hide');
+
+                    var id = $("#btnDeleteReview").val();
+                    $("#" + id).remove();
+                },
+                error: function (data) {
+
+                    alarm("eror");
+                }
+
+
+            });
+
+        });
+    });
+</script>
+<div class="content">
+
+    <div class="main-content">
+
+        <div class="main-content">
+
+            <div class="btn-toolbar list-toolbar btnAddNewFilm">
+
+
+
+
+
+
+
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+
+                        <th>Tiêu đề</th>
+                        <th>Nội dung</th>
+                        <th>Người đăng</th>
+                        <th>Ngày đăng</th>
+                        <th>Bộ phim</th>
+                        <th style="width: 10%" >Hình ảnh</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
+                    {
+                        
+                  
+                          p.content = System.Text.RegularExpressions.Regex.Replace(p.content, "<.*?>", string.Empty);
+                      
+                        
+                        
+                        <tr id="@p.MS_ReView">
+                            <td>@p.MS_ReView</td>
+                            <td>@p.title</td>
+                            <td class="postReivew">@Html.Raw(p.content)</td>
+                            <td>@p.UserName</td>
+                            <td>@p.postDate</td>
+                            <td>@p.TenPhim</td>
+                            <td><img class="ImageFilmAdmin" src="@p.ulr_HinhAnh" alt="" /></td>
+                            <td>
+
+                                <a href="#myModal" class="btn btn-default" id="open-AddBookDialog" role="button" data-toggle="modal" data-id="@p.MS_ReView"><i class="fa fa-trash-o"></i></a>
+
+                            </td>
+                        </tr>
+                    }
+
+
+
+
+
+
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+            <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h2 id="myModalLabel">Xác nhận xóa bài nhận xét</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn có chắc muốn xóa bài nhận xét này?</p>
+                        </div>
+                        <div class="modal-footer">
+
+
+
+                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
+                            <button class="btn btn-danger" type="submit" value="" id="btnDeleteReview" name="codeReview">Xóa</button>
+
+
+                            @*<button class="btn btn-danger" data-dismiss="modal">@Html.ActionLink("Xóa", "Index", "AdminMovies")</button>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+

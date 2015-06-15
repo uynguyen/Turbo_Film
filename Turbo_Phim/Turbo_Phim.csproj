@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AdminCategoryController.cs" />
     <Compile Include="Controllers\AdminMainController.cs" />
     <Compile Include="Controllers\AdminMoviesController.cs" />
+    <Compile Include="Controllers\AdminReviewPostController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CommentViewModels.cs" />
     <Compile Include="Models\FilmLikeModels.cs" />
+    <Compile Include="Models\HistoryViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
@@ -473,6 +475,8 @@
     <Content Include="Views\Home\showReview.cshtml" />
     <Content Include="Views\ReviewDetail\CommentsOfTopReview.cshtml" />
     <Content Include="Views\ReviewDetail\AddComment.cshtml" />
+    <Content Include="Views\Manage\MyActivitiesLog.cshtml" />
+    <Content Include="Views\AdminReviewPost\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
