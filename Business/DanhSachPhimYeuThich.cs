@@ -17,10 +17,9 @@ namespace Business
         public int MaSo { get; set; }
         public string MS_ThanhVien { get; set; }
         public Nullable<int> MS_Phim { get; set; }
+        public Nullable<bool> TinhTrang { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Phim Phim { get; set; }
-
-        public bool TinhTrang { get; set; }
     }
 }

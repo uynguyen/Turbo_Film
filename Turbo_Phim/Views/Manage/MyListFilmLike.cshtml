@@ -14,8 +14,8 @@
             $("#btnDeleteReview").click(function () {
                 $.ajax({
                     type: "post",
-                    url: '@Url.Action("DeleteFilm", "Manage")',
-                    data: { IDPost: $(this).val() },
+                    url: '@Url.Action("DeleteFilm", "Review")',
+                    data: { IDFilm: $(this).val() },
                     success: function (data) {
 
                         $("#myModal").modal('hide');
@@ -24,8 +24,7 @@
                         $("#" + id).remove();
                     },
                     error: function (data) {
-
-
+                        alert("no vo day ne");
                     }
 
 

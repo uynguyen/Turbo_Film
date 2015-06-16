@@ -397,18 +397,7 @@ namespace Turbo_Phim.Controllers
             return View(result);
         }
 
-        [HttpPost]
-        [AuthorizeUser]
-        public String DeleteFilm(String IDFilm)
-        {
-            FilmLikeService filmS = new FilmLikeService();
-            bool result = filmS.deleteFilm(IDFilm);
 
-            if (result)
-                return "success";
-            else
-                return "failed";
-        }
 
 
 

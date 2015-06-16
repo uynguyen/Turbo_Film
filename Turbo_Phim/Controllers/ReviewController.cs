@@ -90,7 +90,18 @@ namespace Turbo_Phim.Controllers
             }
         }
 
+        [HttpPost]
+        [AuthorizeUser]
+        public String DeleteFilm(String IDFilm)
+        {
+            FilmLikeService filmS = new FilmLikeService();
+            bool result = filmS.deleteFilm(IDFilm);
 
+            if (result)
+                return "success";
+            else
+                return "failed";
+        }
         
         public ActionResult SortByName()
         {
