@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AdminMoviesController.cs" />
     <Compile Include="Controllers\AdminReviewPostController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FilmViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
@@ -477,6 +478,7 @@
     <Content Include="Views\ReviewDetail\AddComment.cshtml" />
     <Content Include="Views\Manage\MyActivitiesLog.cshtml" />
     <Content Include="Views\AdminReviewPost\Index.cshtml" />
+    <Content Include="Views\Manage\MyListFilmLike.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

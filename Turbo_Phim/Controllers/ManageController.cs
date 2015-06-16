@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Turbo_Phim.Services;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System;
 
 namespace Turbo_Phim.Controllers
 {
@@ -378,6 +379,37 @@ namespace Turbo_Phim.Controllers
         {
             return View();
         }
+
+        public ActionResult MyListFilmLike()
+        {
+            FilmLikeService film = new FilmLikeService();
+            List<FilmLikeModels> lstFilmLike = film.getMyListFilmLike(User.Identity.GetUserId());
+
+            List<PhimViewModels> result = new List<PhimViewModels>();
+       
+            PhimViewModels temp = new PhimViewModels();
+            FilmService a = new FilmService();
+            foreach (FilmLikeModels i in lstFilmLike)
+            {
+                temp = a.getFilmByMaso(i.ms_phim);
+                result.Add(temp);
+            }
+            return View(result);
+        }
+
+        [HttpPost]
+        [AuthorizeUser]
+        public String DeleteFilm(String IDFilm)
+        {
+            FilmLikeService filmS = new FilmLikeService();
+            bool result = filmS.deleteFilm(IDFilm);
+
+            if (result)
+                return "success";
+            else
+                return "failed";
+        }
+
 
 
         #region Helpers

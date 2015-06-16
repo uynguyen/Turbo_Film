@@ -12,9 +12,11 @@ namespace Turbo_Phim.Models
         public int MaSo { get; set; }
 
         [Display(Name = "MS Thành Viên")]
-        public string thanhVien { get; set; }
+        public string ms_thanhVien { get; set; }
 
         [Display(Name = "MS Phim")]
-        public string tenPhim { get; set; }
+        public int ms_phim { get; set; }
+
+        public int maso { get; set; }
     }
 }

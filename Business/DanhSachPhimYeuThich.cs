@@ -20,5 +20,7 @@ namespace Business
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Phim Phim { get; set; }
+
+        public bool TinhTrang { get; set; }
     }
 }

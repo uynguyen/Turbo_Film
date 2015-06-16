@@ -113,6 +113,15 @@ namespace Turbo_Phim.Services
             return pvm;
         }
 
+        public PhimViewModels getFilmByMaso(int ms_phim)
+        {
+            Phim p = bus.getFilmByMaso(ms_phim);
+
+            PhimViewModels pvm = Phim2PhimViewModels(p);
+
+            return pvm;
+        }
+
         internal bool EditFilm(Phim p)
         {
            

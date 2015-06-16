@@ -92,6 +92,7 @@ namespace Turbo_Phim.Services
         internal List<TopReviewModels> getMyListReview(string IDUser)
         {
             List<TopReviewModels> result = new List<TopReviewModels>();
+
             ReviewFilmsBus bus = new ReviewFilmsBus();
             List<BaiNhanXet> Review = bus.getMyListReview(IDUser);
             if (Review != null)

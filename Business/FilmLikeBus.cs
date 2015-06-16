@@ -47,12 +47,33 @@ namespace Business
             }
         }
 
-        public List<DanhSachPhimYeuThich> showFilmLike()
-        {
-            List<DanhSachPhimYeuThich> lst = new List<DanhSachPhimYeuThich>();
-            lst = db.DanhSachPhimYeuThich.ToList();
+        //public List<DanhSachPhimYeuThich> showFilmLike()
+        //{
+        //    List<DanhSachPhimYeuThich> lst = new List<DanhSachPhimYeuThich>();
+        //    lst = db.DanhSachPhimYeuThich.ToList();
+        //    return lst;
+        //}
 
-            return lst;
+        public List<DanhSachPhimYeuThich> getMyListFilmLike(string IDUser)
+        {
+       //     return db.DanhSachPhimYeuThich.Where(x => x.MS_ThanhVien.Equals(IDUser) && x.TinhTrang == true).ToList();
+            return db.DanhSachPhimYeuThich.Where(x => x.MS_ThanhVien.Equals(IDUser)).ToList();
+        }
+
+        public bool deleteFilm(int IDFilm)
+        {
+            try
+            {
+                DanhSachPhimYeuThich temp = db.DanhSachPhimYeuThich.Where(x => x.MaSo == IDFilm).FirstOrDefault();
+                temp.TinhTrang = false;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
         }
 
     }
