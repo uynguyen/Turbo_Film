@@ -140,6 +140,7 @@
           <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" />
           <Property Name="MS_Phim" Type="int" />
           <Property Name="TinhTrang" Type="bit" />
+          <Property Name="ThoiGian" Type="datetime" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -628,6 +629,7 @@
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_DanhSachPhimYeuThich_AspNetUsers" FromRole="DanhSachPhimYeuThich" ToRole="AspNetUsers" />
           <NavigationProperty Name="Phim" Relationship="Self.FK_DanhSachPhimYeuThich_Phim" FromRole="DanhSachPhimYeuThich" ToRole="Phim" />
           <Property Name="TinhTrang" Type="Boolean" />
+          <Property Name="ThoiGian" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Phim">
           <Key>
@@ -1073,6 +1075,7 @@
           <EntitySetMapping Name="DanhSachPhimYeuThich">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.DanhSachPhimYeuThich">
               <MappingFragment StoreEntitySet="DanhSachPhimYeuThich">
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
                 <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
