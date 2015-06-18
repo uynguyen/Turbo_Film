@@ -21,6 +21,11 @@ namespace Turbo_Phim.Services
             return bus.checkList(username, ms_phim);
         }
 
+        public bool checkRate(string username, int ms_phim)
+        {
+            return bus.checkRate(username, ms_phim);
+        }
+
         public FilmLikeModels DanhSachPhimYeuThich2DanhSachPhimYeuThichFilmModel(DanhSachPhimYeuThich p)
         {
             FilmLikeModels result = new FilmLikeModels();
