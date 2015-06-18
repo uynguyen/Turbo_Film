@@ -26,30 +26,37 @@ namespace Turbo_Phim.Controllers
 
             return View(filmS.getFilmByID(IDPhim));
         }
-    
 
 
 
 
 
-        
 
-        public ActionResult CommentsOfTopReview(String IDPhim)
+
+
+        public ActionResult CommentsOfTopReview(String IDPhim, String IDReview = "-1")
         {
 
             
             List<CommentViewModels> result = new List<CommentViewModels>();
             ReviewFilmService reviewS = new ReviewFilmService();
-
-
-            TopReviewModels top = reviewS.getTopReview(IDPhim);
+            TopReviewModels top = null;
+            if(IDReview.Equals("-1")) // Bài Review nổi bật nhất
+            {
+                top = reviewS.getTopReview(IDPhim);
+            }
+            else
+            {
+                top = reviewS.getReview(IDReview);
+            }
+            
             if(top != null)
             {
                 result = reviewS.getComment(top.MS_ReView.ToString());
 
                 TempData["IDPost"] = top.MS_ReView;
             }
-        
+            
       
 
 
