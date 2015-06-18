@@ -65,6 +65,26 @@ namespace Business
             }
         }
 
+        public bool checkRate(string username, int ms_phim)
+        {
+            AspNetUsers user = db.AspNetUsers.SingleOrDefault(e => e.UserName == username);
+            if (user == null) return false;
+
+            try
+            {
+                DanhGia ds = db.DanhGia.Where(
+                    e => e.MS_ThanhVien == user.Id && e.MS_Phim == ms_phim).FirstOrDefault();
+                if (ds != null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         //public List<DanhSachPhimYeuThich> showFilmLike()
         //{
         //    List<DanhSachPhimYeuThich> lst = new List<DanhSachPhimYeuThich>();

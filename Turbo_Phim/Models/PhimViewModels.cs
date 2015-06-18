@@ -100,5 +100,11 @@ namespace Turbo_Phim.Models
              FilmLikeService sv = new FilmLikeService();
              return sv.checkList(p, ms_phim);
          }
+
+        public bool IsRateByUser(string p, int ms_phim)
+         {
+             FilmLikeService sv = new FilmLikeService();
+             return sv.checkRate(p, ms_phim);
+         }
     }
 }
