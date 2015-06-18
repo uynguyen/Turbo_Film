@@ -87,7 +87,7 @@ input[type="checkbox"].input-validation-error {
 
 
 #header1{
-    background: transparent url(data-url) no-repeat;
+    /*background: transparent url(data-url) no-repeat;*/
     background-size: cover;
 }
 
