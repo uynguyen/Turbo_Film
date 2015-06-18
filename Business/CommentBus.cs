@@ -15,5 +15,10 @@ namespace Business
 
 
         }
+
+        public List<BinhLuan> getMyComments(string IDUser)
+        {
+            return db.BinhLuan.Where(x => x.MS_ThanhVien == IDUser).OrderByDescending(x => x.NgayDang).ToList();
+        }
     }
 }

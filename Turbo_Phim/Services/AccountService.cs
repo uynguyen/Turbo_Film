@@ -55,33 +55,89 @@ namespace Turbo_Phim.Services
         public List<HistoryViewModels> getActivitiesLog(string IDUser)
         {
             //ReviewFilmsBus reviewFilmsBus = new ReviewFilmsBus();
+            List<HistoryViewModels> result = new List<HistoryViewModels>();
+
+            CommentBus commentBus = new CommentBus();
+
+            ReviewFilmsBus reviewBus = new ReviewFilmsBus();
+            AccountBus accBus = new AccountBus();
+            FilmBus filmBus = new FilmBus();
+            ThanhVien thanhVien = accBus.getMemberByUserId(IDUser);
+
+            List<BinhLuan> lstBinhLuan = commentBus.getMyComments(IDUser);
+
+          
 
 
+            foreach (BinhLuan binhLuan in lstBinhLuan)
+            {
+
+                HistoryViewModels temp = new HistoryViewModels();
+
+                BaiNhanXet baiNhanXet = reviewBus.getReview((int)binhLuan.MS_BaiNhanXet);
+                Phim phim = filmBus.getFilmByID(baiNhanXet.MS_Phim.ToString());
+
+                temp.tenBaiNhanXet = baiNhanXet.TieuDe;
+                temp.MS_BaiNhanXet = (int)binhLuan.MS_BaiNhanXet;
+                temp.tenPhim = phim.TenPhim;
+                temp.MS_Phim = (int)phim.MaSo;
+                temp.action = "Comment";
+                temp.Hoten = thanhVien.HoTen;
+                temp.content = binhLuan.NoiDung;
+                temp.dateAction = (DateTime)  binhLuan.NgayDang;
+                result.Add(temp);
 
 
+            }
 
-            //List<BaiNhanXet> lstBaiNhanXet = reviewFilmsBus.getMyListReview(IDUser);
+            FilmLikeBus filmLikeBus = new FilmLikeBus();
+
+            List<DanhSachPhimYeuThich> lstPhimYeuThich = filmLikeBus.getMyListFilmLike(IDUser);
+
+         
+            foreach (DanhSachPhimYeuThich phimYeuThich in lstPhimYeuThich)
+            {
+
+                HistoryViewModels temp = new HistoryViewModels();
+
+                Phim p = filmBus.getFilmByID(phimYeuThich.MS_Phim.ToString());
+                temp.tenPhim = p.TenPhim;
+                temp.MS_Phim = p.MaSo;
+                temp.Hoten = thanhVien.HoTen;
+                temp.action = "Like";
+                temp.content = thanhVien.HoTen + " đã thích " + p.TenPhim;
+                temp.dateAction = (DateTime)phimYeuThich.ThoiGian;
+                result.Add(temp);
 
 
-            //CommentBus commentBus = new CommentBus();
+            }
+
+         
+            List<BaiNhanXet> lstNhanXet = reviewBus.getMyListReview(IDUser);
+
+            foreach (BaiNhanXet baiNhanXet in lstNhanXet)
+            {
+
+                HistoryViewModels temp = new HistoryViewModels();
+                Phim p = filmBus.getFilmByID(baiNhanXet.MS_Phim.ToString());
+                temp.tenPhim = p.TenPhim;
+                temp.MS_Phim = p.MaSo;
+                temp.tenBaiNhanXet = baiNhanXet.TieuDe;
+                temp.MS_BaiNhanXet = baiNhanXet.MaSo;
+                temp.Hoten = thanhVien.HoTen;
+                temp.action = "Post";
+                temp.content = thanhVien.HoTen + " đã thêm bài nhận xét ...." + baiNhanXet.MS_Phim;
+                temp.dateAction = (DateTime)baiNhanXet.NgayDang;
+                result.Add(temp);
 
 
-            //List<BinhLuan> lstBinhLuan = commentBus.getMyComment(IDUser);
+            }
 
+            result.Sort((x, y) => y.dateAction.CompareTo(x.dateAction));
+            
 
-
-            //BinhChonBus binhChonBus = new BinhChonBus();
-
-
-
-            //List<BinhChon> lstBinhChon = binhChonBus.getMyBinhChon(IDUser);
-
-
-            return null;
+            return result;
            
-
-
-
         }
 
     }
