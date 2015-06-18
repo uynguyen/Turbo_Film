@@ -491,6 +491,8 @@
     <Content Include="Views\Manage\MyActivitiesLog.cshtml" />
     <Content Include="Views\AdminReviewPost\Index.cshtml" />
     <Content Include="Views\Manage\MyListFilmLike.cshtml" />
+    <Content Include="Views\Manage\PagingMyListReview.cshtml" />
+    <Content Include="Views\Manage\PagingMyListFilmLike.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

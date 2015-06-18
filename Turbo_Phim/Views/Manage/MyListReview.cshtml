@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Turbo_Phim.Models.TopReviewModels>
+﻿          
+
 @{
     ViewBag.Title = "MyListReview";
 }
-
 
 <script type="text/javascript">
         $(document).on("click", "#open-AddBookDialog", function () {
@@ -36,45 +36,8 @@
         });
 </script>
 <h2>Danh sách các bài Review của bạn</h2>
-    @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
-    {
-        <div class="review myReview" id="@p.MS_ReView">
-            <img class="ImageFilmMyListReview" src="@p.ulr_HinhAnh" alt="" />
-            <div class="review-info">
 
-                @Html.ActionLink("[#" + p.MS_ReView + "].Tiêu đề: " + p.title, "Index", "ReviewDetail", new { IDPhim = @p.MS_Phim, IDReview = p.MS_ReView }, new { @class = "span" })
-                <p class="dirctr">Ngày đăng: @p.postDate.ToString("dd/MM/yyyy hh:mm:ss")</p>
-                <p>Đánh giá phim: @p.TenPhim</p>
-
-                @{ 
-                  p.content = System.Text.RegularExpressions.Regex.Replace(p.content, "<.*?>", string.Empty);
-                }
-                <div class="postReivew">@Html.Raw(@p.content)</div>    
-
-
-                    <div class="clearfix"></div>
-                <div class="clearfix"></div>
-
-                <div class="clearfix"></div>
-                    <div class="yrw">
-
-
-                        <div class="rtm text-center">
-                            <a href="#myModal" class="button play-icon" id="open-AddBookDialog" role="button" data-toggle="modal" data-id="@p.MS_ReView">Xóa bài nhận xét</a>
-                        </div>
-                        <div class="wt text-center">
-                            <a class="button play-icon" href="@Url.Action("EditPost", "ReviewDetail", new { IDReview = @p.MS_ReView })">Edit bài nhận xét</a>
-                        </div>
-
-                        <div class="clearfix"></div>
-                    </div>
-</div>
-            <div class="clearfix"></div>
-        </div>
-    }
-  
-
-
+ @Html.Action("PagingMyListReview")
 
 <div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
