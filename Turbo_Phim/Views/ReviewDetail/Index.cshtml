@@ -16,7 +16,7 @@
             <div class="review-info">
 
                 <h2> <b>@Model.TenPhim</b></h2>
-                <p class="dirctr"><a href="">Quốc gia @Model.NuocSX, </a>@Model.NgayPhatHanh</p>
+                <p class="dirctr"><a href="">Quốc gia @Model.NuocSX, </a>Ngày phát hành @Model.NgayPhatHanh.Value.ToString("dd/MM/yyy")</p>
                 <p class="ratingview">Đánh giá của trang:</p>
                 <p class="ratingview">
                     &nbsp;@Model.DiemDanhGia / 5
@@ -87,6 +87,7 @@
                 <p class="info">Thời lượng:&nbsp; @Model.ThoiLuong Phút</p>
             </div>
             <div class="clearfix"></div>
+            <img class="createImage" src="@Model.Banner" alt="" />
         </div>
         <div class="single">
 

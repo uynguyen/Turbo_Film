@@ -381,7 +381,8 @@ namespace Turbo_Phim.Controllers
 
         public ActionResult MyActivitiesLog()
         {
-            return View();
+            AccountService acSer = new AccountService();
+            return View(acSer.getActivitiesLog(User.Identity.GetUserId()));
         }
 
         public ActionResult MyListFilmLike()

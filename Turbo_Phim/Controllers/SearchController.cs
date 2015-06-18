@@ -50,9 +50,8 @@ namespace Turbo_Phim.Controllers
 
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
-            List<PhimViewModels> searchResult = phimService.searchFilm(filmName, (int)page, out maxPage);
-            ViewBag.maxPage = maxPage;
-
+            List<PhimViewModels> searchResult = phimService.searchFilm(filmName);
+         
             return View(searchResult);
         }
 
@@ -92,8 +91,8 @@ namespace Turbo_Phim.Controllers
             int maxPage;
             ViewBag.maxIndexPage = phimService.getMaxIndexPage();
 
-            List<PhimViewModels> searchResult = phimService.searchFilm4(actor, directer, country, type, (int)page, out maxPage);
-            ViewBag.maxPage = maxPage;
+            List<PhimViewModels> searchResult = phimService.searchFilm4(actor, directer, country, type);
+        
 
             return View(searchResult);
 

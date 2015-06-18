@@ -343,22 +343,20 @@ namespace Business
         }
 
 
-        // Cac ham chuc nang search cua Xanh
+  
 
 
-        // Cac ham chuc nang search cua Xanh
+     
 
-        public List<Phim> searchFilm(string nameFilm, int page, out int maxPage)
+        public List<Phim> searchFilm(string nameFilm)
         {
 
             // Giải quyết vấn đề dạng 1
             var t = from entry in db.Phim select entry;
             if (!String.IsNullOrEmpty(nameFilm))
                 t = t.Where(e => e.TenPhim.Contains(nameFilm) && e.TinhTrang == true);
-            maxPage = countPageSearch(t.ToList());
-
             if (t.ToList().Count != 0)
-                return t.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                return t.ToList();
             else
             {
                 // Giải quyết vấn đề dạng 3
@@ -372,7 +370,7 @@ namespace Business
                         result.Add(item);
                     }
                 }
-                return result.Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                return result.ToList();
             }
         }
 
@@ -421,7 +419,7 @@ namespace Business
             }
             return false;
         }
-        public List<Phim> searchFilm4(string actor, string directer, string country, string type, int page, out int maxPage)
+        public List<Phim> searchFilm4(string actor, string directer, string country, string type)
         {
             //List<Phim> lst = db.Phim.ToList();
             //List<Phim> result = new List<Phim>();
@@ -434,15 +432,10 @@ namespace Business
             if (!String.IsNullOrEmpty(actor) || !String.IsNullOrEmpty(directer))
                 t1 = t1.Where(e => e.DienVien.Contains(actor) && e.DaoDien.Contains(directer)
                                                  && e.MS_NuocSX == maNuoc && e.MS_TheLoai == maTheLoai);
-            maxPage = countPageSearch(t1.ToList());
-            //     if (t1.ToList().Count != 0)
-            //     {
-            return t1.OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
-            //    }
-            //else
-            //{
+           
 
-            //}
+            return t1.ToList();
+
         }
 
         public List<Phim> findByGenre(int genreID, int page, string strSort, bool isASC)

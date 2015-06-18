@@ -19,6 +19,8 @@
                 url: '@Url.Action("AddComment", "ReviewDetail")',
                 data:  "CommentContent=" +Content  + "&IDPost=" + IDPost ,
                 success: function (data) {
+
+                  
                     $("#commentssection").after(data);
                     $("#CommentContent").val("");
                     HideLastComment();

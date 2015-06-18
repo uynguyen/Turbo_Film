@@ -12,7 +12,11 @@ namespace Turbo_Phim.Models
 
         public DateTime dateAction { get; set; }
 
-
+        public String tenPhim { get; set; }
+        public int MS_Phim {get; set;}
+        public String tenBaiNhanXet {get; set;}
+        public int MS_BaiNhanXet {get;set;}
+        public String Hoten { get; set; }
 
 
 
