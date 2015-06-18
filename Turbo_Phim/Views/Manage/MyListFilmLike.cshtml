@@ -3,7 +3,7 @@
     ViewBag.Title = "MyListFilmLike";
 }
 
-<script type="text/javascript">
+    <script type="text/javascript">
         $(document).on("click", "#open-AddBookDialog", function () {
             var myBookId = $(this).data('id');
             $("#btnDeleteReview").val(myBookId);
@@ -24,7 +24,6 @@
                         $("#" + id).remove();
                     },
                     error: function (data) {
-                        alert("no vo day ne");
                     }
 
 
@@ -32,9 +31,10 @@
 
             });
         });
-</script>
+    </script>
 
 <h2>Danh sách các bộ phim yêu thích của bạn</h2>
+            <div class="review" id="@p.MaSo">
 
 @Html.Action("PagingMyListFilmLike")
 
@@ -51,9 +51,6 @@
                     <p class="error-text"><i class="fa fa-warning modal-icon"></i>Bạn có chắc muốn xóa bộ phim này khỏi danh mục phim yêu thích?</p>
                 </div>
                 <div class="modal-footer">
-
-
-                    @*   @using (Html.BeginForm("Delete", "AdminMovies", FormMethod.Get))*@
 
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Hủy bỏ</button>
                     <button class="btn btn-danger" type="submit" value="" id="btnDeleteReview" name="codeFilm">Xóa</button>

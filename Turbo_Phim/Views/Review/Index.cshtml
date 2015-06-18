@@ -107,7 +107,7 @@
                         {
                             if (p.IsLikedByUser(User.Identity.Name, p.MaSo))
                             {
-                                <button class="like btn-success" id=@p.MaSo> Thêm vào danh sách yêu thích </button> 
+                                <button class="like btn-success" id=@p.MaSo> Đã thêm vào danh sách yêu thích </button> 
                             }
                                 
                             else
@@ -158,7 +158,11 @@
                                 data: { MS_Phim: btn.attr('id') },
                                 success: function (data) {
                                     if (data == "success")
-                                          btn.addClass("btn btn-success");
+                                    {
+                                        btn.addClass("btn btn-success");
+                                        btn.text("Đã thêm vào danh sách phim yêu thích");
+                                    }
+                               
                                       
                                 },
                                 error: function (result) {
