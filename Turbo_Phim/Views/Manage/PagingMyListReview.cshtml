@@ -44,7 +44,8 @@
             <div class="clearfix"></div>
         </div>
     }
-    <div class="col-md-12">
+    <div class="col-md-12 col-centered">
+        <hr />
         Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong số @Model.PageCount trang
 
         @Html.PagedListPager(Model, page => Url.Action("PagingMyListReview",

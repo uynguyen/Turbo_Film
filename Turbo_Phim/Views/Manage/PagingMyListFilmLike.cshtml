@@ -13,7 +13,7 @@
 
         @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
         {
-            <div class="review">
+            <div class="review" id="@p.MaSo">
                 <div class="movie-pic">
                     <a href="single.html"><img src="@p.HinhAnh" alt="" /></a>
                 </div>
@@ -58,8 +58,9 @@
             </div>
         }
     </div>
-    <hr />
-    <div class="col-md-12">
+    
+    <div class="col-md-12 col-centered">
+        <hr />
         Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong số @Model.PageCount trang
 
         @Html.PagedListPager(Model, page => Url.Action("PagingMyListFilmLike",
