@@ -17,7 +17,10 @@ namespace Business
                 DanhSachPhimYeuThich ds = new DanhSachPhimYeuThich();
                 ds.MS_Phim = ms_phim;
                 ds.MS_ThanhVien = ms_thanhVien;
+                ds.TinhTrang = true;
+                ds.ThoiGian = System.DateTime.Now;
                 db.DanhSachPhimYeuThich.Add(ds);  
+
                 db.SaveChanges();
                 return true;
             }

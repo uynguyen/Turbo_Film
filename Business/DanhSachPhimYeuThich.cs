@@ -18,6 +18,7 @@ namespace Business
         public string MS_ThanhVien { get; set; }
         public Nullable<int> MS_Phim { get; set; }
         public Nullable<bool> TinhTrang { get; set; }
+        public Nullable<System.DateTime> ThoiGian { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Phim Phim { get; set; }
