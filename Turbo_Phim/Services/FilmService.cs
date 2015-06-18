@@ -57,12 +57,12 @@ namespace Turbo_Phim.Services
             return pvm;
         }
 
-        public List<PhimViewModels> searchFilm(String nameFilm, int page, out int maxPage)
+        public List<PhimViewModels> searchFilm(String nameFilm)
 
         {
             List<PhimViewModels> result = new List<PhimViewModels>();
 
-            List<Phim> lstFilms = bus.searchFilm(nameFilm, page,out maxPage);
+            List<Phim> lstFilms = bus.searchFilm(nameFilm);
             foreach (Phim p in lstFilms)
             {
                 PhimViewModels pvm = Phim2PhimViewModels(p);
@@ -73,11 +73,11 @@ namespace Turbo_Phim.Services
         }
 
 
-        public List<PhimViewModels> searchFilm4(String actor, String directer, String country, String type, int page, out int maxPage)
+        public List<PhimViewModels> searchFilm4(String actor, String directer, String country, String type)
         {
             List<PhimViewModels> result = new List<PhimViewModels>();
 
-            List<Phim> lstFilms = bus.searchFilm4(actor, directer, country, type, page, out maxPage);
+            List<Phim> lstFilms = bus.searchFilm4(actor, directer, country, type);
             foreach (Phim p in lstFilms)
             {
                 PhimViewModels pvm = Phim2PhimViewModels(p);

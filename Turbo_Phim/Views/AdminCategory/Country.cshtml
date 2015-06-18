@@ -28,7 +28,7 @@
             <th>#</th>
             <th>Tên nước </th>
             <th>Cập nhật tên nước</th>
-            <th style="width: 3.5em;">Xóa</th>
+            <th class="th_Country">Xóa</th>
         </tr>
     </thead>
     <tbody>
@@ -42,12 +42,14 @@
                     <td width="30%">@country.TenNuoc</td>
                     <td width="60%">
                         @using (Html.BeginForm("EditCountry", "AdminCategory", FormMethod.Get))
-                        {
+{
 
 
-                            <input style="width: 80%; float: left" type="text" class="form-control" name="newName" placeholder="Tên nước sản xuất">
-
-    <button class="btn btn-primary btn-sm" type="submit" style="margin-left: 10px" name="countryID" value="@country.MaSo"><i class="fa fa-pencil"></i></button>
+            <input type="text" class="form-control input_Country" name="newName" placeholder="Tên nước sản xuất">
+                            @*<input style="width: 80%; float: left" type="text" class="form-control " name="newName" placeholder="Tên nước sản xuất">*@
+                            
+    <button class="btn btn-primary btn-sm" type="submit" name="countryID" value="@country.MaSo"><i class="fa fa-pencil button_Country"></i></button>
+    @*<button class="btn btn-primary btn-sm" type="submit" style="margin-left: 10px" name="countryID" value="@country.MaSo"><i class="fa fa-pencil"></i></button>*@
 
 
                         }

@@ -39,7 +39,7 @@
             <th>#</th>
             <th>Tên thể loại</th>
             <th>Cập nhật tên thể loại</th>
-            <th style="width: 3.5em;">Xóa</th>
+            <th class="th_Country">Xóa</th>
         </tr>
     </thead>
     <tbody>
@@ -53,12 +53,12 @@
                     <td>@genre.TenTheLoai</td>
                     <td>
                         @using (Html.BeginForm("EditGenre", "AdminCategory", FormMethod.Get))
-                        {
+{
 
 
-                            <input style="width: 80%; float: left" type="text" class="form-control" name="newName" placeholder="Tên thể loại">
+    <input type="text" class="form-control input_Country" name="newName" placeholder="Tên thể loại">
 
-    <button class="btn btn-primary btn-sm" type="submit" style="margin-left: 10px" name="genreID" value="@genre.MaSo"><i class="fa fa-pencil"></i></button>
+    <button class="btn btn-primary btn-sm" type="submit" @*style="margin-left: 10px"*@ name="genreID" value="@genre.MaSo"><i class="fa fa-pencil button_Country"></i></button>
 
 
                         }

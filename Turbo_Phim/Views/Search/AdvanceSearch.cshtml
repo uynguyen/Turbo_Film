@@ -85,10 +85,7 @@
                     int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
                     for (int i = startIndexPage; i < endIndexPage; i++)
                     {
-                        if (i > (int)ViewBag.maxPage)
-                        {
-                            break;
-                        }
+ 
                         <li>@Html.ActionLink(i.ToString(), "AdvanceSearch", "Search", new { page = @i }, null)</li>
                     }
 
