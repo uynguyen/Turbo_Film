@@ -14,15 +14,30 @@ namespace Business
         {
             try
             {
-                DanhSachPhimYeuThich ds = new DanhSachPhimYeuThich();
-                ds.MS_Phim = ms_phim;
-                ds.MS_ThanhVien = ms_thanhVien;
-                ds.TinhTrang = true;
-                ds.ThoiGian = System.DateTime.Now;
-                db.DanhSachPhimYeuThich.Add(ds);  
+                DanhSachPhimYeuThich check = db.DanhSachPhimYeuThich.Where(
+                e => e.MS_ThanhVien == ms_thanhVien && e.MS_Phim == ms_phim && e.TinhTrang == false).FirstOrDefault();
 
-                db.SaveChanges();
-                return true;
+                if (check != null)
+                {
+                    check.TinhTrang = true;
+                    check.ThoiGian = System.DateTime.Now;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    DanhSachPhimYeuThich ds = new DanhSachPhimYeuThich();
+                    ds.MS_Phim = ms_phim;
+                    ds.MS_ThanhVien = ms_thanhVien;
+                    ds.TinhTrang = true;
+                    ds.ThoiGian = System.DateTime.Now;
+                    db.DanhSachPhimYeuThich.Add(ds);
+
+                    db.SaveChanges();
+                    return true;
+                }
+
+
             }
             catch (Exception e)
             {
@@ -38,7 +53,7 @@ namespace Business
             try
             {
                 DanhSachPhimYeuThich ds = db.DanhSachPhimYeuThich.Where(
-                    e => e.MS_ThanhVien == user.Id && e.MS_Phim == ms_phim).FirstOrDefault();
+                    e => e.MS_ThanhVien == user.Id && e.MS_Phim == ms_phim && e.TinhTrang == true).FirstOrDefault();
                 if (ds != null)
                     return true;
                 else
