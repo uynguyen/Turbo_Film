@@ -23,6 +23,7 @@ namespace Turbo_Phim.Controllers
             ViewBag.VideoStatus = "inactive";
             ViewBag.ReviewStatus = "active";
             ViewBag.ContactStatus = "inactive";
+
             if (page == null)
             {
                 if (TempData["currentPage"] != null)

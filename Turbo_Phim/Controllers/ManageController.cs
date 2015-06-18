@@ -10,7 +10,7 @@ using Turbo_Phim.Services;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System;
-
+using PagedList;
 namespace Turbo_Phim.Controllers
 {
     [AuthorizeUser]
@@ -366,13 +366,17 @@ namespace Turbo_Phim.Controllers
         }
 
         public ActionResult MyListReview()
+        {       
+            return View();
+        }
+
+        public ActionResult PagingMyListReview(int? page)
         {
             ReviewFilmService reviewS = new ReviewFilmService();
             List<TopReviewModels> result = reviewS.getMyListReview(User.Identity.GetUserId());
-
-
-            return View(result);
-
+            int PageSize = 2;
+            int pageNumber = page ?? 1;
+            return PartialView(result.ToPagedList(pageNumber, PageSize));
         }
 
         public ActionResult MyActivitiesLog()
@@ -381,6 +385,11 @@ namespace Turbo_Phim.Controllers
         }
 
         public ActionResult MyListFilmLike()
+        {        
+            return View();
+        }
+
+        public ActionResult PagingMyListFilmLike(int? page)
         {
             FilmLikeService film = new FilmLikeService();
             List<FilmLikeModels> lstFilmLike = film.getMyListFilmLike(User.Identity.GetUserId());
@@ -394,11 +403,13 @@ namespace Turbo_Phim.Controllers
                 temp = a.getFilmByMaso(i.ms_phim);
                 result.Add(temp);
             }
-            return View(result);
+
+
+
+            int PageSize = 2;
+            int pageNumber = page ?? 1;
+            return PartialView(result.ToPagedList(pageNumber, PageSize));
         }
-
-
-
 
 
         #region Helpers
