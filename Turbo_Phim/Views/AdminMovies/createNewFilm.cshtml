@@ -119,18 +119,32 @@
 
                             @{
                 List<SelectListItem> listRank = new List<SelectListItem>();
-                for (float i = 0; i <= 10; i ++)
+                String[] rating = new String[9];
+
+                rating[0] = "1. Tệ";
+                rating[1] = "1.5. Dưới trung bình";
+                rating[2] = "2. Trung bình";
+                rating[3] = "2.5. Trên trung bình";
+                rating[4] = "3. Xem được";
+                rating[5] = "3.5. Khá Tốt";
+                rating[6] = "4 Tốt";
+                rating[7] = "4.5. Rất tốt";
+                rating[8] = "5. Tuyệt vời";
+
+                int j = 0;
+                for (float i = 1; i <= 5; i += 0.5f)
                 {
 
                     SelectListItem temp = new SelectListItem();
                     temp.Value = i.ToString();
-                    temp.Text = i.ToString();
+                    temp.Text = rating[j];
+                    j++;
                     listRank.Add(temp);
                 }
                 @Html.DropDownListFor(m => m.DiemDanhGia, listRank, "-Điểm đánh giá-", new { @class = "form-control my-form-control" })
                       @*@Html.ValidationMessageFor(m => m.DiemDanhGia)*@
                                          }
-
+                           
 
 
 

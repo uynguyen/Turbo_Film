@@ -54,7 +54,7 @@
                     <div class="review-info">
                         <h2><b>@p.TenPhim</b> </h2>
                         @*@Html.ActionLink(p.TenPhim, "Index", "ReviewDetail",new {IDPhim = @p.MaSo}, new { @class = "span" })*@
-                        <p class="dirctr"><a href="">Quốc gia @p.NuocSX, </a>@p.NgayPhatHanh</p>
+                        <p class="dirctr"><a href="">Quốc gia @p.NuocSX, </a>Ngày phát hành @p.NgayPhatHanh.Value.ToString("dd/MM/yyy")</p>
                         <p class="ratingview">Đánh giá của trang:</p>
                         <p class="ratingview">
                             &nbsp;@p.DiemDanhGia / 5
