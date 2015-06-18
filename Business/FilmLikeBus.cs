@@ -134,5 +134,34 @@ namespace Business
                 return -1;
             }
         }
+
+        public bool addRating(string ms_thanhVien, int ms_Phim, double rating)
+        {
+            try
+            {
+                DanhGia check = db.DanhGia.Where(
+                e => e.MS_ThanhVien == ms_thanhVien && e.MS_Phim == ms_Phim).FirstOrDefault();
+
+                if (check != null)
+                {
+                    return false;
+                }
+                else
+                {
+                    DanhGia dg = new DanhGia();
+                    dg.MS_ThanhVien = ms_thanhVien;
+                    dg.MS_Phim = ms_Phim;
+                    dg.ThoiGian = System.DateTime.Now;
+                    dg.DiemDanhGia = rating;
+                    db.DanhGia.Add(dg);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

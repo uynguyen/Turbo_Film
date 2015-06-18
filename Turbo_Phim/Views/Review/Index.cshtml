@@ -37,8 +37,8 @@
 
 
     <div class="col-md-9 reviews-grids">
-        
-       
+
+
         @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
         {
 
@@ -67,60 +67,92 @@
                         &nbsp; @p.DiemDanhGiaTrungBinh / 5 (@p.LuotDanhGia Lượt đánh giá)
                     </p>
                     <div class="clearfix"></div>
-                    <div class="rating-movie">  
-                        <input type="hidden" id="idbacking_@p.MaSo" value="5" step="1.0">                                                               
-                        <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false"
-                             data-rateit-min="0" data-rateit-max="10">
-                        </div>
-                        <span id="value5"></span>
-                        <div id="hover5"></div>
-                        
+                    <div class="rating-movie">
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (p.getRating(User.Identity.Name, p.MaSo) > 0)
+                            {
+                                <input type="range" class="hidden" id="idbacking_@p.MaSo" value="@p.getRating(User.Identity.Name, p.MaSo)" step="1">
+                                <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false" data-rateit-step="1"
+                                     data-rateit-min="1" data-rateit-max="10" data-rateit-readonly="true">
+                                </div>
+                                <span id="value5"></span>
+                                <div id="hover5"></div>
+                                <div class="IDPhim hidden" id="@p.MaSo"></div>
+                            }
+                            else
+                            {
+
+                                <input type="hidden" id="idbacking_@p.MaSo" value="@p.DiemDanhGiaTrungBinh" step="1">
+                                <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false" data-rateit-step="1"
+                                     data-rateit-min="1" data-rateit-max="10">
+                                </div>
+                                <span id="value5"></span>
+                                <div id="hover5"></div>
+                                <div class="hidden" id="IDPhim"> @p.MaSo</div>
+                            }
+                        }
+                        else
+                        {
+                            <input type="hidden" id="idbacking_@p.MaSo" value="@p.DiemDanhGiaTrungBinh" step="1">
+                            <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false" data-rateit-step="1"
+                                 data-rateit-min="1" data-rateit-max="10">
+                            </div>
+                            <span id="value5"></span>
+                            <div id="hover5"></div>
+                        }
+
+
+
+
+
+
                     </div>
                     <div class="yrw">
-                                      
-                    <div class="rtm text-center">
-                        <a class="button play-icon" href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @p.MaSo })'>Xem review phim</a>
+
+                        <div class="rtm text-center">
+                            <a class="button play-icon" href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @p.MaSo })'>Xem review phim</a>
+                        </div>
+                        <div class="wt text-center">
+                            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
+                        </div>
+
+
+                        <div id="small-dialog" class="mfp-hide">
+                            <iframe src="@p.URL_Trailer" frameborder="0" allowfullscreen></iframe>
+                        </div>
+
+
+
+
+
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="wt text-center">
-                        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
-                    </div>
+                    <p class="info">Diễn viên:&nbsp; @p.DienVien</p>
+                    <p class="info">Đạo diễn: &nbsp; @p.DaoDien</p>
+                    <p class="info">Thể loại:&nbsp; @p.TheLoai</p>
+                    <p class="info">Thời lượng:&nbsp; @p.ThoiLuong Phút</p>
 
-
-                    <div id="small-dialog" class="mfp-hide">
-                        <iframe src="@p.URL_Trailer" frameborder="0" allowfullscreen></iframe>
-                    </div>
-
-
-
-
-
-                    <div class="clearfix"></div>
-                </div>
-                <p class="info">Diễn viên:&nbsp; @p.DienVien</p>
-                <p class="info">Đạo diễn: &nbsp; @p.DaoDien</p>
-                <p class="info">Thể loại:&nbsp; @p.TheLoai</p>
-                <p class="info">Thời lượng:&nbsp; @p.ThoiLuong Phút</p>
-
-                @if (Request.IsAuthenticated)
-                {
-                    if (p.IsLikedByUser(User.Identity.Name, p.MaSo))
+                    @if (Request.IsAuthenticated)
                     {
-                        <button class="like btn-success" id=@p.MaSo> Đã thêm vào danh sách yêu thích </button>
-                    }
+                        if (p.IsLikedByUser(User.Identity.Name, p.MaSo))
+                        {
+                            <button class="like btn-success" id=@p.MaSo> Đã thêm vào danh sách yêu thích </button>
+                        }
 
+                        else
+                        {
+                            <button class="like" id=@p.MaSo> Thêm vào danh sách yêu thích </button>
+                        }
+
+                    }
                     else
                     {
-                        <button class="like" id=@p.MaSo> Thêm vào danh sách yêu thích </button>
+                        <button class="like liked" id=@p.MaSo> Thêm vào danh sách yêu thích </button>
                     }
-
-                }
-                else
-                {
-                    <button class="like liked" id=@p.MaSo> Thêm vào danh sách yêu thích </button>
-                }
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-        </div>
         }
         <div>
 
@@ -232,28 +264,50 @@
 
 
     <script type="text/javascript">
-    
-        $(".rateit").bind('rated', function (event, value) {
+
+        $('.rateit').on('beforerated', function (e, value) {
+            var ri = $(this);
+            e.preventDefault();
+            var idPhim = ri.siblings('#IDPhim').text();
+            $.ajax({
+                url: '@Url.Action("Insert_Film_Rate", "Review")',
+                data: { MS_Phim: idPhim, rating: value },
+                type: 'POST',
+                success: function (result) {
+                    if (result == "success") {
+                        ri.rateit('value', value);
+                        ri.rateit('readonly', true);
+                    }
+                    else {
+                        alert("Đánh giá không thành công!");
+                    }
+                },
+                error: function (result) {
+                    alert("Đã có lỗi xảy ra!\nVui lòng thử lại sau! ");
+                }
+
+            });
             var arr = ["Dở tệ", "Dở", "Không dở", "Không hay", "Bình thường", "Xem được", "Có vẻ hay", "Hay", "Rất hay", "Tuyệt hay"];
-            $(this).siblings('#value5').text(arr[value-1]); 
+            $(this).siblings('#value5').text(arr[value - 1]);
         });
-    
+
+
         $(".rateit").bind('over', function (event, value) {
-        var arr = ["Dở tệ", "Dở", "Không dở", "Không hay", "Bình thường", "Xem được", "Có vẻ hay", "Hay", "Rất hay", "Tuyệt hay"];
-        $(this).attr("title", arr[value-1]);
-        $(this).siblings("#hover5").text(arr[value - 1]);
-        
-    });
+            var arr = ["Dở tệ", "Dở", "Không dở", "Không hay", "Bình thường", "Xem được", "Có vẻ hay", "Hay", "Rất hay", "Tuyệt hay"];
+            $(this).attr("title", arr[value - 1]);
+            $(this).siblings("#hover5").text(arr[value - 1]);
+
+        });
 
         $(".rateit").bind('mouseleave', function () {
-        $(this).siblings("#hover5").text("");
-    });
+            $(this).siblings("#hover5").text("");
+        });
     </script>
 
 
 
 
-    
+
 
 
 
@@ -390,44 +444,44 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    </div>
+</div>
 
 
 
-    <div class="review-slider">
-        <ul id="flexiselDemo1">
-            @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
-            {
-                <li><img src="@p.HinhAnh" alt="" /></li>
-            }
+<div class="review-slider">
+    <ul id="flexiselDemo1">
+        @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+        {
+            <li><img src="@p.HinhAnh" alt="" /></li>
+        }
 
 
-        </ul>
-        <script type="text/javascript">
-            $(window).load(function () {
+    </ul>
+    <script type="text/javascript">
+        $(window).load(function () {
 
-                $("#flexiselDemo1").flexisel({
-                    visibleItems: 8,
-                    animationSpeed: 1000,
-                    autoPlay: true,
-                    autoPlaySpeed: 3000,
-                    pauseOnHover: false,
-                    enableResponsiveBreakpoints: true,
-                    responsiveBreakpoints: {
-                        portrait: {
-                            changePoint: 480,
-                            visibleItems: 2
-                        },
-                        landscape: {
-                            changePoint: 640,
-                            visibleItems: 3
-                        },
-                        tablet: {
-                            changePoint: 768,
-                            visibleItems: 3
-                        }
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 8,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,
+                pauseOnHover: false,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 2
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 3
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
                     }
-                });
+                }
             });
-        </script>
-    </div>
+        });
+    </script>
+</div>
