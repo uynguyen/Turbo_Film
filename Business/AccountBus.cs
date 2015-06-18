@@ -59,5 +59,7 @@ namespace Business
         {
             return db.ThanhVien.SingleOrDefault(e => e.MS_TaiKhoan == Id && e.TinhTrang == true);
         }
+
+       
     }
 }

@@ -14,17 +14,22 @@
                         <a href="#" onclick="openProfileDialog()">Thông tin cá nhân</a>
                     </li>
                     <li>
-                       <a href="#" onclick="openChangePasswordDialog()">Thay đổi mật khẩu</a>
-                        
+                       <a href="#" onclick="openChangePasswordDialog()">Thay đổi mật khẩu</a>                        
                     </li>
                     @if (User.IsInRole("Admin") || User.IsInRole("Administrator"))
                     {
                         <li><a href='@Url.Action("Index", "Home", new { homepage=false})'>Trang admin</a></li>
-                    }
-                    
+                    }                    
                     <li>
-
                         @Html.ActionLink("Danh sách bài nhận xét", "MyListReview", "Manage")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Danh mục phim yêu thích", "MyListFilmLike", "Manage")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Nhật ký hoạt động", "MyActivitiesLog", "Manage")
                     </li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
 
@@ -69,14 +74,16 @@ else
         </ul>
         <script>
 
-    function openLoginDialog() {
-
+    function openLoginDialog(t) {
+        window.scroll(0, 0);
         $.ajax({
             url: '@Url.Action("Login", "Account")',
             contentType: 'application/html',
             data: { returnurl: window.location.href },
             success: function (content) {
                 $('#login-body').html(content);
+                if (t != null)
+                    $("#dialogResult").html("Vui lòng đăng nhập!");
             },
             error: function (e) { alert("Failure!"); }
         });

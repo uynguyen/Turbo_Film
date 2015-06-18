@@ -92,6 +92,7 @@
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
     <Compile Include="FilmBus.cs" />
+    <Compile Include="FilmLikeBus.cs" />
     <Compile Include="Phim.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>
@@ -120,6 +121,8 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <EntityDeploy Include="Turbo_Phim.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

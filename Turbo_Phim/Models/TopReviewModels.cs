@@ -35,6 +35,8 @@ namespace Turbo_Phim.Models
         public String ulr_HinhAnh { get; set; }
 
 
+        public string MS_TaiKhoan;
+
 
         
     }

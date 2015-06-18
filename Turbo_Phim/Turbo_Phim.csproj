@@ -175,7 +175,9 @@
     <Compile Include="Controllers\AdminCategoryController.cs" />
     <Compile Include="Controllers\AdminMainController.cs" />
     <Compile Include="Controllers\AdminMoviesController.cs" />
+    <Compile Include="Controllers\AdminReviewPostController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FilmViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
@@ -199,6 +201,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CommentViewModels.cs" />
+    <Compile Include="Models\FilmLikeModels.cs" />
+    <Compile Include="Models\HistoryViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhimViewModels.cs" />
@@ -211,6 +215,7 @@
     </Compile>
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\FilmLikeService.cs" />
     <Compile Include="Services\FilmService.cs" />
     <Compile Include="Services\GenreService.cs" />
     <Compile Include="Services\ReviewFilmService.cs" />
@@ -289,7 +294,6 @@
     <Content Include="Content\images\gridallbum7.jpg" />
     <Content Include="Content\images\gridallbum8.jpg" />
     <Content Include="Content\images\gridallbum9.jpg" />
-    <Content Include="Content\images\header-bg.jpg" />
     <Content Include="Content\images\img-sprite-social.png" />
     <Content Include="Content\images\img-sprite.png" />
     <Content Include="Content\images\less.png" />
@@ -370,10 +374,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Scripts\jqplot.barRenderer.min.js" />
-    <Content Include="Scripts\jqplot.categoryAxisRenderer.min.js" />
     <Content Include="Scripts\jqplot.pieRenderer.min.js" />
-    <Content Include="Scripts\jqplot.pointLabels.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -397,6 +398,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login-dropdown.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myscripts.js" />
+    <Content Include="Scripts\myscripts1.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -485,6 +488,9 @@
     <Content Include="Views\Home\showReview.cshtml" />
     <Content Include="Views\ReviewDetail\CommentsOfTopReview.cshtml" />
     <Content Include="Views\ReviewDetail\AddComment.cshtml" />
+    <Content Include="Views\Manage\MyActivitiesLog.cshtml" />
+    <Content Include="Views\AdminReviewPost\Index.cshtml" />
+    <Content Include="Views\Manage\MyListFilmLike.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

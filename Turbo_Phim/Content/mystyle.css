@@ -156,19 +156,19 @@ label{
 	background: rgba(255, 255, 255, 0.47);
 }
 .header {
-	background: url('./images/1.jpg') no-repeat 0px 0px;
+	/*background: url('/images/02_banner.jpg') no-repeat 0px 0px;*/
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
 	-o-background-size:cover;
 	-ms-background-size:cover;
 	min-height:750px;	
-   margin-top: -7em;
+   margin-top: 0em;
    padding-top:5em;
 }
 .header-info {
 	float:right;
-	padding-top:2em;
+	padding-top:0em;
 	width:25%;
 	margin-right: 2.5%;
 }
@@ -1407,7 +1407,7 @@ font-weight: 700;
 		float: right;
           padding-top: 2em;
           width: 40%;
-          margin-right: -10%;
+          margin-right: 0%;
 	}
 	p.special {
 		font-size: 0.95em;

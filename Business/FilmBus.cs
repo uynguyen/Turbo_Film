@@ -745,5 +745,21 @@ namespace Business
 
             return result;
         }
+
+        public Phim getFilmByMaso(int ms_phim)
+        {
+            Phim result;
+            List<Phim> lst = db.Phim.ToList();
+            foreach (Phim item in lst)
+            {
+                if(item.MaSo == ms_phim)
+                {
+                    result = item;
+                    return result;
+                }
+            }
+
+            return null;
+        }
     }
 }
