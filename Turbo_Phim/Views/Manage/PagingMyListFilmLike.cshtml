@@ -59,11 +59,13 @@
         }
     </div>
     
-    <div class="col-md-12 col-centered">
+    <div class="col-md-12">
         <hr />
-        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong số @Model.PageCount trang
+        <div class="col-md-5 col-centered">
+            <span> Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong số @Model.PageCount trang</span> 
 
-        @Html.PagedListPager(Model, page => Url.Action("PagingMyListFilmLike",
+            @Html.PagedListPager(Model, page => Url.Action("PagingMyListFilmLike",
         new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "movie_grid" }))
+        </div>
     </div>
 </div>

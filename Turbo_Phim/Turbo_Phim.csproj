@@ -224,7 +224,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customtheme.css" />
     <Content Include="Content\default.css" />
-    <Content Include="Content\delete.gif" />
     <Content Include="Content\elements.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -351,8 +350,6 @@
     <Content Include="Content\mystyle.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
-    <Content Include="Content\rateit.css" />
-    <Content Include="Content\star.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -376,7 +373,6 @@
     </None>
     <Content Include="Scripts\jquery.rateit.js" />
     <Content Include="Scripts\jquery.rateit.min.js" />
-    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -511,6 +507,9 @@
       <Project>{1cd84080-71ca-4cae-a4dc-dbe655dc12e6}</Project>
       <Name>Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
