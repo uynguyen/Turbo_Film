@@ -489,6 +489,7 @@
     <Content Include="Views\Manage\PagingMyListReview.cshtml" />
     <Content Include="Views\Manage\PagingMyListFilmLike.cshtml" />
     <Content Include="Views\ReviewDetail\PagingCommentsOfTopReview.cshtml" />
+    <Content Include="Views\Manage\PagingMyActivitiesLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

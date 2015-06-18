@@ -385,6 +385,14 @@ namespace Turbo_Phim.Controllers
             return View(acSer.getActivitiesLog(User.Identity.GetUserId()));
         }
 
+        public ActionResult PagingMyActivitiesLog(int? page)
+        {
+            AccountService acSer = new AccountService();
+            int pageNumber = page ?? 1;
+            int pageSize = 10;
+            return PartialView(acSer.getActivitiesLog(User.Identity.GetUserId()).ToPagedList(pageNumber, pageSize));
+        }
+
         public ActionResult MyListFilmLike()
         {        
             return View();

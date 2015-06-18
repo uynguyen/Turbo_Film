@@ -5,7 +5,6 @@
 
 <div class="content">
 
-  
 
         <div class="main-content">
 
@@ -13,91 +12,9 @@
 
 
 
-
-
-
-
             </div>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nội dung</th>
-                        
-                        <th>Ngày đăng</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Turbo_Phim.Models.HistoryViewModels p in Model)
-                    {
-
-                        <tr>
-                            @{
-                        switch (p.action)
-                        {
-                            case "Comment":
-                                <td>
-                                    <p>@p.Hoten đã bình luận về bài nhận xét  <b>@p.tenBaiNhanXet</b> về bộ phim  <b>@p.tenPhim</b> với nội dung: <b>@p.content</b>  </p>
-                                 
-                                    <br/>
-                                    @Html.ActionLink("Chi tiết", "Index", "ReviewDetail", new { IDPhim = p.MS_Phim, IDReview = p.MS_BaiNhanXet }, new { @class = "a" })
-                      
-                               
-                                
-                                </td>
-                                break;
-                            case "Like":
-                            <td>
-                                <p>@p.Hoten đã thêm <b>@p.tenPhim</b> vào danh sách phim yêu thích</p>
-
-                                <br />
-                                @Html.ActionLink("Chi tiết", "Index", "ReviewDetail", new { IDPhim = p.MS_Phim }, new { @class = "a" })
-
-
-
-                            </td>
-                                break;
-                            case "Post":
-                            <td>
-                                <p>@p.Hoten đã thêm bài nhận xét <b>@p.tenBaiNhanXet</b> về bộ phim <b>@p.tenPhim</b></p>
-
-                                <br />
-                                @Html.ActionLink("Chi tiết", "Index", "ReviewDetail", new { IDPhim = p.MS_Phim, IDReview = p.MS_BaiNhanXet }, new { @class = "a" })
-
-
-
-                            </td>
-                                break;
-
-
-                        }
-}
-
-
-
-
-                          
-                            <td>@p.dateAction.ToString("dd/MM/yyy hh:mm:ss")</td>
-
-                        </tr>
-                    }
-
-
-
-
-
-
-                </tbody>
-            </table>
-
-
-
-
-
-
-
-           
+      @Html.Action("PagingMyActivitiesLog", "Manage")
         </div>
 
 
