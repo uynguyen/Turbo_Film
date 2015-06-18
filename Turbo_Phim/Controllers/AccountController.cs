@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace Turbo_Phim.Controllers
 {
-    [Authorize]
+    [AuthorizeUser]
     public class AccountController : Controller
     {
         private AccountService AC = new AccountService();

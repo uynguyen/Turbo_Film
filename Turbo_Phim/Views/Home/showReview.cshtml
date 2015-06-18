@@ -1,35 +1,40 @@
-﻿
-@model List<Turbo_Phim.Models.TopReviewModels>
-@using System.Text.RegularExpressions;
+﻿@model PagedList.IPagedList<Turbo_Phim.Models.TopReviewModels>
+@using PagedList.Mvc
+
+    @using System.Text.RegularExpressions;
     @{
         ViewBag.Title = "showReview";
         Layout = null;
     }
 
-    @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
-    {
-        p.content = Regex.Replace(p.content, "<.*?>", string.Empty);
-        <div class="news-grid">
-            <h5> @p.title </h5>
-            <label> @p.postDate </label>
+    <div id="showReview_content">
+        @foreach (Turbo_Phim.Models.TopReviewModels p in Model)
+        {
+            p.content = Regex.Replace(p.content, "<.*?>", string.Empty);
+            <div class="news-grid">
+                <h5> @p.title </h5>
+                <label> @p.postDate </label>
 
-            <p class="new-content">
-                @Html.Raw(@p.content.Substring(0, @p.content.IndexOf(".") + 1) + "...");
-               
-            </p>
-        
-            <p class="hidden" id="c1">
-                @Html.Raw(@p.content);
-            </p>
-            <p class="hidden" id="c2">
-                @Html.Raw(@p.content.Substring(0, @p.content.IndexOf(".") + 1) + "...");
-          
-            </p>
-            <a class="more"> MORE </a>
-        </div>
+                <p class="new-content">
+                    @Html.Raw(@p.content.Substring(0, @p.content.IndexOf(".") + 1) + "...");
 
-    }
+                </p>
 
+                <p class="hidden" id="c1">
+                    @Html.Raw(@p.content);
+                </p>
+                <p class="hidden" id="c2">
+                    @Html.Raw(@p.content.Substring(0, @p.content.IndexOf(".") + 1) + "...");
+
+                </p>
+                <a class="more"> MORE </a>
+            </div>
+
+        }
+
+        @Html.PagedListPager(Model, page => Url.Action("showReview", "Home",
+                        new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "showReview_content" }))
+    </div>
     <script>
         $(document).ready(function () {
             $(".more").click(function () {

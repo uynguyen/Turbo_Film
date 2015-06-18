@@ -1,8 +1,12 @@
-﻿@model List<Turbo_Phim.Models.PhimViewModels>
-    @{
-        ViewBag.Title = "filmNew";
-        Layout = null;
-    }
+﻿@model PagedList.IPagedList<Turbo_Phim.Models.PhimViewModels>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "filmNew";
+    Layout = null;
+}
+<div id="filmnew_content">
+
     @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
     {
 
@@ -24,7 +28,13 @@
             <a class="more">MORE</a>
         </div>
     }
-    <script>
+    @Html.PagedListPager(Model, page => Url.Action("filmNew", "Home",
+                new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "filmnew_content" }))
+
+</div>
+
+
+<script>
         $(document).ready(function () {
             $(".more").click(function () {
                 var parent = $(this).parent();
@@ -41,6 +51,6 @@
                 }
             });
         });
-    </script>
+</script>
 
 
