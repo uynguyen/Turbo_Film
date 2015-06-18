@@ -2354,3 +2354,53 @@ font-weight: 700;
 #main-menu ul {
     margin-right: -9px;
 }
+
+.th_Country {
+    width: 3.5em;
+}
+.input_Country {
+    width: 80%;
+    float: left;
+}
+.button_Country {
+    margin-left: 10px;
+}
+.main_Admin_div {
+    margin-top:20px; 
+    margin-left:20px; 
+    width:100%; 
+    height:450px;
+}
+.main_Admin_div2 {
+    height:300px; 
+    width:1000px;
+}
+.main_Admin_p {
+    margin-top: 12px;
+}
+.movie_Admin_1 {
+    width: 1%;
+}
+.movie_Admin_2 {
+    width: 2%;
+}
+.movie_Admin_5 {
+    width: 5%;
+}
+.movie_Admin_10 {
+    width: 10%;
+}
+.movie_Admin_15 {
+    width: 15%;
+}
+.review_Admin {
+    width: 10%;
+}
+.review_div {
+    background-color: #383838;
+}
+.review_h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+
