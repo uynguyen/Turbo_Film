@@ -66,5 +66,10 @@ namespace Turbo_Phim.Services
 
 
 
+
+        public double getRating(string username, int ms_phim)
+        {
+            return bus.getRating(username, ms_phim);
+        }
     }
 }

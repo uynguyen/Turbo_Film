@@ -113,5 +113,26 @@ namespace Business
             }
         }
 
+
+        public double getRating(string username, int ms_phim)
+        {
+            if (username == null) return -1;
+            AspNetUsers user = db.AspNetUsers.SingleOrDefault(e => e.UserName == username);
+            if (user == null) return -1;
+
+            try
+            {
+                DanhGia ds = db.DanhGia.Where(
+                    e => e.MS_ThanhVien == user.Id && e.MS_Phim == ms_phim).FirstOrDefault();
+                if (ds != null)
+                    return ds.DiemDanhGia ?? -1;
+                else
+                    return -1;
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+        }
     }
 }
