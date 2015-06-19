@@ -76,25 +76,7 @@
                 else
                 {
 
-            <ul class="pagination">
-                <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
-                <li>@Html.ActionLink("«", "AdvanceSearch", "Search", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1 }, null)</li>
-
-                @{
-                    int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
-                    int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
-                    for (int i = startIndexPage; i < endIndexPage; i++)
-                    {
- 
-                        <li>@Html.ActionLink(i.ToString(), "AdvanceSearch", "Search", new { page = @i }, null)</li>
-                    }
-
-                }
-
-
-                <li>@Html.ActionLink("»", "AdvanceSearch", "Search", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1 }, null)</li>
-
-            </ul>
+           
         }
         </div>
 

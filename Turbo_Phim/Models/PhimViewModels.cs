@@ -93,18 +93,16 @@ namespace Turbo_Phim.Models
          public bool isASC { get; set; }
 
 
-
-
          public bool IsLikedByUser(string p, int ms_phim)
          {
              FilmLikeService sv = new FilmLikeService();
              return sv.checkList(p, ms_phim);
          }
 
-        public bool IsRateByUser(string p, int ms_phim)
+        public double getRating(string p, int ms_phim)
          {
              FilmLikeService sv = new FilmLikeService();
-             return sv.checkRate(p, ms_phim);
+             return sv.getRating(p, ms_phim);
          }
     }
 }

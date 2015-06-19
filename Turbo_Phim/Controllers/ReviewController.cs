@@ -67,6 +67,22 @@ namespace Turbo_Phim.Controllers
                 return Content("failure");
         }
 
+        [AuthorizeUser]
+        [HttpPost]
+        public ActionResult Insert_Film_Rate(int MS_Phim, string rating)
+        {
+            AccountBus ac = new AccountBus();
+            ThanhVien result = ac.getMemberByUserId(User.Identity.GetUserId());
+            RatingFilmServices film = new RatingFilmServices();
+
+
+            // true đã có
+            // false chưa có;
+            if (film.addFilmLike(result.MS_TaiKhoan, MS_Phim, double.Parse(rating)))
+                return Content("success");
+            else
+                return Content("failure");
+        }
  
         [HttpPost]
         public ActionResult IsLiked(int MS_Phim)
