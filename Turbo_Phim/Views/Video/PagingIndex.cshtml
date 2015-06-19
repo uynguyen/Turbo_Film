@@ -1,0 +1,58 @@
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<Turbo_Phim.Models.PhimViewModels>
+
+@{
+    Layout = null;
+}
+
+<div class="content-grids" id="contentupdate">
+    @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+    {
+        <div class="content-grid">
+            <a href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @p.MaSo })'><img class="createImage" src="@p.HinhAnh" title="allbum-name"></a>
+            @{
+        if (@p.TenPhim.Length > 30)
+        {
+            <h3>@p.TenPhim.Substring(0, 30) ...</h3>
+        }
+        else
+        {
+            <h3>@p.TenPhim</h3>
+        }
+            }
+
+            @*<ul>
+                    <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
+                    <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
+                    <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
+                </ul>*@
+            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
+        </div>
+        <div id="small-dialog" class="mfp-hide">
+            <iframe src="https://www.youtube.com/embed/2LqzF5WauAw" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+    }
+    <div class="clearfix"> </div>
+
+
+    <!---start-pagenation----->
+    <div class="col-md-12">
+        <hr />
+        <div class="col-md-5">
+
+            <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong số @Model.PageCount trang</span>
+
+            @Html.PagedListPager(Model, page => Url.Action("PagingIndex",
+                 new { page, actor = ViewBag.actor, directer = ViewBag.directer, country = ViewBag.country, type = ViewBag.type }),
+                       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "contentupdate" }))
+        </div>
+    </div>
+
+
+    <div class="clearfix"> </div>
+    <!---End-pagenation----->
+</div>
+

@@ -492,6 +492,8 @@
     <Content Include="Views\Manage\PagingMyActivitiesLog.cshtml" />
     <Content Include="Views\Search\PagingSimpleSearch.cshtml" />
     <Content Include="Views\Search\PagingAdvanceSearch.cshtml" />
+    <Content Include="Views\Video\PagingIndex.cshtml" />
+    <Content Include="Views\UsersAdmin\PagingIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

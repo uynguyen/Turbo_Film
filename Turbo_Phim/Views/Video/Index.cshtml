@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+﻿
 @{
     ViewBag.Title = "Videos";
 }
@@ -9,42 +9,5 @@
             <h3 class="head">Những bộ phim mới nhất</h3>
         </div>
     </div>
-    <div class="content-grids">
-@foreach (Turbo_Phim.Models.PhimViewModels p in Model)
-            {
-        <div class="content-grid">
-            <a href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @p.MaSo })'><img class="createImage" src="@p.HinhAnh" title="allbum-name" </a>
-            @{
-                if (@p.TenPhim.Length > 30)
-                {
-                    <h3>@p.TenPhim.Substring(0, 30) ...</h3>
-                }
-                else
-                {
-                    <h3>@p.TenPhim</h3>
-                }
-            }
-          
-            @*<ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>*@
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
-        </div>
-        <div id="small-dialog" class="mfp-hide">       
-            <iframe src="https://www.youtube.com/embed/2LqzF5WauAw" frameborder="0" allowfullscreen></iframe>
-        </div>
- 
-            }
-        <div class="clearfix"> </div>
-    
-      
-        <!---start-pagenation----->
-      
-
-
-        <div class="clearfix"> </div>
-        <!---End-pagenation----->
-    </div>
+    @Html.Action("PagingIndex", "Video")
 </div>
