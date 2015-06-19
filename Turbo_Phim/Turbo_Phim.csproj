@@ -349,7 +349,7 @@
     <Content Include="Content\jquery.jqplot.min.css" />
     <Content Include="Content\jqueryui.css" />
     <Content Include="Content\LoginDropdownForm.css" />
-    <Content Include="Content\mystyle.css" />
+    <Content Include="Content\mystyle1.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
     <Content Include="Content\rateit.css" />
