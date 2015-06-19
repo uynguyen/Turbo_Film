@@ -37,7 +37,7 @@ namespace Turbo_Phim.Services
             model.Name = member.HoTen;
             model.Birthday = member.NgaySinh;
             model.Address = member.DiaChi;
-
+            model.Avatar = member.Avatar;
             return model;
         }
 
@@ -49,6 +49,7 @@ namespace Turbo_Phim.Services
             tv.GioiTinh = model.IsMale;
             tv.DiaChi = model.Address;
             tv.TinhTrang = true;
+            tv.Avatar = model.Avatar;
             return bus.updateProfile(id, tv);
         }
 

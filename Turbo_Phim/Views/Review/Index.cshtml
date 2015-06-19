@@ -33,7 +33,7 @@
     </div>
 
 
-        <h3 class="head review_h3" @*style="text-align:center;margin-top:20px"*@>DANH SÁCH PHIM</h3>
+    <h3 class="head review_h3" @*style="text-align:center;margin-top:20px"*@>DANH SÁCH PHIM</h3>
 
 
     <div class="col-md-9 reviews-grids">
@@ -55,7 +55,7 @@
                 <div class="review-info">
                     <h2><b>@p.TenPhim</b> </h2>
                     @*@Html.ActionLink(p.TenPhim, "Index", "ReviewDetail",new {IDPhim = @p.MaSo}, new { @class = "span" })*@
-                        <p class="dirctr"><a href="">Quốc gia @p.NuocSX, </a>Ngày phát hành @p.NgayPhatHanh.Value.ToString("dd/MM/yyy")</p>
+                    <p class="dirctr"><a href="">Quốc gia @p.NuocSX, </a>Ngày phát hành @p.NgayPhatHanh.Value.ToString("dd/MM/yyy")</p>
                     <p class="ratingview">Đánh giá của trang:</p>
                     <p class="ratingview">
                         &nbsp;@p.DiemDanhGia / 5

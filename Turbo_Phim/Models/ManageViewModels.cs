@@ -33,6 +33,10 @@ namespace Turbo_Phim.Models {
 
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
+
+
+        [Display(Name = "Ảnh đại diện")]
+        public string Avatar { get; set; }
     }
     public class IndexViewModel {
         public bool HasPassword { get; set; }
