@@ -1,0 +1,79 @@
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<Turbo_Phim.Models.PhimViewModels>
+
+@{
+    Layout = null;
+}
+
+<div id="search_result">
+    @foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+    {
+        <div class="review">
+            <div class="movie-pic">
+                <a href="single.html"><img src="@p.HinhAnh" alt="" /></a>
+            </div>
+            <div class="review-info">
+
+                @Html.ActionLink("Review " + p.TenPhim, "ReviewDetail", "Review", new { @class = "span" })
+                <p class="dirctr"><a href="">@p.NuocSX, </a>@p.NgayPhatHanh</p>
+                <p class="ratingview">Đánh giá của trang:</p>
+                <p class="ratingview">
+                    &nbsp;@p.DiemDanhGia / 10
+                </p>
+                <div class="clearfix"></div>
+                <p class="ratingview c-rating">Đánh giá trung bình của người xem:</p>
+
+                <p class="ratingview c-rating">
+                    &nbsp; @p.DiemDanhGiaTrungBinh / 10 (@p.LuotDanhGia Lượt đánh giá)
+                </p>
+
+
+                <div class="clearfix"></div>
+                <div class="yrw">
+                 
+                    <div class="rtm text-center">
+                        <a class="button play-icon" href="#">Review phim</a>
+                    </div>
+                    <div class="wt text-center">
+                        <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
+                    </div>
+
+
+                    <div id="small-dialog" class="mfp-hide">
+                        <iframe src="@p.URL_Trailer" frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <p class="info">Diễn viên:&nbsp; @p.DienVien</p>
+                <p class="info">Đạo diễn: &nbsp; @p.DaoDien</p>
+                <p class="info">Thể loại:&nbsp; @p.TheLoai</p>
+                <p class="info">Thời lượng:&nbsp; @p.ThoiLuong Phút</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+    <div>
+        @if (Model.Count() == 0)
+        {
+            <h3>Không có bộ phim nào được tìm thấy ...</h3>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <hr />
+                <div class="col-md-5">
+
+                    <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trong số @Model.PageCount trang</span>
+
+                    @Html.PagedListPager(Model, page => Url.Action("PagingSimpleSearch",
+                 new { page, filmName=ViewBag.filmName }),
+              PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "search_result" }))
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

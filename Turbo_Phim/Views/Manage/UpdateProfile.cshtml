@@ -7,6 +7,25 @@
 }
 
 
+
+<script>
+
+    $(function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah1').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+        $("#imgInp").change(function () {
+            readURL2(this);
+        });
+    });
+</script>
+
 <script>
     $(document).ready(function () {
         $(function () {
@@ -32,11 +51,26 @@
                             <h4 class="modal-title" id="myModalLabel">Cập nhật thông tin cá nhân</h4>
                         </div>
                         <div class="well">
-                            @using (Ajax.BeginForm("UpdateProfile", "Manage", new AjaxOptions { UpdateTargetId="message" }, new { @class = "form-vertical", role = "form" }))
+                            @using (Ajax.BeginForm("UpdateProfile", "Manage", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "message" }, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary()
-                            <div id ="message" class="text-danger"></div>
+                                <div id="message" class="text-danger"></div>
+                                <div >
+                                    <span class="help-block"></span>
+                                   
+                                    @{
+                     TempData["currentAvatar"] = Model.Avatar;
+                                    }
+
+
+                                    
+                            
+                                    
+                                    <img id="blah1" style="width:150px; display: block; height: 150px; margin-left: auto !important; margin-right: auto !important " src="@Model.Avatar" alt="avatar" class="img-circle">
+                                    <input type='file' name="files" id="imgInp" />
+                                    <span class="help-block"></span>
+                                 </div>
                                 <div class="form-group">
                                     @Html.Label("Email:")
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = true })
@@ -57,7 +91,7 @@
                                 </div>
                                 <div class="form-group">
                                     @Html.Label("Ngày sinh:")
-                                    @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", id = "datepicker" })
+                                    @Html.TextBoxFor(m => m.Birthday, Model.Birthday.Value.ToString("dd/MM/yyyy"), new { @class = "form-control", id = "datepicker" })
                                     @Html.ValidationMessageFor(m => m.Birthday)
                                     <span class="help-block"></span>
                                 </div>
@@ -91,8 +125,6 @@
         </div>
     </div>
 </div>
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

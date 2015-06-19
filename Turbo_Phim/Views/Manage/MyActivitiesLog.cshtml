@@ -1,7 +1,24 @@
-﻿
+﻿@model IEnumerable<Turbo_Phim.Models.HistoryViewModels>
 @{
     ViewBag.Title = "MyActivitiesLog";
 }
 
-<h2>MyActivitiesLog</h2>
+<div class="content">
+
+
+        <div class="main-content">
+
+            <div class="btn-toolbar list-toolbar btnAddNewFilm">
+
+
+
+            </div>
+
+      @Html.Action("PagingMyActivitiesLog", "Manage")
+        </div>
+
+
+</div>
+
+
 

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
     ViewBag.Title = "Videos";
 }
 
@@ -8,199 +9,39 @@
             <h3 class="head">Những bộ phim mới nhất</h3>
         </div>
     </div>
-
-    <div id="menufilms">
-        <div class="btn-group col-xs-12 col-sm-2 col-md-2">
-            <button type="button" class="btn btn-primary">Thể loại</button>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Phim hành động</a></li>
-                <li><a href="#">Phim viễn tưởng</a></li>
-                <li><a href="#">Phim hoạt hình</a></li>
-
-            </ul>
-        </div>
-        <div class="btn-group col-xs-12 col-sm-2 col-md-2">
-            <button type="button" class="btn btn-primary">Quốc gia</button>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Mỹ</a></li>
-                <li><a href="#">Việt Nam</a></li>
-                <li><a href="#">Hàn Quốc</a></li>
-
-            </ul>
-        </div>      
-
-        <div class="btn-group col-xs-12 col-sm-2 col-md-2">
-            <button type="button" class="btn btn-primary">Phim mới</button>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Phim mới 2015</a></li>
-                    <li><a href="#">Phim mới 2014</a></li>
-                    <li><a href="#">Phim mới 2013</a></li>
-
-                </ul>
-
-        </div>
-    </div>
-
-
     <div class="content-grids">
+@foreach (Turbo_Phim.Models.PhimViewModels p in Model)
+            {
         <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum1.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
+            <a href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @p.MaSo })'><img class="createImage" src="@p.HinhAnh" title="allbum-name" </a>
+            @{
+                if (@p.TenPhim.Length > 30)
+                {
+                    <h3>@p.TenPhim.Substring(0, 30) ...</h3>
+                }
+                else
+                {
+                    <h3>@p.TenPhim</h3>
+                }
+            }
+          
+            @*<ul>
                 <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
                 <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
                 <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
+            </ul>*@
+            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>
         </div>
         <div id="small-dialog" class="mfp-hide">       
             <iframe src="https://www.youtube.com/embed/2LqzF5WauAw" frameborder="0" allowfullscreen></iframe>
         </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum2.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum3.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid last-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum4.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum5.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum6.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum7.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid last-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum8.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum9.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum10.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum11.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
-        <div class="content-grid last-grid">
-            <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><img src="~/Content/images/gridallbum1.jpg" title="allbum-name" /></a>
-            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-            <ul>
-                <li><a href="#"><img src="~/Content/images/likes.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/views.png" title="image-name" /></a></li>
-                <li><a href="#"><img src="~/Content/images/link.png" title="image-name" /></a></li>
-            </ul>
-            <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem đánh giá</a>
-        </div>
+ 
+            }
         <div class="clearfix"> </div>
+    
+      
         <!---start-pagenation----->
-        <nav>
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
+      
 
 
         <div class="clearfix"> </div>

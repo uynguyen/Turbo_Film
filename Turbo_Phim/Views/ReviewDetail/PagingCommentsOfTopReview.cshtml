@@ -1,0 +1,41 @@
+﻿@model PagedList.IPagedList<Turbo_Phim.Models.CommentViewModels>
+@using PagedList.Mvc
+
+
+<div id="update-comment">
+
+    <div class="Trả lời-section">
+        <p>Để lại bình luận</p>
+        <div class="blog-form">
+
+            <textarea class="form-control" rows="10" placeholder="Nội dung" id="CommentContent"></textarea>
+            <input id="btnSubmitComment" type="submit" class="btn btn-info" value="Đăng bình luận">
+
+
+        </div>
+    </div>
+    <div class="comments-section">
+        <div class="comments-section-head" id="commentssection">
+            <p>Ý kiến người xem</p>
+            <div class="clearfix"></div>
+        </div>
+        @foreach (Turbo_Phim.Models.CommentViewModels p in Model)
+        {
+            <div class="comments-section-grids">
+                <div class="comments-section-grid">
+                    <div class="col-md-2 comments-section-grid-image">
+                        <img src="~/Content/images/eye-brow.jpg" class="img-responsive" alt="" />
+                    </div>
+                    <div class="col-md-10 comments-section-grid-text">
+                        <h4>@p.fullName</h4>
+                        <label>@p.datePost.ToString("dd/MM/yyyy hh:mm:ss")</label>
+                        <p>@p.content</p>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

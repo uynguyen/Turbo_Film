@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using Turbo_Phim.Services;
 using Business;
 using System.Collections.Generic;
+using PagedList;
 
 namespace Turbo_Phim.Controllers
 {
@@ -29,18 +30,13 @@ namespace Turbo_Phim.Controllers
 
 
 
-
-
-
-
-
-        public ActionResult CommentsOfTopReview(String IDPhim, String IDReview = "-1")
-        {
-
-            
+        public ActionResult CommentsOfTopReview(int? page, String IDPhim, String IDReview = "-1")
+        {          
             List<CommentViewModels> result = new List<CommentViewModels>();
             ReviewFilmService reviewS = new ReviewFilmService();
             TopReviewModels top = null;
+            ViewBag.IDPhim = IDPhim;
+            ViewBag.IDReview = IDReview;
             if(IDReview.Equals("-1")) // Bài Review nổi bật nhất
             {
                 top = reviewS.getTopReview(IDPhim);
@@ -56,14 +52,12 @@ namespace Turbo_Phim.Controllers
 
                 TempData["IDPost"] = top.MS_ReView;
             }
+
+            int pageNumber = page ?? 1;
+            int pageSize = 10;
             
-      
-
-
-            return View(result);
+            return PartialView(result.ToPagedList(pageNumber, pageSize));
         }
-
-
 
 
 

@@ -212,6 +212,7 @@
     <Compile Include="Services\FilmLikeService.cs" />
     <Compile Include="Services\FilmService.cs" />
     <Compile Include="Services\GenreService.cs" />
+    <Compile Include="Services\RatingFilmServices.cs" />
     <Compile Include="Services\ReviewFilmService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -224,6 +225,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customtheme.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\delete.gif" />
     <Content Include="Content\elements.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -350,6 +352,8 @@
     <Content Include="Content\mystyle1.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
+    <Content Include="Content\rateit.css" />
+    <Content Include="Content\star.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -373,6 +377,7 @@
     </None>
     <Content Include="Scripts\jquery.rateit.js" />
     <Content Include="Scripts\jquery.rateit.min.js" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -483,6 +488,10 @@
     <Content Include="Views\Manage\MyListFilmLike.cshtml" />
     <Content Include="Views\Manage\PagingMyListReview.cshtml" />
     <Content Include="Views\Manage\PagingMyListFilmLike.cshtml" />
+    <Content Include="Views\ReviewDetail\PagingCommentsOfTopReview.cshtml" />
+    <Content Include="Views\Manage\PagingMyActivitiesLog.cshtml" />
+    <Content Include="Views\Search\PagingSimpleSearch.cshtml" />
+    <Content Include="Views\Search\PagingAdvanceSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

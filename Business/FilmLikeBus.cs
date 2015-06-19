@@ -113,5 +113,55 @@ namespace Business
             }
         }
 
+
+        public double getRating(string username, int ms_phim)
+        {
+            if (username == null) return -1;
+            AspNetUsers user = db.AspNetUsers.SingleOrDefault(e => e.UserName == username);
+            if (user == null) return -1;
+
+            try
+            {
+                DanhGia ds = db.DanhGia.Where(
+                    e => e.MS_ThanhVien == user.Id && e.MS_Phim == ms_phim).FirstOrDefault();
+                if (ds != null)
+                    return ds.DiemDanhGia ?? -1;
+                else
+                    return -1;
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+        }
+
+        public bool addRating(string ms_thanhVien, int ms_Phim, double rating)
+        {
+            try
+            {
+                DanhGia check = db.DanhGia.Where(
+                e => e.MS_ThanhVien == ms_thanhVien && e.MS_Phim == ms_Phim).FirstOrDefault();
+
+                if (check != null)
+                {
+                    return false;
+                }
+                else
+                {
+                    DanhGia dg = new DanhGia();
+                    dg.MS_ThanhVien = ms_thanhVien;
+                    dg.MS_Phim = ms_Phim;
+                    dg.ThoiGian = System.DateTime.Now;
+                    dg.DiemDanhGia = rating;
+                    db.DanhGia.Add(dg);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

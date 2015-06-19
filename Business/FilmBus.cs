@@ -754,5 +754,17 @@ namespace Business
 
             return null;
         }
+
+        public List<Phim> getNewFilms()
+        {
+            try
+            {
+                return db.Phim.Where(x => x.NgayPhatHanh.Value.CompareTo(System.DateTime.Now) > 0).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
 }

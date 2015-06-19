@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers
 {
@@ -15,7 +16,9 @@ namespace Turbo_Phim.Controllers
             ViewBag.VideoStatus = "active";
             ViewBag.ReviewStatus = "inactive";
             ViewBag.ContactStatus = "inactive";
-            return View();
+            FilmService filmService = new FilmService();
+
+            return View(filmService.getNewFilms());
         }
     }
 }

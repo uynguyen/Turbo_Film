@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using Turbo_Phim.Models;
 using Turbo_Phim.Services;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Turbo_Phim.Controllers {
     public class HomeController : Controller {
@@ -29,21 +31,24 @@ namespace Turbo_Phim.Controllers {
             return View(result[0]);
         }
 
-        public ActionResult filmNew()
+        public ActionResult filmNew(int? page)
         {
             FilmService phimService = new FilmService();
 
             List<PhimViewModels> result = phimService.findFilmNew();
-            return PartialView(result);
+            int pageNumber = page ?? 1;
+            int pageSize = 2;
+            return PartialView(result.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult showReview()
+        public ActionResult showReview(int? page)
         {
             ReviewFilmService review = new ReviewFilmService();
 
             List<TopReviewModels> result = review.showReview();
-
-            return PartialView(result);
+            int pageNumber = page ?? 1;
+            int pageSize = 5;
+            return PartialView(result.ToPagedList(pageNumber, pageSize));
         }
 
 

@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System;
 using PagedList;
+using System.IO;
 namespace Turbo_Phim.Controllers
 {
     [AuthorizeUser]
@@ -73,14 +74,44 @@ namespace Turbo_Phim.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateProfile(UpdateProfileViewModal model)
+        public ActionResult UpdateProfile(IEnumerable<HttpPostedFileBase> files)
         {
-            if (ModelState.IsValid)
+
+            if (files != null)
             {
-                var id = User.Identity.GetUserId();
-                AC.UpdateAccount(id, model);
-                return Content("Cập nhật thành công!");
+                foreach (var file in files)
+                {
+                    // Verify that the user selected a file
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        // extract only the fielname
+                        var fileName = Path.GetFileName(file.FileName);
+                        // TODO: need to define destination
+                        var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                        file.SaveAs(path);
+                    }
+                }
             }
+
+
+            //String fileName = "";
+            //if (file != null && file.ContentLength > 0)
+            //{
+            //    fileName = Path.GetFileName(file.FileName);
+            //    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+            //    file.SaveAs(path);
+            //}
+            //if (fileName != "")
+            //    model.Avatar = "/Images/" + fileName;
+            //else
+            //    model.Avatar = (String)TempData["currentAvatar"];
+
+            //if (ModelState.IsValid)
+            //{
+            //    var id = User.Identity.GetUserId();
+            //    AC.UpdateAccount(id, model);
+            //    return Content("Cập nhật thành công!");
+            //}
             return Content("Không thể cập nhật! Vui lòng kiểm tra lại thông tin!");
         }
 
@@ -381,7 +412,16 @@ namespace Turbo_Phim.Controllers
 
         public ActionResult MyActivitiesLog()
         {
-            return View();
+            AccountService acSer = new AccountService();
+            return View(acSer.getActivitiesLog(User.Identity.GetUserId()));
+        }
+
+        public ActionResult PagingMyActivitiesLog(int? page)
+        {
+            AccountService acSer = new AccountService();
+            int pageNumber = page ?? 1;
+            int pageSize = 10;
+            return PartialView(acSer.getActivitiesLog(User.Identity.GetUserId()).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult MyListFilmLike()
