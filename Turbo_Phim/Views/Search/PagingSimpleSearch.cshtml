@@ -15,8 +15,8 @@
                 <a href="single.html"><img src="@p.HinhAnh" alt="" /></a>
             </div>
             <div class="review-info">
-
-                @Html.ActionLink("Review " + p.TenPhim, "ReviewDetail", "Review", new { @class = "span" })
+                <h2><b>@p.TenPhim</b> </h2>
+            
                 <p class="dirctr"><a href="">@p.NuocSX, </a>@p.NgayPhatHanh</p>
                 <p class="ratingview">Đánh giá của trang:</p>
                 <p class="ratingview">
@@ -34,7 +34,7 @@
                 <div class="yrw">
                  
                     <div class="rtm text-center">
-                        <a class="button play-icon" href="#">Review phim</a>
+                        <a class="button play-icon" href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @p.MaSo })'>Xem Review phim</a>
                     </div>
                     <div class="wt text-center">
                         <a class="button play-icon popup-with-zoom-anim" href="#small-dialog">Xem trailer</a>

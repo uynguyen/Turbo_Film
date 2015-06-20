@@ -37,7 +37,7 @@ namespace Turbo_Phim.Controllers {
 
             List<PhimViewModels> result = phimService.findFilmNew();
             int pageNumber = page ?? 1;
-            int pageSize = 2;
+            int pageSize = 5;
             return PartialView(result.ToPagedList(pageNumber, pageSize));
         }
 

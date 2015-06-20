@@ -11,7 +11,7 @@
     {
 
         <div class="news-grid">
-            <h5>@p.TenPhim</h5>
+            <h5>@Html.ActionLink(@p.TenPhim, "Index", "ReviewDetail", new { IDPhim = @p.MaSo }, new { @class = "a" })<br /></h5>
             <label>Dự kiến khởi chiếu: @p.NgayPhatHanh </label>
 
             <p class="new-content">

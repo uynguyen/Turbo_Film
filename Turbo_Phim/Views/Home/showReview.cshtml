@@ -12,7 +12,8 @@
         {
             p.content = Regex.Replace(p.content, "<.*?>", string.Empty);
             <div class="news-grid">
-                <h5> @p.title </h5>
+                <h5>@Html.ActionLink(p.title, "Index", "ReviewDetail", new { IDPhim = p.MS_Phim, IDReview = p.MS_ReView }, new { @class = "a" })<br/></h5>
+
                 <label> @p.postDate </label>
 
                 <p class="new-content">
