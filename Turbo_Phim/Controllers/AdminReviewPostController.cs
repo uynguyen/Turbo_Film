@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Models;
 using Turbo_Phim.Services;
+using PagedList;
 
 namespace Turbo_Phim.Controllers
 {
@@ -12,11 +13,17 @@ namespace Turbo_Phim.Controllers
     {
         // GET: AdminReviewPost
         public ActionResult Index()
+        {    
+            return View();
+        }
+
+        public ActionResult PagingIndex(int? page)
         {
             ReviewFilmService reviewS = new ReviewFilmService();
-            
-            return View(reviewS.getAllReviewFilm());
+
+            return PartialView(reviewS.getAllReviewFilm().ToPagedList(page ?? 1, 10));
         }
+
          [HttpPost]
         public string DeletePost(string codeReview)
         {
