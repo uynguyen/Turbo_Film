@@ -246,7 +246,8 @@ namespace Turbo_Phim.Controllers
                        new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
                     await UserManager.SendEmailAsync(user.Id,
-                       "Xác nhận tài khoản của bạn", "Vui lòng xác nhận tài khoản bằng cách nhấn vào <a href=\""
+                       "Xác nhận tài khoản của bạn", "Cảm ơn bạn đã đăng ký tài khoản trên website của chúng tôi <br/> "+
+                       "Vui lòng xác nhận tài khoản bằng cách nhấn vào <a href=\""
                        + callbackUrl + "\">đây</a>");
                     string script = "window.location.href='" + Url.Action("DisplayEmail", "Account") + "'";
                     return JavaScript(script);

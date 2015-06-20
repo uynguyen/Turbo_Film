@@ -349,7 +349,7 @@
     <Content Include="Content\jquery.jqplot.min.css" />
     <Content Include="Content\jqueryui.css" />
     <Content Include="Content\LoginDropdownForm.css" />
-    <Content Include="Content\mystyle.css" />
+    <Content Include="Content\mystyle1.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
     <Content Include="Content\rateit.css" />
@@ -490,6 +490,10 @@
     <Content Include="Views\Manage\PagingMyListFilmLike.cshtml" />
     <Content Include="Views\ReviewDetail\PagingCommentsOfTopReview.cshtml" />
     <Content Include="Views\Manage\PagingMyActivitiesLog.cshtml" />
+    <Content Include="Views\Search\PagingSimpleSearch.cshtml" />
+    <Content Include="Views\Search\PagingAdvanceSearch.cshtml" />
+    <Content Include="Views\Video\PagingIndex.cshtml" />
+    <Content Include="Views\UsersAdmin\PagingIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

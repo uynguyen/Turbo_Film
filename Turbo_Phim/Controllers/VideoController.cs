@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Turbo_Phim.Services;
+using PagedList;
 
 namespace Turbo_Phim.Controllers
 {
@@ -16,9 +17,14 @@ namespace Turbo_Phim.Controllers
             ViewBag.VideoStatus = "active";
             ViewBag.ReviewStatus = "inactive";
             ViewBag.ContactStatus = "inactive";
+            return View();
+        }
+
+        public ActionResult PagingIndex(int? page)
+        {
             FilmService filmService = new FilmService();
 
-            return View(filmService.getNewFilms());
+            return PartialView(filmService.getNewFilms().ToPagedList(page ?? 1 , 9));
         }
     }
 }

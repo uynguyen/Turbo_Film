@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace Turbo_Phim.Controllers
 {
@@ -54,9 +55,16 @@ namespace Turbo_Phim.Controllers
 
         //
         // GET: /Users/
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await UserManager.Users.ToListAsync());
+            return View();
+        }
+
+        //
+        // GET: /Users/
+        public ActionResult PagingIndex(int? page)
+        {
+            return PartialView(UserManager.Users.ToList().ToPagedList(page ?? 1, 8));
         }
 
         //
