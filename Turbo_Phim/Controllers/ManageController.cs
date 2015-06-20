@@ -74,44 +74,28 @@ namespace Turbo_Phim.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateProfile(IEnumerable<HttpPostedFileBase> files)
+        public ActionResult UpdateProfile(UpdateProfileViewModal model, HttpPostedFileBase file)
         {
 
-            if (files != null)
+
+            String fileName = "";
+            if (file != null && file.ContentLength > 0)
             {
-                foreach (var file in files)
-                {
-                    // Verify that the user selected a file
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        // extract only the fielname
-                        var fileName = Path.GetFileName(file.FileName);
-                        // TODO: need to define destination
-                        var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                        file.SaveAs(path);
-                    }
-                }
+                fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                file.SaveAs(path);
             }
+            if (fileName != "")
+                model.Avatar = "/Images/" + fileName;
+            else
+                model.Avatar = (String)TempData["currentAvatar"];
 
-
-            //String fileName = "";
-            //if (file != null && file.ContentLength > 0)
-            //{
-            //    fileName = Path.GetFileName(file.FileName);
-            //    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-            //    file.SaveAs(path);
-            //}
-            //if (fileName != "")
-            //    model.Avatar = "/Images/" + fileName;
-            //else
-            //    model.Avatar = (String)TempData["currentAvatar"];
-
-            //if (ModelState.IsValid)
-            //{
-            //    var id = User.Identity.GetUserId();
-            //    AC.UpdateAccount(id, model);
-            //    return Content("Cập nhật thành công!");
-            //}
+            if (ModelState.IsValid)
+            {
+                var id = User.Identity.GetUserId();
+                AC.UpdateAccount(id, model);
+                return Content("Cập nhật thành công!");
+            }
             return Content("Không thể cập nhật! Vui lòng kiểm tra lại thông tin!");
         }
 
