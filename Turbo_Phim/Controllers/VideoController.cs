@@ -24,7 +24,7 @@ namespace Turbo_Phim.Controllers
         {
             FilmService filmService = new FilmService();
 
-            return PartialView(filmService.getNewFilms().ToPagedList(page ?? 1 , 9));
+            return PartialView(filmService.getNewFilms().ToPagedList(page ?? 1 , 8));
         }
     }
 }
