@@ -433,8 +433,23 @@ namespace Business
                 t1 = t1.Where(e => e.DienVien.Contains(actor) && e.DaoDien.Contains(directer)
                                                  && e.MS_NuocSX == maNuoc && e.MS_TheLoai == maTheLoai);
            
+            if(t1.ToList().Count != 0)
+                return t1.ToList();
+            else
+            {
+                // Giải quyết vấn đề dạng 3 - những trường hợp search sai chính tả
+                List<Phim> lst = db.Phim.ToList();
+                List<Phim> result = new List<Phim>();
+                foreach (Phim item in lst)
+                {
+                    int temp = LevenshteinDistance(actor, item.DienVien);
+                    int temp2 = LevenshteinDistance(directer, item.DaoDien);
+                    if (temp <= 5 && temp2 <= 5 && item.MS_NuocSX == maNuoc && item.MS_TheLoai == maTheLoai)
+                        result.Add(item);
 
-            return t1.ToList();
+                }
+                return result.ToList();
+            }
 
         }
 
