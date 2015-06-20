@@ -1,5 +1,4 @@
 ﻿body {
-    
     padding-bottom: 20px;
 }
 
@@ -13,7 +12,7 @@
 input,
 select,
 textarea {
-   /*max-width:280px;*/
+    /*max-width:280px;*/
 }
 
 /* styles for validation helpers */
@@ -43,17 +42,17 @@ input[type="checkbox"].input-validation-error {
 
 
 #line-chart {
-            height: 300px;
-            width: 800px;
-            margin: 0px auto;
-            margin-top: 1em;
-        }
+    height: 300px;
+    width: 800px;
+    margin: 0px auto;
+    margin-top: 1em;
+}
 
-        .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-            color: #fff;
-        }
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+    color: #fff;
+}
+
 .user {
-    
     display: block;
     float: right;
     width: 5% auto;
@@ -61,33 +60,33 @@ input[type="checkbox"].input-validation-error {
     position: relative;
     margin-left: 5px;
     padding: 5px;
-    font-size:small;
-
+    font-size: small;
 }
 
-.btn-group bootstrap-select{
-    width:60%;
+.btn-group bootstrap-select {
+    width: 60%;
 }
 
-.textbox{
+.textbox {
     width: 85%;
 }
 
-#exampleModal modal-body{
+#exampleModal modal-body {
     padding: 2em;
 }
 
 
 
-.col-centered{
+.col-centered {
     float: none;
     margin: 0 auto;
-    
 }
 
 
-#header1{
-    
+#header1 {
     background-size: cover !important;
 }
 
+.g-recaptcha > iframe {
+    min-height: 70px !important;
+}

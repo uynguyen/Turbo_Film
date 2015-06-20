@@ -7,10 +7,10 @@
 <div class="row">
     <div class="col-md-12">
         <div id="login-message"></div>
-        <div class="social-buttons">
+        @*<div class="social-buttons">
             <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
             <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-        </div>
+        </div>*@
 
         @using (Ajax.BeginForm("Login", "Account", new AjaxOptions
                             {
@@ -43,7 +43,7 @@
 
     <div class="bottom text-center">
 
-        <button onclick="openRegisterDialog()">register</button>
+        <button type="button" class="btn btn-info" onclick="openRegisterDialog()">Đăng ký</button>
 
         <script>
             
