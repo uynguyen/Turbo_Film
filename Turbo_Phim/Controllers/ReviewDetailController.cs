@@ -70,6 +70,8 @@ namespace Turbo_Phim.Controllers
             baiNhanXet.MS_Phim = phim.MaSo;
             baiNhanXet.TieuDe = phim.title;
             baiNhanXet.NgayDang = System.DateTime.Now;
+            if (phim.contentPost == null)
+                phim.contentPost = "";
             baiNhanXet.NoiDung = phim.contentPost;
             baiNhanXet.MS_TaiKhoan = User.Identity.GetUserId();
 

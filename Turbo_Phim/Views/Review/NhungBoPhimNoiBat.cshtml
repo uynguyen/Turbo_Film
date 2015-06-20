@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Turbo_Phim.Models.PhimViewModels>
+@{
+    ViewBag.Title = "NhungBoPhimNoiBat";
+    Layout = null;
+}
+
+
+<div class="col-md-3 side-bar">
+
+
+    <div class="entertainment">
+        <h3>Các bộ phim nổi bật</h3>
+        @foreach (Turbo_Phim.Models.PhimViewModels phim in Model)
+        {
+            <ul>
+                <li class="ent">
+                    <a href='@Url.Action("Index", "ReviewDetail", new { IDPhim = @phim.MaSo })'><img src="@phim.HinhAnh" alt="" /></a>
+                </li>
+                <li>
+                    <p>@phim.TenPhim</p>
+
+                </li>
+                <li>
+                    <p>Điểm đánh giá: @phim.DiemDanhGia / 10</p>
+
+                </li>
+                <div class="clearfix"></div>
+            </ul>
+        }
+
+
+    </div>
+
+</div>
+<div class="clearfix"></div>
+

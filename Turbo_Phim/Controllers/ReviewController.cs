@@ -224,7 +224,17 @@ namespace Turbo_Phim.Controllers
             return View("Index", lstPhim);
         }
 
-     
+
+        public ActionResult NhungBoPhimNoiBat()
+        {
+
+            FilmService filmS = new FilmService();
+
+            List<PhimViewModels> result = filmS.getNhungBoPhimNoiBat();
+
+            return View(result);
+
+        }
 
 
     }

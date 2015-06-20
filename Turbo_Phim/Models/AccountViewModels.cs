@@ -92,6 +92,7 @@ namespace Turbo_Phim.Models
         }
         public bool IsMale { get; set; }
 
+        [Required(ErrorMessage = "Phải nhập {0} của bạn.")]
         [Display(Name = "Ngày tháng năm sinh")]
         [DataType(DataType.Date, ErrorMessage = "Định dạng {0} không đúng!"),
         DisplayFormat(DataFormatString = "MM/dd/yyyy",

@@ -781,5 +781,18 @@ namespace Business
                 return null;
             }
         }
+
+        public List<Phim> getTheMostFilmds()
+        {
+            try
+            {
+                return db.Phim.OrderByDescending(x => x.DiemDanhGia).Take(15).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+        }
     }
 }
