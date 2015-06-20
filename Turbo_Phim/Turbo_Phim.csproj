@@ -224,7 +224,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customtheme.css" />
-    <Content Include="Content\default1.css" />
+    <Content Include="Content\default.css" />
     <Content Include="Content\delete.gif" />
     <Content Include="Content\elements.css" />
     <Content Include="Content\font-awesome.css" />
@@ -349,7 +349,7 @@
     <Content Include="Content\jquery.jqplot.min.css" />
     <Content Include="Content\jqueryui.css" />
     <Content Include="Content\LoginDropdownForm.css" />
-    <Content Include="Content\mystyle.css" />
+    <Content Include="Content\mystyle1.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\popuo-box.css" />
     <Content Include="Content\rateit.css" />
