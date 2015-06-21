@@ -712,22 +712,7 @@ namespace Business
         // II. Hiển thị những bài nhận xét mới, trả về kết quả danh sách các bài nhận xét, từ mới nhất đến cũ nhất.
         public List<BaiNhanXet> findThink()
         {
- //           List<BaiNhanXet> result = new List<BaiNhanXet>();
-
             List<BaiNhanXet> lst_nx = db.BaiNhanXet.OrderByDescending(x => x.NgayDang).ToList();
-
-            //DateTime saveNow = DateTime.Now;
-
-
-            //for (int i = 0; i < lst_nx.Count(); i++)
-            //{
-            //    DateTime date = (DateTime)lst_nx[i].NgayDang;
-            //    System.TimeSpan diff = saveNow.Subtract(date);
-            //    if (diff.Days <= 30)
-            //    {
-            //        result.Add(lst_nx[i]);
-            //    }
-            //}
 
             return lst_nx;
         }
