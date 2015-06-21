@@ -92,12 +92,13 @@ namespace Turbo_Phim.Models
         }
         public bool IsMale { get; set; }
 
-        [Required(ErrorMessage = "Phải nhập {0} của bạn.")]
+        [Required(ErrorMessage = "Phải nhập {0} của bạn để chúng tôi xác định tuổi.")]
         [Display(Name = "Ngày tháng năm sinh")]
         [DataType(DataType.Date, ErrorMessage = "Định dạng {0} không đúng!"),
         DisplayFormat(DataFormatString = "MM/dd/yyyy",
             ApplyFormatInEditMode = true)]
         public DateTime? Birthday { get; set; }
+
 
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }

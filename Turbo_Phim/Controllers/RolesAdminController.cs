@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Turbo_Phim.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Super Admin")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
@@ -55,7 +55,7 @@ namespace Turbo_Phim.Controllers
         // GET: /Roles/
         public ActionResult Index()
         {
-            return View(RoleManager.Roles);
+            return View(RoleManager.Roles.Where(e=>e.Name != "Super Admin" && e.Name != "Member").ToList());
         }
 
         //

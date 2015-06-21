@@ -211,14 +211,14 @@ namespace Turbo_Phim.Controllers
                         break;
 
                     default:
-                        ViewBag.Message = "Error occured. Please try again";
+                        ViewBag.Message = "Xác nhận Captcha bị lỗi! Vui lòng thử lại!";
                         break;
                 }
-                return Content("Vui lòng xác nhận Captcha!", "text/html");
+                return PartialView(model);
             }
             else
             {
-                ViewBag.Message = "Valid";
+                ViewBag.Message = "";
             }
 
      
@@ -233,7 +233,8 @@ namespace Turbo_Phim.Controllers
                     if (!AC.CreateProfile(user, model))
                     {
                         await UserManager.DeleteAsync(user);
-                        return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
+                        ModelState.AddModelError("user_error", "Không thể tạo tài khoản của bạn!");
+                        return PartialView(model);
                     }
 
                     await UserManager.AddToRoleAsync(user.Id, "Member");
@@ -256,7 +257,7 @@ namespace Turbo_Phim.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return Content("Lỗi! Không thể tạo tài khoản của bạn! Vui lòng kiểm tra lại thông tin!");
+            return PartialView(model);
         }
 
         //

@@ -9,7 +9,7 @@ using PagedList;
 
 namespace Turbo_Phim.Controllers
 {
-     [Authorize(Roles = "Admin, Administrator")]
+    [Authorize(Roles = "Admin, Super Admin")]
     public class AdminReviewPostController : Controller
     {
         // GET: AdminReviewPost
