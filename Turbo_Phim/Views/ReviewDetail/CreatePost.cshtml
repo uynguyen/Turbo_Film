@@ -20,7 +20,7 @@
             </div>
             <div class="review-info">
 
-                <a class="span" href="single.html"> <i>@Model.TenPhim</i></a>
+                <h2 ><b>@Model.TenPhim</b></h2>
                 <p class="dirctr"><a href="">@Model.NuocSX, </a>@Model.NgayPhatHanh</p>
                 <p class="ratingview">Đánh giá của trang:</p>
                 <p class="ratingview">
@@ -75,18 +75,28 @@
     @using (Html.BeginForm("CreateNewPost", "ReviewDetail", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
+        
+        <br />
         @Html.TextBoxFor(@model => @model.title, new { @class = "form-control my-form-control" ,@placeholder = "Tiêu đề bài nhận xét" })
         @Html.ValidationMessageFor(@model => @model.title)
-
+    <br />
          @Html.TextAreaFor(@model => @model.contentPost, new {@placeholder = "Nội dung bài nhận xét"})
-
+    <br />
         @Html.ValidationMessageFor(@model => @model.contentPost)
         @Html.TextAreaFor(@model => @model.MaSo, 1, 1, new { @class = "hidden"})
 
 
-        <button type="submit">Thêm mới</button>
+        <button class="btn btn-info btn_left"  type="submit">Thêm mới</button>
 
     }
+  
+        @using (Html.BeginForm("Index", "ReviewDetail", FormMethod.Post))
+        {
+            <input class="hidden" name="IDPhim" value="@Model.MaSo">
+    <input class="hidden" name="IDReview" value="@Model.MaSoBaiNhanXet">
+           <button class="btn btn-info" type="submit">Hủy bỏ</button>
+
+        }
 
     <script type="text/javascript">
 

@@ -44,7 +44,7 @@
                                 <div id="result" class="text-danger"></div>
 
                                 @Html.AntiForgeryToken()
-                                @Html.ValidationSummary("Lỗi! Vui lòng kiểm tra lại thông tin!", new { @class = "text-danger" })
+                                @*@Html.ValidationSummary("Lỗi! Vui lòng kiểm tra lại thông tin!", new { @class = "text-danger" })*@
 
                                 <div class="form-group">
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })

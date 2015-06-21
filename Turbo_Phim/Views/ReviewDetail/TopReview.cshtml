@@ -8,15 +8,19 @@
    
     @if (@Model == null)
     {
-        <h4>Bài viết hay nhất:</h4>
-        <h1>Hiện chưa có bài đánh giá nào</h1>
+        <h1>Bài viết hay nhất:</h1>
+    <br />
+    <h3 class="PostContent"><b><i>Hiện chưa có bài đánh giá nào</i></b></h3>
     }
     else
     {
-        <h1>@Model.title</h1>
-        <h5>Được đăng bởi @Model.UserName lúc @Model.postDate:</h5>
-        <h5>Tổng số lượt bình chọn @Model.totalRank:</h5>
-        
+        <h1>Bài viết hay nhất: @Model.title</h1>
+        <br/>
+        <h3 class="PostContent"><b><i>Được đăng bởi @Model.UserName lúc @Model.postDate</i></b></h3>
+    <br />
+    <h3 class="PostContent"><b><i>Tổng số lượt bình chọn @Model.totalRank</i></b></h3>
+    <br />
+
         @Html.Raw("<div class='postReivew'>" + @Model.content + "</div>")
     }
    
