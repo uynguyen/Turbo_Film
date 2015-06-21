@@ -54,6 +54,24 @@ namespace Business
 
         }
 
+        public bool DeleteProfile(string id)
+        {
+            try
+            {
+                ThanhVien tv = db.ThanhVien.Where(e => e.MS_TaiKhoan == id).FirstOrDefault();
+                if (tv != null)
+                {
+                    db.ThanhVien.Remove(tv);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         public ThanhVien getMemberByUserId(string Id)
         {

@@ -98,11 +98,11 @@ namespace Business
          //   return db.DanhSachPhimYeuThich.Where(x => x.MS_ThanhVien.Equals(IDUser)).ToList();
         }
 
-        public bool deleteFilm(int IDFilm)
+        public bool deleteFilm(string userId, int IDFilm)
         {
             try
             {
-                DanhSachPhimYeuThich temp = db.DanhSachPhimYeuThich.Where(x => x.MS_Phim == IDFilm).FirstOrDefault();
+                DanhSachPhimYeuThich temp = db.DanhSachPhimYeuThich.Where(x => x.MS_ThanhVien == userId && x.MS_Phim == IDFilm).FirstOrDefault();
                 temp.TinhTrang = false;
                 db.SaveChanges();
                 return true;

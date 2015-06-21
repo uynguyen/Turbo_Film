@@ -19,9 +19,13 @@
                     success: function (data) {
 
                         $("#myModal").modal('hide');
-
+                        if (data != "success") {
+                            alert("Lỗi không thể thực hiện được !");
+                            return;
+                        }
                         var id = $("#btnDeleteReview").val();
                         $("#" + id).remove();
+                        window.location.reload();
                     },
                     error: function (data) {
                     }
@@ -33,7 +37,7 @@
         });
     </script>
 
-<h2>Danh sách các bộ phim yêu thích của bạn</h2>
+<h2 class="text-center">Danh sách các bộ phim yêu thích của bạn</h2>
           
 
 @Html.Action("PagingMyListFilmLike")
@@ -61,5 +65,5 @@
         </div>
 
     </div>
-
+<div class="clearfix"></div>
 

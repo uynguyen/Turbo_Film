@@ -8,17 +8,73 @@
    
     @if (@Model == null)
     {
-        <h1>Bài viết hay nhất:</h1>
+        <h1>Tiêu đề:</h1>
     <br />
     <h3 class="PostContent"><b><i>Hiện chưa có bài đánh giá nào</i></b></h3>
     }
     else
     {
-        <h1>Bài viết hay nhất: @Model.title</h1>
+        <h1>Tiêu đề: @Model.title</h1>
         <br/>
         <h3 class="PostContent"><b><i>Được đăng bởi @Model.UserName lúc @Model.postDate</i></b></h3>
     <br />
     <h3 class="PostContent"><b><i>Tổng số lượt bình chọn @Model.totalRank</i></b></h3>
+    <br />
+    <div class="binh_chon">
+        @if (Request.IsAuthenticated)
+        {
+
+            if (@Model.isVoted(User.Identity.Name, @Model.MS_ReView))
+            {
+                <a  id="vote" class="btn btn-sm btn-success disabled" role="button" data-idreview="@Model.MS_ReView">Đã bình chọn</a>
+            }
+            else
+            {
+                <a  id="vote" class="btn btn-sm btn-success" role="button" data-idreview="@Model.MS_ReView">Bình chọn</a>
+            }
+
+        }
+        else
+        {
+            <a id="vote" class="btn btn-sm btn-success" role="button" data-idreview="@Model.MS_ReView">Bình chọn</a>
+        }
+      
+
+        <script>
+            @*function checkVote(ms_review) {
+                var res = false;
+                $.ajax({
+                    url: '@Url.Action("isLiked", "ReviewDetail")',
+                    type: "POST",
+                    data: { IDReview: ms_review },
+                    success: function (result) {
+                        if (result == "true")
+                            res = true;
+                        else
+                            res = false;
+                   }
+                });
+                return res;
+            }*@
+            $("#vote").click(function () {
+                var vote = $(this);
+                            $.ajax({
+                                url: '@Url.Action("LikePost", "ReviewDetail")',
+                                type: 'POST',
+                                data: {IDReview: vote.data("idreview")},
+                                success: function (result) {
+                                    if (result == "success") {
+                                        vote.text("Đã bình chọn");
+                                        vote.addClass("disabled");
+                                    }
+                                    else {
+                                        alert("Bình chọn không thành công!");
+                                    }
+                                }
+                            });
+                        });
+        </script>
+    </div>
     <br />
 
         @Html.Raw("<div class='postReivew'>" + @Model.content + "</div>")

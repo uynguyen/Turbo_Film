@@ -8,7 +8,7 @@
 
     <div class="review_div">
         @Html.Action("Genre", "Review")
-
+        @Html.Action("Country", "Review")
 
         <div class="btn-group">
             <button type="button" class="btn btn-danger">Sắp xếp</button>
@@ -18,13 +18,25 @@
             </button>
             <ul class="dropdown-menu" role="menu">
 
-
+               @if (@ViewBag.ViewForGenre == true)
+               {
                 <li>@Html.ActionLink("Tên phim", "ViewForGenre", new { strSort = "Name", genreID = ViewBag.genreID })</li>
                 <li>@Html.ActionLink("Thể loại", "ViewForGenre", new { strSort = "Genre", genreID = ViewBag.genreID })</li>
                 <li>@Html.ActionLink("Điểm đánh giá", "ViewForGenre", new { strSort = "Rank", genreID = ViewBag.genreID })</li>
                 <li>@Html.ActionLink("Ngày phát hành", "ViewForGenre", new { strSort = "Date", genreID = ViewBag.genreID })</li>
                 <li>@Html.ActionLink("Thời lượng", "ViewForGenre", new { strSort = "Duration", genreID = ViewBag.genreID })</li>
 
+               }
+               else
+               {
+                <li>@Html.ActionLink("Tên phim", "ViewForCountry", new { strSort = "Name", countryID = @ViewBag.countryID })</li>
+                <li>@Html.ActionLink("Thể loại", "ViewForCountry", new { strSort = "Genre", countryID = @ViewBag.countryID })</li>
+                <li>@Html.ActionLink("Điểm đánh giá", "ViewForCountry", new { strSort = "Rank", countryID = @ViewBag.countryID })</li>
+                <li>@Html.ActionLink("Ngày phát hành", "ViewForCountry", new { strSort = "Date", countryID = @ViewBag.countryID })</li>
+                <li>@Html.ActionLink("Thời lượng", "ViewForCountry", new { strSort = "Duration", countryID = @ViewBag.countryID  })</li>
+
+               }
+                
 
 
             </ul>
@@ -44,8 +56,11 @@
 
             TempData["genreID"] = ViewBag.genreID; //Biến giữ trạng thái là xem theo thể loại hay xem tất cả các phim
 
+
+
             TempData["strSort"] = p.strSort;
             TempData["sortDirection"] = p.isASC;
+
 
 
             <div class="review">
@@ -55,6 +70,7 @@
                 <div class="review-info">
                     <h2><b>@p.TenPhim</b> </h2>
                     @*@Html.ActionLink(p.TenPhim, "Index", "ReviewDetail",new {IDPhim = @p.MaSo}, new { @class = "span" })*@
+                    <br />
                     <p class="dirctr"><a href="">Quốc gia @p.NuocSX, </a>Ngày phát hành @p.NgayPhatHanh.Value.ToString("dd/MM/yyy")</p>
                     <p class="ratingview">Đánh giá của trang:</p>
                     <p class="ratingview">
@@ -195,7 +211,7 @@
 
                             },
                             error: function (result) {
-                               // alert(result);
+                                // alert(result);
                             }
 
                         });
@@ -215,40 +231,81 @@
             }
             else
             {
-                <ul class="pagination">
-
-
-                    <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
-                    <li>@Html.ActionLink("«", (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1, genreID = @ViewBag.genreID }, null)</li>
-
-                    @{
-                int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
-                int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
-                for (int i = startIndexPage; i < endIndexPage; i++)
+                if (@ViewBag.ViewForGenre == true)
                 {
-                    if (i > (int)ViewBag.maxPage)
+                    <ul class="pagination">
+
+
+                        <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
+                        <li>@Html.ActionLink("«", (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1, genreID = @ViewBag.genreID }, null)</li>
+
+                        @{
+                    int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
+                    int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
+                    for (int i = startIndexPage; i < endIndexPage; i++)
                     {
-                        break;
+                        if (i > (int)ViewBag.maxPage)
+                        {
+                            break;
+                        }
+
+                        if (i == (int)TempData["currentPage"])
+                        {
+                            <li class="active">@Html.ActionLink(i.ToString(), (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = @i, genreID = @ViewBag.genreID }, null)</li>
+                        }
+                        else
+                        {
+
+                            <li>@Html.ActionLink(i.ToString(), (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = @i, genreID = @ViewBag.genreID }, null)</li>
+                        }
+
                     }
 
-                    if (i == (int)TempData["currentPage"])
-                    {
-                        <li class="active">@Html.ActionLink(i.ToString(), (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = @i, genreID = @ViewBag.genreID }, null)</li>
-                    }
-                    else
-                    {
+                        }
 
-                        <li>@Html.ActionLink(i.ToString(), (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = @i, genreID = @ViewBag.genreID }, null)</li>
+
+                        <li>@Html.ActionLink("»", (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1, genreID = @ViewBag.genreID }, null)</li>
+
+                    </ul>
+                }
+                else
+                {
+                    <ul class="pagination">
+
+
+                        <p>Trang @TempData["currentPage"] / @ViewBag.maxPage</p>
+                        <li>@Html.ActionLink("«", (@ViewBag.ViewForCountry == true) ? "ViewForCountry" : "Index", "Review", new { page = ((int)TempData["currentPage"] > 1) ? (int)(TempData["currentPage"]) - 1 : 1, countryID = @ViewBag.countryID }, null)</li>
+
+                        @{
+                    int startIndexPage = ((int)TempData["currentPage"] / (int)ViewBag.maxIndexPage) * (int)ViewBag.maxIndexPage + 1;
+                    int endIndexPage = startIndexPage + (int)ViewBag.maxIndexPage;
+                    for (int i = startIndexPage; i < endIndexPage; i++)
+                    {
+                        if (i > (int)ViewBag.maxPage)
+                        {
+                            break;
+                        }
+
+                        if (i == (int)TempData["currentPage"])
+                        {
+                            <li class="active">@Html.ActionLink(i.ToString(), (@ViewBag.ViewForCountry == true) ? "ViewForCountry" : "Index", "Review", new { page = @i, countryID = @ViewBag.countryID }, null)</li>
+                        }
+                        else
+                        {
+
+                            <li>@Html.ActionLink(i.ToString(), (@ViewBag.ViewForCountry == true) ? "ViewForCountry" : "Index", "Review", new { page = @i, countryID = @ViewBag.countryID }, null)</li>
+                        }
+
                     }
 
+                        }
+
+
+                        <li>@Html.ActionLink("»", (@ViewBag.ViewForCountry == true) ? "ViewForCountry" : "Index", "Review", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1, countryID = @ViewBag.countryID }, null)</li>
+
+                    </ul>
                 }
 
-                    }
-
-
-                    <li>@Html.ActionLink("»", (@ViewBag.ViewForGenre == true) ? "ViewForGenre" : "Index", "Review", new { page = ((int)(TempData["currentPage"]) >= (int)ViewBag.maxPage) ? (int)ViewBag.maxPage : (int)(TempData["currentPage"]) + 1, genreID = @ViewBag.genreID }, null)</li>
-
-                </ul>
             }
 
 
@@ -278,15 +335,15 @@
                         ri.rateit('value', value);
                         ri.rateit('readonly', true);
                         var arr = ["Dở tệ", "Dở", "Không dở", "Không hay", "Bình thường", "Xem được", "Có vẻ hay", "Hay", "Rất hay", "Tuyệt hay"];
-                       ri.siblings('#value5').text(arr[value - 1]);
-                    }                  
+                        ri.siblings('#value5').text(arr[value - 1]);
+                    }
                 },
                 error: function (result) {
-                  //  alert("Đã có lỗi xảy ra!\nVui lòng thử lại sau! ");
+                    //  alert("Đã có lỗi xảy ra!\nVui lòng thử lại sau! ");
                 }
 
             });
-            
+
         });
 
 
@@ -309,6 +366,7 @@
 
 
     @Html.Action("NhungBoPhimNoiBat", "Review")
+
 
 </div>
 

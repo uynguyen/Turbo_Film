@@ -152,6 +152,18 @@ namespace Turbo_Phim.Services
             return page;
         }
 
+        internal int countPageSearch(List<Phim> searchResult)
+        {
+            int size = searchResult.Count;
+
+            int page = size / getMaxIndexPage();
+            if (size % FilmBus.MAX_PRODUCT_EACHPAGE != 0)
+            {
+                page++;
+            }
+            return page;
+        }
+
 
         internal List<PhimViewModels> findByGenre(string genreID, int? page, string strSort, bool sortDirection)
         {
@@ -168,6 +180,40 @@ namespace Turbo_Phim.Services
 
             return result;
         }
+
+        internal List<Phim> findAllByGenry(string genreID)
+        {
+
+            return bus.findAllByGenre(Int32.Parse(genreID));
+
+         
+        }
+        internal List<Phim> findAllByCountry(string countryID)
+        {
+
+
+
+            return bus.findAllByCountry(Int32.Parse(countryID));
+
+
+        }
+  
+        internal List<PhimViewModels> findByCountry(String countryID, int? page, String strSort, bool sortDirection)
+        {
+            if (page == null)
+                page = 1;
+            List<PhimViewModels> result = new List<PhimViewModels>();
+            List<Phim> lstFilms = bus.findByCountry(Int32.Parse(countryID), (int)page, strSort, sortDirection);
+            foreach (Phim p in lstFilms)
+            {
+                PhimViewModels pvm = Phim2PhimViewModels(p, page, strSort, sortDirection);
+
+                result.Add(pvm);
+            }
+
+            return result;
+        }
+
 
 
         internal int getMaxProductOnEachPage()
@@ -234,7 +280,7 @@ namespace Turbo_Phim.Services
         internal List<PhimViewModels> getNewFilms()
         {
             List<PhimViewModels> result = new List<PhimViewModels>();
-            List<Phim> lstFilms = bus.findFilmNew();
+            List<Phim> lstFilms = bus.getNewFilms();
             foreach (Phim p in lstFilms)
             {
                 PhimViewModels pvm = Phim2PhimViewModels(p);

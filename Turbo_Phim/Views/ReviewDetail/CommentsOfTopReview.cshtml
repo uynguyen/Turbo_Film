@@ -42,7 +42,9 @@
 <div id="update_comment">
 
     <div class="Trả lời-section">
+        <br />
         <p>Để lại bình luận</p>
+        <br />
         <div class="blog-form">
 
             <textarea class="form-control" rows="10" placeholder="Nội dung" id="CommentContent"></textarea>
@@ -50,11 +52,13 @@
 
         </div>
     </div>
+    <br />
     <div class="comments-section">
         <div class="comments-section-head" id="commentssection">
-            <p>Ý kiến người xem</p>
+            <h2>Ý kiến người xem</h2>
             <div class="clearfix"></div>
         </div>
+        <br />
         @foreach (Turbo_Phim.Models.CommentViewModels p in Model)
         {
             <div class="comments-section-grids">
