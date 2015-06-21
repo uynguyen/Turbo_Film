@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Controllers
 {
@@ -247,6 +248,14 @@ namespace Turbo_Phim.Controllers
                 {
                     return HttpNotFound();
                 }
+
+                AccountService ac = new AccountService();
+                if (!ac.RemoveAccount(id))
+                {
+                    ModelState.AddModelError("", "Không thể xóa tài khoản");
+                    return View();
+                }
+
                 var result = await UserManager.DeleteAsync(user);
                 if (!result.Succeeded)
                 {
