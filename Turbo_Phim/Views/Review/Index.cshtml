@@ -74,7 +74,7 @@
                             {
                                 <input type="range" class="hidden" id="idbacking_@p.MaSo" value="@p.getRating(User.Identity.Name, p.MaSo)" step="1">
                                 <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false" data-rateit-step="1"
-                                     data-rateit-min="1" data-rateit-max="10" data-rateit-readonly="true">
+                                     data-rateit-min="0" data-rateit-max="10" data-rateit-readonly="true">
                                 </div>
                                 <span id="value5"></span>
                                 <div id="hover5"></div>
@@ -85,7 +85,7 @@
 
                                 <input type="hidden" id="idbacking_@p.MaSo" value="@p.DiemDanhGiaTrungBinh" step="1">
                                 <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false" data-rateit-step="1"
-                                     data-rateit-min="1" data-rateit-max="10">
+                                     data-rateit-min="0" data-rateit-max="10">
                                 </div>
                                 <span id="value5"></span>
                                 <div id="hover5"></div>
@@ -96,7 +96,7 @@
                         {
                             <input type="hidden" id="idbacking_@p.MaSo" value="@p.DiemDanhGiaTrungBinh" step="1">
                             <div class="rateit" data-rateit-backingfld="#idbacking_@p.MaSo" data-rateit-resetable="false" data-rateit-step="1"
-                                 data-rateit-min="1" data-rateit-max="10">
+                                 data-rateit-min="0" data-rateit-max="10">
                             </div>
                             <span id="value5"></span>
                             <div id="hover5"></div>
@@ -277,18 +277,16 @@
                     if (result == "success") {
                         ri.rateit('value', value);
                         ri.rateit('readonly', true);
-                    }
-                    else {
-                        alert("Đánh giá không thành công!");
-                    }
+                        var arr = ["Dở tệ", "Dở", "Không dở", "Không hay", "Bình thường", "Xem được", "Có vẻ hay", "Hay", "Rất hay", "Tuyệt hay"];
+                       ri.siblings('#value5').text(arr[value - 1]);
+                    }                  
                 },
                 error: function (result) {
-                    alert("Đã có lỗi xảy ra!\nVui lòng thử lại sau! ");
+                  //  alert("Đã có lỗi xảy ra!\nVui lòng thử lại sau! ");
                 }
 
             });
-            var arr = ["Dở tệ", "Dở", "Không dở", "Không hay", "Bình thường", "Xem được", "Có vẻ hay", "Hay", "Rất hay", "Tuyệt hay"];
-            $(this).siblings('#value5').text(arr[value - 1]);
+            
         });
 
 

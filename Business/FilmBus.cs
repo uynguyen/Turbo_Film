@@ -690,45 +690,46 @@ namespace Business
 
         public List<Phim> findFilmNew()
         {
-            List<Phim> result = new List<Phim>();
+       //     List<Phim> result = new List<Phim>();
 
-            List<Phim> lst = db.Phim.ToList();
-            DateTime saveNow = DateTime.Now;
-            for (int i = 0; i < lst.Count(); i++)
-            {
-                // Những bộ phim nào mà phát hành trong vòng 1 tháng thì được xem là phim mới        
-                DateTime date = (DateTime)lst[i].NgayPhatHanh;
-                System.TimeSpan diff = saveNow.Subtract(date);
-                if (diff.Days <= 30)
-                {
-                    result.Add(lst[i]);
-                }
-            }
-            return result;
+            List<Phim> lst = db.Phim.OrderByDescending(x => x.NgayPhatHanh).ToList();
+
+            //DateTime saveNow = DateTime.Now;
+            //for (int i = 0; i < lst.Count(); i++)
+            //{
+            //    // Những bộ phim nào mà phát hành trong vòng 1 tháng thì được xem là phim mới        
+            //    DateTime date = (DateTime)lst[i].NgayPhatHanh;
+            //    System.TimeSpan diff = saveNow.Subtract(date);
+            //    if (diff.Days <= 30)
+            //    {
+            //        result.Add(lst[i]);
+            //    }
+            //}
+            return lst;
         }
 
 
-        // II. Hiển thị những bài nhận xét mới 
+        // II. Hiển thị những bài nhận xét mới, trả về kết quả danh sách các bài nhận xét, từ mới nhất đến cũ nhất.
         public List<BaiNhanXet> findThink()
         {
-            List<BaiNhanXet> result = new List<BaiNhanXet>();
+ //           List<BaiNhanXet> result = new List<BaiNhanXet>();
 
-            List<BaiNhanXet> lst_nx = db.BaiNhanXet.ToList();
+            List<BaiNhanXet> lst_nx = db.BaiNhanXet.OrderByDescending(x => x.NgayDang).ToList();
 
-            DateTime saveNow = DateTime.Now;
+            //DateTime saveNow = DateTime.Now;
 
 
-            for (int i = 0; i < lst_nx.Count(); i++)
-            {
-                DateTime date = (DateTime)lst_nx[i].NgayDang;
-                System.TimeSpan diff = saveNow.Subtract(date);
-                if (diff.Days <= 30)
-                {
-                    result.Add(lst_nx[i]);
-                }
-            }
+            //for (int i = 0; i < lst_nx.Count(); i++)
+            //{
+            //    DateTime date = (DateTime)lst_nx[i].NgayDang;
+            //    System.TimeSpan diff = saveNow.Subtract(date);
+            //    if (diff.Days <= 30)
+            //    {
+            //        result.Add(lst_nx[i]);
+            //    }
+            //}
 
-            return result;
+            return lst_nx;
         }
 
 
