@@ -398,10 +398,26 @@ namespace Turbo_Phim.Models
 
                 JavaScriptResult script = new JavaScriptResult();
                 script.Script = "openLoginDialog(true)";
-                filterContext.Result = script;
-                
+                filterContext.Result = script;              
                 
             } 
+            else
+            {
+                base.HandleUnauthorizedRequest(filterContext);
+            }
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class AuthorizeUserNonAjaxAttribute : AuthorizeAttribute
+    {
+        protected override void HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext filterContext)
+        {
+            if (!filterContext.HttpContext.Request.IsAuthenticated)
+            {
+                filterContext.HttpContext.Session["OpenAuthorizationPopup"] = "true";
+                filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.PathAndQuery);
+            }
             else
             {
                 base.HandleUnauthorizedRequest(filterContext);

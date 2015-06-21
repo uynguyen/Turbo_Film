@@ -62,7 +62,6 @@ namespace Turbo_Phim.Controllers
 
 
         [AuthorizeUser]
-
         public ActionResult CreateNewPost(PhimViewModels phim)
         {
             BaiNhanXet baiNhanXet = new BaiNhanXet();
@@ -142,7 +141,7 @@ namespace Turbo_Phim.Controllers
                 return "failed";
         }
 
-        [AuthorizeUser]
+        [AuthorizeUserNonAjax]
         public ActionResult CreatePost(String IDPhim)
         {
            
@@ -179,7 +178,7 @@ namespace Turbo_Phim.Controllers
             return View(result);
         }
 
-        [Authorize]
+        [AuthorizeUser]
        
         public ActionResult AddComment(String CommentContent , String IDPost)
         {
@@ -188,7 +187,7 @@ namespace Turbo_Phim.Controllers
             string IDUser = User.Identity.GetUserId();
             CommentViewModels result = reviewS.addComment(CommentContent, IDPost, IDUser);
 
-            return PartialView(result);
+            return RedirectToAction("CommentsOfTopReview", new { page = 1, IDPhim = TempData["IDPhim"], IDReview=TempData["IDReview"]});
         }
     }
 }

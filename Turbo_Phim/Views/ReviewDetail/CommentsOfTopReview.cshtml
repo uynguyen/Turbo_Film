@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "CommentsOfTopReview";
     Layout = null;
+    TempData["IDPhim"] = ViewBag.IDPhim;
+    TempData["IDReview"] = ViewBag.IDReview;
 }
 
 <script type="text/javascript">
@@ -18,12 +20,10 @@
                 type: "get",
                 url: '@Url.Action("AddComment", "ReviewDetail")',
                 data: "CommentContent=" + Content + "&IDPost=" + IDPost,
-                success: function (data) {
+                success: function (data) {                  
 
+                    $("#update_comment").html(data);
 
-                    $("#commentssection").after(data);
-                    $("#CommentContent").val("");
-                    HideLastComment();
 
                 },
                 error: function (data) {
@@ -37,10 +37,6 @@
         });
     });
 
-    function HideLastComment() {
-        var lastcmt = $(".comments-section-grids").last();
-        lastcmt.remove();
-    }
 </script>
 
 <div id="update_comment">
