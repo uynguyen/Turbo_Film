@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Turbo_Phim.Services;
 
 namespace Turbo_Phim.Models
 {
@@ -28,7 +29,11 @@ namespace Turbo_Phim.Models
 
         public String TenPhim { get; set; }
 
-        
+        public bool isVoted(string user_name, int ms_review)
+        {
+            LikeReviewPostService sv = new LikeReviewPostService();
+            return sv.isVoted(user_name, ms_review);
+        }
 
 
 

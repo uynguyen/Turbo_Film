@@ -212,6 +212,7 @@
     <Compile Include="Services\FilmLikeService.cs" />
     <Compile Include="Services\FilmService.cs" />
     <Compile Include="Services\GenreService.cs" />
+    <Compile Include="Services\LikeReviewPostService.cs" />
     <Compile Include="Services\RatingFilmServices.cs" />
     <Compile Include="Services\ReviewFilmService.cs" />
     <Compile Include="Startup.cs" />
