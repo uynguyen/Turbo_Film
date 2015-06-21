@@ -76,3 +76,10 @@ table
     min-height:800px;
   
 }
+.PostContent{
+     color:red;
+}
+.btn_left{
+    float: left;
+    margin-right: 20px;
+}

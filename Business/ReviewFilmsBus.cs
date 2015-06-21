@@ -12,20 +12,20 @@ namespace Business
     {
         private TURBO_PHIMEntities db = new TURBO_PHIMEntities();
 
-        public bool addPost(BaiNhanXet baiNhanXet)
+        public int addPost(BaiNhanXet baiNhanXet)
         {
             try
             {
-                db.BaiNhanXet.Add(baiNhanXet);
+                BaiNhanXet result = db.BaiNhanXet.Add(baiNhanXet);
                 db.SaveChanges();
 
-                return true;
+                return result.MaSo;
             }
 
             catch (Exception e)
             {
 
-                return false;
+                return -1;
             }
         }
 

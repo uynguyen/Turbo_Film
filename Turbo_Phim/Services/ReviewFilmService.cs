@@ -9,7 +9,7 @@ namespace Turbo_Phim.Services
     public class ReviewFilmService
     {
         private FilmBus filmBus = new FilmBus();
-        internal bool addPost(Business.BaiNhanXet baiNhanXet)
+        internal int addPost(Business.BaiNhanXet baiNhanXet)
         {
             ReviewFilmsBus bus = new ReviewFilmsBus();
             return bus.addPost(baiNhanXet);

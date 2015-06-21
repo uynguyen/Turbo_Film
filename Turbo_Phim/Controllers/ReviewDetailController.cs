@@ -76,10 +76,10 @@ namespace Turbo_Phim.Controllers
 
             ReviewFilmService reviewS = new ReviewFilmService();
 
-            bool result = reviewS.addPost(baiNhanXet);
-            
+            int result = reviewS.addPost(baiNhanXet);
 
-            return View();
+
+            return RedirectToAction("Index", new {IDPhim =  baiNhanXet.MS_Phim , IDReview= result });
         }
 
         [AuthorizeUser]
@@ -123,8 +123,8 @@ namespace Turbo_Phim.Controllers
 
             bool result = reviewS.editPost(baiNhanXet);
 
-
-            return View();
+            return RedirectToAction("Index", new { IDPhim = baiNhanXet.MS_Phim, IDReview = phim.MaSoBaiNhanXet });
+         
         }
 
       
