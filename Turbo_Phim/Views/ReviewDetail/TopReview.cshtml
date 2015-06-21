@@ -8,13 +8,13 @@
    
     @if (@Model == null)
     {
-        <h1>Bài viết hay nhất:</h1>
+        <h1>Tiêu đề:</h1>
     <br />
     <h3 class="PostContent"><b><i>Hiện chưa có bài đánh giá nào</i></b></h3>
     }
     else
     {
-        <h1>Bài viết hay nhất: @Model.title</h1>
+        <h1>Tiêu đề: @Model.title</h1>
         <br/>
         <h3 class="PostContent"><b><i>Được đăng bởi @Model.UserName lúc @Model.postDate</i></b></h3>
     <br />
