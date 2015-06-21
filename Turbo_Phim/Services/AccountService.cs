@@ -7,7 +7,7 @@ using Turbo_Phim.Models;
 
 namespace Turbo_Phim.Services
 {
-    public class AccountService   
+    public class AccountService
     {
         private AccountBus bus = new AccountBus();
 
@@ -24,7 +24,7 @@ namespace Turbo_Phim.Services
             member.MS_TaiKhoan = user.Id;
             member = bus.createNewProfile(member);
             if (member != null)
-            {             
+            {
                 return true;
             }
             return false;
@@ -55,6 +55,11 @@ namespace Turbo_Phim.Services
             return bus.updateProfile(id, tv);
         }
 
+        public bool RemoveAccount(string id)
+        {
+            return bus.DeleteProfile(id);
+        }
+
         public List<HistoryViewModels> getActivitiesLog(string IDUser)
         {
             //ReviewFilmsBus reviewFilmsBus = new ReviewFilmsBus();
@@ -69,7 +74,7 @@ namespace Turbo_Phim.Services
 
             List<BinhLuan> lstBinhLuan = commentBus.getMyComments(IDUser);
 
-          
+
 
 
             foreach (BinhLuan binhLuan in lstBinhLuan)
@@ -87,7 +92,7 @@ namespace Turbo_Phim.Services
                 temp.action = "Comment";
                 temp.Hoten = thanhVien.HoTen;
                 temp.content = binhLuan.NoiDung;
-                temp.dateAction = (DateTime)  binhLuan.NgayDang;
+                temp.dateAction = (DateTime)binhLuan.NgayDang;
                 result.Add(temp);
 
 
@@ -97,7 +102,7 @@ namespace Turbo_Phim.Services
 
             List<DanhSachPhimYeuThich> lstPhimYeuThich = filmLikeBus.getMyListFilmLike(IDUser);
 
-         
+
             foreach (DanhSachPhimYeuThich phimYeuThich in lstPhimYeuThich)
             {
 
@@ -115,7 +120,7 @@ namespace Turbo_Phim.Services
 
             }
 
-         
+
             List<BaiNhanXet> lstNhanXet = reviewBus.getMyListReview(IDUser);
 
             foreach (BaiNhanXet baiNhanXet in lstNhanXet)
@@ -137,10 +142,10 @@ namespace Turbo_Phim.Services
             }
 
             result.Sort((x, y) => y.dateAction.CompareTo(x.dateAction));
-            
+
 
             return result;
-           
+
         }
 
     }
