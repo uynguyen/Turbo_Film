@@ -38,13 +38,13 @@
                             {
                                 HttpMethod = "POST",
                                 InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "result"
+                                UpdateTargetId = "dialogPlaceholder"
                             }))
                             {
                                 <div id="result" class="text-danger"></div>
 
                                 @Html.AntiForgeryToken()
-                                @*@Html.ValidationSummary("Lỗi! Vui lòng kiểm tra lại thông tin!", new { @class = "text-danger" })*@
+                                @Html.ValidationSummary(true, "Lỗi! Vui lòng kiểm tra lại thông tin!", new { @class = "text-danger" })
 
                                 <div class="form-group">
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
@@ -78,26 +78,25 @@
                                     <span class="help-block"></span>
                                 </div>
                                 <div class="form-group">
-                                    
+
                                     @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Địa chỉ" })
                                     @Html.ValidationMessageFor(m => m.Address)
                                     <span class="help-block"></span>
                                 </div>
-                              // TODO chỗ này của thằng Vin
-                                @*<style>
-                                    iframe {
-                                        min-height: 70px !important;
-                                    }
-                                </style>*@
                                 <div class="g-recaptcha" data-sitekey="6LfM3wcTAAAAAK4Q3nlAVXhalji_ePWlO5XZrEnL"></div>
+                                <span class="field-validation-valid">@ViewBag.Message</span>
+
+
                                 <span class="help-block"></span>
-                                
-                                <input type="submit" class="btn btn-success btn-block" value="Đăng ký">
+
+                                <input type="submit" onclick="$('#register').modal('hide')" class="btn btn-success btn-block" value="Đăng ký">
                             }
                             <script src='https://www.google.com/recaptcha/api.js'></script>
                             <script>
                                 $(document).ready(function () {
+                                    $(".modal-backdrop").remove();
                                     $('#register').modal();
+
                                 });
                                 function registerSuccess() {
                                     $('#register').modal("hide");
@@ -114,3 +113,4 @@
 @section Script {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

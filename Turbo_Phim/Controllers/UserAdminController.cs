@@ -14,7 +14,7 @@ using PagedList;
 
 namespace Turbo_Phim.Controllers
 {
-    [Authorize(Roles = "Admin, Administrator")]
+    [Authorize(Roles = "Admin, Super Admin")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()
@@ -64,7 +64,7 @@ namespace Turbo_Phim.Controllers
         // GET: /Users/
         public ActionResult PagingIndex(int? page)
         {
-            return PartialView(UserManager.Users.ToList().ToPagedList(page ?? 1, 8));
+            return PartialView(UserManager.Users.Where(x => x.UserName != "superadmin@turbo.com").ToList().ToPagedList(page ?? 1, 8));
         }
 
         //
@@ -87,7 +87,7 @@ namespace Turbo_Phim.Controllers
         public async Task<ActionResult> Create()
         {
             //Get the list of Roles
-            ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
+            ViewBag.RoleId = new SelectList(await RoleManager.Roles.Where(e => e.Name != "Super Admin").ToListAsync(), "Name", "Name");
             return View();
         }
 
@@ -110,7 +110,7 @@ namespace Turbo_Phim.Controllers
                         if (!result.Succeeded)
                         {
                             ModelState.AddModelError("", result.Errors.First());
-                            ViewBag.RoleId = new SelectList(await RoleManager.Roles.ToListAsync(), "Name", "Name");
+                            ViewBag.RoleId = new SelectList(await RoleManager.Roles.Where(e=>e.Name != "Super Admin").ToListAsync(), "Name", "Name");
                             return View();
                         }
                     }
@@ -118,13 +118,13 @@ namespace Turbo_Phim.Controllers
                 else
                 {
                     ModelState.AddModelError("", adminresult.Errors.First());
-                    ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
+                    ViewBag.RoleId = new SelectList(RoleManager.Roles.Where(e => e.Name != "Super Admin"), "Name", "Name");
                     return View();
 
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
+            ViewBag.RoleId = new SelectList(RoleManager.Roles.Where(e => e.Name != "Super Admin"), "Name", "Name");
             return View();
         }
 
@@ -132,6 +132,13 @@ namespace Turbo_Phim.Controllers
         // GET: /Users/Edit/1
         public async Task<ActionResult> Edit(string id)
         {
+            if (!User.IsInRole("Super Admin"))
+            {
+                if (UserManager.IsInRole(id, "Admin"))
+                {
+                  return  RedirectToAction("LoginUnauthorized", "Account");
+                }
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -163,6 +170,7 @@ namespace Turbo_Phim.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
         {
+
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByIdAsync(editUser.Id);
@@ -202,6 +210,13 @@ namespace Turbo_Phim.Controllers
         // GET: /Users/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
+            if (!User.IsInRole("Super Admin"))
+            {
+                if (UserManager.IsInRole(id, "Admin"))
+                {
+                    return RedirectToAction("LoginUnauthorized", "Account");
+                }
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
