@@ -76,8 +76,11 @@
     {
         @Html.AntiForgeryToken()
         @Html.TextBoxFor(@model => @model.title, new { @class = "form-control my-form-control" ,@placeholder = "Tiêu đề bài nhận xét" })
-        @Html.TextAreaFor(@model => @model.contentPost, new {@placeholder = "Nội dung bài nhận xét"})
+        @Html.ValidationMessageFor(@model => @model.title)
 
+         @Html.TextAreaFor(@model => @model.contentPost, new {@placeholder = "Nội dung bài nhận xét"})
+
+        @Html.ValidationMessageFor(@model => @model.contentPost)
         @Html.TextAreaFor(@model => @model.MaSo, 1, 1, new { @class = "hidden"})
 
 

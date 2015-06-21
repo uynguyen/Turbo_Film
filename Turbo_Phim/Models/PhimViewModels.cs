@@ -66,8 +66,13 @@ namespace Turbo_Phim.Models
          public string Banner { get; set; }
 
          [AllowHtml]
+         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Display(Name = "Nội dung bài nhận xét")]
          public String contentPost { get; set; }
 
+
+         [Required(ErrorMessage = "Bạn chưa nhập {0}")]
+         [Display(Name = "Tiêu đề bài nhận xét")]
          public String title { get; set; }
 
          public int MaSoBaiNhanXet { get; set; }

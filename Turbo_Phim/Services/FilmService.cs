@@ -243,5 +243,18 @@ namespace Turbo_Phim.Services
             }
             return result;
         }
+
+        internal List<PhimViewModels> getNhungBoPhimNoiBat()
+        {
+            List<PhimViewModels> result = new List<PhimViewModels>();
+            List<Phim> lstFilms = bus.getTheMostFilmds();
+            foreach (Phim p in lstFilms)
+            {
+                PhimViewModels pvm = Phim2PhimViewModels(p);
+
+                result.Add(pvm);
+            }
+            return result;
+        }
     }
 }

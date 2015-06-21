@@ -17,6 +17,8 @@ namespace Turbo_Phim.Services
             member.TinhTrang = true;
             member.HoTen = model.Name;
             member.NgaySinh = model.Birthday;
+
+            member.Avatar = "/Images/avatar_default.png";
             member.DiaChi = model.Address;
             member.GioiTinh = model.IsMale;
             member.MS_TaiKhoan = user.Id;
