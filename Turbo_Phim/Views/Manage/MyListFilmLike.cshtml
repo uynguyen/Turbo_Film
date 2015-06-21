@@ -19,9 +19,13 @@
                     success: function (data) {
 
                         $("#myModal").modal('hide');
-
+                        if (data != "success") {
+                            alert("Lỗi không thể thực hiện được !");
+                            return;
+                        }
                         var id = $("#btnDeleteReview").val();
                         $("#" + id).remove();
+                        window.location.reload();
                     },
                     error: function (data) {
                     }

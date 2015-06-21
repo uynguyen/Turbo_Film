@@ -112,7 +112,7 @@ namespace Turbo_Phim.Controllers
         public String DeleteFilm(String IDFilm)
         {
             FilmLikeService filmS = new FilmLikeService();
-            bool result = filmS.deleteFilm(IDFilm);
+            bool result = filmS.deleteFilm(User.Identity.GetUserId(), IDFilm);
 
             if (result)
                 return "success";

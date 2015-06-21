@@ -56,10 +56,10 @@ namespace Turbo_Phim.Services
                 return null;
         }
 
-        public bool deleteFilm(string IDFilm)
+        public bool deleteFilm(string userID, string IDFilm)
         {
             FilmLikeBus bus = new FilmLikeBus();
-            return bus.deleteFilm(Int32.Parse(IDFilm));
+            return bus.deleteFilm(userID, Int32.Parse(IDFilm));
         }
 
 
