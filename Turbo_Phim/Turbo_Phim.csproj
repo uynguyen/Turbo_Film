@@ -496,6 +496,7 @@
     <Content Include="Views\UsersAdmin\PagingIndex.cshtml" />
     <Content Include="Views\AdminReviewPost\PagingIndex.cshtml" />
     <Content Include="Views\Review\NhungBoPhimNoiBat.cshtml" />
+    <Content Include="Views\Review\Country.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

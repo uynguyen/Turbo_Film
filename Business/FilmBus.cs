@@ -494,6 +494,48 @@ namespace Business
             return db.Phim.Where(x => x.TinhTrang == true && x.MS_TheLoai == genreID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
         }
 
+
+        public List<Phim> findByCountry(int countryID, int page, string strSort, bool isASC)
+        {
+            if (isASC)
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            else
+            {
+                switch (strSort)
+                {
+                    case "ID":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderByDescending(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Name":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderByDescending(x => x.TenPhim).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Date":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderByDescending(x => x.NgayPhatHanh).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Duration":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderByDescending(x => x.ThoiLuong).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Genre":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderByDescending(x => x.MS_TheLoai).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                    case "Rank":
+                        return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderByDescending(x => x.DiemDanhGia).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+                }
+            }
+            return db.Phim.Where(x => x.TinhTrang == true && x.MS_NuocSX == countryID).OrderBy(x => x.MaSo).Skip(page * MAX_PRODUCT_EACHPAGE - MAX_PRODUCT_EACHPAGE).Take(MAX_PRODUCT_EACHPAGE).ToList();
+        }
+
         public float calculateAvgRank(int p)
         {
             float result = 0;
@@ -795,5 +837,29 @@ namespace Business
             }
 
         }
+
+        public List<Phim> findAllByGenre(int idGenre)
+        {
+            try
+            {
+                return db.Phim.Where(x => x.MS_TheLoai == idGenre).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        public List<Phim> findAllByCountry(int idCountry)
+        {
+            try
+            {
+                return db.Phim.Where(x => x.MS_NuocSX == idCountry).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
+
 }

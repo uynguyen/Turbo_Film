@@ -174,7 +174,11 @@ namespace Turbo_Phim.Controllers
             return View(genre.getAllGener());
         }
 
-
+        public ActionResult Country()
+        {
+            CountryService country = new CountryService();
+            return View(country.getAllCountry());
+        }
 
         public ActionResult ViewForGenre(String genreID, int? page, String strSort)
         {
@@ -218,12 +222,68 @@ namespace Turbo_Phim.Controllers
         
 
             List<PhimViewModels> lstPhim = phimService.findByGenre(genreID, page, TempData["strSort"].ToString(), false);
-            ViewBag.maxPage = phimService.countPageSearch(lstPhim);
+
+            List<Phim> lstPhimSearch = phimService.findAllByGenry(genreID);
+
+            ViewBag.maxPage = phimService.countPageSearch(lstPhimSearch);
           
 
             return View("Index", lstPhim);
         }
 
+        public ActionResult ViewForCountry(String countryID, int? page, String strSort)
+        {
+            TempData["strSort"] = strSort;
+            if (countryID == null) //Nếu không xem them thể loại thì xem tất cả các phim
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            ViewBag.ViewForCountry = true;
+            ViewBag.countryID = countryID;
+
+
+            ViewBag.HomeStatus = "inactive";
+            ViewBag.VideoStatus = "inactive";
+            ViewBag.ReviewStatus = "active";
+            ViewBag.ContactStatus = "inactive";
+
+
+
+            if (page == null)
+            {
+                if (TempData["currentPage"] != null)
+                {
+                    page = Int32.Parse(TempData["currentPage"].ToString()); //Chuyển hướng từ action delete
+                }
+                else
+                {
+                    page = 1;
+                    TempData["currentPage"] = page;
+                }
+            }
+            else
+                TempData["currentPage"] = page;
+
+            if (TempData["strSort"] == null)
+                TempData["strSort"] = "ID";
+
+            FilmService phimService = new FilmService();
+            ViewBag.maxIndexPage = phimService.getMaxIndexPage();
+
+
+
+            List<PhimViewModels> lstPhim = phimService.findByCountry(countryID, page, TempData["strSort"].ToString(), false);
+
+            List<Phim> lstPhimSearch = phimService.findAllByCountry(countryID);
+
+            ViewBag.maxPage = phimService.countPageSearch(lstPhimSearch);
+
+
+
+            return View("Index", lstPhim);
+        }
 
         public ActionResult NhungBoPhimNoiBat()
         {
