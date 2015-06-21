@@ -29,6 +29,30 @@ namespace Turbo_Phim.Controllers
         }
 
 
+        [HttpPost]
+        [AuthorizeUser]
+        public ActionResult LikePost(int IDReview)
+        {
+            LikeReviewPostService fls = new LikeReviewPostService();
+            if (fls.LikeReviewPost(User.Identity.GetUserId(), IDReview))
+            {
+                return Content("success");
+            }
+            return Content("fail");
+        }
+
+        [HttpPost]
+        [AuthorizeUser]
+        public ActionResult isLiked(int IDReview)
+        {
+            LikeReviewPostService fls = new LikeReviewPostService();
+            if (fls.isVoted(User.Identity.GetUserId(), IDReview))
+            {
+                return Content("true");
+            }
+
+            return Content("false");
+        }
 
         public ActionResult CommentsOfTopReview(int? page, String IDPhim, String IDReview = "-1")
         {          

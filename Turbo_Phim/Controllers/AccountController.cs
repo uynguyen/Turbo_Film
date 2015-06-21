@@ -486,6 +486,15 @@ namespace Turbo_Phim.Controllers
         }
 
         //
+        // GET: /Account/LogOff
+        [HttpGet]
+        public ActionResult LogOff(int? userid)
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]

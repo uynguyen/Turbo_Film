@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="FilmBus.cs" />
     <Compile Include="FilmLikeBus.cs" />
+    <Compile Include="LikeReviewPostBus.cs" />
     <Compile Include="Phim.cs">
       <DependentUpon>Turbo_Phim.tt</DependentUpon>
     </Compile>

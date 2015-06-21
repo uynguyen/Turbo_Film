@@ -96,6 +96,7 @@
           <Property Name="MS_ThanhVien" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="MS_BaiNhanXet" Type="int" Nullable="false" />
           <Property Name="TinhTrang" Type="bit" Nullable="false" />
+          <Property Name="ThoiGian" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -578,6 +579,7 @@
           <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_BinhChon_AspNetUsers" FromRole="BinhChon" ToRole="AspNetUsers" />
           <NavigationProperty Name="BaiNhanXet" Relationship="Self.FK_BinhChon_BaiNhanXet" FromRole="BinhChon" ToRole="BaiNhanXet" />
+          <Property Name="ThoiGian" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="BinhLuan">
           <Key>
@@ -1028,6 +1030,7 @@
           <EntitySetMapping Name="BinhChon">
             <EntityTypeMapping TypeName="TURBO_PHIMModel.BinhChon">
               <MappingFragment StoreEntitySet="BinhChon">
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
                 <ScalarProperty Name="MaSo" ColumnName="MaSo" />
                 <ScalarProperty Name="MS_ThanhVien" ColumnName="MS_ThanhVien" />
                 <ScalarProperty Name="MS_BaiNhanXet" ColumnName="MS_BaiNhanXet" />
