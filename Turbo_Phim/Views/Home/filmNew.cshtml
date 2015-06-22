@@ -25,7 +25,7 @@
                 @p.NoiDung.Substring(0, @p.NoiDung.IndexOf(".") + 1)...
             </p>
 
-            <a class="more">MORE</a>
+            <a class="more" href="#@p.MaSo">Xem thêm</a>
         </div>
     }
     @Html.PagedListPager(Model, page => Url.Action("filmNew", "Home",

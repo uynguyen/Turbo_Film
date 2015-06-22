@@ -608,8 +608,11 @@ i.book {
 	color:#000;
 }
 .footer {
-	background:#f3f3f3;
-	padding:4em 3em;
+     position: fixed;
+	background:#939b97;
+	padding:0.5em 0.5em;
+   bottom: 0px;
+   width: 100%;
 }
 .footer h6 {
 	color:#6F6F6F;
