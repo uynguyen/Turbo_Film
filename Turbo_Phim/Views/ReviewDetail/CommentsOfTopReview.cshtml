@@ -21,7 +21,7 @@
                 url: '@Url.Action("AddComment", "ReviewDetail")',
                 data: "CommentContent=" + Content + "&IDPost=" + IDPost,
                 success: function (data) {                  
-
+                    if (data != "openLoginDialog(true)")
                     $("#update_comment").html(data);
 
 
